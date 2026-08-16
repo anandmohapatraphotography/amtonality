@@ -1249,12 +1249,15 @@ function contact(){
           ${SITE.social.map(([n,h])=>`<li><a href="${h}" target="_blank" rel="noopener"><span>${n}</span><em>↗</em></a></li>`).join('')}
         </ul>
       </div>
-      <form class="rv d1" id="cform">
+      <form class="rv d1" id="cform" novalidate>
         <div class="field"><label for="n">Name</label><input id="n" name="name" required autocomplete="name"></div>
         <div class="field"><label for="e">Email address</label><input id="e" name="email" type="email" required autocomplete="email"></div>
         <div class="field"><label for="s">Project type</label><input id="s" name="subject" placeholder="Residential, commercial, heritage, editorial…"></div>
         <div class="field"><label for="m">Message</label><textarea id="m" name="message" required></textarea></div>
-        <button class="btn" type="submit">Send enquiry ${ARROW}</button>
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_subject" value="New enquiry — amtonality.com">
+        <button class="btn" id="csubmit" type="submit">Send enquiry ${ARROW}</button>
         <p class="num" id="cnote" style="letter-spacing:.06em;line-height:1.6"></p>
       </form>
     </div>
@@ -1350,13 +1353,40 @@ function wireIndexToggle(){
 function wireForm(){
   const f = document.getElementById('cform');
   if (!f) return;
-  f.addEventListener('submit', ev=>{
+  const btn  = document.getElementById('csubmit');
+  const note = document.getElementById('cnote');
+  const endpoint = `https://formsubmit.co/ajax/${SITE.email}`;
+
+  f.addEventListener('submit', async ev => {
     ev.preventDefault();
-    const d = new FormData(f);
-    const subject = encodeURIComponent(`Enquiry — ${d.get('subject') || 'New project'}`);
-    const body = encodeURIComponent(`${d.get('message')}\n\n—\n${d.get('name')}\n${d.get('email')}`);
-    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
-    document.getElementById('cnote').textContent = 'Opening your mail app… if nothing happens, write to ' + SITE.email;
+    if (!f.reportValidity()) return;
+    if (f.querySelector('[name="_honey"]').value) return;         // spam bot filled the hidden field
+
+    const btnLabel = btn.innerHTML;
+    btn.disabled = true;
+    btn.style.opacity = '.6';
+    btn.innerHTML = 'Sending…';
+    note.textContent = '';
+
+    try {
+      const r = await fetch(endpoint, {
+        method:'POST',
+        headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(f)))
+      });
+      const j = await r.json().catch(()=>({}));
+      if (!r.ok || j.success === 'false' || j.success === false) throw new Error(j.message || 'send failed');
+      f.innerHTML = `
+        <div class="rv in" style="padding:clamp(28px,4vw,52px) 0">
+          <div class="eyebrow" style="margin-bottom:14px">Received</div>
+          <p class="pintro-lead" style="max-width:32ch">Thank you. Your message is on its way — a reply will follow within 48 hours.</p>
+        </div>`;
+    } catch (err) {
+      btn.disabled = false;
+      btn.style.opacity = '';
+      btn.innerHTML = btnLabel;
+      note.innerHTML = `Something went wrong — please write directly to <a href="mailto:${SITE.email}" style="text-decoration:underline">${SITE.email}</a>.`;
+    }
   });
 }
 
