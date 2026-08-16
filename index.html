@@ -283,8 +283,10 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
 .lb .lbcount{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
   font-size:11px;letter-spacing:.14em;color:var(--ink-3);font-variant-numeric:tabular-nums}
 @media (max-width:720px){
-  .lb .lbnav{width:42px;height:42px;font-size:26px}
-  .lb .lbnav.prev{left:12px}.lb .lbnav.next{right:12px}
+  /* On touch screens, swipe replaces buttons — hide the arrows entirely so they
+     don't cover the photograph. Keyboard nav is irrelevant here. */
+  .lb .lbnav{display:none}
+  .lb .lbcount{bottom:18px}
 }
 
 /* ---------- page fade ---------- */
@@ -1414,6 +1416,26 @@ document.addEventListener('keydown', e=>{
   if (e.key === 'ArrowRight') showLb(lbIdx + 1);
   else if (e.key === 'ArrowLeft') showLb(lbIdx - 1);
 });
+/* Swipe navigation on touch devices. Horizontal swipe > 50px flips, vertical
+   swipe > 80px closes. A dominant vertical motion is treated as scroll and
+   ignored, so pinch-zoom and tap-and-hold aren't hijacked. */
+let tx = 0, ty = 0, tt = 0;
+lb.addEventListener('touchstart', e => {
+  if (e.touches.length !== 1) return;
+  tx = e.touches[0].clientX; ty = e.touches[0].clientY; tt = Date.now();
+}, { passive: true });
+lb.addEventListener('touchend', e => {
+  if (!lb.classList.contains('on') || e.changedTouches.length !== 1) return;
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  const dt = Date.now() - tt;
+  if (dt > 700) return;                       // too slow → probably a scroll
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+    showLb(lbIdx + (dx < 0 ? 1 : -1));         // swipe left = next, right = prev
+  } else if (dy < -80 && Math.abs(dy) > Math.abs(dx)) {
+    closeLb();                                  // swipe up = close
+  }
+}, { passive: true });
 function wireLightbox(){
   const imgs = [...view.querySelectorAll('.jgal.gallery .gimg img')];
   const srcs = imgs.map(im => im.dataset.src || im.src);
