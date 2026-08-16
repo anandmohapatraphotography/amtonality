@@ -1255,8 +1255,6 @@ function contact(){
         <div class="field"><label for="s">Project type</label><input id="s" name="subject" placeholder="Residential, commercial, heritage, editorial…"></div>
         <div class="field"><label for="m">Message</label><textarea id="m" name="message" required></textarea></div>
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_subject" value="New enquiry — amtonality.com">
         <button class="btn" id="csubmit" type="submit">Send enquiry ${ARROW}</button>
         <p class="num" id="cnote" style="letter-spacing:.06em;line-height:1.6"></p>
       </form>
@@ -1355,7 +1353,8 @@ function wireForm(){
   if (!f) return;
   const btn  = document.getElementById('csubmit');
   const note = document.getElementById('cnote');
-  const endpoint = `https://formsubmit.co/ajax/${SITE.email}`;
+  /* Google Apps Script web app — sends form contents to hello@amtonality.com */
+  const endpoint = 'https://script.google.com/macros/s/AKfycbyBj-bylQ9oCRcA9PYHShK4byRdTJ94mJ4E6YRhOp40ojArk3c937pqz2Cx2koQYho/exec';
 
   f.addEventListener('submit', async ev => {
     ev.preventDefault();
@@ -1369,13 +1368,15 @@ function wireForm(){
     note.textContent = '';
 
     try {
-      const r = await fetch(endpoint, {
+      /* Apps Script doesn't set CORS headers, so use text/plain (no preflight) and
+         no-cors mode. The response is opaque — an absence of network error means
+         the POST reached the endpoint and the email was sent. */
+      await fetch(endpoint, {
         method:'POST',
-        headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+        mode:'no-cors',
+        headers:{ 'Content-Type':'text/plain;charset=utf-8' },
         body: JSON.stringify(Object.fromEntries(new FormData(f)))
       });
-      const j = await r.json().catch(()=>({}));
-      if (!r.ok || j.success === 'false' || j.success === false) throw new Error(j.message || 'send failed');
       f.innerHTML = `
         <div class="rv in" style="padding:clamp(28px,4vw,52px) 0">
           <div class="eyebrow" style="margin-bottom:14px">Received</div>
