@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Anand Mohapatra — Tonality | Architecture Photography, Vancouver</title>
+<meta name="description" content="Anand Mohapatra is an architecture and interiors photographer based in Vancouver, Canada. Where creativity finds its tone.">
+<meta name="keywords" content="architecture photography, interiors photography, Vancouver photographer, Anand Mohapatra, Tonality, game cinematics">
+<meta name="author" content="Anand Mohapatra">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Anand Mohapatra — Tonality">
+<meta property="og:description" content="Architecture and interiors photography. Vancouver, Canada.">
+<meta property="og:image" content="https://cdn.myportfolio.com/9c0b9cff-4f88-4e53-a5c5-7ba8f446de1b/ba9ac85d-3af8-452b-8369-a7b93bbda95d_rwc_0x1593x3702x3934x4096.jpg?h=4debe597381cebaeded41fdb7a7cb3e2">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.myportfolio.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TONALITY — editorial gallery-white system
+   Paper, ink, hairlines. Type does the talking; images breathe.
+   ============================================================ */
+:root{
+  --paper:#FBFAF7;
+  --paper-2:#F2EFE9;
+  --ink:#14130F;
+  --ink-2:#6B675D;
+  --ink-3:#9A958A;
+  --rule:#E2DED5;
+  --shadow:0 1px 0 rgba(20,19,15,.05);
+  --ease:cubic-bezier(.19,.82,.24,1);
+  --pad:clamp(20px,5vw,88px);
+  --maxw:1680px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+html,body{background:var(--paper);color:var(--ink)}
+body{
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-weight:400;font-size:16px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--ink);color:var(--paper)}
+
+/* ---------- type ---------- */
+.serif{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400}
+.display{
+  font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+  font-size:clamp(2.9rem,8.4vw,8.2rem);line-height:.92;letter-spacing:-.022em;
+}
+.display em{font-style:italic;letter-spacing:-.01em}
+.h2{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(2rem,4.6vw,4rem);line-height:1.02;letter-spacing:-.018em}
+.h3{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.5rem,2.5vw,2.35rem);line-height:1.1;letter-spacing:-.014em}
+.eyebrow{
+  font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.185em;
+  color:var(--ink-2);
+}
+.lede{font-size:clamp(1.02rem,1.35vw,1.2rem);line-height:1.68;color:var(--ink-2);max-width:46ch}
+.body p{max-width:64ch;color:var(--ink-2);font-size:1.02rem;line-height:1.78}
+.body p+p{margin-top:1.35em}
+.num{font-size:11px;letter-spacing:.14em;color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+/* ---------- layout ---------- */
+.wrap{max-width:var(--maxw);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.rule{height:1px;background:var(--rule);width:100%}
+section{position:relative}
+
+/* ---------- header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  background:rgba(251,250,247,.82);backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid transparent;
+  transition:transform .5s var(--ease),border-color .4s ease,background .4s ease;
+}
+header.scrolled{border-bottom-color:var(--rule)}
+header.hide{transform:translateY(-102%)}
+.hbar{display:flex;align-items:center;justify-content:space-between;height:72px}
+.mark{display:flex;align-items:center;gap:10px;line-height:1}
+.mark img{height:34px;width:auto;display:block;transform:translateY(2px)}
+.markfall{display:none;align-items:baseline;gap:10px}
+.mark.fallback img{display:none}
+.mark.fallback .markfall{display:flex}
+.mark b{font-weight:500;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase}
+.mark em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:19px;color:var(--ink-2)}
+.mark i{display:inline-block;width:16px;height:1px;background:var(--rule);transform:translateY(-5px)}
+nav.main{display:flex;gap:34px;align-items:center}
+nav.main a{
+  font-size:12px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-2);
+  position:relative;padding:6px 0;transition:color .35s ease;
+}
+nav.main a::after{
+  content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--ink);
+  transform:scaleX(0);transform-origin:right;transition:transform .55s var(--ease);
+}
+nav.main a:hover{color:var(--ink)}
+nav.main a:hover::after,nav.main a.active::after{transform:scaleX(1);transform-origin:left}
+nav.main a.active{color:var(--ink)}
+.burger{display:none;width:34px;height:34px;position:relative}
+.burger s{position:absolute;left:6px;right:6px;height:1px;background:var(--ink);transition:transform .45s var(--ease),opacity .3s}
+.burger s:nth-child(1){top:13px}.burger s:nth-child(2){top:20px}
+body.menu .burger s:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+body.menu .burger s:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+.drawer{
+  position:fixed;inset:72px 0 0;z-index:55;background:var(--paper);
+  padding:0 var(--pad);display:flex;flex-direction:column;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .45s ease;
+}
+body.menu .drawer{opacity:1;pointer-events:auto}
+.drawer a{font-family:"Instrument Serif",Georgia,serif;font-size:13vw;line-height:1.18;border-bottom:1px solid var(--rule);padding:.18em 0}
+
+/* ---------- images ---------- */
+.frame{position:relative;overflow:hidden;background:var(--paper-2)}
+.frame img{width:100%;height:100%;object-fit:cover;
+  transition:transform 1.6s var(--ease)}
+.frame.r43{aspect-ratio:4/3}
+.frame.r32{aspect-ratio:3/2}
+.frame.r11{aspect-ratio:1/1}
+.frame.r45{aspect-ratio:4/5}
+.frame.r219{aspect-ratio:21/9}
+/* natural-aspect frames — photographs are never cropped inside a series */
+.frame.nat{aspect-ratio:auto;min-height:0;display:flex;align-items:center;justify-content:center;background:none}
+.frame.nat.done{min-height:0}
+.frame.nat img{position:relative;width:auto;max-width:100%;height:auto;max-height:78vh;object-fit:contain}
+.frame.lead{aspect-ratio:auto;overflow:visible;background:none;display:flex;justify-content:center}
+.frame.lead img{width:auto;max-width:100%;height:auto;max-height:68vh;object-fit:contain}
+a.card:hover .frame img{transform:scale(1.045)}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(22px)}
+.rv.in{opacity:1;transform:none;transition:opacity 1.15s var(--ease),transform 1.15s var(--ease)}
+.rv.d1.in{transition-delay:.08s}.rv.d2.in{transition-delay:.16s}.rv.d3.in{transition-delay:.24s}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.frame img{transform:none}}
+
+/* ---------- hero ---------- */
+.hero{padding-top:clamp(104px,12vh,160px);padding-bottom:clamp(10px,1.4vw,24px)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(28px,5vw,72px);align-items:center}
+.hero-img{display:flex;align-items:center}
+.hero-img .frame{width:100%}
+.hero-img .frame{display:flex;justify-content:center;background:none}
+.hero-img .frame img{height:auto;max-height:76vh;width:auto;max-width:100%;object-fit:contain}
+.hero-copy{padding-bottom:clamp(0px,1.5vw,26px)}
+.hero-copy .eyebrow{margin-bottom:clamp(18px,2.4vw,32px)}
+.hero-copy .display{margin-bottom:clamp(20px,2.6vw,34px)}
+
+/* ---------- link ---------- */
+.arrow{display:inline-flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding-bottom:7px;border-bottom:1px solid var(--ink);transition:gap .45s var(--ease)}
+.arrow:hover{gap:20px}
+.arrow svg{width:15px;height:9px}
+
+
+/* ---------- section head ---------- */
+.shead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:clamp(56px,8vw,120px) 0 clamp(24px,3.2vw,44px);flex-wrap:wrap}
+.shead-first{padding-top:clamp(18px,2.2vw,34px);border-top:1px solid var(--rule);margin-top:clamp(10px,1.4vw,22px)}
+.shead .h2{max-width:16ch}
+.sectioncap{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.25rem,2.1vw,1.85rem);line-height:1.32;letter-spacing:-.008em;color:var(--ink);max-width:44ch;margin-top:14px}
+.shead .eyebrow{margin-bottom:14px}
+
+/* ---------- editorial work rows ---------- */
+.works{display:grid;gap:clamp(40px,5.5vw,92px);padding-bottom:clamp(56px,8vw,120px)}
+.work{display:grid;gap:clamp(16px,2vw,28px)}
+.work.wide{grid-column:1/-1}
+.work-row{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.5vw,40px);align-items:end}
+.c-1-8{grid-column:1/9}.c-9-12{grid-column:9/13}
+.c-1-6{grid-column:1/7}.c-7-12{grid-column:7/13}
+.c-1-5{grid-column:1/6}.c-6-12{grid-column:6/13}
+.c-2-9{grid-column:2/10}.c-1-12{grid-column:1/13}
+.c-4-12{grid-column:4/13}.c-1-7{grid-column:1/8}
+.cap{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:14px;border-top:1px solid var(--rule)}
+.cap h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.25rem,2vw,1.9rem);line-height:1.12;letter-spacing:-.012em}
+.cap .num{white-space:nowrap}
+.card .cap h3{transition:opacity .4s ease}
+.card:hover .cap h3{opacity:.55}
+.blurb{font-size:14.5px;color:var(--ink-2);max-width:52ch;margin-top:10px;line-height:1.62}
+
+/* ---------- index list view ---------- */
+.toggle{display:flex;gap:2px;border:1px solid var(--rule);border-radius:999px;padding:3px}
+.toggle button{font-size:11px;letter-spacing:.13em;text-transform:uppercase;padding:7px 16px;border-radius:999px;color:var(--ink-2);transition:.35s ease}
+.toggle button.on{background:var(--ink);color:var(--paper)}
+.list{border-top:1px solid var(--rule)}
+.list a{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1.2fr);gap:clamp(12px,2vw,32px);
+  align-items:center;padding:clamp(18px,2.2vw,30px) 0;border-bottom:1px solid var(--rule);transition:padding .5s var(--ease)}
+.list a:hover{padding-left:14px}
+.list a h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.15rem,2.1vw,1.85rem);letter-spacing:-.012em}
+.list a p{font-size:13.5px;color:var(--ink-2);line-height:1.5}
+#thumb img{height:auto}
+.list .thumb{position:absolute;pointer-events:none;width:300px;opacity:0;transform:translate(-50%,-50%) scale(.96);
+  transition:opacity .45s ease,transform .6s var(--ease);z-index:5;overflow:hidden;background:var(--paper-2)}
+.list .thumb.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+
+/* ---------- grid view ---------- */
+/* Justified rows, matched to the grid on amtonality.com: each cell's width and
+   flex-grow are both set to (aspect x BASE), so a row wraps naturally and then
+   grows to fill the line — every image in it scaling by the same factor. Equal
+   heights, flush margins, true aspect ratios, no cropping, no JS measuring. */
+.jgal{display:flex;flex-wrap:wrap;margin-inline:calc(var(--inset) * -1)}
+.jgal .gitem{box-sizing:border-box;padding:var(--inset);min-width:0;flex-shrink:1}
+.jgal .gimg{display:block;width:100%;overflow:hidden;background:var(--paper-2)}
+.jgal .gimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.4s var(--ease)}
+.jgal a.gitem:hover .gimg img{transform:scale(1.035)}
+.jgal.gallery{--inset:4px}
+.jgal.gallery .gitem{display:flex;flex-direction:column}
+.jgal.gallery .gimg{flex:1 1 auto;min-height:0}
+/* Album covers are all 4:3, so they belong in an even column grid — every card
+   the same width, rows lining up, and a partial last row keeping that width
+   instead of shrinking to fit. Galleries above stay justified, because those
+   photographs have mixed shapes. */
+.jgal.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2.2vw,34px);margin-inline:0}
+.jgal.cards .gitem{width:auto;padding:0;align-self:start}
+@media (max-width:1180px){.jgal.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:820px){.jgal.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.jgal.cards{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- about ---------- */
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,80px);align-items:start}
+.factlist{list-style:none;border-top:1px solid var(--rule);margin-top:clamp(30px,4vw,52px)}
+.factlist li{display:grid;grid-template-columns:130px 1fr;gap:20px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:14px}
+.factlist span{color:var(--ink-3);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding-top:4px}
+
+/* ---------- project ---------- */
+.phero{padding-top:clamp(104px,12vh,150px)}
+.pmeta{display:flex;gap:clamp(24px,4vw,60px);flex-wrap:wrap;padding:clamp(22px,3vw,38px) 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-top:clamp(30px,4vw,54px)}
+.pmeta div span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.pmeta div p{font-size:14.5px}
+.pintro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,80px);
+  padding-top:clamp(38px,5vw,76px);align-items:start}
+.pintro-lead{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.4rem,2.5vw,2.15rem);
+  line-height:1.3;letter-spacing:-.008em;color:var(--ink);max-width:24ch}
+.pintro:has(.body) .pintro-lead{max-width:22ch}
+.pintro.solo{grid-template-columns:1fr}
+.pintro.solo .pintro-lead{max-width:32ch;font-size:clamp(1.5rem,3vw,2.55rem)}
+.pintro .body p{font-size:1rem;line-height:1.8}
+.pnav{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,40px);padding:clamp(48px,7vw,110px) 0 clamp(40px,6vw,90px);border-top:1px solid var(--rule);margin-top:clamp(48px,7vw,110px)}
+.pnav a{display:block}
+.pnav .eyebrow{margin-bottom:10px}
+.pnav .r{text-align:right}
+
+/* ---------- contact ---------- */
+.contact{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(30px,5vw,84px);align-items:start}
+form{display:grid;gap:clamp(18px,2.4vw,30px)}
+.field{position:relative;border-bottom:1px solid var(--rule);transition:border-color .4s ease}
+.field:focus-within{border-color:var(--ink)}
+.field label{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:8px}
+.field input,.field textarea{width:100%;border:0;background:none;outline:none;font:inherit;font-size:16px;color:var(--ink);padding:0 0 12px;resize:vertical}
+.field textarea{min-height:120px}
+.btn{display:inline-flex;align-items:center;gap:14px;background:var(--ink);color:var(--paper);
+  padding:16px 30px;border-radius:999px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  justify-self:start;transition:opacity .35s ease,gap .45s var(--ease)}
+.btn:hover{opacity:.85;gap:22px}
+.socials{list-style:none;border-top:1px solid var(--rule);margin-top:clamp(26px,3.4vw,44px)}
+.socials a{display:flex;justify-content:space-between;align-items:center;padding:15px 0;border-bottom:1px solid var(--rule);font-size:14px;transition:padding .5s var(--ease)}
+.socials a:hover{padding-left:12px}
+.socials a em{font-style:normal;color:var(--ink-3);font-size:12px;letter-spacing:.1em}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28px,3.4vw,44px);margin-top:clamp(50px,7vw,110px)}
+.fgrid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-end}
+.fnav{display:flex;gap:26px;flex-wrap:wrap}
+.fnav a,.fmeta{font-size:12px;letter-spacing:.1em;color:var(--ink-2);text-transform:uppercase}
+.fbig{margin-bottom:clamp(28px,4vw,60px)}
+.ftag{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.5rem,3.4vw,3rem);line-height:1.1;letter-spacing:-.018em;margin-top:clamp(16px,2vw,28px);color:var(--ink)}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:90;background:var(--paper);display:flex;align-items:center;justify-content:center;
+  padding:clamp(20px,5vw,70px);opacity:0;pointer-events:none;transition:opacity .5s ease}
+.lb.on{opacity:1;pointer-events:auto}
+.lb img{max-width:100%;max-height:82vh;object-fit:contain}
+.lb .x{position:absolute;top:24px;right:var(--pad);font-size:12px;letter-spacing:.14em;text-transform:uppercase;z-index:2}
+.lb .lbnav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Instrument Serif",Georgia,serif;font-size:34px;line-height:1;color:var(--ink);
+  border:1px solid var(--rule);border-radius:999px;background:rgba(251,250,247,.9);
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+  transition:opacity .35s ease,background .35s ease,border-color .35s ease,color .35s ease;opacity:.7;z-index:2}
+.lb .lbnav:hover{opacity:1;background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.lb .lbnav.prev{left:var(--pad)}
+.lb .lbnav.next{right:var(--pad)}
+.lb .lbcount{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+  font-size:11px;letter-spacing:.14em;color:var(--ink-3);font-variant-numeric:tabular-nums}
+@media (max-width:720px){
+  .lb .lbnav{width:42px;height:42px;font-size:26px}
+  .lb .lbnav.prev{left:12px}.lb .lbnav.next{right:12px}
+}
+
+/* ---------- page fade ---------- */
+#view{animation:fade .7s var(--ease)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:1000px){
+  .hero-grid,.about,.contact,.pintro{grid-template-columns:1fr}
+  .hero-img .frame{min-height:52vh}
+  .pintro-lead,.pintro:has(.body) .pintro-lead{max-width:30ch}
+  .hero-grid{gap:34px}
+  .work-row{grid-template-columns:1fr}
+  .c-1-8,.c-9-12,.c-1-5,.c-6-12,.c-2-9,.c-1-12,.c-4-12,.c-1-7,.c-1-6,.c-7-12{grid-column:1/-1}
+  .list a{grid-template-columns:40px 1fr 70px}
+  .list a p{display:none}
+  .list .thumb{display:none}
+}
+@media (max-width:720px){
+  nav.main{display:none}
+  .burger{display:block}
+  .hero{padding-top:110px}
+  .pnav{grid-template-columns:1fr;gap:26px}
+  .pnav .r{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="wrap hbar">
+    <a href="#/" class="mark" aria-label="Anand Mohapatra, Tonality — home">
+      <img id="logoimg" src="https://cdn.myportfolio.com/9c0b9cff-4f88-4e53-a5c5-7ba8f446de1b/8c1ce994-695e-4cce-a523-a12cf994b4e5_rwc_0x0x6878x1425x4096.png?h=b28ae4cb18de0c41226a2907023f94f2" alt="Anand Mohapatra — Tonality">
+      <span class="markfall"><b>Anand Mohapatra</b><i></i><em>Tonality</em></span>
+    </a>
+    <nav class="main" id="nav">
+      <a href="#/architecture">Architecture</a>
+      <a href="#/explorations">Explorations</a>
+      <a href="#/about">About</a>
+      <a href="#/contact">Contact</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu"><s></s><s></s></button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer">
+  <a href="#/architecture">Architecture</a>
+  <a href="#/explorations">Explorations</a>
+  <a href="#/about">About</a>
+  <a href="#/contact">Contact</a>
+</div>
+
+<main id="view"></main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbig"><img src="https://cdn.myportfolio.com/9c0b9cff-4f88-4e53-a5c5-7ba8f446de1b/8c1ce994-695e-4cce-a523-a12cf994b4e5_rwc_0x0x6878x1425x4096.png?h=b28ae4cb18de0c41226a2907023f94f2" alt="Tonality" style="height:clamp(46px,7vw,96px);width:auto"><div class="ftag">Where creativity finds <em style="font-style:italic">its</em> tone.</div></div>
+    <div class="rule" style="margin-bottom:clamp(24px,3vw,40px)"></div>
+    <div class="fgrid">
+      <nav class="fnav">
+        <a href="#/architecture">Architecture</a>
+        <a href="#/explorations">Explorations</a>
+        <a href="#/about">About</a>
+        <a href="#/contact">Contact</a>
+      </nav>
+      <nav class="fnav">
+        <a href="https://www.behance.net/anandmohapatra" target="_blank" rel="noopener">Behance</a>
+        <a href="https://www.instagram.com/_anandmohapatra/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.linkedin.com/in/anand-mohapatra-650b7212b/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.facebook.com/AnandMohapatraPhotography" target="_blank" rel="noopener">Facebook</a>
+      </nav>
+      <div class="fmeta">© <span id="yr"></span> Anand Mohapatra : Tonality — Vancouver, BC</div>
+    </div>
+  </div>
+</footer>
+
+<div class="lb" id="lb">
+  <button class="x" id="lbx">Close</button>
+  <button class="lbnav prev" id="lbprev" aria-label="Previous image">‹</button>
+  <button class="lbnav next" id="lbnext" aria-label="Next image">›</button>
+  <img id="lbimg" alt="">
+  <div class="lbcount" id="lbcount"></div>
+</div>
+
+<script>
+/* ============================================================
+   DATA — edit here to change the site.
+   `cover` and `images` accept either a full URL or a local path
+   like "images/heritage/01.jpg" once photos are moved off Adobe.
+   Add a project's own photos to its `images: []` array and the
+   project page will render a full gallery automatically.
+   ============================================================ */
+const CDN = "https://cdn.myportfolio.com/9c0b9cff-4f88-4e53-a5c5-7ba8f446de1b/";
+const u = f => CDN + f;
+
+/* PREVIEW_MODE fills every empty gallery with the series cover so the layout
+   is visible. Set to false once real image sets are in the `images` arrays. */
+const PREVIEW_MODE = false;
+
+/* The three brand assets pulled off the current site. */
+const LOGO_A = u("8c1ce994-695e-4cce-a523-a12cf994b4e5_rwc_0x0x6878x1425x4096.png?h=b28ae4cb18de0c41226a2907023f94f2");
+const LOGO_B = u("119e08ed-8827-442f-9ef9-97e8374bad2c_rwc_167x0x6752x1426x4096.png?h=21390e404c7b3ce250095a0647e74037");
+const HOME_COVER = u("f8293e57-7e62-468b-b343-5b02f63e9798_rw_600.png?h=affbad915ff7304ecfa387a275b0f44a");
+
+const SITE = {
+  name: "Anand Mohapatra",
+  studio: "Tonality",
+  city: "Vancouver, BC",
+  email: "hello@amtonality.com",
+  /* Your own photo, from amtonality.com/about */
+  portrait: u("9b506c86-7cad-47f7-83b7-4142739ea2bd_rw_1920.jpg?h=5261f07f5f576cef32b58a3972cd5591"),
+  /* The cover photograph from your entry page, amtonality.com/entersite */
+  cover: u("ba9ac85d-3af8-452b-8369-a7b93bbda95d_rwc_0x1593x3702x3934x4096.jpg?h=4debe597381cebaeded41fdb7a7cb3e2"),
+  tagline: "Where creativity finds <em>its</em> tone.",
+  intro: "Architecture and interiors photography — a study of form, proportion, and the quiet dialogue between space and light.",
+  social: [
+    ["Behance","https://www.behance.net/anandmohapatra"],
+    ["Instagram","https://www.instagram.com/_anandmohapatra/"],
+    ["LinkedIn","https://www.linkedin.com/in/anand-mohapatra-650b7212b/"],
+    ["Facebook","https://www.facebook.com/AnandMohapatraPhotography"]
+  ]
+};
+
+const ARCHITECTURE = [
+  { slug:"architecture", title:"Architecture", year:"2026", place:"Vancouver, BC",
+    cover:u("19b3f0de-cb02-44a5-9a9c-28b56c97df60_rwc_425x374x1247x935x1247.jpg?h=b8b49a8fed999f4fe36126856e37b2bd"),
+    statement:"Through the art of photography, I learned that architecture is more than form — it carries atmosphere, intention, and the character of the people who inhabit it. Each photograph is an exploration of balance, detail, and the quiet dialogue between space, material, and experience.",
+    legacy:"https://amtonality.com/architecture", images:[] },
+  { slug:"residential", title:"Residential & Interiors", year:"2026", place:"Vancouver, BC",
+    cover:u("ccc1ee2e-e5ed-42e9-a675-630c099e762a_rwc_403x0x3413x2560x3413.jpg?h=a2a608a8ecaca687f300134543a8841a"),
+    statement:"Within the world of residence and interiors, design becomes intimate — a study in texture, silence, and the personality it holds. And within that space lies a rhythm of living: comfort, belonging, and the character shaped by those who call it home.",
+    legacy:"https://amtonality.com/residential", images:[] },
+  { slug:"heritage", title:"Heritage", year:"2026", place:"India · Canada",
+    cover:u("a99fc47b-8b43-48c1-b4b4-46def2f420a4_rwc_0x802x3840x2880x3840.jpg?h=be3e5b14a302b5da473b552f67aba536"),
+    statement:"Through my passion for travel and architecture, I learned that heritage architecture is more than history and the basic story of a timeless structure — it carries memory, craftsmanship, and the spirit of the generations who built and inhabited it.",
+    legacy:"https://amtonality.com/heritage", images:[] },
+  { slug:"bandra-worli", title:"Bandra–Worli Sea Link", year:"2018", place:"Mumbai, India",
+    cover:u("6a9f5ed8-18e0-4751-970f-b5354773361e_car_4x3.jpg?h=3c8221985d97840ebc949a4e4467e9ef"),
+    statement:"The first cable-stayed bridge constructed in open seas in India. Pylons of complex geometry carry one of the longest spans of concrete deck ever attempted — engineering photographed as sculpture, held between water and sky.",
+    legacy:"https://amtonality.com/bandra-worli-sea-link-bridge", images:[] }
+];
+
+const EXPLORATIONS = [
+  { slug:"time-and-migration", title:"Time and Migration", year:"2023", place:"Canada · India",
+    cover:u("c3fb7868-8fd2-4f24-b1c6-c3a05bd469a3_rwc_0x0x3413x2560x3413.jpg?h=b0c13d6445acecdd7e76913cd900fa09"),
+    statement:"“Time and Migration” portrays the inherent human inclination to traverse different places. Often our journeys involve not only physical movement but an exploration of self — through work, leisure, art, or expanding our perspectives. The series serves as a mirror reflecting the significance of time and travel, both of which define our true essence. In 2019, my migration from my homeland to Canada became a catalyst for introspection.",
+    legacy:"https://amtonality.com/time-and-migration-1", images:[] },
+  { slug:"ladakh-spiti", title:"Ladakh and Spiti", year:"2019", place:"Himalaya, India",
+    cover:u("5d9ca35e-ffe2-418e-83ce-758913b72c8d_rwc_0x0x3413x2560x3413.jpg?h=97093c076fed8d84da1a8aff73fd83d8"),
+    statement:"Amidst surreal landscapes, Ladakh became a canvas for self-reflection. The spiritual aura was palpable, as centuries-old traditions were woven seamlessly into daily life. For four years, Ladakh and Spiti were my gateway to a cold desert realm — a space where beauty, spirituality, and personal growth converged in harmony.",
+    legacy:"https://amtonality.com/ladakhandspiti", images:[] },
+  { slug:"asad-khan", title:"Asad Khan — Press", year:"2024", place:"Vancouver, BC",
+    cover:u("2ad990b5-3ecd-4141-80c0-40802faf52be_rwc_217x0x3413x2560x3413.jpg?h=83fb81f01494870f2fd04e27daab8366"),
+    statement:"A portrait series documenting the rebrand of Pakistani-Canadian musician Asad Khan — formerly Khanvict — built from a Pinterest mood board through to final frame. Creative direction by Vikram Johal shaped every lighting and compositional decision on set, while styling by Jasmine Johal grounded the editorial vision in wardrobe and texture that feel entirely his own.",
+    legacy:"https://amtonality.com/asad-khan-press-photos", images:[] },
+  { slug:"music", title:"Music & Concerts", year:"2018", place:"Asia · North America",
+    cover:u("e86f576b-4195-48a3-9a26-3fbb7fa64313_rwc_484x0x2879x2160x2879.jpg?h=a9d6c48e8af1152282890c1e50b13484"),
+    statement:"From photographing Coldplay's breathtaking live show to touring as the official photographer for Bryan Adams' 2018 India tour, my journey in music photography has taken me across continents and some of the most iconic stages in the industry.",
+    legacy:"https://amtonality.com/music", images:[] },
+  { slug:"burning-man", title:"Burning Man 2022: Waking Dreams", year:"2022", place:"Black Rock Desert, NV",
+    cover:u("637b8327-7900-4fb4-81e7-fcec903f04e1_car_4x3.jpg?h=346c2c889cf951bd97176263aa206100"),
+    statement:"My desire to attend Burning Man was sparked when I first learned about it in 2013. My first impression was that this was just another huge music and arts festival set in the middle of a desert. But as the years went by, I realised there is more to it than just music or art. Nothing I had anticipated was even near to the reality of that place.",
+    legacy:"https://amtonality.com/burning-man-2022-waking-dreams", images:[] },
+  { slug:"reflection", title:"The Reflection That Remains", year:"2024", place:"New York City",
+    cover:u("7fe53fff-ecee-4f75-b898-e201a3527010_rwc_733x0x2879x2160x2879.jpg?h=deeebf38d9a6e9bcbeb84759a104e6d1"),
+    statement:"New York City has a way of reflecting who you are — or who you're becoming. In its chaotic rush, it blurs the line between self and city, leaving you lost in its pulse. Vivek Dhiman's face, caught in windows and puddles, shows this transformation — his reflection shifting with the city's constant motion. In New York, it's easy to forget who you were. The city's reflections don't show the past — they reveal the anger, the hunger, the need to survive. Vivek's journey is a reminder that the city doesn't just absorb you — it redefines you. And in the end, you discover who you truly are by facing the reflection staring back at you.",
+    legacy:"https://amtonality.com/the-reflection-that-remains", images:[] },
+  { slug:"underwater-odyssey", title:"Underwater Odyssey", year:"2023", place:"—",
+    cover:u("814b57d6-49ff-4615-aff4-d66aa0765a27_rwc_217x0x3413x2560x3413.jpg?h=b3ffe2129f110388857b5bfdfd1bd823"),
+    statement:"Underwater Odyssey is a visual exploration of the deep — a journey that transcends the surface, both literally and metaphorically.",
+    legacy:"https://amtonality.com/underwater-odyssey", images:[] },
+  { slug:"industrial", title:"Industrial", year:"2023", place:"—",
+    cover:u("c99c256e-83fa-4133-b76a-ce062ca8e3ff_rwc_314x0x4946x3710x4946.jpg?h=73da1837c34eee274fa6cb3284cf1977"),
+    statement:"Where heavy machinery meets quiet poetry — an industrial photography series.",
+    legacy:"https://amtonality.com/industrial", images:[] },
+  { slug:"aerial", title:"Aerial", year:"2022", place:"—",
+    cover:u("6c766474-9517-4f4a-b8cc-ce9ee88400e1_car_4x3.jpg?h=26eeb909cf0bb4373b13f84f904e5972"),
+    statement:"The world redrawn from above — landscape reduced to line, tone, and pattern.",
+    legacy:"https://amtonality.com/arie", images:[] },
+  { slug:"likir-dosmoche", title:"Likir Dosmoche Festival", year:"2019", place:"Ladakh, India",
+    cover:u("4fa0a847-dfcd-4e23-aa39-95f9731f9c0d_car_4x3.jpg?h=e96d55cc613aeef0304f12a77f94805c"),
+    statement:"Dosmoche is celebrated every year in February with great enthusiasm in Leh, Likir and Diskit monasteries. The courtyards of the chapels below Leh Palace resonate with the sound of drums and the thumping steps of masked Lamas from various monasteries performing their sacred Cham dance.",
+    legacy:"https://amtonality.com/likir-dosmoche-festival-ladakh", images:[] },
+  { slug:"ulterior", title:"Ulterior: The Light of Tomorrow", year:"2021", place:"—",
+    cover:u("15ea3475-03e7-4fa1-98f9-372c90dda4df_rwc_217x0x3413x2560x3413.jpg?h=a8b4637485199c8e6f4b86a5c3c8177c"),
+    statement:"This series is shot with the technique of light-painting photography, creating the light trails in-camera with no compositing involved. Each photograph is a long exposure — the trails are what make it look so futuristic.",
+    legacy:"https://amtonality.com/virtual-reality", images:[] },
+  { slug:"patterns", title:"Patterns of Consciousness", year:"2023", place:"—",
+    cover:u("2abf629a-144d-4eb0-8d01-4a35db1bffeb_car_4x3.jpg?h=1f4bfcbe6344dce78193489989de8d93"),
+    statement:"“Patterns of Consciousness” explores the intricate brain patterns and released chemicals during the transformative process of breaking old habits in 2022–2023.",
+    legacy:"https://amtonality.com/time-and-migration", images:[] },
+  { slug:"purity", title:"Purity", year:"2021", place:"Banff, AB",
+    cover:u("013c5984-5990-45cd-999a-e9e706a28168_car_4x3.jpg?h=5e189a17815cf70d22c487b284438ac5"),
+    statement:"White is the colour of purity and innocence. It provides hope and clarity, and it promotes open-mindedness and self-reflection. Shot across a journey to Banff, drawn to something unique in those snowy settings.",
+    legacy:"https://amtonality.com/purity", images:[] },
+  { slug:"food", title:"Food", year:"2020", place:"—",
+    cover:u("5679e272-1142-4b01-baf5-27691ba637c7_rwc_217x0x3413x2560x3413.jpg?h=e1740d9178e005a0a68b84d5b195d053"),
+    statement:"These photos trace my journey as a photographer, shaped by years of working with food as a visual and emotional subject.",
+    legacy:"https://amtonality.com/table-top", images:[] }
+];
+
+const ALL = [...ARCHITECTURE, ...EXPLORATIONS];
+const bySlug = s => ALL.find(p => p.slug === s);
+
+/* ------------------------------------------------------------------
+   PHOTOGRAPHS — all 525, in their original running order.
+   Stored compactly: one line per image, "<sizeCode><base64 id+token><aspect>".
+   Aspect ratios are the real pixel dimensions, which is what lets the
+   galleries lay out in aligned rows without measuring or cropping.
+   ------------------------------------------------------------------ */
+const SFX = ["_rw_3840.jpg","_rw_1920.jpg","_rw_3840.JPG","_rw_600.jpg","_rw_1200.jpg","_rw_1920.JPG","_rw_1200.JPG"];
+const SLUGS = ["architecture","residential","heritage","bandra-worli","time-and-migration","ladakh-spiti","aerial","burning-man","music","underwater-odyssey","reflection","industrial","asad-khan","likir-dosmoche","ulterior","patterns","purity","food"];
+const IMGDATA = `#0 31
+1+EOnGE36THqa+WgC//B+GGoSFzCWW3dGtTwmaUfuqck0.667
+1xd/vp1P4QAGMjyuAp43OURbnXFRTGpUVN93SXETuTv81.500
+11kOJ+pl4TG+5NS5/zFrDS9uufNq9LERQ4Zk9iRU71i81.500
+19BK6o0xWQIanOT3c/CTAiqjLsdxLqSNnrgQv+rYZrGQ0.667
+1UHFzYUaQQEaBmfZjC9BJwmQK6w8fBhu6jkGGzAjUnoc0.667
+1k9/Er4C1Tg2CyWPinzYCe+kN2yEoS+7plus3Vwthz1o1.500
+1cbAdOgPiSQSYTC+cGh6ZuVmYmss6Xqy1rdD45+kojPs1.500
+1rvwb2gssTQScF8aWQqWK4i7lDoAr9sU2ZmNXLJfQgks0.667
+1VrodTKfIS92002pTGQeqkZacgomXnmggQ2h9GS96YUs0.667
+1RUEjd1V9TuS7qtrOTXur0lNHH8qXkpUbZlOr1EV/n/U1.500
+1cehcDVZwRRmQe20OR+sqxQycSsUf+eUleI5lVDS8toQ1.500
+15PdvQb/XSP2DTyDMG1nUDUPOp7TzcX4jH8cvbfIshZo0.667
+1MzRWcIeoRVWi2zkBw0zEAFZcTJCWyH9knda8uI7/Pq40.667
+1tmXufJwOSAOPbgkLoNDBbaJtgVz8rUq4jou+rSk3UmQ0.667
+1RXUn2aFXQnCDlA7s+16HsiUZEGW+n24P5AHKQgIRvY00.667
+1u2P9uY5IT7SfSnuLc9UILSqye6Efn1XGUWuhIq6l98I1.500
+1e9mPFU8MQLC4XNsmTZKURrjECzVSpE/hNdv4QacJ3iw0.638
+10Emlrg6tQraGRjMe+qyX6Fz46jM3rslNDfRCZDKa6yI0.667
+1V04AlxGLSTW0EhN790c/ESfXJR1f3I1zwhKmVmZAgHc1.500
+1JSK9Vg9lSje6PFXOI5brAopepPkQw90Dkhlj79guJto1.500
+1hBg3wVkOQpCcpCAaqLk/UYTYkxLMFAJLjKitKjyZkMA0.667
+1cqMbhJoKRxGbXQAKU7UCUlGHXdTKXil14IyfKNTtRlQ0.667
+184/hFXrvQnmKJ60bMnPB05lSw7b+p/bU3uNTaqaK7YQ0.667
+5HdG1VV/DTn+1RTkEpw2Udd+4wCFTabTPQJzUzwByeX81.500
+18jp+tqunSYWhGRPVk8WQhpRd0SCSRR5yj70nj1tl/X41.500
+1SNrY0nelSQmkDptocbHvu3CCCKM2LL+8BBVnqx47J4k0.667
+1XR0bXhyiT4G7dYkNGe0qKHIvgnTB/AQLIOMNdCErOhY0.667
+1g1wN+d+6RkC95E8Tt1Yb8R2DQ9MtX9cgXFBL2kAV7wA0.667
+1XBDROixWQ8ijXGrxZTYn3XgCBgz3i57J10xhzP/qOWI0.667
+1BLoui2VdRLeMxI2GGZq47vvLV5h0EJstleXL5w1azGM1.500
+1JwXovtQiQqqbVe13pa+yBw+EfwpQ1bzM4IHG6xQZxxg1.500
+#1 28
+11RKwxwfGTjyrBK05WOsC0IkrdCgVzjZuJqD5LX5X2Uo0.667
+1UOtyycCYTeuzGF1yiwq0caxDEfv/ByAvWHJl7XRxlbs1.500
+1lG4bLwDGQuqJuC9XB/NJdO2r1N68KEk/KkW2HrbKAFI0.667
+1BsTP19f+SoCrnnp2wYmv1toXv2BzQXYKFttewhGKUb01.500
+1WRHf3fbeSg6LKs+p4adu2yx/qKFoDZutG2zu+ZBA1lE1.501
+11auUty3aQ1iMfFNoVopTQjLkKvkE3YKYJ2q8/osGczs0.667
+1/4OcY8CpSZOigDe4KeiSTUQap8lGxS63Rwjn1WIolho1.500
+1nKz/4qTrSSOE/kB52Z4hp1b5haR5W0KcqdrEM1VvcBw0.667
+10uCZ8QodSq261LHLsj7JSUv69PQlFyjLYXUICpYr7O00.667
+1AWoebvpPTAinmHQ9PaJ+BxU7msZ5tHZ2/rSSMeCgU1o1.500
+1++VVcdRJQJqeEAsJ1GB5wgRpaLhn4teW5yPYSS7Ir5U1.500
+10s5bEPrlQLGstIU0eK8TC24X1efM4ryJAHIaHl55YZA1.500
+1pnQGPXb7TeSAfoi9FXgERr6X0XSmd7xC7sj873xb5bM1.501
+1UEGwzdAPSCqzs/CCvV4vG5YsBpshwU8TLbcZfRIrTnI0.667
+1/+DLxyv5SSm3Vo62BqB1U3U7r13I6PxaD2DCOEf8PB81.500
+1Dz+cMnovRAWr2wzlkCtXqpuba510MeXljwHLiaHNO6w1.500
+1/UX5KaFPT6KxUNE4CiLFamAqrPH164ujDS8WJpN6Sf80.667
+181dGaULxRQu0aw8sa+RvgkG8LA9skboMQZCQP6NJNcs1.500
+1K8owDgTNRHCO4lmUvXCLSLFqs8Akll61RzcEtd9IkZQ1.500
+1Fw6sKqhFRG6dAic0PdXG488p9vJWWu0JueKobyqv8s00.667
+1aVe5xzblThG492j5wTnBq4d6yD+IRVvdSjFm7v0H+PA0.667
+1Rnhx8wbGR/OxjKOsZQEylc1IybvHZAqf0gLNZAaue1Q1.500
+1Cdq9VbNDRmi0XECmMad8Rjoucn4SmxoPSkL5QAxpmhI1.500
+1/8wPgCozR1WQlVvtFBPI6nHNb84Lnhm0+TbzeEzs5W40.667
+1qWWlY/HDT2KCtO8zuo1sjwzU3i5p+0jGvsZ/leYLBWw1.500
+1b/0/VoJBRPqiScI6ePA6Wj/dB1An/M5g/5/+54yuW+g1.500
+16IZFFIDuT7+S8ANlVz7q66360OLyL5PfQEWa8AYHG1Y1.500
+1JHaGjbY5S62MxTYQ3XDgCod/d/+acqEPa/cpohnPGks0.667
+#2 16
+1WMyCYI0CTuq1h83gyI6COoBR5Ju6RqtMe/BOJEPj2JA0.667
+1Q+vEO0OjTqGfgXKxUpvltrpprbyJUoPQ/cWrs+VXngI1.500
+1nk8QElJdTBuptYX+sbCALUFseaRKcDJiZ7TgKYrTLM40.667
+1NZVXRPfsQ4CVl5sNZ7nuCqVB/JI3y09klPlNr2ptybI1.501
+1lKChVfMyR1qKVvrHSKzh+ekvR2WU/Q3kYLOML2gh4Y41.500
+1TA4sXsLOQSy8BMWSBEZxal07vb7IFxO6E37j8+yGKvU0.667
+1h55Y7iTjRj6ksyWOod/YtlzIwJ51aFTISCh+40KJUaE1.500
+1dNUOqbWiT1ecWDlogS2Kj4PhW9T7HMqhVGGjHDyMuGE0.667
+1NnWJAHIfSHaMWlnuFyvprUNYC8mAs3k890T29Fzom0Y0.667
+1w3tyrcMuTqC68iRrgNvd85unhYBGSgUGcaEFswjwo4c1.500
+1bzbfdcScQi62GR9CURhkmJnCKOUOJaSrNuGjG4wyTfE0.667
+16qwQ0SeBQCixOmUzczmUGksp9eaejyrAHWio7/VCH6I1.500
+1eWTR4odWTiiD2+8Ib8IVSqXNDOX8WXlZ2h6VFiOtts81.500
+1jq00ZO1/R5qweUZ0BpY+nNis23iJS/0KbBNzlXcmnC40.667
+1a5OcUN8zQ02RYiB2sKYwUiWCaKf99hB1v7Sk8KS3yu80.667
+1kXnUKW3uTEix5/BY9smTg7LrTj55ulGP7nWJMKNXz501.500
+#3 6
+17m/5hlfWQZytAUvGbcYoZ/srdI5ufLftpEaKsjJbRbI1.500
+1wo8Ph6woSIOOL87kFClhQT4bwPECbSwUttp2+tGu+IQ1.500
+1S33Ps/BPQzq/vUYNk9Kwe3O2MYJd3em+msXX+aH+iaA1.500
+1loS2XY7pTP+ix89brxQGchVA1IO208T8xoetnPb0+i00.667
+1E3tIkgJwRZKMOHEaVWBFRtwZ4NjaPxdmwzX3BtMChjo0.667
+1y7RtNMbbSNmQ7EbzAU/PyGEC8COQYKwPQ+WrcUPTMyM1.500
+#4 60
+1zeSdDd5oTK62zAV1Zyx4Ki7Zd1crabG/Nu4D4A0yEUY1.501
+1rVCmEr/PTP+R9AvLbiblQ1/jij0wcwk/Yl7CACQm1aY1.500
+13GCAcWx/S7iOTV+CyC2FAiv2x6N4xGjjDEMXuZRdJ9w0.667
+1GFLCXCbXTzWfc0ElhEw+bEnT5XIvubcPFYKvVYjH9Fw1.400
+1Zpgq5IATSlu/CmZkmHD+tMNuB/xN7BOxwNk63xyIw4A1.250
+1McPLQ+k/Tv6SHJylmuys4AkiPbRqoSjzLl5Ex0hMvRc1.250
+15sXc5pTSTWK3RcVVxhId/iCTFkhgP2nlmQ/Hzrq9mQ01.500
+1uFruxtpxR6eNyLO9KiofRDM1cIEKacjVYoPYpG0XEQk1.500
+1Ygr4tLevR9271SUtodmdpVr2JebJVmHKNS2EFfcTxCs1.500
+1bYH4kgblTGy36mTSRZwehcHpZM7odrfsOeiJXqHtELU1.401
+13f61d8GvSwqSMekk/M9ExFKyKTH61sZWuHoEf6an4kA1.500
+1NOIRihRGTh6dmoBApoz7cjgb/Sbs0QRwlyc7ZjMNI6k1.500
+1JUeI0FthSmyQrTLsObyrWNI9HEpPjC4x9BzJ/VDrp741.500
+18a7vS9SBS86S/plj38iDIEGs5qo+uC1woWymZMvgEI81.500
+11ZgRe5a/Rbu8QtnTTwSdSAGKDxoOehNlytwzjJmsRTU1.501
+1fbVlj6hMTMOZ9KOt3QOUZ4MqOWIFDZtpMYat3dQP02k1.500
+1QAlTvIxpTJSeSqve59/18An/rSZ59fV7jcjtrjmaS7Q1.778
+1Q+rqIN2xSC66X+o+YWuvAZV0alxAJb1ZmiCBYhYSaxU1.778
+1hH3q+blyT/ifE5loc0muuy7ZTGtV1k81zoOsiTAYkl41.500
+1uzdbXQGOQ6W6rVHj9sBnmneA9YRuW+LoiF47gDhncX01.500
+10DR81ztNTii9Kymy87WqU1bAoWoP3FU4D9l64T6iCXo1.500
+1Rwg1x0FbQdKgTAmJY0O5bGFmvgQNfrOINd5u6X0mebE1.500
+1cTdKkM0WSHeHJYCLpuks4OP+JRqECuIQuTBEi0a4Wkk0.667
+13GFxISrvTiyuAiZaMc+MN3st7SpI0IxX48mNX6eahfM1.500
+1SXIAXYx5RVCVe7F4eKkH3K7bva/v0ibZbh6/yBkzMMU1.500
+1Tj6X+PTgTOCbubxzwtvOEyD72Y72TVKC+HKjaxahDmk0.667
+11g0lLZGmSd6AfyB1iQ9p+CDdiNoT6jmi+WWqn6P2s9E1.500
+1h/PJIK8QSB6budwPwzHE7JlCZsF7kCFwBZILqczz5KQ1.501
+1EiktwtlnSCGJWhQ2Yu2RXFwUHPk1wywb5EVuptp6mHM1.500
+1n49+n+x0SX+tC5XCF7VRqW6l4KWyLaHF/S1tDvgr7a41.500
+1Fyqw/ylVRDSuOcxKHt1HUKPk5li9pcu+DONAXS/sGsA1.500
+1bBiOg3F9T5q97FO8pYpg2b886hVvdPnn1KMQT/bxIyA1.500
+3dzl2M66SS525bcxNpbLYp4A7I8gwXs2vd3JlIgP+6Do0.667
+1NMpi+pSmSNKiIoqGNy2FfDZtiPfzXWB7WXQq3yaUIHo1.500
+4X8ZAwNt1RUOaohzsSnJte0YQ6yTI2h4Rn7PLsI6Ll3I1.501
+4UrshBgRNS1m8oSEQY+b5tC3w9pPdv7Q3cpGNZ1KbM1o1.501
+1BgSjHSbkS8uOTq38aOpdOt3VKMSAvbZ+P30EtCGqACo1.500
+1X+Mcf3kBQh2ntiUsG1G9PpczCSZBi1FcQlvwx86MmHg1.500
+1CLZR1zvNRa6jeS5dgI3jcLxENSpPlzvCwwUjnNQIEL01.500
+1+IeUhOHORzmdHJstIi1fTFbnqZ2DsCMM+04TSnUffKE1.333
+1fXsH+pkYRHuUq7FjZimM47EqWcI/uqA1veGfnkve+vk1.500
+143c4s2hySjmaq+u7FgfbgX8HRLe65JUhpfz4uQSClZY1.500
+1kuqfRAfrSNqr5LtbQJiba9I73TP6f/+kUnKos+TlFJE1.500
+1bZ/ggWLxSueaQr8t1FUXuqAcQKd3Gjoq6g5AfD8fX3Y1.500
+1S8fBgtyQSqWaEj8kkaNa5ivxQtAlhXuOQEEAe/WQOVM0.667
+1GG29Jo7eQOK/rYQ2DbIqTsaVOShoJm81QxS23xjn9Es0.667
+1/n1LMNMZT62+Ik6x1X23ycuUABC9TbEAmydaegwGFA81.500
+18spsTbCtR8aDruHXKFRu/OUOhJHuF+euEv/nlYEPbA81.500
+1wS2RBLCpR4qWZnUNnQHWtlU86uCRhjcZt1Nry+aAR9U1.500
+1iLemOxg1TwurpJILdreuwGbb4+XB4EpGxb8HMazFN4k1.500
+1kgZUWuJjROKQMO8fsR4vjVbpuqf/iwE0ADdIPZlZCgI0.667
+1wlyEQl+OSbGUHtvzFNa1sLrEXVyBdHmC6bmC3UVigwg1.500
+1kzaoiX31TnWI28btnJVWcxn75dEnUHKmizAdb6l2kOE1.501
+1n6ka4yfrQLyV3yZOfkLRxORh+sJWiK0wE2eNlV0tcpY1.501
+1gEtQpmVZSd2ZNip5aJeT9FI6U3Nz07VyXRqNfwMF+081.500
+1aZ7tWs8HRNqnl93fEu55ldVlzTIXYuTWChe3Jxkha+k1.500
+1+mcugNquTS6sXb4hoAu6ITYa02eGFtAcg3MJSJyht0c1.500
+19eOHIEtTSQ2+K4rMnqPHazBzTi1YOhCvWKtIIvCyALY0.667
+1H/4eJD6ISW2uN++ZcErcS6zTGLd00Xg/eEbK1B99kMs1.500
+1P5tGBbxzRs+vowJZAaoHPrJEIZvcuRGb8R8LOamFt+I1.500
+#5 56
+1GhrjhPqYRL2XQW8nGX41OSKVTdN2hKNsYOmXKinJXnY1.500
+4UbrgehpPSSmmKMGEN46O7l+MBUDbufQwsH+ONRr8Mpc0.666
+1H8W8e+aRQJSCMXzLIonO0PmfPQyDMAvnT5QvnIsrTok1.500
+1D4b9okIyRxibzpTuw/2A5n+G3fsQEJcsjr+bKaAjkxk1.500
+1xyumwnu+SUSWC8z0nCmNrJwKeG5GhRfsaJND7vkWxwY0.667
+1+vReHiB2TVWyvtWwEeDcmJ0g1mdtdEciJoofWb5HHYA1.500
+15bGVs0xVQ4uHXT27MzRg0txTrmjvpmEOqxm/2+V/ESU0.667
+17nwcZ7v5TKiXAvy3v5PLKkYwl+Qsw8ax37ukZ+jLYm81.500
+1AgpHezBCTXyzSrl3LvnWbxIMB+kCpm1iZhcpVomsAbg1.500
+1LYggivZyS5aqE0jeLTS7rpSXCNTAp+zQ8ZdPETtoeH81.500
+1JSMhn/tjRRGvtPrV/v5LYr4bsHVccU3BL2+WeRP+SdM1.500
+1Q5qt15stTWG+uLH3f01U/jU05Uir3uF+BJ3PZ6hLCj01.501
+1d12kGjoxTDqgdZbT2PiKBvyKmAUhlq890jtMsm3yNm01.500
+1LrG9joYcSCO6v/eyZCGvl74f6ZYtAwxzgYqqejx10xc1.500
+1cimyl33nTV2Cj0SGtYyBSs3PoSl+9RKa4JVJyne3DoY1.500
+1WYoru8KaRbOA8f0f69lg+hbKyMq00VhsQEfMIokU4cc1.500
+1iEmkkzXVS1et2ofFmpsF1ztpxPXWyfGCg1q1Gp/L/dc1.500
+1sU/kBXiyR8i2o+Aw2r/biHTxHqq3zCRxr6D6D4AsQr41.500
+101ECvJBcQuGPDDqtNeWxXxSpeY0j6kKpgiCVsw7W8z81.500
+1PnFtgKTNSa6/rb6VJ0JQVlTh3Wd6siqdUmVZWhGp9wI0.667
+1gO5T6sD6RUG65sWyJAh9LNbjprEGBPYPvB/Y/B9zeUo1.500
+1opEjLnIVRu+uFkQaE/zrUnQgTTKG2/jiJDfiR65PXjo1.501
+1ZWf8x4ZCSJO2e9CR8TtJHEpe2bfHX5A1ekcf+dJYrc81.500
+1vvLoIYCvTo6cqqMn33vjOSJ9fXXoR7cI17PsVXDxL1Y1.500
+1jYPCamesT16HvqfFNtJjf9z3vbvS6wAl6DCNsHrNWtk1.500
+1EIcIv/JlSpuHRDITdzOJFMe5lfLcbiRMCu1svgPTn8U1.500
+1KPcRKzvjSuq/Ach9AtTzu+P7Nk3q/9Sx9I1BF9UFUh80.750
+18whJi98xTYGvepEDCYpqNEoQED0O6th5dU0cCUDtiZY1.501
+43p+/9ZI7RiK1Z3/Jf2jVVtftS5t94Oi42UuWdWXvLFo0.666
+1P55c0qBtR+aWlrKn0oWqfni35p63d56byXMHLlwXYOY1.501
+1rt3Gak+xTkeCMiX8nN7/23Si7FngX9nhA6DpRFKXzeY1.500
+108bEMMGYSUmuvmqjYPluBGq1ySBw8ZnRjXr19OU0kcw1.500
+1sSrsGc2QTBmNq7KoSrbnk2i0IkJGs0jbuLQYZOhSMUc1.500
+1T5go3EysQL68ifvE7d7YrG+WLd85mqZVtHFYbffWumI1.500
+1D32h+E3tRuCMNWQaDss/w365PD70eCAF0DTg46ns9J01.500
+1yksm1XuvTTG70H/2itkrHAWb/WlJ1O/O5suc98uKSPw1.501
+14yCsS0Z2R7OcibbD3zlfkpsi2CXltKb0Stlojo/56XQ1.500
+13TQHBkc+RKKXZHP3Ks5QF4wDYNTWPKUK/A18nL8oY4Q1.500
+1WF2SEy/LRsysCGLHckmnxDLvv+zsVKPbrcRUDuV6fQQ1.500
+1bOzMJ+EXTj+i3Vgth5/jgR/hCCHmdgiTGNJq6bfTCVY1.500
+5uLFxqPSpR4aNN4rsdji80rDU9aPa8us+SbBNP5ymRIo1.500
+18syuEb11Rx+U2QeyGDFb5ALm2EGpK+bf1eMN/6k0w8s1.501
+1ZdHiTa3mQsGeiI3ZbyjqdtdTsnUf+/+sFKpNSER3er01.500
+1irEDrywDRH+ga1jigXDW00K6cbQQMZAwdmGMxrwrOVU1.500
+1H/sAc87bQxGMDS+fZ4AoyL4czXe6Ogs3rOZ0E7D0daQ1.500
+1JHqvWkEQQPaqzutE56t74/ADTxMeDyTilhG5UcTCQo81.500
+1nhT7cKwhRX2EmXvUbN43uutVvIQPGJTnf/ugL4ER/9Q1.500
+1HVxziIj5TpeD68RO6HEFr7DB669GNHGbwwziQQo1TmM1.501
+13g7GxMaCTgKrNcmiYje4NgL7MjyGVTW8Ty6V1W1k58o1.500
+1mzuLRQStR/KDxm/fds6wSw3cqobuAlfzSu7XA7c1+a41.500
+1Q3AEPFFZSoiSPqUkv9xQP9VyzcSKfCbkNLVXjGqAkH81.500
+1C+/XXdzFS8yyaxwRkEzNG1kcp6Sed2gdve8zf7ryKlU1.500
+1Bnm4nnTyQwe2J4zLeygqzDO22gF14mLSPj2x/j05mjY1.500
+1dObG1DjrQYK6aQskcTFjOiRE4WzoMjowx3VuiQkB8qI1.500
+1ccmxWrSRSn+tOGzMur7WyJZuuRySmtyfA+8HtFjqOUk1.500
+1yMvY+aENRCOEgIvwPKnyTU3gbjtf8Jw+SFKcHw4vBsY1.501
+#6 13
+1JUidmKGhRiCUScssD+QNr7oPvGyUDY1XZl3iJDqwy8A1.500
+114kwwmACSSqu0i2+hihBF3HPmj6odTi+0gXta5MlnSI1.334
+1Hj5K5kALSG6seQGGtLifh7hKvzjyUbQnxiGd88Sv91k1.400
+1IrbXwkHgSO6ddRvdurcDv2UJTskYSepCLlv2lmrhGnA1.400
+165FrY9WHQJO6xAJ0C6MzUX7b+W7zq30YdzVC/ZzYRLQ1.400
+1PrBFaj1ETbu0fastjqfs6dVjp5Yh57lVxCXQuefPMYc1.400
+1XiSi3S/PTyeWQ+UiINqZFMiQdCX8wb1VGmnx+mp7vNs1.400
+1u2bAtULOR96KHGlSTW1GzZb4JyfbGeh5azpnAp696Uc1.400
+10+oHa2lzTFOSydexzlRHUSBYMTjiytwNRApyT8B4n7w0.750
+1PxFhNG8qTiep+HkA3UCgK9OTuegtCBuWJWdybuNmt8s1.334
+5PAZlRbT1SretMnjx1a+C626rDq3Mqw9AYwhJoAmW43Y1.778
+1QLp9gG/STx+GVodIxTuumBOIHMxm9Nc7qeWRyvLgORE0.750
+1UKbt8Ew3SG+fZ5fQaAOG2l9lV+TENnTv5O7yWclhlK41.334
+#7 107
+1Am+ouZTHSjmRuvXi0psjIf82PzBuwpQbPhn1W80yp3I1.500
+1qCugpAiASEOB+tQYk+CXj4/fghKVY04F2fDkPjXM9Qs1.500
+1gvEYpiWjSdiKne0lFnMADqsuhOMPZIDiVtKq8MM/ZLg0.667
+1uOT/qjy4TPqCqSmu9OiZcSvxZULwUPyMhc7npSOkEc01.500
+1dwuTSYqlQl6SZGddS0YXWzGQh71w1z02KHltaOkLFwE0.667
+1bZJzsd6MQ2mBcLwldhweKsghZJB9jBJ/RiHF78CuyRA1.500
+1t88c1Vb9RxyY9EtcCrEfWVubn3xjYB5Scda6tZSRCSM1.500
+1402mvJy0Rm+nUc95FzQPr4ZocHu6ZNnhTJWAqwLbros1.500
+18G6dher3SW2yjh8oH7BsI01bGwVt3A6yA24V9uQo6D81.778
+1A0cs93G4Qdu/gCMn60lcKIzd7LCAUCIDFZcOeWZQKwQ1.500
+1nx3oGZDlQ7i92La5CpMJC1bYHLwhF/Lb3LA6KlnKEw01.500
+11jhAcxv6QWCYFhQ2vRElv532OGPpclNsDO7tGXivV4I1.500
+1kptcvmHdR8CjCMPCVP37kIMy3xpyBWzrv6BbwcUdAys1.500
+1BJLiCWTkR7us+W/ftIz7bpy2g9+UmmW5BXD2OMb9uoY1.400
+10O/UsSRvRjGd+4d/WOnvQskIdhIAvsKPi6nxY+NCuFA1.500
+14fKjpzlxTqq3GlZW8tIvBzHlCaSLBwciLYG74CLdpMo1.500
+1M4RrjchYQnCExJMyxtr9Dvj38OLKOP7FNqZ1BTm4Zas1.500
+1W+SWPDI7TmWT5CiPy5jmhnMRw4iUpCQlpSKGBSysGRE1.500
+14Xy1N9vvTPqp32TcIoBBhmlikX4jYqWxkftW2vlIaw01.500
+1BKRKWwcfQwm5SOOcPQRtWX0ZFk23+deFnZtJ95Zwrmg1.500
+1wG67MsQQQD+aIiU8/vZPGBr3TWVuh2slEFD+USZqhTs1.500
+12eogiWZIS9qrDXgptyA3CXorbzG9rIeTc2NK+572GIs1.500
+1Kku8i6RLTcaEWmJbDVSq6KBZkaKeG0yLoD6wRU5zyDo1.500
+14iLMhWIAQGmbbgNOIvDwavaKhjMhkJJJEpPBhlDUPNQ1.500
+1Zw/PqWCGTNqLzsCfAPtfq18lSlzxFZyB9OaNhBDqz/A1.500
+18arkfEKkQRC/aoBh7xa8XfACHyKv9PeKktQNDALLY5I1.500
+1HpyfDZ4AR/Cm6lQqKV3qaiuBzSwGnKVNWGRdTHjWKwA1.500
+1KFHLk172Qc+TDRKPBOXhlfeUcEzj9H1nCMrLpb0FYHY1.500
+1f4W5Q8IqRq64pYfXfgIK5z3fN/bfiooZPZPWLYuUeEU1.500
+1NGsMElBGS4ihphML/6AJGid1vHBD112yb9i6pGheH3g1.779
+1zW2jOVJ5RN2cY4+clw01BDbfQ3brbJSn8fEXU4uPnww1.500
+1VSZR79NrR+2ZcP/eU8pgTBaHjKYAO4WU6MWDng37XQM1.500
+1CMYG/RIXRrS3YCzMLnLkDniXpPXDBfIn7B2fpM7LmeI1.500
+1wKwAyOn/TlWfmgX+HyShvgxzf9f37UGigMrQZUMg7QM1.500
+1epawu8e5QnGfrQXW1szRg/HFsKgd2FL3xbPgpSrwKEY1.500
+1dtoNEVjYRyWkAEQbL+DvjEnkPIehy0L5qWBupzd5uos1.500
+1VuDa6uqpShG3vjNKoVLmH5XCS/8NrSzR/c+ygSs6JjU1.500
+10jplO4JMRIG43vXawISlU9WUOJCuOrAPi6byOKMNXZI1.500
+1wOnEZgtSRcalu7aXYnq+xho+0VtGQVv6KEkRVwqqBYM1.500
+1Z2oSnvcwTY2OfLbfCuKXNw+nqxiHRdt4j8hdOFyY+fg1.500
+12ejttcGQQp+p8r4QrVjZPKnjxVBNYMLskITbuwtZAj81.500
+1dZoeo2BsTxu/xaBCxAHgjIU3mE7ZCoJxTQVjE/K8c2k0.667
+1qDRNbJTWQwKyozQwQKgZcCGoXSFukP7jO+/KhhaTnSY1.500
+1DWamKqWBS3K3LYR4yIE8dcv73Y2BIJZeiWSgCfnXGsc1.500
+1GGl7RsTqRPeOXG2+Sg4/Q6GoqsngiFypyLpykvs1nHY1.500
+1wrZXv2wFR5Oaep9kvqJJv+AFR28wLbjqkp2RIjaCFfM1.500
+1iYL0d3FDRCyKNeeYPBCedBwyzE5wVonyg7KIJva2pEc0.667
+1ZgHwD8QSQyi8elyE8/JU9kqmMPjgRsnREARxys7jDb81.500
+1idvNUEE9TMCNri7R5GWbZy/c5Zyat6gCc2BRBxhH51g1.500
+1h+blJpYkS5C8nI2YxNGPJ+GIwvhDmCh8enQ+opd1c8E1.500
+13m/JMWTYRjeHIHEAiQ71yggRNWAtcA5N7cxrAkevC980.667
+1onAEQIiUTCGvfcj+vvbr2RxbZLhrRGrwmFQi43xtigg1.500
+15hKLbnlcQC2BP6EM66vGkQzewHQcO5s1G+8OrN15yWI1.500
+1e7JDvQvsRM+9b1J2R3gIVX6yryTos19EblphehoQo+c1.500
+1FA0HxT0RSuKsVygXXtOtTvVvDFgFV3lcfw1Z7cA+pkg1.500
+1nEuOeXORQXGvtO7fzKLlY/x6qdjf8A+ztwvoWE++ouo1.778
+1C6OCa7zfQTuDBI0HjoxdfzYPJ5f/lotyo9yxPpwsHpw1.500
+1NtGBSca5Q++r14v6oPtzGDuqynlE3Qr68uPgLicrQUQ1.500
+1ktOTLq7hTrCoTei1Bd3Mvk2380SLEbY3Tu8oyd40vPE1.500
+1rH1j/VH1RqalhWzTIjkDni9MMYeQyRk5gMLTu1jQg641.500
+1H99DtG3iSwCA1OSBcJFg2XCdqN07pglf7dLaeDGLYWE1.500
+1q02gcAsGTT2xQkBXgUULope8yHklyyefJDVRE7wv1Kw1.500
+1o73hqu3KQSKPdWy7H33HqB35+pL8btd2QFnx1Anlcos1.500
+1CTmgVbgZTBuj+SyVwlpv0WIi19twUKvwqmbgX6Vz8Tg1.500
+15+1fRIkKSvGveJlZqMVTJbNyjb+7NruoS3PJX0AN4H81.500
+1B2eK0bllQ+OlicQJskar9HhcA+YrpxXiryQKC8sjA5g0.667
+1JZG3BrOSRvSfT7RvtPgRquAAIj8xnKVUKMumIImaT+w1.500
+1RrpfPjclQI2vzWqxffaOS14fBleu9bnPx/H9671PiJc1.500
+1P5JOhc4XRbqBmJiqMGqG9ZgZgAf52GpIB3JA0VSNtwo1.500
+1zfVzvIOMQ+W3XxsSF1UzhUH3F9phso97QaDMIE3E+aQ1.500
+1irJ9pBIUQ0eSDFz8oxzl1BblqWC+GAt5gaoGONcyzQ41.500
+1q1Wx/SrxTZ6va2hZQMzcyNZ/+eHMc6316cz+ChbLALA1.500
+1y4FqCs4wTFWmb0txNqUbawj78owmUHt9qpdcMoIHVss1.500
+1j3BQmZmFTZSK7e/foO4ErZqlSE8lHsrWSEtQXuvs4i41.500
+18TwC4ahFS/ytO9bQtvkHJklgoIM1nIhyxK+YATCMY701.500
+1UISW1pwwR4ikMA/vl5+3kOILJGWnpsAZG/FzHlkn56I1.500
+1/NyL+7ETS3qOowRnOa9eO8SC2wh47hmhxU9OQfOm+8M1.500
+1MRG0pVNJRSOhv4Er0XHKiEcVT2prgCepKqrrnZ70/QY1.500
+1LUOn2/YlQY+EiEy/hxIWso9Ah6zkGlJe4XU1crPwC3I1.500
+1NsTiEgf9SeyTH0a2VjUYuzHE+pjNRgyTKgdjD65GF9k1.500
+1LbmIFt2dSHOKBQhbELP/DhX9BCXxKV135mHyslfJFZ41.501
+1qrfvUxt4Q7qipvwjPYm8IxrZTmysh34pT4P5iV3WIH81.500
+10BNe7HdHRxm3WrR3CjjVkLqHNfp+sFtTkpn7o5ddlE00.667
+1pI79zFUmSGyIyTB0FSJlJ3POJryEmRRUIDOOupFcMms0.667
+1k8wGM4aqRlqJBfWcuK0Sp5a4b7M9M9VrAAircqUUzFE0.667
+1ogA5JWJjTwOv8BPxv8wMByVGAbuFz1J7e56OjWysdNQ1.500
+1hLxb0JYbS/SaFvezXE0BLmSp0hMaL/TmZlToomDKbEY1.500
+1QWbRpJvCSqKY8TXSj4i/IP6CP+2d3i+IgNMezMY8O4c1.500
+18wXg7D19R9GLh3CCJ8RpLwNA/eFuI25spYXFnn908M41.500
+192wKKMXhRiuzyUNeefNICJcP64Qem3rNfQtxWU5v3ZE1.500
+1FviMLbZ2Scmi5gXHd/wTBphYen+l61Ko+ofKUeUz8u41.500
+1fRmnkvIIQFWsztQlg9QC00QRtBlPfYI0Bn/qOAUsRAI1.500
+1Qy9w0ZlsSI2eQfh1j4mqWe2JW9Ql19Wr70bWjXtkvjs1.500
+1BEPJnnhdQdCezBLiw3esd81easM6U3X4/hhpxeAly8A1.500
+1z6XasSwASiSuyhpMaGxiuWkzW++iRbSPWyStts3S61Y1.500
+1OK76eYRSQNC4e7eZ+ptsVunGe8OWOmb2JWN1JhBEgzw1.500
+1KhIO03+FRbGc2BFk3vvZCtqu3uE1G9daVEFZLH1Zk941.500
+1g597fL7fSxKstJ26/sEDgswL7lOnmk2k9MGKaUVFRPM1.501
+1EVFf/t0uSKWU8vCr02YigSMmT8tEp6RgSsLDH5Ts1ZY0.667
+16SVHZ/iBTPaucCY+4ngnUEzkp0QFXHdX6S7VqjJXhr80.667
+1wBGLGPLqQmqT7nfhvYtqGsSTYQsDJBPNNYZ0G5z30mM0.667
+1skifEhX0TWyg0EyT1RxizWRDAa/oXChXaCWKvMD3D4o1.500
+1kMNB6M0nTbKEb54IdwYaZ4YGwM6i+q2Qlu4sn3baXvY1.500
+1Ww7bjg7gTtGX2nXE2lgVwl0NWw3787qNo5RYzpefG+Y1.500
+1eoejv+yjROe/ln6X7IlBEZ8sIVOGw0LlL3DEZ9FUp2k1.500
+1/U1aaHQRRliis2bGhOGNEbpFO+TlwWOdXKrN8ikt/vo1.500
+1D1cNBstNRuSGuBTbPQBMOcnRDIr8HrSDR2hbwxlr7NQ1.500
+#8 85
+1JzVVauDqTpuNmZu2iaWrTBLTQM1Fe70InEu7ec2uTg01.500
+1OcoOxT0xRzGbrRPoUeAWJJO9QJd2/7XnjTHJIJPStho1.500
+1aILArx2STsm0lrBR5OP2u6z8dJRb833wJtFwqYoPFkc1.500
+1sTxWivT2SC+j7Ay2WGc2nIRPMkhSAR2s8jGmPANiJDc1.500
+1ffHBsrorTeGPyYae7tuFoG1AuGIekCDEUfrHl5Ll8O81.500
+1vh9nehiWQ12zmC89wzDX6pgB71CnQrlJtBecO73Snxw1.500
+19RQFs7HpTguYTpKuEaVcBok7kG2T4gra3Np3tb+OdJs1.500
+1uuZjuS8iTHaKoRX4KyIBAQBeexdODssycuE4aymn8o01.500
+13G2GQbwFS0u8rAniILDFZPbdfRxgICJx/PDc4iip1fA1.500
+16bxaFGHsRx+Pdaq9GF57CsIICx5WCjJxthIMH+g3YR81.500
+1CEXPkGWtTOOqRsWBhXBHio3yRnE/tQb26GNBylS0PMo1.500
+1MUR0VaCJQCquq1Ys3kWfYb4QrzMxoIEflvU+HuA+PtI1.500
+1bVB0wf3rRZmZKEX46YXl93aA2dq7R3g78A64MYm27l41.500
+13Xb6mmmkQ8C3P1yAkKazRLgQ9HRHWtaXLrcwFKX/Kng0.667
+1Fpxd2JIOSKaaGRixwxAsGSBHJY7jJOFzFzVgIbB5Y7A1.500
+1CbKTUJXeRh6LSygB0BoB/+nVXYY18ewainyhHNgMOc01.500
+1/UnTvo6JRoyd4+dgtAVvJtdzjrZOPMFP2nwBEQVPwew1.500
+1lIjoL551RoaNaZ29WFQuyB8p58zbGLB+FXo1Lgg06do1.500
+1BZN6UsK8QfmI752ZOuLShKxChtwO1kOQDj2Z4YInzHk1.500
+1jjmCDnuyTCOxfW6bxXZAgx9QC/20mRAKKXP41WqgZbE1.500
+1Yj5gU1D9RS+Flkd+wu9ZtSJStX8fPpUArvgbqwB1oQA1.500
+1Xavtt4OlRn6LEB7S18SWX5jshTVCAQ3TxIH5L2C4MCQ1.500
+1jNEjl4WuTJaBV/N2czU4IQ5Q0x71oexyFIIzsausKMs1.500
+1G7Vmyw/7RMqj1JRs1hgX2wPkKyTeSRLs1snmK5TSZBA1.501
+1Ji2AyJyeSm6Ks2NflyBtZxHWvlpzTXUpQByytyDZ5uY1.500
+1DTk/aaOTSHmudWsCyPWLvGuUhhz7ZVLmVxWrP4oykR81.500
+1sQJD5ln7RPi7rPydkkfWVcNenP1k0MZfIUS4N7BujKo1.500
+1cC6fDNfEQz2/Qnb74JPvd41UO5goBzfBCYm4RGcmg+41.501
+1Z5do0sDmSNq6zBovXxwB/N7ELix3WDoNJ9mt0EJsvAg1.500
+1ZVM5Msj+R76/5SKwn61OoxxnatoRhh3PTcrJmhux/D41.500
+1L2WPRnogQ+e+tzQ6jKJfMHMC1IPFnUg9lJyG6FsAPp81.500
+19eOG+OS1SqW7qN96FUv334/ITQ6nHomd3U8REXa+B0o1.500
+1gHBdnF+1Q2qHVr5ASdFKv90xYai9564bzDecoeLNCWk1.500
+1Ln7Yf78MS9OdEA2tRplhG8e+EreYGT5z2JF68+yDocU1.500
+1aJjzh20dSUe1CTfxiQqovntenKkMWizO+RZ5KzEGuJE1.500
+1cHHWk+1OTxWz4H+odyyVv4YyS2a9SScWaGjMTM6VpoI0.667
+1tqcjbDPsRaavng6LG6i/bchIkmU0yXfXE/pLOngvAlg1.500
+1MzB2rd0LRtayqPeikOzCN9gpKFBRxxE0T/pwSEPlrHo1.778
+1wxoY3xJaTzqsKG3z5kmBDkyL9RTWaRlz1DeaGutPLAs1.500
+1KTRhMOt1ToiA16Rk3tIsBzFNtU6EZJBRS6iFstirIf81.500
+1XQmjRVPlRwajzRasCyS8uCaSWIYb2TaM8G3vI6RdAQ41.500
+1UmXVmhxTT2+HHffntq5dkYNmnbDewKxcJ1Cptn9G3PU1.500
+1/eDy0eaYRrm4M73m3+gKIlAykbcHdW3O5zASZqiT38k1.500
+1o6JklEI3S9Cs+B8n+9UDFm01VeZjhjMtIZdtom4D3n01.500
+1W4KPlwJHSQGU9PI5PwUo5qyouTGkNTBj0E0pE5t2oyw1.500
+1ROMLNLfATtSTaBMqD5MJBA8GvP8rPAc6jhjbb06OdNg1.500
+1QIdjRMyhSOyp9mqg4prkmGERa1eLs7/wXIJwed2JTzw1.500
+5MfxMptVSQpycptmbYuRCueIVnvoeUhYqKSCcXTgDti01.500
+1+SEzmvwBQk6f4BEqUp831ImyCRjTimX1z4fxrKtCWXw1.500
+1RBcYPIcLSIi5CZ6Vb6gU3fqOkGspsPXpSJIP7fquPec1.500
+1TaLzpKsfSPCkWkkrlP3fvi8DzkTYVtFTbweyYx+tx0M1.500
+14fzV/Ef6QhikeVsg89nICK8RYkCjOcS5YQ5A7cfA5vs1.500
+1R7zMQIsxSqiwte+rdiKugC+EXMUQvH1yLYsTe6PFors1.500
+1mA2mpZewT0CFPGMk0CsIXmV0ZEuEOeJHEcNoUgcmkyo1.500
+1OU/64crsSt6POMQceRK4PBhfz68tHQajxYjI835KBmI1.500
+1wOaUVjYCSfyDEulUeUTq05M9gOWq0rz6tgiUYuTfk6g1.500
+1Sp53ccKYQ4iNDSB6Rg3xDJXXM4CGPn5+mm3BBZnQ9eU1.500
+1CYpylLayQCOOVKLSDjMR8bpmoHjkbYihQfWgfZdweuU1.500
+17lue486eRQWplK/CEPu1RjTdMUthUHgljQJhU76bqUs1.500
+1lKG3cR2/Sb+jHP5m4AVIHSqJjd/hO8J0+BRGRjeFYn01.500
+11QmCvxy0QR6VDuX+SBe5rldP3XFhytJqHib10FrpzCg1.501
+1j6dhTCiDRWChlyBDrOlP0m68nDsiXWJ0JpUeeJwRBb01.501
+1IYyUiTcWTguEp/FAJB796xPfd6v3kO6IrMfWD63TDAo1.500
+1Br9QpU6kQdaF64H0M+G0/Oy1gIVoyGtM4pevpom++Xw1.500
+1tO9T7c7qRtGX+N4QrEuaXStU8/pQ/nOECjlxMQDZkmA1.500
+1Qg6d9xR4T2eWK3a7YD0RHx0Zky6YF8BRxs0N/FjQn+g0.667
+1Z48ZWszXQPOpEg7OBwVf65mV57L3VFIkwBCdimk27tU1.500
+1vPLXMzIdQzSI3n1aSn2R3b9KBXIC99sotBho62AHhug1.500
+1jKlVF8yeRYmrvi9FkRAsDNv3EH033LsAzCAmmmTTUak1.500
+1sAJPKuymQh2SOw1xGOLS+dArVpUPyyfJOxjYWN2LcbU1.500
+1u+82XWCzQfuis0g77PS0mmUflP8OjkoGS1ZxVejLsIM1.500
+1FAX5aD4rRIyJRXMEXLEa//foS8VdBQxSOVoiAhvJKBw1.500
+1I5yVm2z+QcyDp1sh47SI7Zcs6T9llhGkaFfsopIdESo1.500
+14Zfxe2QCTGCjg8fEKCsqow5kFQDbVc8C6pvkOEkEz4w1.501
+11WM1ZnJERwCwPsvaabNDLqWacaFsQlZSzIeYSluqKb81.500
+1PD1A31SQQ1iZT9jr5SNaHnSMnxA+dlYeUm0VkxieLlo0.667
+1pQzlaMJLTym25pmqDwiRjNuICn2IuC4mxJ599bPzlxU1.500
+1iJE1w8cnSiWd/7SAmIarXG/T1dFuqWIUO9Z2hHRHdCQ1.500
+1tHxdOliyTe6XlYtxieTIGj9W3MOcTnLbhsIrQPC6srE1.500
+1Pb7YJbqOQ+KpkyFNTBM3X6V0vQO24gaM977P1owR7Eo1.500
+1TA85F2IGTuGCbFeIXJ2AydN2B4kcKMBHChih4VfX2h81.500
+1JWt0pIgSRJOnJMVseKESIDAqpx7GUMEIQxj7lJBCfW41.778
+1auFJ8JmMQEKXObI4ncqmAxQd9GZokMfdnpqfwxCKQyw1.500
+16GxkZLuPTJa9oNxAyHbnYomV7/aQNQ84qBNwYRq0pIg1.500
+1XM31+AI2StmL53H6t4HSAaWBSsFOr+d+/fOmMy1ZR+M1.500
+#9 7
+1mEA4PhWFQey2CCW8DTAeoELgHYVtT63QeEzpwCBprhM1.500
+1BPzQsQJ1RtW5TN6xybqFD0KrId1EVgABQHxOFqssxHI1.500
+14AHQ49dsSAGF7/8qnVxG0rvQVgY1kkIcOIwJtlWVSSw1.500
+1C+v34iNDS3SsBg1L7fHQA+IPnnbdj4jy/e9xQ7XOqHs1.500
+1P79eHAwbTuKDzstMCiAPSS7jwMFugmyS319+vqv6lVo1.500
+1a8QYxATnSRKaTVYymnIJLSiNf6FStIqZiMb+ZDJ/iVU1.500
+1YSCgxwc1QlSJ2IuEOdAQVWDY20WF9ZHi9LY1Kt8RZrQ1.500
+#10 16
+1/8KoZMQVRD61XQ3Cjm14XswUqYXzTEml2xYCQhKROAA1.500
+1+qoH9m1MR5WNzQvB+EddvxDUVTqD1E0m4hUlddgSelo1.778
+1PZiV3ZtKQ0ONv8pD9vhJtusHFV7oK3iv7fbXYj2XQkY1.500
+1m9P5lDhzTeCn8iMi36wVOAMjkJjWat5k7Gd3t6sMJDU0.667
+1OhDCrfayRg+ESPydf75U/7PcC6leb9O/YNGS2shOME40.667
+1kRZdC9BYSOS6bv3FOVo4+ATRvYI/9SHqv+Bs5repnl41.778
+1w+RMAovOSSWS4i79wndUnD9vCaY6Q5KgAAQQDhVjCTQ0.667
+1FYzhq6G9SS2THkvKkN45Byorm0Vlam+Igl0NjuFvSak1.778
+1ipGsRRBWSO2fi3fvSylnkkAr5XsFAtpRaIkDo/eDoKs1.778
+1xymK7pZ1TPW7TQHCrRl+X3PTnzYFRKhOV+5aSL3u/fc1.778
+1j4eOVa8tTX2ZT1zRB4pyqChuRNwdTb87kfopxWZLNZE1.778
+13iBeTulmSXyUyNBmFfS8ycVY/Tfl6PSzPbtaRicax+U1.778
+1YDIHpfWqSFyaERPAFNka1kfvXyCXTkx9MmArHU2ytO01.778
+1b7i4S8OPTUCzWJtO3GRqg7ceXKFBVH4g/02DLwIgUa41.778
+1UL6w7zydRl2/JefWyG+OuT9WiZJybXg1Auo52QGeVpE0.667
+1QGoEMQ8bQ7SXaTY024IpIkE+c559C0Y36TH7Z/zMqQk0.667
+#11 19
+1o7Vr+jbRSj+Zy/oAoRpCzpclkJzKTZuKlFCYGRxMBoo1.500
+12lxqiDjMQQqcZdvM7qqc7D6dpfwe+EJaiT7ESrDka2U0.667
+1/eTXxx6OSN6LCdtrPwrviA8YljcncBGFaCW+swsExKo0.667
+4xf1MvzVcRPyqUeNp1e43B3C2uv8vsdY/NrpMsFTDO8U0.667
+4tSaZ9fbrSPO36ZLdjPCsjBxZmLoG8z4f8SsqfsqR2PU0.667
+1afFEBf2eRbi3f1v9I9lI1uUbqZhrpuyMWeUCpksMek80.667
+1AcNHKjZAS66Cma9CcnrWWD0uixeh4y47BZawXh3mGiA1.500
+1p9/gQUDRTWyFP+9ZkGdNzdfVwqNSfZT+rMsHEi2rK5E1.500
+1GtCz+TKhRsaxTeXvM2KonDwv+S0suGgQ6JP2XAaakY41.500
+1nuaCp12VQLiiQ4sYhf168teIbd/sSArUslXIuUk7pE01.500
+1h7vCnSWJR/6/tNVnSpsK7aL4lZczQ8GtEleKcjS4q2A1.500
+1hblDWZf3SDGfwthQs/EGNzz3YmZ0PgECXVDO0nAztao1.500
+1ohr7tcfQRPiCXmvNW8b7bDAmCIpHdYmnFrRqZfavMKw1.500
+1VWWsPuAbQiSCmfLkj7wKrNmM5u7Vz1OE9zPTFnlXPTY1.500
+1rWR2AL6+QSiW3YQlT6dFULK2QP0QD+SVXTFUQNmSVIg1.500
+11coSZOnRTmGTP+RjXRtKf6JuXXRze/8LH1X7plCBHX41.500
+16KRGSN7SReip1/BKt6jnsbIBqr1+2xD7kynhaftcaQg1.500
+1g+Odjt9ZTRWeahjquL9v4Iut6Q8654V3gO9V4XX4g3c1.500
+1Ss6/KwrNQ4SPTu4t/+SkMc15NnBCEiT1m1VzusaKOyk1.500
+#12 11
+1TEBfjLxNSEGKVYGDHkQoVgVo44vmPnn81NlYgsi2E7k1.500
+1m9qWDR2vRqyOs1mLWSU7OKvVZf+NcAsAKTjYi7LL1Xw0.667
+1Kkh7rhvYTei4vweP+/qTBkeriqul8jNZ4BSAytw29Yc0.667
+1y+2d56duSMepaIHw2zqgyKpOEOuyuq/HC6oZlMUJkUI1.500
+15oIFO98UQkSn9C5dex0Ab41f+/1H8B0iFZDt0aHbRqo1.500
+1p/SsLibVSs2wh4aHsQI0NaXu7nzELwYOQuR87EcCmqo0.667
+1tqBRF+iiTOSL3Cw8pB3pr25m03ORwNxkAs9jKUrXrNY0.667
+1hYwTGTeKQ5i36dhkJ2pOXwkDrMRlfzdvoduZyu6dowc1.500
+1YwBw0QOKTxa+IPeTjTjSGq3VJrMtDmEAkHY4Nh9tNPw1.500
+1nWj738CvSa2GIMRNhYOwoE4MtN76cVssP7RTaMzfwZE0.667
+1M9hRvEgaRSGClpYg26uFfJipsmW1S0ai7P8rnoPqwKQ1.500
+#13 14
+1Dat6mfk2Qmeeiz2WkbmLnX6p6vUqnL6XMno5nxtp4jA1.500
+1FkXowISvTYad0V6fAw0LVMmTluzXz8Y8OtJPBRSNJLs1.500
+1CgjHQQdRToa20DwugB5COktvbp49iyPIv+OX+EdRCnE1.500
+1tT9WWePNRaGWhBygfPcmTzFu5GzNIqoSjG86sUfDiNc0.667
+1WkHJic3oTUyuGMtoAqUsH9EZeuI2r/RnDQzHwFnzdT80.667
+1Dqs+dMNFTnCavaxZQ5P933egELsh/4cBY31mdRtd1y80.667
+1yHT72ZrLS5WNVyGTViZT2U4BGvtItsZaiZJlyvCataw1.500
+1qHSplBt2TFmqeT0Mj96IsGRwgU3gV+SUwR4vUqm2v5k1.500
+1dzFO0AXQRR+UlJxuM5jXIxidsdmET/HJLAE6PX5W2+Q1.500
+1G7tl3T8MR3iBLSeRFpC1j1MeSZGM0PA1FBwiCnibB8g1.500
+1Znd/9unfRVOAuVgo32HWBoLRkY+/Sv2CKDUR+XH5Dno1.500
+1JhbXlTeuQsKysKv8RLmZ9TIYDy9N/0C1wGo7vrU+9zM1.500
+1zB0LDBecTQuFOKKVG6MPlNOex1vYNReJTtnHg38P34M1.500
+1vlOiJkG8RBmzwlAPVZkbgsIpxNJk67l0dJ98QudvcM41.333
+#14 12
+1kl30bxRBQEC4hckTFJBjtF7Pr2vxY97ZSXtCmNBhjVQ1.500
+1n5/JTaxzQLuKlAVZ7m6YRbzokd5VI6pRDYTJ4BQOUUs1.500
+1iDhgNvhORIaGx+vyGlhSE2kJe3CSYZxU/59FqbaOc7c1.500
+1YTV+WzbiRM2ZjyPzYp7AA8xpp5OwThjUAkfRK7/H8aQ1.500
+16dIAEMMPSPmLM2/uW26jvw+M7HC7VWsNLmfzHQQBtUU1.500
+1LyQ1Ut4WSJG0JE8RBDtbbOimnWBfCpt75u6WR1Fjb4E1.500
+1m//KTNeCQuiHSzEObkiwNplH+6EDlDS+0/8XH/heCb01.500
+1LrYRqySqR7an9EI4aV11p8TGFuYdaCTMOSdVwgeWf/U1.500
+12IDptT9jQu22FfkZjBzKWZxAcse4l7S8q0Wxwh2aF2Q1.500
+1giPj3EIUS/KIDvFDkWHVn68VeXSUusYhB85joPWzfpg1.500
+13FocIpsCTs+eCmAj+U0ksy1qaf2BE2ubbBw/Z+7CtUQ1.500
+158+P5OKMQhaJsQKaik5H0ex6yZ1L4cdzVvC4v92b4AE1.500
+#15 7
+12YCd1irjQrGT72ct7PwQ8cnCP9fXpxdEdbQfihxqoNs1.500
+1TaQNHNK9SLiZU9f/gqkRQS7BeaPNfCyo/yvfBFYiqTU0.667
+1oeuHlXAERZWD3oP9/WDhgQZD/qILgUs6q7BTCIogQ540.667
+1E9t0kmWDSQKCCdTA1HOV05k7d06uVccFySua3//2kTU1.500
+1RV4CUsvGTsOEwGIbD9JXBQubToUwy1do0fcEuUX9dHI1.501
+1GAkGxZKJTICG0q+8EG4j0OC8zdeoQsRyfFdLmTHY9cY1.500
+151w+t/h/RSGa0CIFHltBIQU31H1oj79HrPMgMGUPg3s1.778
+#16 7
+1sGjnMg+STZ2qOQ+kLAQjAfQRtut4PrRGGzKn+ripjD43.632
+1OIbNjajTSxSLdeVITGHsV8DNyKhfmVS8orovSAaIqqQ1.500
+19Fh3RaJKRxa/RNTO7GHFhVf/tugTnmGzIQDSnEUGDIM1.500
+1EBcu8p58RxCwcqczZbz2GH++BLhT/fVoV2KfkPOvkCI1.500
+1ZgyocpYuR2mOgKXFhz9570y3ps5hT+Qg7FvRAwjMtOQ1.500
+178jTBl//SXGPlhhf4jaNbzp3122QUivmWgfnEZGMCnA1.500
+1bqzJWo1MTFKl1bLStSdB5G8XbEDKsdifdFe1KGbS0zo1.500
+#17 30
+1qCC9L3LiQxWkTeAiSfDFmbYlEdutivuLkr/rZe+X9aE1.500
+12feXwcF3QIiVhyfVqJmkeI2vgTYsmfHN3eYs2KsgUf00.667
+1FKEWoujBTxq/eNGE+WPviBqE9cUcUoHk2QTMoT/Nn/k0.667
+14q7Cj0T8TnKGkCdT3vW0J0Mqo5m06xpnN0QVAQpTdmk0.667
+1KItUxLQuSseyaKiuHLPBjX/m7MjJRi57Bu15vIG7QGg0.667
+18JcaOwbqT6CziI8N5v9Ua5orcI7cAH6rRg8mn1gFqTM0.667
+1JL7RsHd5Q0aPhKucJAJRqp1H4C1jMJ4ZDmTsBX0Kq7o0.667
+19aE0JDi4SZm/XTtEUvXO0T9XGqzuzh1lalxDZ0bke4M0.667
+1TZkm2NN6ToaFu7Bs1JZNOEYxeRP5gYGRQUXN4r3VQ9c0.667
+1mfJLb4rnRNmCR0hojbYhjI2WbFcEVBSaIl7uTM/aa1I0.667
+1pUchmUU7RKiOp6WeXqsSyF2+/mxO8uq7cGtS8qlU57I0.667
+15JfpwNwCQzewgFpIII78l4SxdD8V3yyiyOYvKdPsR7Y1.500
+1bnF25WvpS8mJwXR7jbXrDuxD4L96262nwX+VnD6+U2o1.500
+1bvCP7NCWSZangrS6ld1e30aKAbR44wwNg7Yk4aF0DTU0.667
+1sMbBOCYSSyiy0KP2mzuLzs0gV89iimtjszx+9S94zFQ0.667
+1U7Ks2MvaTM+o599HwnwOBDKAoLRDjyrGDRT9lJc9uPc0.667
+1AT10eIbOTUKnF8Ukd8fCGlWnZrEX7yCgxwNHahkwnw40.667
+1qCAcoHq/RzO6PaEOq00AToOunkr7u0B4qzFwKiB5J5Y0.667
+1zmSZ4BQDTXaRumqbacNhAhEW+I9NK6B3w77DpfAw5VQ0.667
+1C83VA0hATaevZQBUw3Kt4vgwSP0FjoYou1+8ChPAg+U0.667
+1pr7im53MQEiREjFm8UONMqi6IFm99lsOCClV2hC1k/g1.500
+13u05QMmhR76EuIemw35bqq/kAa97B2qee56bVNzQQio0.667
+1uabvShloR6WmEVysi6axAqt+QS+bY172yeH7DYVXVCw0.667
+1urn+qqReRF+MgXBexpO46OYFdwRsSc2m+MHNMHwUArM0.667
+15IGvLOjyQEC75fPVqSUXczKeJAYozTmbUMVI5vwVueE0.667
+1qRfFtRdnQci2cVXHVXYsSAzXw8qcbB+02PBI91J+eEw0.667
+1D20OKBJPTkKB+tSAK71CmdK9d44na5EadWhP7RCTq6I0.667
+1xNBnIvSZS4C2ZvaEjBka8yuI4a1mPE25lS1bUYeAZUM0.667
+1OtZOEOg9Tvu3jiKW8obrHXFBF3AyKK3CAQU8x73sg/01.501
+1kbeJ274STFmQxKq1CHTMbQ/MMKsBw+ZnrI72FM3S61Y1.500`;
+(function(){
+  let cur = null;
+  for (const l of IMGDATA.split("\n")) {
+    if (!l) continue;
+    if (l[0] === "#") { cur = bySlug(SLUGS[+l.slice(1).split(" ")[0]]); continue; }
+    if (!cur) continue;
+    const bin = atob(l.slice(1,44));
+    let h = "";
+    for (let i = 0; i < bin.length; i++) h += bin.charCodeAt(i).toString(16).padStart(2,"0");
+    const id = h.slice(0,32), tok = h.slice(32);
+    const uuid = id.slice(0,8)+"-"+id.slice(8,12)+"-"+id.slice(12,16)+"-"+id.slice(16,20)+"-"+id.slice(20,32);
+    cur.images.push({ u: CDN + uuid + SFX[+l[0]] + "?h=" + tok, a: parseFloat(l.slice(44)) || 1.5 });
+  }
+})();
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const ARROW = '<svg viewBox="0 0 15 9" fill="none" aria-hidden="true"><path d="M0 4.5h13M9.5 1l3.5 3.5L9.5 8" stroke="currentColor" stroke-width="1"/></svg>';
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+
+const frame = (src, ratio='nat', alt='') =>
+  `<div class="frame ${ratio}"><img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`;
+
+/* Each item's width and flex-grow are (aspect x BASE); the inner box carries the
+   aspect ratio, so its height follows automatically once the row is justified. */
+const gitem = (src, ar, alt, href, cap, base) => {
+  /* base is only used by the justified galleries; album cards sit in a fixed
+     column grid, so they get no inline width and no flex-grow. */
+  const sizing = base ? `style="width:${(ar*base).toFixed(2)}px;flex-grow:${(ar*base).toFixed(2)}" ` : '';
+  return `
+  <${href?'a':'div'} class="gitem" ${href?`href="${href}" `:''}${sizing}data-ar="${ar}">
+    <span class="gimg" style="aspect-ratio:${ar}"><img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async"></span>
+    ${cap||''}
+  </${href?'a':'div'}>`;
+};
+
+/* Album cards use each series' own cover — the same cover image, and the same
+   4:3 shape, that the collection pages on amtonality.com use. */
+const card = (p, n, base) => gitem(
+  p.cover,
+  COVER_AR,
+  p.title + ' — ' + SITE.name,
+  `#/p/${p.slug}`,
+  `<span class="cap"><h3>${esc(p.title)}</h3></span>`,
+  base || null
+);
+
+/* BASE row heights. 260 is the value amtonality.com uses for its galleries. */
+const GALLERY_BASE = 260;
+const CARD_BASE = 240;
+const COVER_AR = 4/3;
+const jgal = (html, cls) => `<div class="jgal ${cls}">${html}</div>`;
+
+const pad = i => String(i+1).padStart(2,'0');
+
+function home(){
+  const a = ARCHITECTURE;
+  return `
+  <section class="hero wrap">
+    <div class="hero-grid">
+      <div class="rv hero-img">${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
+      <div class="hero-copy rv d1">
+        <div class="eyebrow">Architectural Photography</div>
+        <h1 class="display">Where creativity<br>finds <em>its</em> tone.</h1>
+        <p class="lede">${SITE.intro}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="shead shead-first rv">
+      <div><div class="eyebrow">Architectural Photography</div><h2 class="h2">Architecture and Interiors</h2></div>
+      <a class="arrow" href="#/architecture">All architecture ${ARROW}</a>
+    </div>
+    ${jgal(a.map((p,i)=>card(p,pad(i))).join(''), 'cards')}
+  </section>
+
+  <section class="wrap">
+    <div class="shead rv" style="padding-bottom:0">
+      <div style="flex:1 1 520px"><div class="eyebrow">About</div>
+        <h2 class="h2" style="max-width:24ch">A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.</h2></div>
+      <a class="arrow" href="#/about">Read the full story ${ARROW}</a>
+    </div>
+    <div class="body rv d1" style="padding:clamp(24px,3vw,42px) 0 0">
+      <p>I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="shead rv">
+      <div style="flex:1 1 560px"><div class="eyebrow">Explorations</div>
+        <p class="sectioncap">Over the years, I've explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.</p></div>
+      <a class="arrow" href="#/explorations">All explorations ${ARROW}</a>
+    </div>
+    ${jgal(EXPLORATIONS.slice(0,8).map(p=>card(p)).join(''), 'cards')}
+  </section>
+
+  <section class="wrap">
+    <div class="rule" style="margin-top:clamp(48px,7vw,110px)"></div>
+    <div class="shead rv" style="padding-bottom:clamp(48px,7vw,110px)">
+      <div><div class="eyebrow">Commissions</div><h2 class="h2">Let's photograph<br>your space.</h2></div>
+      <a class="arrow" href="#/contact">Start a project ${ARROW}</a>
+    </div>
+  </section>
+`;
+}
+
+function indexPage(title, eyebrow, statement, items){
+  return `
+  <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
+    <div class="rv">
+      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">${eyebrow}</div>
+      <h1 class="display" style="max-width:14ch">${title}</h1>
+      <p class="lede" style="margin-top:clamp(22px,3vw,38px);max-width:58ch">${statement}</p>
+    </div>
+    <div id="idx" style="padding-top:clamp(18px,2.4vw,30px)">${jgal(items.map((p,i)=>card(p,pad(i))).join(''), 'cards')}</div>
+    <div id="idxlist" class="list" style="display:none">
+      ${items.map((p,i)=>`
+        <a href="#/p/${p.slug}" data-cover="${p.cover}">
+          <span class="num">${pad(i)}</span>
+          <h3>${esc(p.title)}</h3>
+          <p>${esc(p.statement.slice(0,110))}…</p>
+        </a>`).join('')}
+      <div class="thumb frame" id="thumb"><img id="thumbimg" alt=""></div>
+    </div>
+  </section>`;
+}
+
+function project(p){
+  const pool = ARCHITECTURE.includes(p) ? ARCHITECTURE : EXPLORATIONS;
+  const i = pool.indexOf(p);
+  const prev = pool[(i-1+pool.length)%pool.length], next = pool[(i+1)%pool.length];
+  const shots = p.images;
+  const gal = shots.length
+    ? `<div class="rv" style="padding-top:clamp(34px,4.5vw,72px)">
+         ${jgal(shots.map((im,n)=>gitem(im.u, im.a, p.title+' — '+(n+1), null, '', GALLERY_BASE)).join(''), 'gallery')}
+       </div>`
+    : '';
+
+  return `
+  <section class="phero wrap">
+    <div class="rv">
+      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">${ARCHITECTURE.includes(p)?'Architecture':'Explorations'}</div>
+      <h1 class="display" style="max-width:13ch">${esc(p.title)}</h1>
+    </div>
+    ${(() => {
+      const parts = p.statement.split(/(?<=[.!?])\s+/);
+      const lead  = parts[0];
+      const rest  = parts.slice(1).join(' ');
+      return `<div class="pintro rv${rest?'':' solo'}">
+        <p class="pintro-lead">${esc(lead)}</p>
+        ${rest ? `<div class="body"><p>${esc(rest)}</p></div>` : ''}
+      </div>`;
+    })()}
+    ${gal}
+    <div class="pnav">
+      <a href="#/p/${prev.slug}"><div class="eyebrow">Previous</div><div class="h3">${esc(prev.title)}</div></a>
+      <a href="#/p/${next.slug}" class="r"><div class="eyebrow">Next</div><div class="h3">${esc(next.title)}</div></a>
+    </div>
+  </section>`;
+}
+
+function about(){
+  return `
+  <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
+    <div class="rv">
+      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">About</div>
+      <h1 class="display" style="max-width:15ch">Light, patience,<br>and the shape<br>of a room.</h1>
+    </div>
+    <div class="about" style="padding-top:clamp(44px,6vw,90px)">
+      <div class="rv">
+        ${frame(SITE.portrait,'nat','Anand Mohapatra')}
+        <ul class="factlist">
+          <li><span>Based in</span><div>${SITE.city}, Canada</div></li>
+          <li><span>Focus</span><div>Architectural Photography</div></li>
+          <li><span>Published</span><div>Lonely Planet, Condé Nast Traveller</div></li>
+          <li><span>Response</span><div>Within 48 hours</div></li>
+        </ul>
+      </div>
+      <div class="body rv d1">
+        <p style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(1.4rem,2.5vw,2.2rem);line-height:1.3;color:var(--ink);max-width:26ch;margin-bottom:1.2em">A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.</p>
+        <p>I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space. My work is driven by this fascination with form, proportion, and the quiet dialogue between space and illumination, where every building becomes a canvas for light to shape emotion and experiences.</p>
+        <p>My journey began as a photographer capturing diverse genres across Asia — shooting music festivals and working with artists like Coldplay and Bryan Adams, and building a lifestyle portfolio with clients like Adidas Run and Nike, alongside published work in Lonely Planet and Condé Nast Traveller.</p>
+        <p>A move to Canada in 2019 then led me to study game design and work as a Game Cinematic Artist at Gameloft on a Disney game, where building structures and sets for game cinematics and trailers repeatedly pulled me toward forms that resembled architecture — long before I recognised it as a calling, sharpening the same instincts for structure, light, and how space shapes experience.</p>
+        <p>That convergence led me home to architecture photography, where every lesson from music, design, games, and art found its clearest expression. Each building is an exploration of balance, detail, and the quiet dialogue between space, material, and light.</p>
+        <p>This path has also been a personal one. While navigating a chronic illness since childhood, architecture photography has become a meditative extension of that healing, teaching me patience and stillness in observing light and space.</p>
+        <p>Through my lens, I strive to transcend boundaries — where imagination meets reality, and creativity becomes a tool for both expression and healing.</p>
+        <div style="margin-top:clamp(30px,4vw,52px)"><a class="arrow" href="#/contact">Work with me ${ARROW}</a></div>
+      </div>
+    </div>
+  </section>`;
+}
+
+function contact(){
+  return `
+  <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
+    <div class="rv">
+      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">Contact</div>
+      <h1 class="display" style="max-width:13ch">Let's make<br>something<br>with light.</h1>
+    </div>
+    <div class="contact" style="padding-top:clamp(44px,6vw,90px)">
+      <div class="rv">
+        <p class="lede">Available for architectural and interior commissions in Vancouver and beyond, editorial assignments, and print enquiries. Generally, I'm able to reply to enquiries within 48 hours.</p>
+        <ul class="socials">
+          <li><a href="mailto:${SITE.email}"><span>${SITE.email}</span><em>Email</em></a></li>
+          ${SITE.social.map(([n,h])=>`<li><a href="${h}" target="_blank" rel="noopener"><span>${n}</span><em>↗</em></a></li>`).join('')}
+        </ul>
+      </div>
+      <form class="rv d1" id="cform">
+        <div class="field"><label for="n">Name</label><input id="n" name="name" required autocomplete="name"></div>
+        <div class="field"><label for="e">Email address</label><input id="e" name="email" type="email" required autocomplete="email"></div>
+        <div class="field"><label for="s">Project type</label><input id="s" name="subject" placeholder="Residential, commercial, heritage, editorial…"></div>
+        <div class="field"><label for="m">Message</label><textarea id="m" name="message" required></textarea></div>
+        <button class="btn" type="submit">Send enquiry ${ARROW}</button>
+        <p class="num" id="cnote" style="letter-spacing:.06em;line-height:1.6"></p>
+      </form>
+    </div>
+  </section>`;
+}
+
+/* ============================================================
+   ROUTER + BEHAVIOUR
+   ============================================================ */
+const view = document.getElementById('view');
+const hdr  = document.getElementById('hdr');
+
+function routeFor(hash){
+  const h = (hash || '#/').replace(/^#/,'');
+  if (h.startsWith('/p/')) {
+    const p = bySlug(h.slice(3));
+    return p ? { html: project(p), title: p.title, nav: ARCHITECTURE.includes(p)?'#/architecture':'#/explorations' }
+             : { html: home(), title: null, nav: '#/' };
+  }
+  switch(h){
+    case '/architecture': return { html: indexPage('Architecture and Interiors','Portfolio',
+      'Shaped by years of observing spaces, structures, and the way light moves through them.', ARCHITECTURE), title:'Architecture', nav:'#/architecture' };
+    case '/explorations': return { html: indexPage('Explorations','Portfolio',
+      "Over the years, I\'ve explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.", EXPLORATIONS), title:'Explorations', nav:'#/explorations' };
+    case '/about':   return { html: about(),   title:'About',   nav:'#/about' };
+    case '/contact': return { html: contact(), title:'Contact', nav:'#/contact' };
+    default:         return { html: home(),    title:null,      nav:'#/' };
+  }
+}
+
+let io;
+function observe(){
+  if (io) io.disconnect();
+  io = new IntersectionObserver(es=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin:'0px 0px -8% 0px', threshold:0.02 });
+  view.querySelectorAll('.rv').forEach(el=>io.observe(el));
+}
+
+function lazyImages(){
+  /* Images now carry a real src plus loading="lazy", so the browser handles
+     fetching on its own. This only marks frames as settled for layout. */
+  view.querySelectorAll('.frame img').forEach(img=>{
+    const mark=()=>img.closest('.frame')?.classList.add('done');
+    if (img.complete) mark(); else img.addEventListener('load', mark, {once:true});
+  });
+}
+
+/* Flexbox justifies every row. The only case it gets wrong is a short final
+   row, which would stretch one or two photos to an absurd size — so cap that
+   row back to its natural base width and let it sit left-aligned. */
+function guardLastRow(gal){
+  const items = [...gal.children];
+  if (items.length < 2) return;
+  items.forEach(el => { el.style.flexGrow = el.style.width.replace('px',''); });
+  const lastTop = items[items.length-1].offsetTop;
+  const lastRow = items.filter(el => el.offsetTop === lastTop);
+  if (lastRow.length === items.length) return;              // single row: leave it
+  lastRow.forEach(el => { el.style.flexGrow = '0'; });
+}
+
+function layoutAll(){ view.querySelectorAll('.jgal.gallery').forEach(guardLastRow); }
+
+let rt;
+window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(layoutAll, 120); });
+
+function wireIndexToggle(){
+  const grid = document.getElementById('idx'), list = document.getElementById('idxlist');
+  if (!grid) return;
+  document.querySelectorAll('.toggle button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('.toggle button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      const isGrid = b.dataset.view === 'grid';
+      grid.style.display = isGrid ? '' : 'none';
+      list.style.display = isGrid ? 'none' : '';
+      layoutAll(); if (!isGrid) lazyImages();
+    });
+  });
+  // hover preview on the index list
+  const thumb = document.getElementById('thumb'), timg = document.getElementById('thumbimg');
+  list.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('mouseenter', ()=>{ timg.src = a.dataset.cover; timg.classList.add('loaded'); thumb.classList.add('show'); });
+    a.addEventListener('mouseleave', ()=>thumb.classList.remove('show'));
+  });
+  list.addEventListener('mousemove', e=>{
+    const r = list.getBoundingClientRect();
+    thumb.style.left = (e.clientX - r.left) + 'px';
+    thumb.style.top  = (e.clientY - r.top) + 'px';
+  });
+}
+
+function wireForm(){
+  const f = document.getElementById('cform');
+  if (!f) return;
+  f.addEventListener('submit', ev=>{
+    ev.preventDefault();
+    const d = new FormData(f);
+    const subject = encodeURIComponent(`Enquiry — ${d.get('subject') || 'New project'}`);
+    const body = encodeURIComponent(`${d.get('message')}\n\n—\n${d.get('name')}\n${d.get('email')}`);
+    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
+    document.getElementById('cnote').textContent = 'Opening your mail app… if nothing happens, write to ' + SITE.email;
+  });
+}
+
+/* lightbox on project galleries */
+const lb = document.getElementById('lb'), lbimg = document.getElementById('lbimg');
+const lbprev = document.getElementById('lbprev'), lbnext = document.getElementById('lbnext');
+const lbcount = document.getElementById('lbcount');
+let lbList = [], lbIdx = 0;
+const closeLb = ()=>{ lb.classList.remove('on'); document.body.style.overflow=''; };
+const showLb = i => {
+  if (!lbList.length) return;
+  lbIdx = (i + lbList.length) % lbList.length;
+  lbimg.src = lbList[lbIdx];
+  lbcount.textContent = String(lbIdx+1).padStart(2,'0') + ' / ' + String(lbList.length).padStart(2,'0');
+};
+document.getElementById('lbx').addEventListener('click', closeLb);
+lbprev.addEventListener('click', e=>{ e.stopPropagation(); showLb(lbIdx-1); });
+lbnext.addEventListener('click', e=>{ e.stopPropagation(); showLb(lbIdx+1); });
+/* click the paper background to close; clicks on the image or nav do not */
+lb.addEventListener('click', e=>{ if(e.target===lb) closeLb(); });
+document.addEventListener('keydown', e=>{
+  if (e.key === 'Escape') { closeLb(); document.body.classList.remove('menu'); return; }
+  if (!lb.classList.contains('on')) return;
+  if (e.key === 'ArrowRight') showLb(lbIdx + 1);
+  else if (e.key === 'ArrowLeft') showLb(lbIdx - 1);
+});
+function wireLightbox(){
+  const imgs = [...view.querySelectorAll('.jgal.gallery .gimg img')];
+  const srcs = imgs.map(im => im.dataset.src || im.src);
+  imgs.forEach((img, i)=>{
+    img.style.cursor='zoom-in';
+    img.addEventListener('click', ()=>{
+      lbList = srcs;
+      showLb(i);
+      lb.classList.add('on'); document.body.style.overflow='hidden';
+    });
+  });
+}
+
+function render(){
+  const r = routeFor(location.hash);
+  view.innerHTML = r.html;
+  document.title = (r.title ? r.title + ' — ' : '') + 'Anand Mohapatra — Tonality | Architecture Photography, Vancouver';
+  document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===r.nav));
+  document.body.classList.remove('menu');
+  layoutAll(); observe(); lazyImages(); wireIndexToggle(); wireForm(); wireLightbox();
+  window.scrollTo({ top:0, behavior:'instant' in window ? 'instant' : 'auto' });
+}
+
+window.addEventListener('hashchange', render);
+document.getElementById('burger').addEventListener('click', ()=>document.body.classList.toggle('menu'));
+document.getElementById('drawer').addEventListener('click', e=>{ if(e.target.tagName==='A') document.body.classList.remove('menu'); });
+document.getElementById('yr').textContent = new Date().getFullYear();
+/* if the logo file fails to load, fall back to the typographic wordmark */
+(function(){
+  const li = document.getElementById('logoimg');
+  li.addEventListener('error', ()=>li.closest('.mark').classList.add('fallback'));
+  if (li.complete && li.naturalWidth === 0) li.closest('.mark').classList.add('fallback');
+})();
+
+let last = 0;
+window.addEventListener('scroll', ()=>{
+  const y = window.scrollY;
+  hdr.classList.toggle('scrolled', y > 12);
+  hdr.classList.toggle('hide', y > 320 && y > last && !document.body.classList.contains('menu'));
+  last = y;
+}, { passive:true });
+
+render();
+</script>
+</body>
+</html>
