@@ -318,7 +318,12 @@ async function loadContent() {
     if (!r.ok) throw new Error('GitHub returned ' + r.status);
     const j = await r.json();
     CONTENT_SHA = j.sha;
-    const decoded = atob(j.content.replace(/\s/g, ''));
+    /* atob() returns a Latin-1 byte string, one JS char per byte. Multi-byte
+       UTF-8 sequences (em dashes, curly quotes) would look right at first but
+       double-encode on the next save. Reinterpret the bytes as UTF-8 here so
+       every round trip preserves the original characters. */
+    const bytes = Uint8Array.from(atob(j.content.replace(/\s/g, '')), c => c.charCodeAt(0));
+    const decoded = new TextDecoder('utf-8').decode(bytes);
     mergeContent(JSON.parse(decoded));
   } catch (e) {
     console.error(e); toast('Could not load current site content — starting from defaults', 'err');
