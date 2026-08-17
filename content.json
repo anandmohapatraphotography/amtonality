@@ -1,5 +1,7 @@
 {
-  "site": {},
+  "site": {
+    "tagline": "Where creativity meets <em>its</em> tone."
+  },
   "about": {},
   "contact": {},
   "projects": {
