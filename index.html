@@ -343,7 +343,7 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
 
 <footer>
   <div class="wrap">
-    <div class="fbig"><img src="https://cdn.myportfolio.com/9c0b9cff-4f88-4e53-a5c5-7ba8f446de1b/8c1ce994-695e-4cce-a523-a12cf994b4e5_rwc_0x0x6878x1425x4096.png?h=b28ae4cb18de0c41226a2907023f94f2" alt="Tonality" style="height:clamp(46px,7vw,96px);width:auto"><div class="ftag">Where creativity finds <em style="font-style:italic">its</em> tone.</div></div>
+    <div class="fbig"><img src="https://cdn.myportfolio.com/9c0b9cff-4f88-4e53-a5c5-7ba8f446de1b/8c1ce994-695e-4cce-a523-a12cf994b4e5_rwc_0x0x6878x1425x4096.png?h=b28ae4cb18de0c41226a2907023f94f2" alt="Tonality" style="height:clamp(46px,7vw,96px);width:auto"><div class="ftag" id="ftag"></div></div>
     <div class="rule" style="margin-bottom:clamp(24px,3vw,40px)"></div>
     <div class="fgrid">
       <nav class="fnav">
@@ -490,6 +490,34 @@ const EXPLORATIONS = [
 
 const ALL = [...ARCHITECTURE, ...EXPLORATIONS];
 const bySlug = s => ALL.find(p => p.slug === s);
+
+/* Editor-managed overrides. `content.json` sits at the repo root and is written
+   by /admin/. It may override site-level text (tagline, intro, portrait, email,
+   about, socials) and, per project, override title/statement/year/place and
+   append extra photos beyond the 525 hardcoded in IMGDATA. Missing file = use
+   the defaults hardcoded here; broken JSON = same fallback with a console
+   warning. */
+async function applyContent(){
+  try{
+    const r = await fetch('/content.json?_=' + Date.now(), { cache:'no-store' });
+    if (!r.ok) return;
+    const c = await r.json();
+    if (c.site) for (const k of Object.keys(c.site)) if (c.site[k] != null) SITE[k] = c.site[k];
+    if (c.about && Array.isArray(c.about.paragraphs)) SITE.aboutParagraphs = c.about.paragraphs;
+    if (c.about && c.about.lead) SITE.aboutLead = c.about.lead;
+    if (c.contact && c.contact.lede) SITE.contactLede = c.contact.lede;
+    if (c.projects) {
+      for (const p of ALL) {
+        const o = c.projects[p.slug];
+        if (!o) continue;
+        for (const k of ['title','statement','year','place','cover']) if (o[k] != null) p[k] = o[k];
+        if (Array.isArray(o.extraImages)) {
+          for (const im of o.extraImages) if (im && im.u) p.images.push({ u: im.u, a: +im.a || 1.5 });
+        }
+      }
+    }
+  } catch(e){ console.warn('content.json load failed', e); }
+}
 
 /* ------------------------------------------------------------------
    PHOTOGRAPHS — all 525, in their original running order.
@@ -1106,7 +1134,7 @@ function home(){
       <div class="rv hero-img">${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
       <div class="hero-copy rv d1">
         <div class="eyebrow">Architectural Photography</div>
-        <h1 class="display">Where creativity<br>finds <em>its</em> tone.</h1>
+        <h1 class="display">${SITE.tagline}</h1>
         <p class="lede">${SITE.intro}</p>
       </div>
     </div>
@@ -1205,7 +1233,19 @@ function project(p){
   </section>`;
 }
 
+const ABOUT_DEFAULT_LEAD = 'A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.';
+const ABOUT_DEFAULT_PARAS = [
+  'I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space. My work is driven by this fascination with form, proportion, and the quiet dialogue between space and illumination, where every building becomes a canvas for light to shape emotion and experiences.',
+  'My journey began as a photographer capturing diverse genres across Asia — shooting music festivals and working with artists like Coldplay and Bryan Adams, and building a lifestyle portfolio with clients like Adidas Run and Nike, alongside published work in Lonely Planet and Condé Nast Traveller.',
+  'A move to Canada in 2019 then led me to study game design and work as a Game Cinematic Artist at Gameloft on a Disney game, where building structures and sets for game cinematics and trailers repeatedly pulled me toward forms that resembled architecture — long before I recognised it as a calling, sharpening the same instincts for structure, light, and how space shapes experience.',
+  'That convergence led me home to architecture photography, where every lesson from music, design, games, and art found its clearest expression. Each building is an exploration of balance, detail, and the quiet dialogue between space, material, and light.',
+  'This path has also been a personal one. While navigating a chronic illness since childhood, architecture photography has become a meditative extension of that healing, teaching me patience and stillness in observing light and space.',
+  'Through my lens, I strive to transcend boundaries — where imagination meets reality, and creativity becomes a tool for both expression and healing.'
+];
+
 function about(){
+  const lead  = SITE.aboutLead || ABOUT_DEFAULT_LEAD;
+  const paras = (Array.isArray(SITE.aboutParagraphs) && SITE.aboutParagraphs.length) ? SITE.aboutParagraphs : ABOUT_DEFAULT_PARAS;
   return `
   <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
     <div class="rv">
@@ -1216,20 +1256,15 @@ function about(){
       <div class="rv">
         ${frame(SITE.portrait,'nat','Anand Mohapatra')}
         <ul class="factlist">
-          <li><span>Based in</span><div>${SITE.city}, Canada</div></li>
+          <li><span>Based in</span><div>${esc(SITE.city)}, Canada</div></li>
           <li><span>Focus</span><div>Architectural Photography</div></li>
           <li><span>Published</span><div>Lonely Planet, Condé Nast Traveller</div></li>
           <li><span>Response</span><div>Within 48 hours</div></li>
         </ul>
       </div>
       <div class="body rv d1">
-        <p style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(1.4rem,2.5vw,2.2rem);line-height:1.3;color:var(--ink);max-width:26ch;margin-bottom:1.2em">A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.</p>
-        <p>I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space. My work is driven by this fascination with form, proportion, and the quiet dialogue between space and illumination, where every building becomes a canvas for light to shape emotion and experiences.</p>
-        <p>My journey began as a photographer capturing diverse genres across Asia — shooting music festivals and working with artists like Coldplay and Bryan Adams, and building a lifestyle portfolio with clients like Adidas Run and Nike, alongside published work in Lonely Planet and Condé Nast Traveller.</p>
-        <p>A move to Canada in 2019 then led me to study game design and work as a Game Cinematic Artist at Gameloft on a Disney game, where building structures and sets for game cinematics and trailers repeatedly pulled me toward forms that resembled architecture — long before I recognised it as a calling, sharpening the same instincts for structure, light, and how space shapes experience.</p>
-        <p>That convergence led me home to architecture photography, where every lesson from music, design, games, and art found its clearest expression. Each building is an exploration of balance, detail, and the quiet dialogue between space, material, and light.</p>
-        <p>This path has also been a personal one. While navigating a chronic illness since childhood, architecture photography has become a meditative extension of that healing, teaching me patience and stillness in observing light and space.</p>
-        <p>Through my lens, I strive to transcend boundaries — where imagination meets reality, and creativity becomes a tool for both expression and healing.</p>
+        <p style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(1.4rem,2.5vw,2.2rem);line-height:1.3;color:var(--ink);max-width:26ch;margin-bottom:1.2em">${esc(lead)}</p>
+        ${paras.map(p => `<p>${esc(p)}</p>`).join('')}
         <div style="margin-top:clamp(30px,4vw,52px)"><a class="arrow" href="#/contact">Work with me ${ARROW}</a></div>
       </div>
     </div>
@@ -1237,6 +1272,7 @@ function about(){
 }
 
 function contact(){
+  const lede = SITE.contactLede || "Available for architectural and interior commissions in Vancouver and beyond, editorial assignments, and print enquiries. Generally, I'm able to reply to enquiries within 48 hours.";
   return `
   <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
     <div class="rv">
@@ -1245,7 +1281,7 @@ function contact(){
     </div>
     <div class="contact" style="padding-top:clamp(44px,6vw,90px)">
       <div class="rv">
-        <p class="lede">Available for architectural and interior commissions in Vancouver and beyond, editorial assignments, and print enquiries. Generally, I'm able to reply to enquiries within 48 hours.</p>
+        <p class="lede">${esc(lede)}</p>
         <ul class="socials">
           <li><a href="mailto:${SITE.email}"><span>${SITE.email}</span><em>Email</em></a></li>
           ${SITE.social.map(([n,h])=>`<li><a href="${h}" target="_blank" rel="noopener"><span>${n}</span><em>↗</em></a></li>`).join('')}
@@ -1478,7 +1514,13 @@ window.addEventListener('scroll', ()=>{
   last = y;
 }, { passive:true });
 
-render();
+/* Fetch editor overrides first, then paint. If the fetch fails the site paints
+   from the defaults hardcoded above, so admin-less setups still work. */
+applyContent().then(() => {
+  const ft = document.getElementById('ftag');
+  if (ft) ft.innerHTML = SITE.tagline;
+  render();
+});
 </script>
 </body>
 </html>
