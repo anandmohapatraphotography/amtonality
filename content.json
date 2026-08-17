@@ -126,7 +126,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/030.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Architecture",
+      "year": "2026",
+      "place": "Vancouver, BC",
+      "statement": "Through the art of photography, I learned that architecture is more than form — it carries atmosphere, intention, and the character of the people who inhabit it. Each photograph is an exploration of balance, detail, and the quiet dialogue between space, material, and experience."
     },
     "residential": {
       "photos": [
@@ -242,7 +246,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/027.jpg",
           "a": 0.667
         }
-      ]
+      ],
+      "title": "Residential & Interiors",
+      "year": "2026",
+      "place": "Vancouver, BC",
+      "statement": "Within the world of residence and interiors, design becomes intimate — a study in texture, silence, and the personality it holds. And within that space lies a rhythm of living: comfort, belonging, and the character shaped by those who call it home."
     },
     "heritage": {
       "photos": [
@@ -310,7 +318,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/015.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Heritage",
+      "year": "2026",
+      "place": "India · Canada",
+      "statement": "Through my passion for travel and architecture, I learned that heritage architecture is more than history and the basic story of a timeless structure — it carries memory, craftsmanship, and the spirit of the generations who built and inhabited it."
     },
     "bandra-worli": {
       "photos": [
@@ -338,7 +350,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/005.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Bandra–Worli Sea Link",
+      "year": "2018",
+      "place": "Mumbai, India",
+      "statement": "The first cable-stayed bridge constructed in open seas in India. Pylons of complex geometry carry one of the longest spans of concrete deck ever attempted — engineering photographed as sculpture, held between water and sky."
     },
     "time-and-migration": {
       "photos": [
@@ -582,7 +598,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/059.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Time and Migration",
+      "year": "2023",
+      "place": "Canada · India",
+      "statement": "“Time and Migration” portrays the inherent human inclination to traverse different places. Often our journeys involve not only physical movement but an exploration of self — through work, leisure, art, or expanding our perspectives. The series serves as a mirror reflecting the significance of time and travel, both of which define our true essence. In 2019, my migration from my homeland to Canada became a catalyst for introspection."
     },
     "ladakh-spiti": {
       "photos": [
@@ -810,7 +830,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/055.jpg",
           "a": 1.501
         }
-      ]
+      ],
+      "title": "Ladakh and Spiti",
+      "year": "2019",
+      "place": "Himalaya, India",
+      "statement": "Amidst surreal landscapes, Ladakh became a canvas for self-reflection. The spiritual aura was palpable, as centuries-old traditions were woven seamlessly into daily life. For four years, Ladakh and Spiti were my gateway to a cold desert realm — a space where beauty, spirituality, and personal growth converged in harmony."
     },
     "aerial": {
       "photos": [
@@ -866,7 +890,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/012.jpg",
           "a": 1.334
         }
-      ]
+      ],
+      "title": "Aerial",
+      "year": "2022",
+      "place": "—",
+      "statement": "The world redrawn from above — landscape reduced to line, tone, and pattern."
     },
     "burning-man": {
       "photos": [
@@ -1298,7 +1326,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/106.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Burning Man 2022: Waking Dreams",
+      "year": "2022",
+      "place": "Black Rock Desert, NV",
+      "statement": "My desire to attend Burning Man was sparked when I first learned about it in 2013. My first impression was that this was just another huge music and arts festival set in the middle of a desert. But as the years went by, I realised there is more to it than just music or art. Nothing I had anticipated was even near to the reality of that place."
     },
     "music": {
       "photos": [
@@ -1642,7 +1674,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/084.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Music & Concerts",
+      "year": "2018",
+      "place": "Asia · North America",
+      "statement": "From photographing Coldplay's breathtaking live show to touring as the official photographer for Bryan Adams' 2018 India tour, my journey in music photography has taken me across continents and some of the most iconic stages in the industry."
     },
     "underwater-odyssey": {
       "photos": [
@@ -1674,7 +1710,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/underwater-odyssey/006.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Underwater Odyssey",
+      "year": "2023",
+      "place": "—",
+      "statement": "Underwater Odyssey is a visual exploration of the deep — a journey that transcends the surface, both literally and metaphorically."
     },
     "reflection": {
       "photos": [
@@ -1742,7 +1782,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/015.jpg",
           "a": 0.667
         }
-      ]
+      ],
+      "title": "The Reflection That Remains",
+      "year": "2024",
+      "place": "New York City",
+      "statement": "New York City has a way of reflecting who you are — or who you're becoming. In its chaotic rush, it blurs the line between self and city, leaving you lost in its pulse. Vivek Dhiman's face, caught in windows and puddles, shows this transformation — his reflection shifting with the city's constant motion. In New York, it's easy to forget who you were. The city's reflections don't show the past — they reveal the anger, the hunger, the need to survive. Vivek's journey is a reminder that the city doesn't just absorb you — it redefines you. And in the end, you discover who you truly are by facing the reflection staring back at you."
     },
     "industrial": {
       "photos": [
@@ -1822,7 +1866,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/018.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Industrial",
+      "year": "2023",
+      "place": "—",
+      "statement": "Where heavy machinery meets quiet poetry — an industrial photography series."
     },
     "asad-khan": {
       "photos": [
@@ -1870,7 +1918,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/010.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Asad Khan — Press",
+      "year": "2024",
+      "place": "Vancouver, BC",
+      "statement": "A portrait series documenting the rebrand of Pakistani-Canadian musician Asad Khan — formerly Khanvict — built from a Pinterest mood board through to final frame. Creative direction by Vikram Johal shaped every lighting and compositional decision on set, while styling by Jasmine Johal grounded the editorial vision in wardrobe and texture that feel entirely his own."
     },
     "likir-dosmoche": {
       "photos": [
@@ -1930,7 +1982,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/013.jpg",
           "a": 1.333
         }
-      ]
+      ],
+      "title": "Likir Dosmoche Festival",
+      "year": "2019",
+      "place": "Ladakh, India",
+      "statement": "Dosmoche is celebrated every year in February with great enthusiasm in Leh, Likir and Diskit monasteries. The courtyards of the chapels below Leh Palace resonate with the sound of drums and the thumping steps of masked Lamas from various monasteries performing their sacred Cham dance."
     },
     "ulterior": {
       "photos": [
@@ -1982,7 +2038,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/011.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Ulterior: The Light of Tomorrow",
+      "year": "2021",
+      "place": "—",
+      "statement": "This series is shot with the technique of light-painting photography, creating the light trails in-camera with no compositing involved. Each photograph is a long exposure — the trails are what make it look so futuristic."
     },
     "patterns": {
       "photos": [
@@ -2014,7 +2074,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/patterns/006.jpg",
           "a": 1.778
         }
-      ]
+      ],
+      "title": "Patterns of Consciousness",
+      "year": "2023",
+      "place": "—",
+      "statement": "“Patterns of Consciousness” explores the intricate brain patterns and released chemicals during the transformative process of breaking old habits in 2022–2023."
     },
     "purity": {
       "photos": [
@@ -2046,7 +2110,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/purity/006.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Purity",
+      "year": "2021",
+      "place": "Banff, AB",
+      "statement": "White is the colour of purity and innocence. It provides hope and clarity, and it promotes open-mindedness and self-reflection. Shot across a journey to Banff, drawn to something unique in those snowy settings."
     },
     "food": {
       "photos": [
@@ -2170,7 +2238,11 @@
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/029.jpg",
           "a": 1.5
         }
-      ]
+      ],
+      "title": "Food",
+      "year": "2020",
+      "place": "—",
+      "statement": "These photos trace my journey as a photographer, shaped by years of working with food as a visual and emotional subject."
     }
   }
 }
