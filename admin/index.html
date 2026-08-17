@@ -33,6 +33,23 @@ a{color:inherit}
 .side a.nav:hover{color:var(--ink);background:rgba(20,19,15,.03)}
 .side a.nav.active{color:var(--ink);border-left-color:var(--ink);background:var(--paper);font-weight:500}
 .side a.nav small{color:var(--ink-3);font-weight:400;margin-left:4px}
+.side a.nav.add{color:var(--ink-3);font-style:italic;padding:6px 24px 12px;margin-bottom:4px}
+.side a.nav.add:hover{color:var(--ink);background:transparent}
+.side a.nav.extra::before{content:"◇ ";color:var(--ink-3);font-size:11px}
+.side a.nav.is-hidden{opacity:.5}
+.side a.nav.is-hidden:hover{opacity:.9}
+
+/* Bottom action blocks on a project page */
+.section-actions,.section-danger{margin-top:32px;padding-top:20px;border-top:1px solid var(--rule)}
+.section-danger{border-top-color:rgba(179,38,30,.2)}
+.section-actions h3,.section-danger h3{font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--ink-2);margin-bottom:8px}
+.section-danger h3{color:var(--err)}
+.section-actions .sub,.section-danger .sub{font-size:12px;color:var(--ink-3);margin-bottom:12px;max-width:60ch}
+.toggle{display:flex;gap:10px;align-items:flex-start;cursor:pointer;padding:8px 0;font-size:13px;color:var(--ink)}
+.toggle input{margin-top:3px}
+.warn-banner{background:rgba(161,91,18,.08);border-left:3px solid var(--warn);padding:12px 16px;border-radius:4px;margin-bottom:20px;font-size:13px;color:var(--warn)}
+.btn.danger.solid{background:rgba(179,38,30,.08);color:var(--err);border:1px solid rgba(179,38,30,.3)}
+.btn.danger.solid:hover{background:rgba(179,38,30,.15)}
 
 .main{padding:0;min-width:0}
 .topbar{position:sticky;top:0;background:rgba(251,250,247,.94);backdrop-filter:blur(10px);
@@ -211,8 +228,38 @@ const PROJECTS = {
     { slug:"food",               title:"Food", year:"2020", place:"—", statement:"These photos trace my journey as a photographer, shaped by years of working with food as a visual and emotional subject." }
   ]
 };
-const ALL_PROJECTS = [...PROJECTS.architecture, ...PROJECTS.explorations];
-const bySlug = s => ALL_PROJECTS.find(p => p.slug === s);
+/* Hardcoded set — these projects exist in the site's index.html and can be
+   hidden but never fully deleted from the editor. */
+const HARDCODED = [...PROJECTS.architecture, ...PROJECTS.explorations];
+
+/* Extras: albums Anand created through this editor. Live in
+   content.json.extraProjects.{architecture,explorations}. Editable and
+   deletable. Marked with _extra so the UI can tell them apart. */
+const getExtras = section =>
+  ((CONTENT.extraProjects && CONTENT.extraProjects[section]) || [])
+    .filter(e => e && e.slug && !e.deleted)
+    .map(e => ({ ...e, _extra: true }));
+
+const getSection = section => [...PROJECTS[section], ...getExtras(section)];
+const getAllProjects = () => [...getSection('architecture'), ...getSection('explorations')];
+const bySlug = s => getAllProjects().find(p => p.slug === s);
+
+/* When an extra is edited in the UI, its edits need to land back on the
+   authoritative object in CONTENT.extraProjects. Look it up by slug. */
+const findExtra = slug => {
+  for (const section of ['architecture', 'explorations']) {
+    const arr = (CONTENT.extraProjects && CONTENT.extraProjects[section]) || [];
+    const e = arr.find(x => x && x.slug === slug);
+    if (e) return e;
+  }
+  return null;
+};
+
+const slugify = t => (t || '').toLowerCase().trim()
+  .replace(/[^\w\s-]/g, '')
+  .replace(/[\s_]+/g, '-')
+  .replace(/-+/g, '-')
+  .replace(/^-+|-+$/g, '');
 
 let TOKEN = localStorage.getItem('amt_pat') || '';
 let CONTENT = { site:{}, about:{}, contact:{}, projects:{} };
@@ -261,8 +308,11 @@ function mergeContent(loaded) {
     site: (loaded && loaded.site) || {},
     about: (loaded && loaded.about) || {},
     contact: (loaded && loaded.contact) || {},
-    projects: (loaded && loaded.projects) || {}
+    projects: (loaded && loaded.projects) || {},
+    extraProjects: (loaded && loaded.extraProjects) || {}
   };
+  if (!CONTENT.extraProjects.architecture) CONTENT.extraProjects.architecture = [];
+  if (!CONTENT.extraProjects.explorations) CONTENT.extraProjects.explorations = [];
 }
 
 /* ============================================================
@@ -440,16 +490,25 @@ function imageDimensions(file) {
    Rendering — each section builds its own pane
    ============================================================ */
 function renderNav() {
-  const arch = $('#nav-arch'); arch.innerHTML = '';
-  PROJECTS.architecture.forEach(p => {
-    const t = (CONTENT.projects[p.slug] && CONTENT.projects[p.slug].title) || p.title;
-    arch.append(el('a', { class:'nav', 'data-section': 'p/' + p.slug, href:'#' }, t));
-  });
-  const expl = $('#nav-expl'); expl.innerHTML = '';
-  PROJECTS.explorations.forEach(p => {
-    const t = (CONTENT.projects[p.slug] && CONTENT.projects[p.slug].title) || p.title;
-    expl.append(el('a', { class:'nav', 'data-section': 'p/' + p.slug, href:'#' }, t));
-  });
+  const paint = (parent, section) => {
+    parent.innerHTML = '';
+    getSection(section).forEach(p => {
+      /* For extras, the extraProjects entry IS the source. For hardcoded,
+         a title override may live at CONTENT.projects[slug].title. */
+      const ov = CONTENT.projects[p.slug] || {};
+      const t = ov.title || p.title;
+      const isHidden = ov.hidden === true;
+      const cls = 'nav'
+        + (p._extra ? ' extra' : '')
+        + (isHidden ? ' is-hidden' : '');
+      parent.append(el('a', { class:cls, 'data-section': 'p/' + p.slug, href:'#' },
+        t + (isHidden ? '  ·  hidden' : '')
+      ));
+    });
+    parent.append(el('a', { class:'nav add', 'data-section': 'new/' + section, href:'#' }, '+ New album'));
+  };
+  paint($('#nav-arch'), 'architecture');
+  paint($('#nav-expl'), 'explorations');
   document.querySelectorAll('.side .nav').forEach(a => {
     a.classList.toggle('active', a.dataset.section === SECTION);
     a.onclick = e => { e.preventDefault(); goto(a.dataset.section); };
@@ -469,7 +528,46 @@ function renderPane() {
   if (SECTION === 'about')   return renderAbout(pane);
   if (SECTION === 'contact') return renderContact(pane);
   if (SECTION === 'account') return renderAccount(pane);
+  if (SECTION.startsWith('new/')) return renderCreateAlbum(pane, SECTION.slice(4));
   if (SECTION.startsWith('p/')) return renderProject(pane, SECTION.slice(2));
+}
+
+/* ---------- Create a new album (extra) ---------- */
+function renderCreateAlbum(pane, section) {
+  const sectionLabel = section === 'architecture' ? 'Architecture' : 'Explorations';
+  pane.append(el('h2', {}, 'New album — ' + sectionLabel));
+  pane.append(el('div', { class:'desc' },
+    'Enter a title, then create. You can add photos, statement, year and place from the album page after.'));
+
+  let title = '';
+  let slug  = '';
+  const slugHint = el('div', { class:'hint' }, 'URL: /#/p/');
+  const titleInput = el('input', { type:'text', placeholder:'e.g. "Nocturne — Vancouver"', style:'width:100%;padding:14px;font-size:16px;border:1px solid #ddd;border-radius:6px;background:#fff' });
+  titleInput.addEventListener('input', () => {
+    title = titleInput.value;
+    slug = slugify(title);
+    slugHint.textContent = 'URL: /#/p/' + (slug || '(pick a title)');
+  });
+
+  pane.append(el('div', { class:'field' }, el('label', {}, 'Title'), titleInput, slugHint));
+
+  const create = el('button', { class:'btn primary', style:'margin-top:14px', onclick: () => {
+    const t = title.trim();
+    if (!t) { toast('Give the album a title first', 'err'); titleInput.focus(); return; }
+    const s = slug || slugify(t);
+    if (!s) { toast('Title needs at least one letter/number for the URL', 'err'); return; }
+    if (bySlug(s)) { toast('An album with that URL already exists. Pick a different title.', 'err'); return; }
+    CONTENT.extraProjects[section].push({
+      slug: s, title: t, year: '', place: '', statement: '', photos: []
+    });
+    setDirty();
+    renderNav();
+    goto('p/' + s);
+    toast('Album created — publish when you\'re ready', 'ok');
+  }}, 'Create album');
+  pane.append(create);
+
+  setTimeout(() => titleInput.focus(), 50);
 }
 
 /* ---------- Site (general) ---------- */
@@ -536,9 +634,19 @@ function renderProject(pane, slug) {
   const def = bySlug(slug);
   if (!def) { pane.append(el('h2', {}, 'Not found')); return; }
   const o = ensure(CONTENT.projects, slug);
+  const isExtra = def._extra === true;
+  /* Fresh extras have no photos array yet — initialise so the tile grid works
+     and future uploads have somewhere to land. */
+  if (isExtra && !Array.isArray(o.photos)) o.photos = [];
 
   pane.append(el('h2', {}, o.title || def.title));
-  pane.append(el('div', { class:'desc' }, 'Album metadata and additional photos.'));
+  if (o.hidden) {
+    pane.append(el('div', { class:'warn-banner' },
+      'This album is currently hidden. It won\'t appear in menus or the homepage until you un-hide it below.'));
+  }
+  pane.append(el('div', { class:'desc' },
+    isExtra ? 'Album you created. Everything editable, deletable at the bottom.'
+            : 'Album metadata and photos.'));
 
   pane.append(textField('Title', o.title != null ? o.title : def.title, v => { o.title = v; setDirty(); renderNav(); }));
 
@@ -630,6 +738,46 @@ function renderProject(pane, slug) {
   drop.addEventListener('drop', e => { e.preventDefault(); drop.classList.remove('over'); handleFiles(e.dataTransfer.files); });
 
   pane.append(block);
+
+  /* ---------- Visibility ---------- */
+  const visSection = el('div', { class:'section-actions' });
+  visSection.append(el('h3', {}, 'Visibility'));
+  visSection.append(el('div', { class:'sub' },
+    'Hidden albums don\'t appear in the menu or the homepage, but the album page keeps working if you type or link its URL directly. Reversible in one click.'));
+  const toggle = el('label', { class:'toggle' });
+  const cb = el('input', { type:'checkbox' });
+  if (o.hidden) cb.checked = true;
+  cb.addEventListener('change', () => {
+    if (cb.checked) o.hidden = true; else delete o.hidden;
+    setDirty(); renderNav(); renderPane();
+  });
+  toggle.append(cb, el('span', {}, ' Hide this album from menus and homepage'));
+  visSection.append(toggle);
+  pane.append(visSection);
+
+  /* ---------- Delete (extras only) ---------- */
+  if (isExtra) {
+    const del = el('div', { class:'section-danger' });
+    del.append(el('h3', {}, 'Delete album'));
+    del.append(el('div', { class:'sub' },
+      'Removes this album completely. The photos remain in your R2 storage bucket (so nothing you paid for is lost), but the album vanishes from the site and the editor after publishing. Hardcoded albums can be hidden but not deleted from here.'));
+    const btn = el('button', { class:'btn danger solid', onclick: () => {
+      const nm = o.title || def.title;
+      if (!confirm(`Permanently delete "${nm}"?\n\nThis removes the album from your site the next time you publish. The photos stay in R2 storage in case you want to recover them.`)) return;
+      for (const section of ['architecture','explorations']) {
+        const arr = (CONTENT.extraProjects && CONTENT.extraProjects[section]) || [];
+        const i = arr.findIndex(e => e && e.slug === slug);
+        if (i !== -1) arr.splice(i, 1);
+      }
+      delete CONTENT.projects[slug];
+      setDirty();
+      renderNav();
+      goto('site');
+      toast('Album deleted — publish to remove it from the live site', 'ok');
+    }}, 'Delete album');
+    del.append(btn);
+    pane.append(del);
+  }
 }
 
 /* ---------- Account ---------- */

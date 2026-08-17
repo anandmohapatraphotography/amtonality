@@ -488,8 +488,15 @@ const EXPLORATIONS = [
     legacy:"https://amtonality.com/table-top", images:[] }
 ];
 
-const ALL = [...ARCHITECTURE, ...EXPLORATIONS];
+/* `let` because applyContent() may push editor-created albums into
+   ARCHITECTURE/EXPLORATIONS and then rebuild ALL in place. */
+let ALL = [...ARCHITECTURE, ...EXPLORATIONS];
 const bySlug = s => ALL.find(p => p.slug === s);
+/* A project is "visible" when it appears in menus and gallery grids. Hidden
+   projects still resolve via #/p/<slug> (so bookmarks keep working) but drop
+   off the homepage, the index pages, and the sidebar. */
+const isVisible = p => !p.hidden;
+const visible = list => list.filter(isVisible);
 
 /* Editor-managed overrides. `content.json` sits at the repo root and is written
    by /admin/. It may override site-level text (tagline, intro, portrait, email,
@@ -506,11 +513,44 @@ async function applyContent(){
     if (c.about && Array.isArray(c.about.paragraphs)) SITE.aboutParagraphs = c.about.paragraphs;
     if (c.about && c.about.lead) SITE.aboutLead = c.about.lead;
     if (c.contact && c.contact.lede) SITE.contactLede = c.contact.lede;
+    /* Extras first — editor-created albums live in extraProjects.{architecture,
+       explorations} as {slug,title,year,place,statement,cover,photos}. Push
+       them onto the hardcoded lists so the rest of the pipeline treats them
+       exactly the same. Skips anything flagged deleted so a soft-delete in
+       the editor really does disappear from the site. */
+    const pushExtras = (dest, arr) => {
+      if (!Array.isArray(arr)) return;
+      for (const e of arr) {
+        if (!e || !e.slug || e.deleted) continue;
+        if (ALL.find(p => p.slug === e.slug)) continue;   /* no duplicates */
+        const photos = Array.isArray(e.photos)
+          ? e.photos.filter(im => im && im.u).map(im => ({ u: im.u, a: +im.a || 1.5 }))
+          : [];
+        dest.push({
+          slug: e.slug,
+          title: e.title || e.slug,
+          year: e.year || '',
+          place: e.place || '',
+          cover: e.cover || (photos[0] && photos[0].u) || '',
+          statement: e.statement || '',
+          images: photos,
+          _extra: true
+        });
+      }
+    };
+    if (c.extraProjects) {
+      pushExtras(ARCHITECTURE, c.extraProjects.architecture);
+      pushExtras(EXPLORATIONS, c.extraProjects.explorations);
+      ALL.length = 0; ALL.push(...ARCHITECTURE, ...EXPLORATIONS);
+    }
     if (c.projects) {
       for (const p of ALL) {
         const o = c.projects[p.slug];
         if (!o) continue;
         for (const k of ['title','statement','year','place','cover']) if (o[k] != null) p[k] = o[k];
+        /* `hidden` removes an album from all menus and grids but keeps it
+           reachable at #/p/<slug> — reversible in one click from the editor. */
+        if (o.hidden === true) p.hidden = true;
         /* `photos` fully replaces the IMGDATA-derived list — this is what the
            editor writes after the Adobe→R2 migration. `extraImages` is the
            older per-project append list; still supported for back-compat. */
@@ -1133,7 +1173,7 @@ const jgal = (html, cls) => `<div class="jgal ${cls}">${html}</div>`;
 const pad = i => String(i+1).padStart(2,'0');
 
 function home(){
-  const a = ARCHITECTURE;
+  const a = visible(ARCHITECTURE);
   return `
   <section class="hero wrap">
     <div class="hero-grid">
@@ -1171,7 +1211,7 @@ function home(){
         <p class="sectioncap">Over the years, I've explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.</p></div>
       <a class="arrow" href="#/explorations">All explorations ${ARROW}</a>
     </div>
-    ${jgal(EXPLORATIONS.slice(0,8).map(p=>card(p)).join(''), 'cards')}
+    ${jgal(visible(EXPLORATIONS).slice(0,8).map(p=>card(p)).join(''), 'cards')}
   </section>
 
   <section class="wrap">
@@ -1321,9 +1361,9 @@ function routeFor(hash){
   }
   switch(h){
     case '/architecture': return { html: indexPage('Architecture and Interiors','Portfolio',
-      'Shaped by years of observing spaces, structures, and the way light moves through them.', ARCHITECTURE), title:'Architecture', nav:'#/architecture' };
+      'Shaped by years of observing spaces, structures, and the way light moves through them.', visible(ARCHITECTURE)), title:'Architecture', nav:'#/architecture' };
     case '/explorations': return { html: indexPage('Explorations','Portfolio',
-      "Over the years, I\'ve explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.", EXPLORATIONS), title:'Explorations', nav:'#/explorations' };
+      "Over the years, I\'ve explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.", visible(EXPLORATIONS)), title:'Explorations', nav:'#/explorations' };
     case '/about':   return { html: about(),   title:'About',   nav:'#/about' };
     case '/contact': return { html: contact(), title:'Contact', nav:'#/contact' };
     default:         return { html: home(),    title:null,      nav:'#/' };
