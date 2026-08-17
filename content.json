@@ -38,6 +38,10 @@
           "a": 0.667
         },
         {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/6c72ktzjmsxuwl3k.jpg",
+          "a": 0.6665480427046263
+        },
+        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/008.jpg",
           "a": 0.667
         },
@@ -2247,5 +2251,9 @@
       "place": "—",
       "statement": "These photos trace my journey as a photographer, shaped by years of working with food as a visual and emotional subject."
     }
+  },
+  "extraProjects": {
+    "architecture": [],
+    "explorations": []
   }
 }
