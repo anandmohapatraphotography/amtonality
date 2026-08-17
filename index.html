@@ -51,12 +51,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .serif{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400}
 .display{
   font-family:"Instrument Serif",Georgia,serif;font-weight:400;
-  font-size:clamp(2.9rem,8.4vw,8.2rem);line-height:.92;letter-spacing:-.022em;
-  /* Kill common ligatures — the "fi" ligature in Instrument Serif collides
-     the f's crossbar with the i's dot at display sizes and looks like a
-     floating speck. Rendering them as separate glyphs is clean. */
-  font-variant-ligatures:no-common-ligatures;
-  font-feature-settings:"liga" 0, "clig" 0;
+  font-size:clamp(2.9rem,8.4vw,8.2rem);line-height:.92;letter-spacing:-.012em;
+  /* Force common ligatures + kerning on. Instrument Serif's "fi" ligature
+     merges f and i into a single glyph that clears the collision; without
+     it and with any negative letter-spacing the dot lands on the f's arm. */
+  font-variant-ligatures:common-ligatures;
+  font-feature-settings:"kern" 1, "liga" 1, "calt" 1;
 }
 .display em{font-style:italic;letter-spacing:-.01em}
 .h2{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(2rem,4.6vw,4rem);line-height:1.02;letter-spacing:-.018em}
