@@ -1,1 +1,2176 @@
-{}
+{
+  "projects": {
+    "architecture": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/002.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/003.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/004.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/005.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/006.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/007.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/008.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/009.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/010.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/011.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/012.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/013.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/014.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/015.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/016.jpg",
+          "a": 0.638
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/017.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/018.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/019.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/020.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/021.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/022.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/023.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/024.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/025.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/026.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/027.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/028.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/029.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/030.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "residential": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/000.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/002.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/003.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/004.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/005.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/006.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/007.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/008.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/009.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/010.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/011.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/012.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/013.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/014.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/015.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/016.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/017.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/018.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/019.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/020.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/021.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/022.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/023.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/024.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/025.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/026.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/027.jpg",
+          "a": 0.667
+        }
+      ]
+    },
+    "heritage": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/000.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/002.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/003.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/004.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/005.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/006.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/007.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/008.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/009.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/010.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/011.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/012.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/013.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/014.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/heritage/015.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "bandra-worli": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/002.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/003.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/004.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/005.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "time-and-migration": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/000.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/002.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/003.jpg",
+          "a": 1.4
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/004.jpg",
+          "a": 1.25
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/005.jpg",
+          "a": 1.25
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/006.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/007.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/008.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/009.jpg",
+          "a": 1.401
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/010.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/011.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/012.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/013.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/014.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/015.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/016.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/017.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/018.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/019.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/020.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/021.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/022.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/023.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/024.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/025.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/026.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/027.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/028.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/029.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/030.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/031.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/032.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/033.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/034.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/035.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/036.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/037.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/038.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/039.jpg",
+          "a": 1.333
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/040.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/041.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/042.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/043.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/044.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/045.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/046.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/047.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/048.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/049.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/050.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/051.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/052.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/053.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/054.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/055.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/056.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/057.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/058.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/time-and-migration/059.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "ladakh-spiti": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/001.jpg",
+          "a": 0.666
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/002.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/003.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/004.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/005.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/006.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/007.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/008.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/009.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/010.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/011.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/012.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/013.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/014.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/015.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/016.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/017.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/018.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/019.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/020.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/021.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/022.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/023.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/024.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/025.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/026.jpg",
+          "a": 0.75
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/027.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/028.jpg",
+          "a": 0.666
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/029.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/030.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/031.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/032.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/033.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/034.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/035.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/036.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/037.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/038.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/039.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/040.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/041.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/042.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/043.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/044.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/045.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/046.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/047.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/048.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/049.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/050.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/051.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/052.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/053.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/054.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ladakh-spiti/055.jpg",
+          "a": 1.501
+        }
+      ]
+    },
+    "aerial": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/001.jpg",
+          "a": 1.334
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/002.jpg",
+          "a": 1.4
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/003.jpg",
+          "a": 1.4
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/004.jpg",
+          "a": 1.4
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/005.jpg",
+          "a": 1.4
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/006.jpg",
+          "a": 1.4
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/007.jpg",
+          "a": 1.4
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/008.jpg",
+          "a": 0.75
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/009.jpg",
+          "a": 1.334
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/010.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/011.jpg",
+          "a": 0.75
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/aerial/012.jpg",
+          "a": 1.334
+        }
+      ]
+    },
+    "burning-man": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/002.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/003.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/004.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/005.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/006.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/007.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/008.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/009.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/010.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/011.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/012.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/013.jpg",
+          "a": 1.4
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/014.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/015.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/016.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/017.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/018.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/019.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/020.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/021.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/022.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/023.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/024.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/025.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/026.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/027.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/028.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/029.jpg",
+          "a": 1.779
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/030.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/031.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/032.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/033.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/034.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/035.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/036.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/037.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/038.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/039.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/040.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/041.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/042.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/043.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/044.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/045.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/046.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/047.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/048.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/049.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/050.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/051.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/052.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/053.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/054.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/055.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/056.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/057.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/058.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/059.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/060.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/061.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/062.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/063.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/064.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/065.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/066.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/067.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/068.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/069.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/070.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/071.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/072.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/073.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/074.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/075.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/076.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/077.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/078.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/079.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/080.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/081.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/082.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/083.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/084.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/085.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/086.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/087.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/088.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/089.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/090.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/091.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/092.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/093.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/094.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/095.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/096.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/097.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/098.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/099.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/100.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/101.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/102.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/103.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/104.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/105.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/burning-man/106.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "music": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/002.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/003.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/004.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/005.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/006.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/007.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/008.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/009.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/010.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/011.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/012.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/013.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/014.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/015.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/016.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/017.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/018.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/019.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/020.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/021.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/022.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/023.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/024.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/025.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/026.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/027.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/028.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/029.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/030.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/031.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/032.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/033.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/034.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/035.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/036.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/037.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/038.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/039.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/040.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/041.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/042.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/043.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/044.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/045.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/046.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/047.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/048.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/049.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/050.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/051.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/052.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/053.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/054.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/055.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/056.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/057.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/058.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/059.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/060.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/061.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/062.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/063.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/064.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/065.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/066.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/067.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/068.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/069.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/070.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/071.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/072.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/073.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/074.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/075.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/076.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/077.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/078.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/079.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/080.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/081.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/082.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/083.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/music/084.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "underwater-odyssey": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/underwater-odyssey/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/underwater-odyssey/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/underwater-odyssey/002.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/underwater-odyssey/003.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/underwater-odyssey/004.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/underwater-odyssey/005.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/underwater-odyssey/006.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "reflection": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/001.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/002.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/003.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/004.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/005.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/006.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/007.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/008.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/009.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/010.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/011.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/012.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/013.jpg",
+          "a": 1.778
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/014.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/reflection/015.jpg",
+          "a": 0.667
+        }
+      ]
+    },
+    "industrial": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/001.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/002.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/003.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/004.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/005.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/006.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/007.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/008.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/009.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/010.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/011.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/012.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/013.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/014.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/015.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/016.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/017.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/industrial/018.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "asad-khan": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/001.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/002.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/003.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/004.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/005.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/006.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/007.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/008.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/009.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/asad-khan/010.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "likir-dosmoche": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/002.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/003.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/004.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/005.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/006.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/007.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/008.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/009.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/010.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/011.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/012.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/likir-dosmoche/013.jpg",
+          "a": 1.333
+        }
+      ]
+    },
+    "ulterior": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/002.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/003.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/004.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/005.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/006.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/007.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/008.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/009.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/010.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/ulterior/011.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "patterns": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/patterns/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/patterns/001.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/patterns/002.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/patterns/003.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/patterns/004.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/patterns/005.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/patterns/006.jpg",
+          "a": 1.778
+        }
+      ]
+    },
+    "purity": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/purity/000.jpg",
+          "a": 3.632
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/purity/001.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/purity/002.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/purity/003.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/purity/004.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/purity/005.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/purity/006.jpg",
+          "a": 1.5
+        }
+      ]
+    },
+    "food": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/000.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/001.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/002.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/003.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/004.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/005.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/006.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/007.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/008.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/009.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/010.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/011.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/012.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/013.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/014.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/015.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/016.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/017.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/018.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/019.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/020.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/021.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/022.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/023.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/024.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/025.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/026.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/027.jpg",
+          "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/028.jpg",
+          "a": 1.501
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/food/029.jpg",
+          "a": 1.5
+        }
+      ]
+    }
+  }
+}

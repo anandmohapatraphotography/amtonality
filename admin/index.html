@@ -546,10 +546,17 @@ function renderProject(pane, slug) {
 
   pane.append(textField('Cover image URL (advanced — leave blank to use the album\'s built-in cover)', o.cover || '', v => { o.cover = v || undefined; setDirty(); }));
 
-  /* ---------- Photos ---------- */
+  /* ---------- Photos ----------
+     After the Adobe→R2 migration, `o.photos` is the full list. Before it,
+     only `o.extraImages` exists and we tell the user the originals are locked. */
+  const migrated = Array.isArray(o.photos);
+  const photos   = migrated ? o.photos : (Array.isArray(o.extraImages) ? o.extraImages : (o.extraImages = []));
+
   const block = el('div', { class:'photos-block' });
   block.append(el('h3', {}, 'Photos in this album'));
-  block.append(el('div', { class:'sub' }, 'Drop image files below to add them. The 525 original photos from Adobe Portfolio show as locked — they can\'t be removed from here yet.'));
+  block.append(el('div', { class:'sub' }, migrated
+    ? 'Drop image files below to add more. Drag tiles to reorder. Click × to delete.'
+    : 'Drop image files below to add them. The 525 original photos from Adobe Portfolio show as locked — they can\'t be removed until the migration finishes.'));
 
   const drop = el('label', { class:'drop' },
     el('div', {}, 'Drag & drop photos here, or '),
@@ -560,19 +567,34 @@ function renderProject(pane, slug) {
   block.append(drop);
 
   const grid = el('div', { class:'grid' });
-  const extras = Array.isArray(o.extraImages) ? o.extraImages : (o.extraImages = []);
 
   const paintGrid = () => {
     grid.innerHTML = '';
-    /* Uploaded extras (deletable, reorderable) */
-    extras.forEach((im, i) => {
-      const t = el('div', { class:'tile' });
-      t.append(el('img', { src: im.u, alt:'' }));
-      t.append(el('button', { class:'rm', title:'Remove', onclick: () => { extras.splice(i, 1); setDirty(); paintGrid(); } }, '×'));
+    photos.forEach((im, i) => {
+      const t = el('div', { class:'tile', draggable:'true', 'data-i': i });
+      t.append(el('img', { src: im.u, alt:'', loading:'lazy' }));
+      t.append(el('button', { class:'rm', title:'Remove', onclick: e => {
+        e.stopPropagation();
+        photos.splice(i, 1);
+        if (migrated) o.photos = photos; else o.extraImages = photos;
+        setDirty(); paintGrid();
+      } }, '×'));
+      /* Drag-to-reorder. Native HTML5 DnD; index carried in the payload. */
+      t.addEventListener('dragstart', e => { e.dataTransfer.setData('text/plain', String(i)); t.style.opacity = '0.4'; });
+      t.addEventListener('dragend',   () => { t.style.opacity = '1'; });
+      t.addEventListener('dragover',  e => e.preventDefault());
+      t.addEventListener('drop',      e => {
+        e.preventDefault();
+        const from = +e.dataTransfer.getData('text/plain');
+        if (from === i || isNaN(from)) return;
+        const [moved] = photos.splice(from, 1);
+        photos.splice(i, 0, moved);
+        if (migrated) o.photos = photos; else o.extraImages = photos;
+        setDirty(); paintGrid();
+      });
       grid.append(t);
     });
-    /* Placeholder count for locked existing photos */
-    grid.append(el('div', { class:'tile locked up' }, 'Original photos on this page are locked from here.'));
+    if (!migrated) grid.append(el('div', { class:'tile locked up' }, 'The 525 originals from Adobe are locked from here until they\'re migrated to your storage.'));
   };
   paintGrid();
   block.append(grid);
@@ -586,7 +608,8 @@ function renderProject(pane, slug) {
       grid.prepend(tile);
       try {
         const im = await uploadPhotoSimple(f, slug, p => { prog.style.width = (p * 100) + '%'; });
-        extras.push({ u: im.u, a: im.a });
+        photos.push({ u: im.u, a: im.a });
+        if (migrated) o.photos = photos; else o.extraImages = photos;
         setDirty(); paintGrid();
       } catch (e) {
         tile.innerHTML = '';

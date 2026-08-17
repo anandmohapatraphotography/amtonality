@@ -511,6 +511,12 @@ async function applyContent(){
         const o = c.projects[p.slug];
         if (!o) continue;
         for (const k of ['title','statement','year','place','cover']) if (o[k] != null) p[k] = o[k];
+        /* `photos` fully replaces the IMGDATA-derived list — this is what the
+           editor writes after the Adobe→R2 migration. `extraImages` is the
+           older per-project append list; still supported for back-compat. */
+        if (Array.isArray(o.photos)) {
+          p.images = o.photos.filter(im => im && im.u).map(im => ({ u: im.u, a: +im.a || 1.5 }));
+        }
         if (Array.isArray(o.extraImages)) {
           for (const im of o.extraImages) if (im && im.u) p.images.push({ u: im.u, a: +im.a || 1.5 });
         }
