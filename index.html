@@ -1202,18 +1202,18 @@ function home(){
   <section class="wrap">
     <div class="shead rv" style="padding-bottom:0">
       <div style="flex:1 1 520px"><div class="eyebrow">About</div>
-        <h2 class="h2" style="max-width:24ch">A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.</h2></div>
+        <h2 class="h2" style="max-width:24ch">${SITE.homeAboutHeading || 'A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.'}</h2></div>
       <a class="arrow" href="#/about">Read the full story ${ARROW}</a>
     </div>
     <div class="body rv d1" style="padding:clamp(24px,3vw,42px) 0 0">
-      <p>I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space.</p>
+      <p>${SITE.homeAboutBlurb || 'I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space.'}</p>
     </div>
   </section>
 
   <section class="wrap">
     <div class="shead rv">
       <div style="flex:1 1 560px"><div class="eyebrow">Explorations</div>
-        <p class="sectioncap">Over the years, I've explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.</p></div>
+        <p class="sectioncap">${SITE.homeExplorationsBlurb || "Over the years, I've explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal."}</p></div>
       <a class="arrow" href="#/explorations">All explorations ${ARROW}</a>
     </div>
     ${jgal(visible(EXPLORATIONS).slice(0,8).map(p=>card(p)).join(''), 'cards')}

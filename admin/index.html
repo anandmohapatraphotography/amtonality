@@ -586,6 +586,29 @@ function renderSite(pane) {
 
   pane.append(textField('Portrait image URL', s.portrait || '', v => { s.portrait = v; setDirty(); }, { hint: 'The photograph of you on the About page. Full URL.' }));
   pane.append(textField('Homepage cover image URL', s.cover || '', v => { s.cover = v; setDirty(); }));
+
+  /* ---- Homepage-only snippets ---- */
+  pane.append(el('div', { class:'section-actions' },
+    el('h3', {}, 'Homepage preview blocks'),
+    el('div', { class:'sub' }, 'Short summaries that appear between the album grids on the homepage. The full About and Explorations pages are edited separately.')
+  ));
+  pane.append(textAreaField(
+    'Homepage About heading (big serif)',
+    s.homeAboutHeading || 'A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.',
+    v => { s.homeAboutHeading = v; setDirty(); },
+    { hint: 'One sentence. Shown above the "Read the full story →" link.' }
+  ));
+  pane.append(textAreaField(
+    'Homepage About blurb (paragraph)',
+    s.homeAboutBlurb || 'I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space.',
+    v => { s.homeAboutBlurb = v; setDirty(); }
+  ));
+  pane.append(textAreaField(
+    'Homepage Explorations blurb',
+    s.homeExplorationsBlurb || "Over the years, I've explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.",
+    v => { s.homeExplorationsBlurb = v; setDirty(); }
+  ));
+
   pane.append(textField('Contact form endpoint (advanced)', s.formEndpoint || '', v => { s.formEndpoint = v; setDirty(); }, { hint: 'Google Apps Script URL that receives form submissions. Only change if you know what this is.' }));
 }
 
