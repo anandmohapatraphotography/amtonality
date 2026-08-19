@@ -1145,12 +1145,14 @@ const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
 const frame = (src, ratio='nat', alt='') =>
   `<div class="frame ${ratio}"><img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`;
 
-/* Each item's width and flex-grow are (aspect x BASE); the inner box carries the
-   aspect ratio, so its height follows automatically once the row is justified. */
+/* Each item gets a fixed width of (aspect * BASE) with NO flex-grow — so every
+   row is exactly BASE pixels tall and short rows leave the natural gap on the
+   right. This is the print-magazine layout; the older row-justified variant
+   made row heights vary with aspect mix. */
 const gitem = (src, ar, alt, href, cap, base) => {
   /* base is only used by the justified galleries; album cards sit in a fixed
      column grid, so they get no inline width and no flex-grow. */
-  const sizing = base ? `style="width:${(ar*base).toFixed(2)}px;flex-grow:${(ar*base).toFixed(2)}" ` : '';
+  const sizing = base ? `style="width:${(ar*base).toFixed(2)}px;flex-grow:0;flex-shrink:0" ` : '';
   return `
   <${href?'a':'div'} class="gitem" ${href?`href="${href}" `:''}${sizing}data-ar="${ar}">
     <span class="gimg" style="aspect-ratio:${ar}"><img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async"></span>
@@ -1393,20 +1395,9 @@ function lazyImages(){
   });
 }
 
-/* Flexbox justifies every row. The only case it gets wrong is a short final
-   row, which would stretch one or two photos to an absurd size — so cap that
-   row back to its natural base width and let it sit left-aligned. */
-function guardLastRow(gal){
-  const items = [...gal.children];
-  if (items.length < 2) return;
-  items.forEach(el => { el.style.flexGrow = el.style.width.replace('px',''); });
-  const lastTop = items[items.length-1].offsetTop;
-  const lastRow = items.filter(el => el.offsetTop === lastTop);
-  if (lastRow.length === items.length) return;              // single row: leave it
-  lastRow.forEach(el => { el.style.flexGrow = '0'; });
-}
-
-function layoutAll(){ view.querySelectorAll('.jgal.gallery').forEach(guardLastRow); }
+/* Uniform row heights — every gitem now ships with flex-grow:0 inline, so
+   there is nothing to guard. Left in place as a no-op so callers don't break. */
+function layoutAll(){ /* no-op */ }
 
 let rt;
 window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(layoutAll, 120); });
