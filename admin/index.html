@@ -705,7 +705,72 @@ function renderProject(pane, slug) {
 
   pane.append(textAreaField('Statement (shown on the album page)', o.statement != null ? o.statement : def.statement, v => { o.statement = v; setDirty(); }, { tall: true }));
 
-  pane.append(textField('Cover image URL (advanced — leave blank to use the album\'s built-in cover)', o.cover || '', v => { o.cover = v || undefined; setDirty(); }));
+  /* ---------- Cover image ---------- */
+  const coverSection = el('div', { class:'section-actions' });
+  coverSection.append(el('h3', {}, 'Cover image'));
+  coverSection.append(el('div', { class:'sub' },
+    'The photograph shown for this album on the homepage and the section index. Uses the album\'s built-in cover unless you override it here.'));
+
+  const currentCover = o.cover || def.cover || '';
+  const preview = el('div', { class:'cover-preview' });
+  const previewImg = el('img', { src: currentCover, alt:'Current cover', style:'width:100%;max-width:280px;aspect-ratio:4/3;object-fit:cover;background:#f2efe9;border:1px solid #e2ded5' });
+  preview.append(previewImg);
+  coverSection.append(preview);
+
+  const controls = el('div', { class:'cover-controls', style:'display:flex;gap:10px;flex-wrap:wrap;margin-top:14px' });
+
+  /* Upload a new cover */
+  const upLabel = el('label', { class:'btn small', style:'cursor:pointer' }, 'Upload new cover');
+  const upInput = el('input', { type:'file', accept:'image/*', style:'display:none' });
+  upLabel.append(upInput);
+  upInput.addEventListener('change', async () => {
+    const f = upInput.files && upInput.files[0];
+    if (!f) return;
+    upLabel.textContent = 'Uploading…';
+    try {
+      const im = await uploadPhotoSimple(f, slug);
+      o.cover = im.u;
+      previewImg.src = im.u;
+      setDirty(); renderNav();
+    } catch (err) {
+      alert('Upload failed: ' + (err && err.message || err));
+    }
+    upLabel.textContent = 'Upload new cover';
+  });
+  controls.append(upLabel);
+
+  /* Use an existing photo from this album */
+  if (Array.isArray(o.photos) && o.photos.length) {
+    const pickBtn = el('button', { class:'btn small', onclick: () => {
+      const pane2 = el('div', { class:'cover-picker', style:'display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px;margin-top:12px' });
+      o.photos.forEach(im => {
+        const t = el('button', { class:'pick-tile', style:'padding:0;border:2px solid transparent;background:none;cursor:pointer', onclick: () => {
+          o.cover = im.u; previewImg.src = im.u; pane2.remove(); setDirty();
+        } });
+        t.append(el('img', { src: im.u, alt:'', style:'width:100%;aspect-ratio:1;object-fit:cover;display:block' }));
+        pane2.append(t);
+      });
+      coverSection.append(pane2);
+    } }, 'Pick from album photos');
+    controls.append(pickBtn);
+  }
+
+  /* Reset to the built-in default */
+  if (o.cover) {
+    const resetBtn = el('button', { class:'btn small ghost', onclick: () => {
+      delete o.cover;
+      previewImg.src = def.cover || '';
+      setDirty();
+      renderPane();
+    } }, 'Reset to default');
+    controls.append(resetBtn);
+  }
+  coverSection.append(controls);
+
+  /* Advanced: paste a URL directly */
+  coverSection.append(textField('Or paste an image URL directly (advanced)', o.cover || '', v => { o.cover = v || undefined; previewImg.src = v || (def.cover || ''); setDirty(); }));
+
+  pane.append(coverSection);
 
   /* ---------- Photos ----------
      After the Adobe→R2 migration, `o.photos` is the full list. Before it,
