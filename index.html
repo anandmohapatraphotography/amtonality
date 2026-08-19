@@ -1396,18 +1396,42 @@ function lazyImages(){
   });
 }
 
-/* Every gallery row justifies to full width — that stretches lone last-row
-   photos to absurd sizes, so neutralise flex-grow on the last row's items.
-   Since we already applied `justify-content: center` on .jgal.gallery, the
-   short last row centers itself. */
+/* Every gallery row justifies to fill width, which grows items taller than the
+   base. The last (incomplete) row cannot justify — a lone photo would stretch
+   full-width — so we set its flex-grow to zero. That leaves last-row items at
+   base height while the rows above got stretched taller, and the last row ends
+   up visibly shorter. Fix: measure the previous row's actual height and resize
+   last-row items to match. Result: uniform apparent height across every row,
+   last row still flush left because we keep flex-grow at 0. */
 function guardLastRow(gal){
   const items = [...gal.children];
   if (items.length < 2) return;
-  items.forEach(el => { el.style.flexGrow = el.style.width.replace('px',''); });
-  const lastTop = items[items.length-1].offsetTop;
-  const lastRow = items.filter(el => el.offsetTop === lastTop);
-  if (lastRow.length === items.length) return;              // single row → leave alone
-  lastRow.forEach(el => { el.style.flexGrow = '0'; });
+  /* Reset every item to natural flex-grow so the browser recomputes the layout
+     as if we hadn't touched it — needed on resize where an item may have moved
+     between rows. */
+  items.forEach(el => { el.style.flexGrow = el.style.width.replace('px',''); el.style.maxWidth = ''; });
+  gal.offsetHeight;                                                   // force a reflow
+  const rowMap = new Map();
+  items.forEach(el => {
+    const t = el.offsetTop;
+    if (!rowMap.has(t)) rowMap.set(t, []);
+    rowMap.get(t).push(el);
+  });
+  const keys = [...rowMap.keys()].sort((a,b) => a - b);
+  if (keys.length < 2) return;                                        // one row only — leave it
+  const lastRow = rowMap.get(keys[keys.length - 1]);
+  const prevRow = rowMap.get(keys[keys.length - 2]);
+  if (lastRow.length === items.length) return;                        // shouldn't hit — keys.length>=2
+  /* The previous row is fully justified, so measuring one of its items gives
+     the true row height. Match every last-row item to that height by setting
+     an explicit width = aspect * target height; the inner .gimg's aspect-ratio
+     rule turns that width back into the matching height. */
+  const targetH = prevRow[0].getBoundingClientRect().height;
+  lastRow.forEach(el => {
+    const ar = parseFloat(el.dataset.ar) || 1.5;
+    el.style.flexGrow = '0';
+    el.style.width = (ar * targetH).toFixed(2) + 'px';
+  });
 }
 function layoutAll(){ view.querySelectorAll('.jgal.gallery').forEach(guardLastRow); }
 
