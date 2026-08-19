@@ -517,6 +517,8 @@ async function applyContent(){
     if (c.site) for (const k of Object.keys(c.site)) if (c.site[k] != null) SITE[k] = c.site[k];
     if (c.about && Array.isArray(c.about.paragraphs)) SITE.aboutParagraphs = c.about.paragraphs;
     if (c.about && c.about.lead) SITE.aboutLead = c.about.lead;
+    if (c.about && c.about.headingText) SITE.aboutHeadingText = c.about.headingText;
+    if (c.about && typeof c.about.headingVisible === 'boolean') SITE.aboutHeadingVisible = c.about.headingVisible;
     if (c.contact && c.contact.lede) SITE.contactLede = c.contact.lede;
     /* Extras first — editor-created albums live in extraProjects.{architecture,
        explorations} as {slug,title,year,place,statement,cover,photos}. Push
@@ -1304,8 +1306,9 @@ function about(){
   <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
     <div class="rv">
       <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">About</div>
+      ${SITE.aboutHeadingVisible === true ? `<h1 class="display" style="max-width:15ch">${esc(SITE.aboutHeadingText || 'Light, patience, and the shape of a room.')}</h1>` : ''}
     </div>
-    <div class="about" style="padding-top:clamp(20px,3vw,44px)">
+    <div class="about" style="padding-top:${SITE.aboutHeadingVisible === true ? 'clamp(44px,6vw,90px)' : 'clamp(20px,3vw,44px)'}">
       <div class="rv">
         ${frame(SITE.portrait,'nat','Anand Mohapatra')}
         <ul class="factlist">

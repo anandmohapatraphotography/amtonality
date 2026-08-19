@@ -618,6 +618,31 @@ function renderAbout(pane) {
   pane.append(el('h2', {}, 'About page'));
   pane.append(el('div', { class:'desc' }, 'Your bio, in your own words.'));
 
+  /* ---------- Big serif page heading (optional) ---------- */
+  const hSection = el('div', { class:'section-actions' });
+  hSection.append(el('h3', {}, 'Page heading (big serif)'));
+  hSection.append(el('div', { class:'sub' },
+    'The oversized serif line at the very top of the About page (e.g. "Light, patience, and the shape of a room."). Off by default; flip it on when you want that flourish.'));
+  const hToggle = el('label', { class:'toggle' });
+  const hCb = el('input', { type:'checkbox' });
+  if (a.headingVisible === true) hCb.checked = true;
+  hCb.addEventListener('change', () => {
+    if (hCb.checked) a.headingVisible = true; else a.headingVisible = false;
+    setDirty(); renderPane();
+  });
+  hToggle.append(hCb, el('span', {}, ' Show heading at the top of the About page'));
+  hSection.append(hToggle);
+  pane.append(hSection);
+
+  if (a.headingVisible === true) {
+    pane.append(textAreaField(
+      'Heading text',
+      a.headingText != null ? a.headingText : 'Light, patience, and the shape of a room.',
+      v => { a.headingText = v; setDirty(); },
+      { hint: 'Line breaks are honoured. Keep it short — this renders enormous.' }
+    ));
+  }
+
   pane.append(textAreaField('Lead sentence (large italic)', a.lead || '', v => { a.lead = v; setDirty(); }, { hint: 'One or two sentences. Shown big and italic under your portrait.' }));
 
   pane.append(el('div', { class:'field' },
