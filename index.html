@@ -208,7 +208,7 @@ a.card:hover .frame img{transform:scale(1.045)}
 .jgal .gimg{display:block;width:100%;overflow:hidden;background:var(--paper-2)}
 .jgal .gimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.4s var(--ease)}
 .jgal a.gitem:hover .gimg img{transform:scale(1.035)}
-.jgal.gallery{--inset:4px}
+.jgal.gallery{--inset:4px;justify-content:center}
 .jgal.gallery .gitem{display:flex;flex-direction:column}
 .jgal.gallery .gimg{flex:1 1 auto;min-height:0}
 /* Album covers are all 4:3, so they belong in an even column grid — every card
@@ -1145,14 +1145,15 @@ const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
 const frame = (src, ratio='nat', alt='') =>
   `<div class="frame ${ratio}"><img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`;
 
-/* Each item gets a fixed width of (aspect * BASE) with NO flex-grow — so every
-   row is exactly BASE pixels tall and short rows leave the natural gap on the
-   right. This is the print-magazine layout; the older row-justified variant
-   made row heights vary with aspect mix. */
+/* Each item's width and flex-grow are (aspect x BASE); flexbox justifies the
+   row to fill the container width, scaling every image in the row by the same
+   factor so heights stay uniform within that row. Last-row items get their
+   flex-grow neutralised at runtime by guardLastRow so a lone photo doesn't
+   stretch to full width — the container centers what remains. */
 const gitem = (src, ar, alt, href, cap, base) => {
   /* base is only used by the justified galleries; album cards sit in a fixed
      column grid, so they get no inline width and no flex-grow. */
-  const sizing = base ? `style="width:${(ar*base).toFixed(2)}px;flex-grow:0;flex-shrink:0" ` : '';
+  const sizing = base ? `style="width:${(ar*base).toFixed(2)}px;flex-grow:${(ar*base).toFixed(2)}" ` : '';
   return `
   <${href?'a':'div'} class="gitem" ${href?`href="${href}" `:''}${sizing}data-ar="${ar}">
     <span class="gimg" style="aspect-ratio:${ar}"><img src="${src}" alt="${esc(alt)}" loading="lazy" decoding="async"></span>
@@ -1395,9 +1396,20 @@ function lazyImages(){
   });
 }
 
-/* Uniform row heights — every gitem now ships with flex-grow:0 inline, so
-   there is nothing to guard. Left in place as a no-op so callers don't break. */
-function layoutAll(){ /* no-op */ }
+/* Every gallery row justifies to full width — that stretches lone last-row
+   photos to absurd sizes, so neutralise flex-grow on the last row's items.
+   Since we already applied `justify-content: center` on .jgal.gallery, the
+   short last row centers itself. */
+function guardLastRow(gal){
+  const items = [...gal.children];
+  if (items.length < 2) return;
+  items.forEach(el => { el.style.flexGrow = el.style.width.replace('px',''); });
+  const lastTop = items[items.length-1].offsetTop;
+  const lastRow = items.filter(el => el.offsetTop === lastTop);
+  if (lastRow.length === items.length) return;              // single row → leave alone
+  lastRow.forEach(el => { el.style.flexGrow = '0'; });
+}
+function layoutAll(){ view.querySelectorAll('.jgal.gallery').forEach(guardLastRow); }
 
 let rt;
 window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(layoutAll, 120); });
