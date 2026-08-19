@@ -1306,10 +1306,10 @@ function about(){
   <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
     <div class="rv">
       <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">About</div>
-      ${SITE.aboutHeadingVisible === true ? `<h1 class="h2" style="max-width:22ch;margin-bottom:0">${esc(SITE.aboutHeadingText || 'Light, patience, and the shape of a room.')}</h1>` : ''}
     </div>
-    <div class="about" style="padding-top:${SITE.aboutHeadingVisible === true ? 'clamp(44px,6vw,90px)' : 'clamp(20px,3vw,44px)'}">
+    <div class="about" style="padding-top:clamp(20px,3vw,44px)">
       <div class="rv">
+        ${SITE.aboutHeadingVisible === true ? `<h1 class="h2" style="max-width:100%;margin-bottom:clamp(18px,2.5vw,32px)">${esc(SITE.aboutHeadingText || 'Light, patience, and the shape of a room.')}</h1>` : ''}
         ${frame(SITE.portrait,'nat','Anand Mohapatra')}
         <ul class="factlist">
           <li><span>Based in</span><div>${esc(SITE.city)}, Canada</div></li>
