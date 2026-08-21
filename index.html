@@ -4,18 +4,84 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Anand Mohapatra — Tonality | Architecture Photography, Vancouver</title>
-<meta name="description" content="Anand Mohapatra is an architecture and interiors photographer based in Vancouver, Canada. Where creativity finds its tone.">
-<meta name="keywords" content="architecture photography, interiors photography, Vancouver photographer, Anand Mohapatra, Tonality, game cinematics">
+<meta name="description" content="Anand Mohapatra is an architecture and interiors photographer based in Vancouver, Canada. Editorial, commercial, and heritage photography for architects, designers, and publications.">
+<meta name="keywords" content="architecture photography Vancouver, interior photography Vancouver, architectural photographer Canada, Anand Mohapatra, Tonality photography, heritage architecture, residential photography, editorial photography, real estate photographer Vancouver">
 <meta name="author" content="Anand Mohapatra">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://amtonality.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Anand Mohapatra — Tonality">
-<meta property="og:description" content="Architecture and interiors photography. Vancouver, Canada.">
-<meta property="og:image" content="https://cdn.myportfolio.com/9c0b9cff-4f88-4e53-a5c5-7ba8f446de1b/ba9ac85d-3af8-452b-8369-a7b93bbda95d_rwc_0x1593x3702x3934x4096.jpg?h=4debe597381cebaeded41fdb7a7cb3e2">
+<meta property="og:site_name" content="Anand Mohapatra — Tonality">
+<meta property="og:url" content="https://amtonality.com/">
+<meta property="og:title" content="Anand Mohapatra — Tonality | Architecture Photography, Vancouver">
+<meta property="og:description" content="Architecture and interiors photography based in Vancouver, Canada. Where creativity finds its tone.">
+<meta property="og:image" content="https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1280">
+<meta property="og:locale" content="en_CA">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Anand Mohapatra — Tonality">
+<meta name="twitter:description" content="Architecture and interiors photography. Vancouver, Canada.">
+<meta name="twitter:image" content="https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg">
+<meta name="theme-color" content="#FBFAF7">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://cdn.myportfolio.com" crossorigin>
+<link rel="preconnect" href="https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://amtonality.com/#person",
+      "name": "Anand Mohapatra",
+      "alternateName": "Tonality",
+      "jobTitle": "Architecture Photographer",
+      "url": "https://amtonality.com/",
+      "email": "hello@amtonality.com",
+      "image": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Vancouver",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      },
+      "sameAs": [
+        "https://www.behance.net/anandmohapatra",
+        "https://www.instagram.com/_anandmohapatra/",
+        "https://www.linkedin.com/in/anand-mohapatra-650b7212b/",
+        "https://www.facebook.com/AnandMohapatraPhotography"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://amtonality.com/#website",
+      "url": "https://amtonality.com/",
+      "name": "Anand Mohapatra — Tonality",
+      "description": "Architecture and interiors photography, Vancouver.",
+      "publisher": { "@id": "https://amtonality.com/#person" },
+      "inLanguage": "en-CA"
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://amtonality.com/#business",
+      "name": "Tonality — Anand Mohapatra Photography",
+      "image": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg",
+      "url": "https://amtonality.com/",
+      "email": "hello@amtonality.com",
+      "priceRange": "$$",
+      "areaServed": ["Vancouver", "British Columbia", "Canada"],
+      "serviceType": ["Architectural Photography", "Interior Photography", "Editorial Photography", "Heritage Photography"],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Vancouver",
+        "addressRegion": "BC",
+        "addressCountry": "CA"
+      }
+    }
+  ]
+}
+</script>
 <style>
 /* ============================================================
    TONALITY — editorial gallery-white system
@@ -1532,10 +1598,55 @@ function wireLightbox(){
   });
 }
 
+/* Keep per-route SEO meta in sync so previews shared on socials show the right
+   photo + description for whichever album / page is on screen. */
+function setMeta(name, value, isProperty){
+  const attr = isProperty ? 'property' : 'name';
+  let el = document.head.querySelector(`meta[${attr}="${name}"]`);
+  if (!el) { el = document.createElement('meta'); el.setAttribute(attr, name); document.head.appendChild(el); }
+  el.setAttribute('content', value || '');
+}
+function setCanonical(href){
+  let el = document.head.querySelector('link[rel="canonical"]');
+  if (!el) { el = document.createElement('link'); el.setAttribute('rel','canonical'); document.head.appendChild(el); }
+  el.setAttribute('href', href);
+}
+function seoFor(hash){
+  const h = (hash || '#/').replace(/^#/,'');
+  const base = 'Anand Mohapatra — Tonality | Architecture Photography, Vancouver';
+  const homeImg = SITE.cover || 'https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg';
+  if (h.startsWith('/p/')) {
+    const p = bySlug(h.slice(3));
+    if (p) return {
+      title: (p.title || 'Album') + ' — Anand Mohapatra',
+      description: (p.statement || '').replace(/\s+/g,' ').slice(0,180),
+      image: p.cover || homeImg,
+      url: 'https://amtonality.com/' + h
+    };
+  }
+  const preset = {
+    '/':             { t: base, d: SITE.intro || 'Architecture and interiors photography, Vancouver.' },
+    '/architecture': { t: 'Architecture — Anand Mohapatra', d: 'Architectural and interiors photography portfolio, Vancouver.' },
+    '/explorations': { t: 'Explorations — Anand Mohapatra', d: 'Travel, music, portraits, and personal photography projects by Anand Mohapatra.' },
+    '/about':        { t: 'About — Anand Mohapatra', d: 'A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.' },
+    '/contact':      { t: 'Contact — Anand Mohapatra', d: 'Available for architectural and interior commissions in Vancouver and beyond.' }
+  }[h] || { t: base, d: SITE.intro || 'Architecture photography, Vancouver.' };
+  return { title: preset.t, description: preset.d, image: homeImg, url: 'https://amtonality.com/' + (h === '/' ? '' : '#' + h) };
+}
 function render(){
   const r = routeFor(location.hash);
   view.innerHTML = r.html;
-  document.title = (r.title ? r.title + ' — ' : '') + 'Anand Mohapatra — Tonality | Architecture Photography, Vancouver';
+  const seo = seoFor(location.hash);
+  document.title = seo.title;
+  setMeta('description', seo.description);
+  setMeta('og:title', seo.title, true);
+  setMeta('og:description', seo.description, true);
+  setMeta('og:image', seo.image, true);
+  setMeta('og:url', seo.url, true);
+  setMeta('twitter:title', seo.title);
+  setMeta('twitter:description', seo.description);
+  setMeta('twitter:image', seo.image);
+  setCanonical(seo.url);
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===r.nav));
   document.body.classList.remove('menu');
   layoutAll(); observe(); lazyImages(); wireIndexToggle(); wireForm(); wireLightbox();
