@@ -1,3 +1,0 @@
-# Cloudflare Pages catch-all: serve index.html for any SPA route.
-# Static files, /admin/, /api/ functions all take precedence over this rule.
-/*    /index.html   200
