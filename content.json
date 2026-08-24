@@ -187,6 +187,10 @@
           "a": 0.667
         },
         {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/005.jpg",
+          "a": 0.667
+        },
+        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/001.jpg",
           "a": 1.5
         },
@@ -201,10 +205,6 @@
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/004.jpg",
           "a": 1.501
-        },
-        {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/005.jpg",
-          "a": 0.667
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/006.jpg",
@@ -275,10 +275,6 @@
           "a": 1.5
         },
         {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/023.jpg",
-          "a": 0.667
-        },
-        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/024.jpg",
           "a": 1.5
         },
@@ -293,12 +289,17 @@
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/027.jpg",
           "a": 0.667
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/0eua5qhnmt7p87j3.jpg",
+          "a": 1.5
         }
       ],
       "title": "Residential & Interiors",
       "year": "2026",
       "place": "Vancouver, BC",
-      "statement": "Within the world of residence and interiors, design becomes intimate — a study in texture, silence, and the personality it holds. And within that space lies a rhythm of living: comfort, belonging, and the character shaped by those who call it home."
+      "statement": "Within the world of residence and interiors, design becomes intimate — a study in texture, silence, and the personality it holds. And within that space lies a rhythm of living: comfort, belonging, and the character shaped by those who call it home.",
+      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/a6fvpbdvmt7p93n2.jpg"
     },
     "heritage": {
       "photos": [
