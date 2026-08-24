@@ -29,7 +29,11 @@ export const onRequest = async (context) => {
 
   const title = (proj.title || slug) + ' — Tonality';
   const desc  = String(proj.statement || '').replace(/\s+/g,' ').trim().slice(0, 200) || 'Photography by Anand Mohapatra.';
-  const image = proj.cover || HOME_IMG;
+  /* Prefer the explicit cover override, otherwise the album's first photo,
+     otherwise the site-wide default. */
+  const image = proj.cover
+              || (Array.isArray(proj.photos) && proj.photos[0] && proj.photos[0].u)
+              || HOME_IMG;
   const canon = 'https://amtonality.com/p/' + slug;
 
   return new HTMLRewriter()
