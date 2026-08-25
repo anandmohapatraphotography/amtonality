@@ -637,6 +637,26 @@ async function applyContent(){
       pushExtras(EXPLORATIONS, c.extraProjects.explorations);
       ALL.length = 0; ALL.push(...ARCHITECTURE, ...EXPLORATIONS);
     }
+    /* Apply user-configured album order (set from the admin editor). Any
+       slugs missing from the order list keep their original relative
+       position at the end. */
+    if (c.albumOrder) {
+      const reorder = (arr, order) => {
+        if (!Array.isArray(order) || order.length === 0) return;
+        const bySlug = new Map(arr.map(p => [p.slug, p]));
+        const seen = new Set();
+        const out = [];
+        for (const s of order) {
+          const p = bySlug.get(s);
+          if (p && !seen.has(s)) { out.push(p); seen.add(s); }
+        }
+        for (const p of arr) if (!seen.has(p.slug)) out.push(p);
+        arr.length = 0; arr.push(...out);
+      };
+      reorder(ARCHITECTURE, c.albumOrder.architecture);
+      reorder(EXPLORATIONS, c.albumOrder.explorations);
+      ALL.length = 0; ALL.push(...ARCHITECTURE, ...EXPLORATIONS);
+    }
     if (c.projects) {
       for (const p of ALL) {
         const o = c.projects[p.slug];
