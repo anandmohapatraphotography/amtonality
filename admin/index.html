@@ -38,6 +38,11 @@ a{color:inherit}
 .side a.nav.extra::before{content:"◇ ";color:var(--ink-3);font-size:11px}
 .side a.nav.is-hidden{opacity:.5}
 .side a.nav.is-hidden:hover{opacity:.9}
+.side .nav-row{display:flex;align-items:stretch}
+.side .nav-row a.nav{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.side .nav-arrow{background:transparent;border:0;color:var(--ink-3);cursor:pointer;padding:0 8px;font-size:13px;line-height:1;flex:0 0 auto;transition:all .15s}
+.side .nav-arrow:hover:not(:disabled){background:rgba(20,19,15,.06);color:var(--ink)}
+.side .nav-arrow:disabled{opacity:.2;cursor:not-allowed}
 
 /* Bottom action blocks on a project page */
 .section-actions,.section-danger{margin-top:32px;padding-top:20px;border-top:1px solid var(--rule)}
@@ -240,7 +245,20 @@ const getExtras = section =>
     .filter(e => e && e.slug && !e.deleted)
     .map(e => ({ ...e, _extra: true }));
 
-const getSection = section => [...PROJECTS[section], ...getExtras(section)];
+const getSection = section => {
+  const arr = [...PROJECTS[section], ...getExtras(section)];
+  const order = CONTENT.albumOrder && CONTENT.albumOrder[section];
+  if (!Array.isArray(order) || order.length === 0) return arr;
+  const bySlugMap = new Map(arr.map(p => [p.slug, p]));
+  const seen = new Set();
+  const out = [];
+  for (const s of order) {
+    const p = bySlugMap.get(s);
+    if (p && !seen.has(s)) { out.push(p); seen.add(s); }
+  }
+  for (const p of arr) if (!seen.has(p.slug)) out.push(p);
+  return out;
+};
 const getAllProjects = () => [...getSection('architecture'), ...getSection('explorations')];
 const bySlug = s => getAllProjects().find(p => p.slug === s);
 
@@ -309,7 +327,8 @@ function mergeContent(loaded) {
     about: (loaded && loaded.about) || {},
     contact: (loaded && loaded.contact) || {},
     projects: (loaded && loaded.projects) || {},
-    extraProjects: (loaded && loaded.extraProjects) || {}
+    extraProjects: (loaded && loaded.extraProjects) || {},
+    albumOrder: (loaded && loaded.albumOrder) || {}
   };
   if (!CONTENT.extraProjects.architecture) CONTENT.extraProjects.architecture = [];
   if (!CONTENT.extraProjects.explorations) CONTENT.extraProjects.explorations = [];
@@ -492,7 +511,8 @@ function imageDimensions(file) {
 function renderNav() {
   const paint = (parent, section) => {
     parent.innerHTML = '';
-    getSection(section).forEach(p => {
+    const items = getSection(section);
+    items.forEach((p, idx) => {
       /* For extras, the extraProjects entry IS the source. For hardcoded,
          a title override may live at CONTENT.projects[slug].title. */
       const ov = CONTENT.projects[p.slug] || {};
@@ -501,18 +521,42 @@ function renderNav() {
       const cls = 'nav'
         + (p._extra ? ' extra' : '')
         + (isHidden ? ' is-hidden' : '');
-      parent.append(el('a', { class:cls, 'data-section': 'p/' + p.slug, href:'#' },
-        t + (isHidden ? '  ·  hidden' : '')
-      ));
+      const link = el('a', { class:cls, 'data-section': 'p/' + p.slug, href:'#' },
+        t + (isHidden ? '  ·  hidden' : ''));
+      const up = el('button', {
+        class:'nav-arrow', title:'Move up',
+        onclick: e => { e.stopPropagation(); moveAlbum(section, idx, -1); }
+      }, '↑');
+      const down = el('button', {
+        class:'nav-arrow', title:'Move down',
+        onclick: e => { e.stopPropagation(); moveAlbum(section, idx, +1); }
+      }, '↓');
+      if (idx === 0) up.disabled = true;
+      if (idx === items.length - 1) down.disabled = true;
+      parent.append(el('div', { class:'nav-row' }, link, up, down));
     });
     parent.append(el('a', { class:'nav add', 'data-section': 'new/' + section, href:'#' }, '+ New album'));
   };
   paint($('#nav-arch'), 'architecture');
   paint($('#nav-expl'), 'explorations');
-  document.querySelectorAll('.side .nav').forEach(a => {
+  document.querySelectorAll('.side a.nav').forEach(a => {
     a.classList.toggle('active', a.dataset.section === SECTION);
     a.onclick = e => { e.preventDefault(); goto(a.dataset.section); };
   });
+}
+
+/* Move an album up or down in its section. Persists the new order in
+   CONTENT.albumOrder so the site can apply it. */
+function moveAlbum(section, idx, delta) {
+  const items = getSection(section);
+  const newIdx = idx + delta;
+  if (newIdx < 0 || newIdx >= items.length) return;
+  const order = items.map(p => p.slug);
+  [order[idx], order[newIdx]] = [order[newIdx], order[idx]];
+  if (!CONTENT.albumOrder) CONTENT.albumOrder = {};
+  CONTENT.albumOrder[section] = order;
+  setDirty();
+  renderNav();
 }
 
 function goto(section) {
