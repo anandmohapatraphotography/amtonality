@@ -696,6 +696,27 @@ function renderProject(pane, slug) {
     isExtra ? 'Album you created. Everything editable, deletable at the bottom.'
             : 'Album metadata and photos.'));
 
+  /* ---------- Shareable link (cache-busted for iMessage / Instagram / WhatsApp) ---------- */
+  const shareBlock = el('div', { class:'section-actions', style:'background:#f4f0e8;border:1px solid #e2ded5;border-radius:8px;padding:14px 16px;margin:14px 0' });
+  shareBlock.append(el('h3', { style:'margin-top:0' }, 'Shareable link'));
+  shareBlock.append(el('div', { class:'sub' },
+    'Use this to share the album on iMessage, Instagram DM, WhatsApp, etc. Each copy includes a fresh version stamp so messaging apps always fetch the correct preview image instead of showing a stale one.'));
+  const shareUrlPreview = el('code', { style:'display:block;background:#fff;border:1px solid #e2ded5;border-radius:4px;padding:8px 10px;margin-top:10px;font-size:12px;word-break:break-all;color:#555' },
+    'https://amtonality.com/p/' + slug + '?v=…');
+  shareBlock.append(shareUrlPreview);
+  const shareBtn = el('button', { class:'btn primary', style:'margin-top:10px', onclick: async () => {
+    const url = 'https://amtonality.com/p/' + slug + '?v=' + Date.now();
+    shareUrlPreview.textContent = url;
+    try {
+      await navigator.clipboard.writeText(url);
+      toast('Link copied — paste into your message', 'ok');
+    } catch (_) {
+      window.prompt('Copy this link:', url);
+    }
+  }}, 'Copy shareable link');
+  shareBlock.append(shareBtn);
+  pane.append(shareBlock);
+
   pane.append(textField('Title', o.title != null ? o.title : def.title, v => { o.title = v; setDirty(); renderNav(); }));
 
   pane.append(el('div', { class:'row2' },
