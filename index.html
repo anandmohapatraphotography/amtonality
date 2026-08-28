@@ -1701,6 +1701,7 @@ function render(){
   document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('active', a.getAttribute('href')===r.nav));
   document.body.classList.remove('menu');
   layoutAll(); observe(); lazyImages(); wireIndexToggle(); wireForm(); wireLightbox();
+  wireInternalLinks();
   window.scrollTo({ top:0, behavior:'instant' in window ? 'instant' : 'auto' });
 }
 
@@ -1713,18 +1714,29 @@ window.addEventListener('popstate', render);
 /* Intercept clicks on same-origin links so we route client-side without a full
    page load. External links, target=_blank, mailto:, and modified clicks pass
    through untouched. */
-document.addEventListener('click', e => {
-  const a = e.target.closest && e.target.closest('a[href]');
-  if (!a) return;
+/* Router: use direct listeners on every internal `<a href="/…">` in the
+   document. Safari has a quirk where a document-delegated click can miss
+   a link whose target already has `.active` — this belt-and-suspenders
+   pattern attaches the handler directly on each link, so nav clicks work
+   in every browser regardless of active state. Called after every render
+   so newly-rendered anchors get wired. */
+const navRoute = (a, e) => {
   const href = a.getAttribute('href') || '';
   if (a.target === '_blank' || a.hasAttribute('download')) return;
   if (href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('http')) return;
   if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-  if (!href.startsWith('/')) return;                                     // relative asset links pass through
+  if (!href.startsWith('/')) return;
   e.preventDefault();
   if (location.pathname !== href) history.pushState({}, '', href);
   render();
-});
+};
+function wireInternalLinks() {
+  document.querySelectorAll('a[href^="/"]').forEach(a => {
+    if (a._navWired) return;
+    a._navWired = true;
+    a.addEventListener('click', e => navRoute(a, e));
+  });
+}
 document.getElementById('burger').addEventListener('click', ()=>document.body.classList.toggle('menu'));
 document.getElementById('drawer').addEventListener('click', e=>{ if(e.target.tagName==='A') document.body.classList.remove('menu'); });
 document.getElementById('yr').textContent = new Date().getFullYear();
