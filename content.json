@@ -2292,11 +2292,62 @@
       "year": "2020",
       "place": "—",
       "statement": "These photos trace my journey as a photographer, shaped by years of working with food as a visual and emotional subject."
+    },
+    "e-commerce-spectrum-energetics": {
+      "photos": [
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/gkaozibqmtfha2gn.jpg",
+          "a": 1.4998615342010524
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/e1yl5i5qmtfha45c.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/7peez0rfmtfha5tw.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/g3isz53omtfhabpz.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/mo1bch32mtfhaci4.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/kmqlsawumtfhad8w.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/kv9tn61amtfhadvw.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/gn8s1a8amtfhaf25.jpg",
+          "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/g7o1oge4mtfhag8b.jpg",
+          "a": 1.5
+        }
+      ],
+      "statement": "E commerce product photography for Spectrum Energetics, crafted to highlight the brand’s wellness-focused products through clean compositions, considered lighting, and premium visual detail.",
+      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/e-commerce-spectrum-energetics/dr7jz049mtfhat1c.jpg"
     }
   },
   "extraProjects": {
     "architecture": [],
-    "explorations": []
+    "explorations": [
+      {
+        "slug": "e-commerce-spectrum-energetics",
+        "title": "E Commerce- Spectrum Energetics",
+        "year": "",
+        "place": "",
+        "statement": "",
+        "photos": []
+      }
+    ]
   },
   "albumOrder": {},
   "press": [
