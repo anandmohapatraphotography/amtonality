@@ -169,6 +169,7 @@ a{color:inherit}
     <div class="group">Site</div>
     <a class="nav" data-section="site" href="#">General</a>
     <a class="nav" data-section="about" href="#">About page</a>
+    <a class="nav" data-section="press" href="#">Press page</a>
     <a class="nav" data-section="contact" href="#">Contact page</a>
     <div class="group">Architecture</div>
     <div id="nav-arch"></div>
@@ -328,7 +329,8 @@ function mergeContent(loaded) {
     contact: (loaded && loaded.contact) || {},
     projects: (loaded && loaded.projects) || {},
     extraProjects: (loaded && loaded.extraProjects) || {},
-    albumOrder: (loaded && loaded.albumOrder) || {}
+    albumOrder: (loaded && loaded.albumOrder) || {},
+    press: Array.isArray(loaded && loaded.press) ? loaded.press : []
   };
   if (!CONTENT.extraProjects.architecture) CONTENT.extraProjects.architecture = [];
   if (!CONTENT.extraProjects.explorations) CONTENT.extraProjects.explorations = [];
@@ -571,6 +573,7 @@ function renderPane() {
   if (SECTION === 'site')    return renderSite(pane);
   if (SECTION === 'about')   return renderAbout(pane);
   if (SECTION === 'contact') return renderContact(pane);
+  if (SECTION === 'press')   return renderPress(pane);
   if (SECTION === 'account') return renderAccount(pane);
   if (SECTION.startsWith('new/')) return renderCreateAlbum(pane, SECTION.slice(4));
   if (SECTION.startsWith('p/')) return renderProject(pane, SECTION.slice(2));
@@ -719,6 +722,94 @@ function renderContact(pane) {
   pane.append(el('div', { class:'desc' }, 'The blurb above your enquiry form. The form itself is unchanged.'));
 
   pane.append(textAreaField('Lede', c.lede || 'Available for architectural and interior commissions in Vancouver and beyond, editorial assignments, and print enquiries. Generally, I\'m able to reply to enquiries within 48 hours.', v => { c.lede = v; setDirty(); }));
+}
+
+/* ---------- Press page ---------- */
+function renderPress(pane) {
+  if (!Array.isArray(CONTENT.press)) CONTENT.press = [];
+  pane.append(el('h2', {}, 'Press page'));
+  pane.append(el('div', { class:'desc' },
+    'Tear sheets, magazine features, and books that carry your photographs. Shown at amtonality.com/press. Drag the ↑ / ↓ arrows to change order.'));
+
+  const list = el('div', { class:'press-list', style:'display:flex;flex-direction:column;gap:18px;margin-top:18px' });
+  pane.append(list);
+
+  const rebuild = () => {
+    list.innerHTML = '';
+    if (!CONTENT.press.length) {
+      list.append(el('div', { class:'hint', style:'padding:24px;text-align:center;border:1px dashed #d5d0c5;border-radius:8px;color:#6b675d' },
+        'No press items yet — click "+ Add press item" below to start.'));
+    }
+    CONTENT.press.forEach((item, idx) => {
+      const row = el('div', { class:'press-row', style:'display:grid;grid-template-columns:160px 1fr auto;gap:16px;padding:14px;border:1px solid #e2ded5;border-radius:8px;background:#fbfaf7;align-items:start' });
+
+      /* Thumbnail + upload */
+      const thumbCol = el('div', { style:'display:flex;flex-direction:column;gap:8px' });
+      const thumb = el('img', { src: item.image || '', alt:'', style:'width:160px;height:120px;object-fit:cover;background:#f2efe9;border:1px solid #e2ded5;border-radius:4px;display:' + (item.image ? 'block' : 'none') });
+      const emptyBox = el('div', { style:'width:160px;height:120px;background:#f2efe9;border:1px dashed #d5d0c5;border-radius:4px;display:' + (item.image ? 'none' : 'flex') + ';align-items:center;justify-content:center;color:#9a958a;font-size:11px' }, 'No image');
+      thumbCol.append(thumb, emptyBox);
+      const upLabel = el('label', { class:'btn small', style:'cursor:pointer;text-align:center' }, 'Upload image');
+      const upInput = el('input', { type:'file', accept:'image/*', style:'display:none' });
+      upInput.onchange = async e => {
+        const f = e.target.files[0];
+        if (!f) return;
+        upLabel.textContent = 'Uploading…';
+        try {
+          const im = await uploadPhotoSimple(f, 'press');
+          item.image = im.u;
+          thumb.src = im.u; thumb.style.display = 'block'; emptyBox.style.display = 'none';
+          setDirty();
+          toast('Image uploaded', 'ok');
+        } catch (err) { toast('Upload failed: ' + err.message, 'err'); }
+        finally { upLabel.textContent = 'Upload image'; upInput.value = ''; }
+      };
+      upLabel.append(upInput);
+      thumbCol.append(upLabel);
+      row.append(thumbCol);
+
+      /* Fields */
+      const fields = el('div', { style:'display:flex;flex-direction:column;gap:10px;min-width:0' });
+      fields.append(textField('Title', item.title || '', v => { item.title = v; setDirty(); }));
+      fields.append(el('div', { class:'row2' },
+        textField('Role (e.g. Photographs)', item.role || '', v => { item.role = v; setDirty(); }),
+        textField('Publication', item.publication || '', v => { item.publication = v; setDirty(); })
+      ));
+      fields.append(textField('Link (optional URL)', item.link || '', v => { item.link = v; setDirty(); }));
+      row.append(fields);
+
+      /* Actions */
+      const actions = el('div', { style:'display:flex;flex-direction:column;gap:6px' });
+      const up = el('button', { class:'btn small', title:'Move up', onclick: () => {
+        if (idx === 0) return;
+        [CONTENT.press[idx-1], CONTENT.press[idx]] = [CONTENT.press[idx], CONTENT.press[idx-1]];
+        setDirty(); rebuild();
+      }}, '↑');
+      const down = el('button', { class:'btn small', title:'Move down', onclick: () => {
+        if (idx === CONTENT.press.length - 1) return;
+        [CONTENT.press[idx+1], CONTENT.press[idx]] = [CONTENT.press[idx], CONTENT.press[idx+1]];
+        setDirty(); rebuild();
+      }}, '↓');
+      const del = el('button', { class:'btn small ghost', title:'Remove', style:'color:#b3261e', onclick: () => {
+        if (!confirm('Remove "' + (item.title || 'this item') + '" from the Press page?')) return;
+        CONTENT.press.splice(idx, 1);
+        setDirty(); rebuild();
+      }}, 'Remove');
+      if (idx === 0) up.disabled = true;
+      if (idx === CONTENT.press.length - 1) down.disabled = true;
+      actions.append(up, down, del);
+      row.append(actions);
+
+      list.append(row);
+    });
+  };
+
+  rebuild();
+
+  const addBtn = el('button', { class:'btn primary', style:'margin-top:16px', onclick: () => {
+    CONTENT.press.push({ image:'', title:'', role:'', publication:'', link:'' });
+    setDirty(); rebuild();
+  }}, '+ Add press item');
+  pane.append(addBtn);
 }
 
 /* ---------- Project (single album) ---------- */
