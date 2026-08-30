@@ -255,6 +255,14 @@ a.card:hover .frame img{transform:scale(1.045)}
 .press-strip{padding-top:clamp(56px,7vw,110px);text-align:center}
 .press-names{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.2;letter-spacing:-.01em;color:var(--ink);display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:.55em}
 .press-sep{color:var(--ink-3);font-style:italic}
+.press-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(24px,4vw,56px);padding-top:clamp(48px,6vw,88px)}
+.press-card{margin:0;display:flex;flex-direction:column;gap:clamp(14px,1.6vw,22px)}
+.press-card .press-img{display:block;background:var(--paper-2);overflow:hidden;border:1px solid var(--rule)}
+.press-card .press-img img{width:100%;height:auto;display:block;transition:transform .8s var(--ease)}
+.press-card a.press-img:hover img{transform:scale(1.02)}
+.press-card figcaption{padding:2px 0}
+.press-title{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.35rem,2.2vw,1.85rem);line-height:1.22;letter-spacing:-.008em}
+.press-pub{font-size:13px;color:var(--ink-2);margin-top:6px;letter-spacing:.01em}
 
 /* ---------- editorial work rows ---------- */
 .works{display:grid;gap:clamp(40px,5.5vw,92px);padding-bottom:clamp(56px,8vw,120px)}
@@ -420,6 +428,7 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
     <nav class="main" id="nav">
       <a href="/architecture">Architecture</a>
       <a href="/explorations">Explorations</a>
+      <a href="/press">Press</a>
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
     </nav>
@@ -444,6 +453,7 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
       <nav class="fnav">
         <a href="/architecture">Architecture</a>
         <a href="/explorations">Explorations</a>
+        <a href="/press">Press</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
       </nav>
@@ -610,6 +620,7 @@ async function applyContent(){
     if (c.about && c.about.headingText) SITE.aboutHeadingText = c.about.headingText;
     if (c.about && typeof c.about.headingVisible === 'boolean') SITE.aboutHeadingVisible = c.about.headingVisible;
     if (c.contact && c.contact.lede) SITE.contactLede = c.contact.lede;
+    if (Array.isArray(c.press)) SITE.press = c.press;
     /* Extras first — editor-created albums live in extraProjects.{architecture,
        explorations} as {slug,title,year,place,statement,cover,photos}. Push
        them onto the hardcoded lists so the rest of the pipeline treats them
@@ -1450,6 +1461,41 @@ function about(){
   </section>`;
 }
 
+/* ---------- Press / Tear sheets ---------- */
+const PRESS_DEFAULT = [
+  {
+    image: '/press/plant-based-indian-cookbook.jpg',
+    title: 'Plant-Based Indian Cookbook',
+    publication: 'Tara Books · Mala Barua & Nandini Gulati',
+    role: 'Photographs',
+    link: 'https://www.amazon.ca/PLANT-BASED-INDIAN-COOKBOOK-SUGAR-GLUTEN/dp/8183862012'
+  }
+];
+
+function press(){
+  const items = (Array.isArray(SITE.press) && SITE.press.length) ? SITE.press : PRESS_DEFAULT;
+  const card = t => `
+    <figure class="press-card rv">
+      ${t.link
+        ? `<a href="${esc(t.link)}" target="_blank" rel="noopener" class="press-img"><img src="${esc(t.image)}" alt="${esc(t.title)}" loading="lazy"></a>`
+        : `<div class="press-img"><img src="${esc(t.image)}" alt="${esc(t.title)}" loading="lazy"></div>`}
+      <figcaption>
+        ${t.role ? `<div class="eyebrow" style="margin-bottom:6px">${esc(t.role)}</div>` : ''}
+        <div class="h3 press-title">${esc(t.title)}</div>
+        ${t.publication ? `<div class="press-pub">${esc(t.publication)}</div>` : ''}
+      </figcaption>
+    </figure>`;
+  return `
+  <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
+    <div class="rv">
+      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">Press</div>
+      <h1 class="display" style="max-width:14ch">Tear sheets<br>&amp; publications.</h1>
+      <p class="lede" style="max-width:52ch;padding-top:clamp(20px,2.6vw,34px)">Selected features and print work — magazine assignments, editorial commissions, and books that carry my photographs.</p>
+    </div>
+    <div class="press-grid">${items.map(card).join('')}</div>
+  </section>`;
+}
+
 function contact(){
   const lede = SITE.contactLede || "Available for architectural and interior commissions in Vancouver and beyond, editorial assignments, and print enquiries. Generally, I'm able to reply to enquiries within 48 hours.";
   return `
@@ -1500,6 +1546,7 @@ function routeFor(pathOrHash){
       'Shaped by years of observing spaces, structures, and the way light moves through them.', visible(ARCHITECTURE)), title:'Architecture', nav:'/architecture' };
     case '/explorations': return { html: indexPage('Explorations','Portfolio',
       "Over the years, I\'ve explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.", visible(EXPLORATIONS)), title:'Explorations', nav:'/explorations' };
+    case '/press':   return { html: press(),   title:'Press',   nav:'/press' };
     case '/about':   return { html: about(),   title:'About',   nav:'/about' };
     case '/contact': return { html: contact(), title:'Contact', nav:'/contact' };
     default:         return { html: home(),    title:null,      nav:'/' };
@@ -1688,6 +1735,7 @@ function seoFor(hash){
     '/':             { t: base, d: SITE.intro || 'Architecture and interiors photography, Vancouver.' },
     '/architecture': { t: 'Architecture — Anand Mohapatra', d: 'Architectural and interiors photography portfolio, Vancouver.' },
     '/explorations': { t: 'Explorations — Anand Mohapatra', d: 'Travel, music, portraits, and personal photography projects by Anand Mohapatra.' },
+    '/press':        { t: 'Press — Anand Mohapatra', d: 'Tear sheets and published work — magazine features, editorial commissions, and books carrying photographs by Anand Mohapatra.' },
     '/about':        { t: 'About — Anand Mohapatra', d: 'A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.' },
     '/contact':      { t: 'Contact — Anand Mohapatra', d: 'Available for architectural and interior commissions in Vancouver and beyond.' }
   }[h] || { t: base, d: SITE.intro || 'Architecture photography, Vancouver.' };
