@@ -2285,5 +2285,22 @@
   "extraProjects": {
     "architecture": [],
     "explorations": []
-  }
+  },
+  "albumOrder": {},
+  "press": [
+    {
+      "image": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/press/oc8a8pjnmtfdj5ha.png",
+      "title": "Condé nast traveler India",
+      "role": "",
+      "publication": "",
+      "link": ""
+    },
+    {
+      "image": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/press/sl6vejnemtfdiyuy.png",
+      "title": "Condé nast traveler India",
+      "role": "",
+      "publication": "",
+      "link": ""
+    }
+  ]
 }
