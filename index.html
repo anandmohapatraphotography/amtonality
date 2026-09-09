@@ -22,7 +22,17 @@
 <meta name="twitter:title" content="Tonality — Anand Mohapatra">
 <meta name="twitter:description" content="Tonality — architecture and interiors photography. Vancouver, Canada.">
 <meta name="twitter:image" content="https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg">
-<meta name="theme-color" content="#FBFAF7">
+<meta name="theme-color" content="#FBFAF7" id="themecolor">
+<script>
+  /* Apply saved theme BEFORE paint to avoid a light-flash on dark-mode devices.
+     `light` / `dark` = user forced, no key = follow OS. */
+  (function(){
+    try{
+      var t = localStorage.getItem('amt_theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    }catch(_){}
+  })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev" crossorigin>
@@ -109,6 +119,7 @@
    Paper, ink, hairlines. Type does the talking; images breathe.
    ============================================================ */
 :root{
+  color-scheme: light dark;
   --paper:#FBFAF7;
   --paper-2:#F2EFE9;
   --ink:#14130F;
@@ -116,9 +127,38 @@
   --ink-3:#9A958A;
   --rule:#E2DED5;
   --shadow:0 1px 0 rgba(20,19,15,.05);
+  --header-bg:rgba(251,250,247,.82);
+  --pill-bg:rgba(251,250,247,.9);
   --ease:cubic-bezier(.19,.82,.24,1);
   --pad:clamp(20px,5vw,88px);
   --maxw:1680px;
+}
+/* Dark palette — active when OS is in dark mode (unless user forced light),
+   OR the user explicitly picked dark via the header toggle. Photos are NOT
+   dimmed; only the chrome around them changes. */
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F0F0E;
+    --paper-2:#1B1A17;
+    --ink:#F0EEE7;
+    --ink-2:#A8A49B;
+    --ink-3:#6E6A62;
+    --rule:#2B2925;
+    --shadow:0 1px 0 rgba(0,0,0,.25);
+    --header-bg:#0F0F0E;
+    --pill-bg:#0F0F0E;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F0F0E;
+  --paper-2:#1B1A17;
+  --ink:#F0EEE7;
+  --ink-2:#A8A49B;
+  --ink-3:#6E6A62;
+  --rule:#2B2925;
+  --shadow:0 1px 0 rgba(0,0,0,.25);
+  --header-bg:#0F0F0E;
+  --pill-bg:#0F0F0E;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -165,7 +205,7 @@ section{position:relative}
 /* ---------- header ---------- */
 header{
   position:fixed;top:0;left:0;right:0;z-index:60;
-  background:rgba(251,250,247,.82);backdrop-filter:saturate(180%) blur(14px);
+  background:var(--header-bg);backdrop-filter:saturate(180%) blur(14px);
   -webkit-backdrop-filter:saturate(180%) blur(14px);
   border-bottom:1px solid transparent;
   transition:transform .5s var(--ease),border-color .4s ease,background .4s ease;
@@ -174,7 +214,12 @@ header.scrolled{border-bottom-color:var(--rule)}
 header.hide{transform:translateY(-102%)}
 .hbar{display:flex;align-items:center;justify-content:space-between;height:72px}
 .mark{display:flex;align-items:center;gap:10px;line-height:1}
-.mark img{height:34px;width:auto;display:block;transform:translateY(2px)}
+.mark img{height:34px;width:auto;display:block;transform:translateY(2px);transition:filter .3s ease}
+:root[data-theme="dark"] .mark img,:root[data-theme="dark"] .fbig img{filter:invert(1) brightness(1.05)}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .mark img,
+  :root:not([data-theme="light"]) .fbig img{filter:invert(1) brightness(1.05)}
+}
 .markfall{display:none;align-items:baseline;gap:10px}
 .mark.fallback img{display:none}
 .mark.fallback .markfall{display:flex}
@@ -193,6 +238,20 @@ nav.main a::after{
 nav.main a:hover{color:var(--ink)}
 nav.main a:hover::after,nav.main a.active::after{transform:scaleX(1);transform-origin:left}
 nav.main a.active{color:var(--ink)}
+/* Theme toggle — sun in dark mode, moon in light mode. Sits between nav and burger. */
+.themebtn{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;background:transparent;border:0;color:var(--ink-2);cursor:pointer;transition:color .3s ease,background .3s ease;margin-left:22px}
+.themebtn:hover{color:var(--ink);background:var(--paper-2)}
+.themebtn svg{width:18px;height:18px}
+.themebtn .ic-sun{display:none}
+.themebtn .ic-moon{display:block}
+:root[data-theme="dark"] .themebtn .ic-sun,
+:root[data-theme="dark"] .themebtn .ic-moon{transition:opacity .3s ease}
+:root[data-theme="dark"] .themebtn .ic-sun{display:block}
+:root[data-theme="dark"] .themebtn .ic-moon{display:none}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .themebtn .ic-sun{display:block}
+  :root:not([data-theme="light"]) .themebtn .ic-moon{display:none}
+}
 .burger{display:none;width:34px;height:34px;position:relative}
 .burger s{position:absolute;left:6px;right:6px;height:1px;background:var(--ink);transition:transform .45s var(--ease),opacity .3s}
 .burger s:nth-child(1){top:13px}.burger s:nth-child(2){top:20px}
@@ -377,7 +436,7 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
 .lb .lbnav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;
   display:flex;align-items:center;justify-content:center;
   font-family:"Instrument Serif",Georgia,serif;font-size:34px;line-height:1;color:var(--ink);
-  border:1px solid var(--rule);border-radius:999px;background:rgba(251,250,247,.9);
+  border:1px solid var(--rule);border-radius:999px;background:var(--pill-bg);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   transition:opacity .35s ease,background .35s ease,border-color .35s ease,color .35s ease;opacity:.7;z-index:2}
 .lb .lbnav:hover{opacity:1;background:var(--ink);color:var(--paper);border-color:var(--ink)}
@@ -415,6 +474,51 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
   .pnav{grid-template-columns:1fr;gap:26px}
   .pnav .r{text-align:left}
 }
+
+/* ============================================================
+   Accessibility widget — floating button + panel
+   ============================================================ */
+.a11y-btn{position:fixed;right:22px;bottom:22px;z-index:70;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--paper);border:0;cursor:pointer;box-shadow:0 6px 22px rgba(0,0,0,.18);display:flex;align-items:center;justify-content:center;transition:transform .2s var(--ease),box-shadow .2s ease}
+.a11y-btn:hover{transform:scale(1.06);box-shadow:0 8px 26px rgba(0,0,0,.24)}
+.a11y-btn svg{width:26px;height:26px}
+.a11y-panel{position:fixed;right:22px;bottom:88px;z-index:70;width:min(360px,calc(100vw - 44px));max-height:min(78vh,640px);background:var(--paper);color:var(--ink);border:1px solid var(--rule);border-radius:14px;box-shadow:0 20px 48px rgba(0,0,0,.18);padding:20px 22px 18px;overflow-y:auto;opacity:0;transform:translateY(8px) scale(.98);pointer-events:none;transition:opacity .25s ease,transform .25s var(--ease)}
+.a11y-panel.on{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.a11y-panel h3{font-family:"Instrument Serif",Georgia,serif;font-size:22px;letter-spacing:-.01em;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.a11y-panel .a11y-actions{display:flex;align-items:center;gap:4px}
+.a11y-panel .a11y-iconbtn{background:transparent;border:0;color:var(--ink-2);cursor:pointer;padding:6px;border-radius:8px;display:flex;align-items:center;justify-content:center;position:relative;transition:background .2s ease,color .2s ease}
+.a11y-panel .a11y-iconbtn:hover{background:var(--paper-2);color:var(--ink)}
+.a11y-panel .a11y-iconbtn svg{width:18px;height:18px}
+.a11y-panel .a11y-iconbtn[data-tip]:hover::after{content:attr(data-tip);position:absolute;top:calc(100% + 6px);left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);font-family:"Inter",sans-serif;font-size:11px;letter-spacing:0;padding:5px 9px;border-radius:6px;white-space:nowrap;pointer-events:none;z-index:1}
+.a11y-panel .a11y-close{background:transparent;border:0;color:var(--ink-2);cursor:pointer;font-size:22px;line-height:1;padding:2px 8px;border-radius:8px;margin-left:2px}
+.a11y-panel .a11y-close:hover{background:var(--paper-2);color:var(--ink)}
+.a11y-panel .a11y-group{margin-top:14px;padding-top:14px;border-top:1px solid var(--rule)}
+.a11y-panel .a11y-group:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.a11y-panel .a11y-group-title{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.a11y-panel .a11y-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.a11y-panel button.a11y-opt{display:flex;align-items:center;gap:10px;padding:12px 12px;background:var(--paper-2);border:1px solid transparent;border-radius:8px;color:var(--ink);cursor:pointer;text-align:left;font-size:13px;line-height:1.2;transition:background .2s ease,border-color .2s ease}
+.a11y-panel button.a11y-opt:hover{background:var(--rule)}
+.a11y-panel button.a11y-opt.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.a11y-panel button.a11y-opt svg{width:18px;height:18px;flex:0 0 auto}
+
+/* User-controlled root-level modifications. Attributes are set on <html>.
+   Text scaling uses `zoom` on the main content areas so every fixed-px size
+   in the stylesheet scales proportionally without a rem-conversion sweep. */
+html[data-a11y-text="large"] main,
+html[data-a11y-text="large"] header,
+html[data-a11y-text="large"] footer{zoom:1.15}
+html[data-a11y-text="xl"] main,
+html[data-a11y-text="xl"] header,
+html[data-a11y-text="xl"] footer{zoom:1.32}
+html[data-a11y-leading="relaxed"] p,html[data-a11y-leading="relaxed"] .lede,html[data-a11y-leading="relaxed"] .body p,html[data-a11y-leading="relaxed"] body{line-height:1.9}
+html[data-a11y-visual="grayscale"] img,html[data-a11y-visual="grayscale"] .frame{filter:grayscale(1)}
+html[data-a11y-links="on"] a{text-decoration:underline !important;text-underline-offset:3px;text-decoration-thickness:1.5px}
+/* Hidden state — button + panel gone from view until page reload */
+html[data-a11y-hidden] .a11y-btn,html[data-a11y-hidden] .a11y-panel{display:none !important}
+
+@media (max-width:480px){
+  .a11y-btn{width:46px;height:46px;right:16px;bottom:16px}
+  .a11y-panel{right:16px;bottom:74px}
+}
 </style>
 </head>
 <body>
@@ -432,6 +536,10 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
       <a href="/about">About</a>
       <a href="/contact">Contact</a>
     </nav>
+    <button class="themebtn" id="theme" aria-label="Toggle dark mode" title="Toggle theme">
+      <svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      <svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
     <button class="burger" id="burger" aria-label="Menu"><s></s><s></s></button>
   </div>
 </header>
@@ -468,6 +576,49 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
   </div>
 </footer>
 
+<!-- Accessibility widget -->
+<button class="a11y-btn" id="a11yBtn" aria-label="Accessibility options" aria-expanded="false">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4" r="1.6"/><path d="M4 8h16M9 8l1 6M15 8l-1 6M10 14l-2 6M14 14l2 6"/></svg>
+</button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Accessibility options">
+  <h3>
+    <span>Accessibility</span>
+    <span class="a11y-actions">
+      <button class="a11y-iconbtn" id="a11yHide" data-tip="Hide widget" aria-label="Hide widget">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.58 10.58a2 2 0 0 0 2.83 2.83"/><path d="M9.88 5.09A9.9 9.9 0 0 1 12 5c5 0 9 4 10 7-.36 1.09-1.18 2.41-2.36 3.57"/><path d="M6.61 6.61C4.06 8.36 2.57 10.97 2 12c1 3 5 7 10 7a10 10 0 0 0 3.39-.6"/></svg>
+      </button>
+      <button class="a11y-iconbtn" id="a11yReset" data-tip="Reset" aria-label="Reset all">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+      </button>
+      <button class="a11y-close" id="a11yClose" aria-label="Close">×</button>
+    </span>
+  </h3>
+
+  <div class="a11y-group">
+    <div class="a11y-group-title">Text</div>
+    <div class="a11y-grid">
+      <button class="a11y-opt" data-set="text" data-val="large">Aa Bigger text</button>
+      <button class="a11y-opt" data-set="text" data-val="xl">Aa Even bigger</button>
+      <button class="a11y-opt" data-set="leading" data-val="relaxed">↕ Line height</button>
+    </div>
+  </div>
+
+  <div class="a11y-group">
+    <div class="a11y-group-title">Visual</div>
+    <div class="a11y-grid">
+      <button class="a11y-opt" data-set="visual" data-val="grayscale">◐ Grayscale</button>
+      <button class="a11y-opt a11y-themebtn" id="a11yThemeToggle">☾ Dark mode</button>
+    </div>
+  </div>
+
+  <div class="a11y-group">
+    <div class="a11y-group-title">Navigation</div>
+    <div class="a11y-grid">
+      <button class="a11y-opt" data-set="links" data-val="on">↗ Highlight links</button>
+    </div>
+  </div>
+
+</div>
 <div class="lb" id="lb">
   <button class="x" id="lbx">Close</button>
   <button class="lbnav prev" id="lbprev" aria-label="Previous image">‹</button>
@@ -1802,6 +1953,119 @@ function wireInternalLinks() {
   });
 }
 document.getElementById('burger').addEventListener('click', ()=>document.body.classList.toggle('menu'));
+
+/* ---------- Accessibility widget ----------
+   Options are stored in body[data-a11y-*] attributes AND localStorage so the
+   visitor's choices persist across pages. */
+(function(){
+  const btn = document.getElementById('a11yBtn');
+  const panel = document.getElementById('a11yPanel');
+  const closeBtn = document.getElementById('a11yClose');
+  const resetBtn = document.getElementById('a11yReset');
+  if (!btn || !panel) return;
+
+  const STORE = 'amt_a11y_v1';
+  const load = () => { try { return JSON.parse(localStorage.getItem(STORE) || '{}'); } catch (_) { return {}; } };
+  const save = state => { try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (_) {} };
+
+  const apply = state => {
+    for (const key of Object.keys(state)) {
+      if (state[key]) document.documentElement.setAttribute('data-a11y-' + key, state[key]);
+      else document.documentElement.removeAttribute('data-a11y-' + key);
+    }
+    document.querySelectorAll('.a11y-opt').forEach(b => {
+      const k = b.dataset.set, v = b.dataset.val;
+      if (!k) return;
+      b.classList.toggle('on', state[k] === v);
+    });
+  };
+
+  let state = load();
+  apply(state);
+
+  btn.addEventListener('click', () => {
+    const open = panel.classList.toggle('on');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  closeBtn.addEventListener('click', () => { panel.classList.remove('on'); btn.setAttribute('aria-expanded','false'); });
+
+  document.querySelectorAll('.a11y-opt').forEach(b => {
+    b.addEventListener('click', () => {
+      const k = b.dataset.set, v = b.dataset.val;
+      if (!k) return;
+      state[k] = state[k] === v ? null : v;
+      apply(state); save(state);
+    });
+  });
+
+  resetBtn.addEventListener('click', () => {
+    state = {};
+    ['text','leading','visual','links','focus'].forEach(k => document.documentElement.removeAttribute('data-a11y-' + k));
+    document.querySelectorAll('.a11y-opt').forEach(b => b.classList.remove('on'));
+    save(state);
+    syncThemeLabel();
+  });
+
+  /* Dark / light mode toggle inside the panel — piggybacks on the site's
+     existing theme system. localStorage key `amt_theme` matches the header
+     toggle so both stay in sync. */
+  const themeBtn = document.getElementById('a11yThemeToggle');
+  const currentThemeIsDark = () => {
+    const t = document.documentElement.getAttribute('data-theme');
+    if (t === 'dark') return true;
+    if (t === 'light') return false;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  };
+  const syncThemeLabel = () => {
+    if (!themeBtn) return;
+    themeBtn.textContent = currentThemeIsDark() ? '☀ Light mode' : '☾ Dark mode';
+  };
+  syncThemeLabel();
+  /* Keep the panel's Dark/Light label in sync when the header toggle flips
+     the theme, or when the OS preference changes. */
+  new MutationObserver(syncThemeLabel).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', syncThemeLabel);
+  themeBtn && themeBtn.addEventListener('click', () => {
+    const next = currentThemeIsDark() ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('amt_theme', next); } catch(_) {}
+    const meta = document.getElementById('themecolor');
+    if (meta) meta.setAttribute('content', next === 'dark' ? '#0F0F0E' : '#FBFAF7');
+    syncThemeLabel();
+  });
+
+  /* Hide the widget until page reload — for visitors who don't need it and
+     want the corner clean. Not persisted, so next visit it's back. */
+  const hideBtn = document.getElementById('a11yHide');
+  hideBtn && hideBtn.addEventListener('click', () => {
+    document.documentElement.setAttribute('data-a11y-hidden', '1');
+  });
+})();
+
+/* ---------- Theme toggle ----------
+   Three states: no key (follow OS), 'light' (forced light), 'dark' (forced dark).
+   Clicking the toggle cycles: current -> the opposite of current. Meta theme-color
+   updates so mobile status bars match. */
+(function(){
+  const btn = document.getElementById('theme');
+  const meta = document.getElementById('themecolor');
+  const mql = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDark = () => {
+    const t = document.documentElement.getAttribute('data-theme');
+    if (t === 'dark') return true;
+    if (t === 'light') return false;
+    return mql.matches;
+  };
+  const paint = () => { meta && meta.setAttribute('content', isDark() ? '#0F0F0E' : '#FBFAF7'); };
+  paint();
+  mql.addEventListener && mql.addEventListener('change', paint);
+  btn && btn.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('amt_theme', next); } catch(_) {}
+    paint();
+  });
+})();
 document.getElementById('drawer').addEventListener('click', e=>{ if(e.target.tagName==='A') document.body.classList.remove('menu'); });
 document.getElementById('yr').textContent = new Date().getFullYear();
 /* if the logo file fails to load, fall back to the typographic wordmark */
