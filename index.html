@@ -519,6 +519,37 @@ html[data-a11y-hidden] .a11y-btn,html[data-a11y-hidden] .a11y-panel{display:none
   .a11y-btn{width:46px;height:46px;right:16px;bottom:16px}
   .a11y-panel{right:16px;bottom:74px}
 }
+
+/* ============================================================
+   IN-PLACE EDITOR (opt-in via ?edit=1, requires PAT in localStorage)
+   ============================================================ */
+html.edit-mode [data-edit]{position:relative;outline:1px dashed transparent;outline-offset:6px;border-radius:2px;transition:outline-color .15s ease,background .15s ease;cursor:text}
+html.edit-mode [data-edit]:hover{outline-color:rgba(20,19,15,.35)}
+html.edit-mode [data-edit]:focus{outline:2px solid var(--ink);outline-offset:8px;background:rgba(255,255,255,.35)}
+:root[data-theme="dark"].edit-mode [data-edit]:hover{outline-color:rgba(240,238,231,.35)}
+:root[data-theme="dark"].edit-mode [data-edit]:focus{background:rgba(255,255,255,.06)}
+html.edit-mode [data-edit].dirty{outline-color:#f39c12}
+
+.editbar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:80;background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:8px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.12);font-family:"Inter",sans-serif;opacity:0;pointer-events:none;transition:opacity .3s ease}
+html.edit-mode .editbar{opacity:1;pointer-events:auto}
+.editbar-status{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:0 12px}
+.editbar-status.dirty{color:#f39c12}
+.editbar-btn{background:transparent;border:0;color:var(--ink);cursor:pointer;padding:8px 16px;border-radius:999px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s ease}
+.editbar-btn:hover{background:var(--paper-2)}
+.editbar-btn.primary{background:var(--ink);color:var(--paper)}
+.editbar-btn.primary:hover{background:var(--ink-2)}
+.editbar-btn:disabled{opacity:.4;cursor:not-allowed}
+
+.edit-auth{position:fixed;inset:0;background:rgba(20,19,15,.6);backdrop-filter:blur(6px);z-index:90;display:flex;align-items:center;justify-content:center;padding:20px}
+.edit-auth-card{background:var(--paper);border-radius:12px;padding:32px;max-width:400px;width:100%;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.edit-auth-card h3{font-family:"Instrument Serif",Georgia,serif;font-size:24px;margin-bottom:8px}
+.edit-auth-card p{color:var(--ink-2);font-size:14px;line-height:1.5;margin-bottom:18px}
+.edit-auth-card input{width:100%;padding:12px 14px;border:1px solid var(--rule);border-radius:6px;font-family:inherit;font-size:13px;background:var(--paper);color:var(--ink);outline:none}
+.edit-auth-card input:focus{border-color:var(--ink)}
+.edit-auth-card .row{display:flex;gap:10px;margin-top:14px}
+.edit-auth-card .row button{flex:1;padding:11px;border:1px solid var(--rule);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.edit-auth-card .row button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.edit-auth-card .err{color:#c0392b;font-size:12px;margin-top:8px}
 </style>
 </head>
 <body>
@@ -1462,8 +1493,8 @@ function home(){
       <div class="rv hero-img">${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
       <div class="hero-copy rv d1">
         <div class="eyebrow">Architectural Photography</div>
-        <h1 class="display">${SITE.tagline}</h1>
-        <p class="lede">${SITE.intro}</p>
+        <h1 class="display" data-edit="site.tagline">${SITE.tagline}</h1>
+        <p class="lede" data-edit="site.intro">${SITE.intro}</p>
       </div>
     </div>
   </section>
@@ -1479,11 +1510,11 @@ function home(){
   <section class="wrap">
     <div class="shead rv" style="padding-bottom:0">
       <div style="flex:1 1 520px"><div class="eyebrow">About</div>
-        <h2 class="h2" style="max-width:24ch">${SITE.homeAboutHeading || 'A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.'}</h2></div>
+        <h2 class="h2" style="max-width:24ch" data-edit="site.homeAboutHeading">${SITE.homeAboutHeading || 'A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.'}</h2></div>
       <a class="arrow" href="/about">Read the full story ${ARROW}</a>
     </div>
     <div class="body rv d1" style="padding:clamp(24px,3vw,42px) 0 0">
-      <p>${SITE.homeAboutBlurb || 'I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space.'}</p>
+      <p data-edit="site.homeAboutBlurb">${SITE.homeAboutBlurb || 'I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space.'}</p>
     </div>
   </section>
 
@@ -1503,7 +1534,7 @@ function home(){
   <section class="wrap">
     <div class="shead rv">
       <div style="flex:1 1 560px"><div class="eyebrow">Explorations</div>
-        <p class="sectioncap">${SITE.homeExplorationsBlurb || "Over the years, I've explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal."}</p></div>
+        <p class="sectioncap" data-edit="site.homeExplorationsBlurb">${SITE.homeExplorationsBlurb || "Over the years, I've explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal."}</p></div>
       <a class="arrow" href="/explorations">All explorations ${ARROW}</a>
     </div>
     ${jgal(visible(EXPLORATIONS).slice(0,8).map(p=>card(p)).join(''), 'cards')}
@@ -2089,7 +2120,172 @@ applyContent().then(() => {
   const ft = document.getElementById('ftag');
   if (ft) ft.innerHTML = SITE.tagline;
   render();
+  /* Boot the in-place editor if URL has ?edit=1. Runs after first render so
+     data-edit elements exist. */
+  if (new URLSearchParams(location.search).get('edit') === '1') bootInlineEditor();
 });
+
+/* ============================================================
+   IN-PLACE EDITOR — visits amtonality.com/?edit=1 to enter edit mode.
+   Requires a GitHub PAT in localStorage.amt_pat (same key as /admin).
+   Save = PUT content.json to GitHub Contents API. Old /admin keeps working.
+   ============================================================ */
+async function bootInlineEditor() {
+  let pat = localStorage.getItem('amt_pat') || '';
+  if (!pat) {
+    pat = await promptForToken();
+    if (!pat) return;
+  }
+  const owner = 'anandmohapatraphotography', repo = 'amtonality', branch = 'main';
+  /* Draft starts as a deep copy of the loaded content.json + a copy of SITE
+     defaults so first-edit-of-a-blank-field still writes cleanly. */
+  let raw = null, sha = null;
+  try {
+    const r = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/content.json?ref=${branch}`, {
+      headers: { Authorization: 'token ' + pat, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!r.ok) throw new Error('load ' + r.status);
+    const j = await r.json();
+    sha = j.sha;
+    raw = JSON.parse(new TextDecoder('utf-8').decode(Uint8Array.from(atob(j.content), c => c.charCodeAt(0))));
+  } catch (e) {
+    alert('Could not load content from GitHub. Check your token in /admin.\n' + e.message);
+    return;
+  }
+  const draft = raw || {};
+  if (!draft.site) draft.site = {};
+
+  /* Set path helpers: "site.tagline" -> draft.site.tagline */
+  const setPath = (obj, path, val) => {
+    const parts = path.split('.');
+    let cur = obj;
+    for (let i = 0; i < parts.length - 1; i++) { if (!cur[parts[i]]) cur[parts[i]] = {}; cur = cur[parts[i]]; }
+    cur[parts[parts.length - 1]] = val;
+  };
+  const getPath = (obj, path) => path.split('.').reduce((c, k) => c && c[k], obj);
+
+  document.documentElement.classList.add('edit-mode');
+
+  const bar = document.createElement('div');
+  bar.className = 'editbar';
+  bar.innerHTML = `
+    <span class="editbar-status" id="editStatus">Clean</span>
+    <button class="editbar-btn" id="editDiscard">Discard</button>
+    <button class="editbar-btn primary" id="editPublish" disabled>Publish</button>
+    <button class="editbar-btn" id="editExit">Exit</button>
+  `;
+  document.body.appendChild(bar);
+  const status = bar.querySelector('#editStatus');
+  const btnPub = bar.querySelector('#editPublish');
+  const btnDis = bar.querySelector('#editDiscard');
+
+  let dirty = false;
+  const markDirty = () => {
+    dirty = true;
+    status.textContent = 'Unsaved changes';
+    status.classList.add('dirty');
+    btnPub.disabled = false;
+  };
+  const markClean = () => {
+    dirty = false;
+    status.textContent = 'Clean';
+    status.classList.remove('dirty');
+    btnPub.disabled = true;
+    document.querySelectorAll('[data-edit].dirty').forEach(el => el.classList.remove('dirty'));
+  };
+
+  /* Wire every data-edit element on the currently-rendered view. Called on each
+     render() so newly-mounted routes get wired. */
+  const wire = () => {
+    document.querySelectorAll('[data-edit]').forEach(el => {
+      if (el._editWired) return;
+      el._editWired = true;
+      el.setAttribute('contenteditable', 'plaintext-only');
+      el.setAttribute('spellcheck', 'true');
+      el.addEventListener('input', () => {
+        const path = el.getAttribute('data-edit');
+        setPath(draft, path, el.textContent);
+        el.classList.add('dirty');
+        markDirty();
+      });
+      /* Prevent Enter from creating <br>; use as blur to finish */
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); el.blur(); }
+        if (e.key === 'Escape') el.blur();
+      });
+    });
+  };
+  wire();
+  const origRender = window.render;
+  if (typeof origRender === 'function') {
+    window.render = function() { origRender.apply(this, arguments); wire(); };
+  }
+
+  btnDis.addEventListener('click', () => {
+    if (!dirty) return;
+    if (!confirm('Discard all unsaved changes?')) return;
+    location.reload();
+  });
+
+  bar.querySelector('#editExit').addEventListener('click', () => {
+    if (dirty && !confirm('You have unsaved changes. Exit anyway?')) return;
+    location.href = location.pathname;
+  });
+
+  btnPub.addEventListener('click', async () => {
+    if (!dirty) return;
+    btnPub.disabled = true;
+    status.textContent = 'Publishing…';
+    try {
+      const bodyContent = btoa(unescape(encodeURIComponent(JSON.stringify(draft, null, 2))));
+      const r = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/content.json`, {
+        method: 'PUT',
+        headers: { Authorization: 'token ' + pat, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+        body: JSON.stringify({ message: 'Inline edit: ' + new Date().toISOString(), content: bodyContent, sha, branch })
+      });
+      if (!r.ok) throw new Error(await r.text());
+      const j = await r.json();
+      sha = j.content.sha;
+      markClean();
+      status.textContent = 'Published. Live in ~30s.';
+      setTimeout(() => { if (!dirty) status.textContent = 'Clean'; }, 4000);
+    } catch (e) {
+      status.textContent = 'Publish failed';
+      btnPub.disabled = false;
+      alert('Publish failed:\n' + e.message);
+    }
+  });
+}
+
+async function promptForToken() {
+  return new Promise(resolve => {
+    const wrap = document.createElement('div');
+    wrap.className = 'edit-auth';
+    wrap.innerHTML = `
+      <div class="edit-auth-card">
+        <h3>Enter editor</h3>
+        <p>Paste your GitHub personal access token (starts with <code>github_pat_</code>). It's saved in this browser only.</p>
+        <input type="password" id="editPat" placeholder="github_pat_...">
+        <div class="err" id="editErr"></div>
+        <div class="row">
+          <button id="editCancel">Cancel</button>
+          <button id="editSave" class="primary">Enter</button>
+        </div>
+      </div>`;
+    document.body.appendChild(wrap);
+    wrap.querySelector('#editPat').focus();
+    wrap.querySelector('#editCancel').onclick = () => { wrap.remove(); resolve(null); };
+    wrap.querySelector('#editSave').onclick = () => {
+      const t = wrap.querySelector('#editPat').value.trim();
+      if (!t.startsWith('github_pat_') && !t.startsWith('ghp_')) {
+        wrap.querySelector('#editErr').textContent = 'That doesn\'t look like a valid token.'; return;
+      }
+      localStorage.setItem('amt_pat', t);
+      wrap.remove();
+      resolve(t);
+    };
+  });
+}
 </script>
 </body>
 </html>
