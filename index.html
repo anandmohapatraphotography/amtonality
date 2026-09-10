@@ -1501,7 +1501,7 @@ function home(){
 
   <section class="wrap">
     <div class="shead shead-first rv">
-      <div><div class="eyebrow">Architectural Photography</div><h2 class="h2">Architecture and Interiors</h2></div>
+      <div><div class="eyebrow">Architectural Photography</div><h2 class="h2" data-edit="site.homeArchHeading">${SITE.homeArchHeading || 'Architecture and Interiors'}</h2></div>
       <a class="arrow" href="/architecture">All architecture ${ARROW}</a>
     </div>
     ${jgal(a.map((p,i)=>card(p,pad(i))).join(''), 'cards')}
@@ -1543,20 +1543,22 @@ function home(){
   <section class="wrap">
     <div class="rule" style="margin-top:clamp(48px,7vw,110px)"></div>
     <div class="shead rv" style="padding-bottom:clamp(48px,7vw,110px)">
-      <div><div class="eyebrow">Commissions</div><h2 class="h2">Let's photograph<br>your space.</h2></div>
+      <div><div class="eyebrow">Commissions</div><h2 class="h2" data-edit="site.commissionsHeading">${SITE.commissionsHeading || "Let's photograph your space."}</h2></div>
       <a class="arrow" href="/contact">Start a project ${ARROW}</a>
     </div>
   </section>
 `;
 }
 
-function indexPage(title, eyebrow, statement, items){
+function indexPage(title, eyebrow, statement, items, editKey){
+  const eTitle = editKey ? `data-edit="site.${editKey}Title"` : '';
+  const eState = editKey ? `data-edit="site.${editKey}Statement"` : '';
   return `
   <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
     <div class="rv">
       <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">${eyebrow}</div>
-      <h1 class="display" style="max-width:14ch">${title}</h1>
-      <p class="lede" style="margin-top:clamp(22px,3vw,38px);max-width:58ch">${statement}</p>
+      <h1 class="display" style="max-width:14ch" ${eTitle}>${title}</h1>
+      <p class="lede" style="margin-top:clamp(22px,3vw,38px);max-width:58ch" ${eState}>${statement}</p>
     </div>
     <div id="idx" style="padding-top:clamp(18px,2.4vw,30px)">${jgal(items.map((p,i)=>card(p,pad(i))).join(''), 'cards')}</div>
     <div id="idxlist" class="list" style="display:none">
@@ -1586,14 +1588,14 @@ function project(p){
   <section class="phero wrap">
     <div class="rv">
       <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">${ARCHITECTURE.includes(p)?'Architecture':'Explorations'}</div>
-      <h1 class="display" style="max-width:13ch">${esc(p.title)}</h1>
+      <h1 class="display" style="max-width:13ch" data-edit="projects.${p.slug}.title">${esc(p.title)}</h1>
     </div>
     ${(() => {
       const parts = p.statement.split(/(?<=[.!?])\s+/);
       const lead  = parts[0];
       const rest  = parts.slice(1).join(' ');
       return `<div class="pintro rv${rest?'':' solo'}">
-        <p class="pintro-lead">${esc(lead)}</p>
+        <p class="pintro-lead" data-edit="projects.${p.slug}.statement">${esc(lead)}</p>
         ${rest ? `<div class="body"><p>${esc(rest)}</p></div>` : ''}
       </div>`;
     })()}
@@ -1625,18 +1627,18 @@ function about(){
     </div>
     <div class="about" style="padding-top:clamp(20px,3vw,44px)">
       <div class="rv">
-        ${SITE.aboutHeadingVisible === true ? `<h1 class="h2" style="max-width:100%;margin-bottom:clamp(18px,2.5vw,32px)">${esc(SITE.aboutHeadingText || 'Light, patience, and the shape of a room.')}</h1>` : ''}
+        ${SITE.aboutHeadingVisible === true ? `<h1 class="h2" style="max-width:100%;margin-bottom:clamp(18px,2.5vw,32px)" data-edit="about.headingText">${esc(SITE.aboutHeadingText || 'Light, patience, and the shape of a room.')}</h1>` : ''}
         ${frame(SITE.portrait,'nat','Anand Mohapatra')}
         <ul class="factlist">
-          <li><span>Based in</span><div>${esc(SITE.city)}, Canada</div></li>
+          <li><span>Based in</span><div data-edit="site.city" data-edit-suffix=", Canada">${esc(SITE.city)}, Canada</div></li>
           <li><span>Focus</span><div>Architectural Photography</div></li>
           <li><span>Published</span><div>Lonely Planet, Condé Nast Traveller</div></li>
           <li><span>Response</span><div>Within 48 hours</div></li>
         </ul>
       </div>
       <div class="body rv d1">
-        <p>${esc(lead)}</p>
-        ${paras.map(p => `<p>${esc(p)}</p>`).join('')}
+        <p data-edit="about.lead">${esc(lead)}</p>
+        ${paras.map((p,i) => `<p data-edit="about.paragraphs.${i}">${esc(p)}</p>`).join('')}
         <div style="margin-top:clamp(30px,4vw,52px)"><a class="arrow" href="/contact">Work with me ${ARROW}</a></div>
       </div>
     </div>
@@ -1671,7 +1673,7 @@ function press(){
   <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
     <div class="rv">
       <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">Press</div>
-      <h1 class="display" style="max-width:14ch">Tear sheets<br>&amp; publications.</h1>
+      <h1 class="display" style="max-width:14ch" data-edit="site.pressHeading">${SITE.pressHeading || "Tear sheets & publications."}</h1>
       <p class="lede" style="max-width:52ch;padding-top:clamp(20px,2.6vw,34px)">Selected features and print work — magazine assignments, editorial commissions, and books that carry my photographs.</p>
     </div>
     <div class="press-grid">${items.map(card).join('')}</div>
@@ -1684,11 +1686,11 @@ function contact(){
   <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
     <div class="rv">
       <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">Contact</div>
-      <h1 class="display" style="max-width:13ch">Let's make<br>something<br>with light.</h1>
+      <h1 class="display" style="max-width:13ch" data-edit="site.contactHeading">${SITE.contactHeading || "Let's make something with light."}</h1>
     </div>
     <div class="contact" style="padding-top:clamp(44px,6vw,90px)">
       <div class="rv">
-        <p class="lede">${esc(lede)}</p>
+        <p class="lede" data-edit="contact.lede">${esc(lede)}</p>
         <ul class="socials">
           <li><a href="mailto:${SITE.email}"><span>${SITE.email}</span><em>Email</em></a></li>
           ${SITE.social.map(([n,h])=>`<li><a href="${h}" target="_blank" rel="noopener"><span>${n}</span><em>↗</em></a></li>`).join('')}
@@ -1724,10 +1726,10 @@ function routeFor(pathOrHash){
              : { html: home(), title: null, nav: '/' };
   }
   switch(h){
-    case '/architecture': return { html: indexPage('Architecture and Interiors','Portfolio',
-      'Shaped by years of observing spaces, structures, and the way light moves through them.', visible(ARCHITECTURE)), title:'Architecture', nav:'/architecture' };
-    case '/explorations': return { html: indexPage('Explorations','Portfolio',
-      "Over the years, I\'ve explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.", visible(EXPLORATIONS)), title:'Explorations', nav:'/explorations' };
+    case '/architecture': return { html: indexPage(SITE.archTitle || 'Architecture and Interiors','Portfolio',
+      SITE.archStatement || 'Shaped by years of observing spaces, structures, and the way light moves through them.', visible(ARCHITECTURE), 'arch'), title:'Architecture', nav:'/architecture' };
+    case '/explorations': return { html: indexPage(SITE.expTitle || 'Explorations','Portfolio',
+      SITE.expStatement || "Over the years, I\'ve explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal.", visible(EXPLORATIONS), 'exp'), title:'Explorations', nav:'/explorations' };
     case '/press':   return { html: press(),   title:'Press',   nav:'/press' };
     case '/about':   return { html: about(),   title:'About',   nav:'/about' };
     case '/contact': return { html: contact(), title:'Contact', nav:'/contact' };
@@ -2204,7 +2206,29 @@ async function bootInlineEditor() {
       el.setAttribute('spellcheck', 'true');
       el.addEventListener('input', () => {
         const path = el.getAttribute('data-edit');
-        setPath(draft, path, el.textContent);
+        const val = el.textContent;
+        setPath(draft, path, val);
+        /* Sync in-memory model so navigation re-renders reflect the edit
+           before publish. Mirrors the mapping in applyContent(). */
+        try {
+          const parts = path.split('.');
+          if (parts[0] === 'site') {
+            SITE[parts[1]] = val;
+          } else if (parts[0] === 'about' && parts[1] === 'lead') {
+            SITE.aboutLead = val;
+          } else if (parts[0] === 'about' && parts[1] === 'headingText') {
+            SITE.aboutHeadingText = val;
+          } else if (parts[0] === 'about' && parts[1] === 'paragraphs') {
+            if (!Array.isArray(SITE.aboutParagraphs)) SITE.aboutParagraphs = [];
+            SITE.aboutParagraphs[+parts[2]] = val;
+          } else if (parts[0] === 'contact' && parts[1] === 'lede') {
+            SITE.contactLede = val;
+          } else if (parts[0] === 'projects') {
+            const slug = parts[1], field = parts[2];
+            const proj = ALL.find(p => p.slug === slug);
+            if (proj) proj[field === 'statement' ? 'statement' : field] = val;
+          }
+        } catch (_) {}
         el.classList.add('dirty');
         markDirty();
       });
