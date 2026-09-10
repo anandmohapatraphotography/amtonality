@@ -2122,9 +2122,16 @@ applyContent().then(() => {
   const ft = document.getElementById('ftag');
   if (ft) ft.innerHTML = SITE.tagline;
   render();
-  /* Boot the in-place editor if URL has ?edit=1. Runs after first render so
-     data-edit elements exist. */
-  if (new URLSearchParams(location.search).get('edit') === '1') bootInlineEditor();
+  /* Boot the in-place editor if URL has ?edit=1, sessionStorage says we're
+     already editing, or the pathname is the shorthand `/edit`. Sticky across
+     internal navigation without needing to preserve the query string. */
+  const qEdit = new URLSearchParams(location.search).get('edit') === '1';
+  const sEdit = (() => { try { return sessionStorage.getItem('amt_edit') === '1'; } catch(_) { return false; } })();
+  const pEdit = location.pathname === '/edit' || location.pathname === '/edit/';
+  if (qEdit || sEdit || pEdit) {
+    if (pEdit) history.replaceState({}, '', '/');
+    bootInlineEditor();
+  }
 });
 
 /* ============================================================
@@ -2167,6 +2174,7 @@ async function bootInlineEditor() {
   const getPath = (obj, path) => path.split('.').reduce((c, k) => c && c[k], obj);
 
   document.documentElement.classList.add('edit-mode');
+  try { sessionStorage.setItem('amt_edit', '1'); } catch(_) {}
 
   const bar = document.createElement('div');
   bar.className = 'editbar';
@@ -2253,6 +2261,7 @@ async function bootInlineEditor() {
 
   bar.querySelector('#editExit').addEventListener('click', () => {
     if (dirty && !confirm('You have unsaved changes. Exit anyway?')) return;
+    try { sessionStorage.removeItem('amt_edit'); } catch(_) {}
     location.href = location.pathname;
   });
 
