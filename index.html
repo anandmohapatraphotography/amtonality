@@ -212,8 +212,12 @@ header{
 }
 header.scrolled{border-bottom-color:var(--rule)}
 header.hide{transform:translateY(-102%)}
-.hbar{display:flex;align-items:center;justify-content:space-between;height:72px}
+.hbar{display:flex;align-items:center;justify-content:space-between;height:72px;position:relative}
 .mark{display:flex;align-items:center;gap:10px;line-height:1}
+/* Logo position variants — configurable from the inline editor. */
+html[data-logo-pos="center"] .hbar .mark{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+html[data-logo-pos="right"] .hbar{flex-direction:row-reverse}
+html[data-logo-pos="right"] .hbar nav.main{margin-left:auto}
 .mark img{height:34px;width:auto;display:block;transform:translateY(2px);transition:filter .3s ease}
 :root[data-theme="dark"] .mark img,:root[data-theme="dark"] .fbig img{filter:invert(1) brightness(1.05)}
 @media (prefers-color-scheme:dark){
@@ -550,6 +554,18 @@ html.edit-mode .editbar{opacity:1;pointer-events:auto}
 .edit-auth-card .row button{flex:1;padding:11px;border:1px solid var(--rule);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 .edit-auth-card .row button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .edit-auth-card .err{color:#c0392b;font-size:12px;margin-top:8px}
+
+/* Editor widget popup (used for logo position, later: image swap) */
+.edit-widget-popup{position:fixed;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.18);display:flex;gap:4px;z-index:85;font-family:"Inter",sans-serif}
+.edit-widget-popup .ep-label{padding:8px 6px 8px 10px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.edit-widget-popup button{background:transparent;border:1px solid var(--rule);border-radius:6px;padding:8px 14px;color:var(--ink);cursor:pointer;font-size:11px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s ease,color .2s ease,border-color .2s ease}
+.edit-widget-popup button:hover{border-color:var(--ink)}
+.edit-widget-popup button.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* Show a subtle "click to move" hint on the logo in edit mode */
+html.edit-mode .mark{cursor:pointer;position:relative}
+html.edit-mode .mark::after{content:"⇔";position:absolute;top:-6px;right:-14px;font-size:10px;color:var(--ink-3);background:var(--paper);border:1px solid var(--rule);border-radius:999px;width:16px;height:16px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s ease}
+html.edit-mode .mark:hover::after{opacity:1}
 </style>
 </head>
 <body>
@@ -797,6 +813,8 @@ async function applyContent(){
     if (!r.ok) return;
     const c = await r.json();
     if (c.site) for (const k of Object.keys(c.site)) if (c.site[k] != null) SITE[k] = c.site[k];
+    if (SITE.logoPosition && SITE.logoPosition !== 'left') document.documentElement.setAttribute('data-logo-pos', SITE.logoPosition);
+    else document.documentElement.removeAttribute('data-logo-pos');
     if (c.about && Array.isArray(c.about.paragraphs)) SITE.aboutParagraphs = c.about.paragraphs;
     if (c.about && c.about.lead) SITE.aboutLead = c.about.lead;
     if (c.about && c.about.headingText) SITE.aboutHeadingText = c.about.headingText;
@@ -2252,6 +2270,43 @@ async function bootInlineEditor() {
   if (typeof origRender === 'function') {
     window.render = function() { origRender.apply(this, arguments); wire(); };
   }
+
+  /* Logo position picker — capture-phase click on .mark intercepts before
+     navRoute so we can show the popup instead of navigating home. */
+  document.addEventListener('click', ev => {
+    if (!document.documentElement.classList.contains('edit-mode')) return;
+    const mark = ev.target.closest('.mark');
+    if (!mark) return;
+    ev.preventDefault();
+    ev.stopImmediatePropagation();
+    document.querySelectorAll('.edit-widget-popup').forEach(p => p.remove());
+    const pop = document.createElement('div');
+    pop.className = 'edit-widget-popup';
+    const cur = SITE.logoPosition || 'left';
+    pop.innerHTML = `<span class="ep-label">Logo</span>` +
+      ['left','center','right'].map(p =>
+        `<button data-pos="${p}"${cur===p?' class="active"':''}>${p}</button>`
+      ).join('');
+    document.body.appendChild(pop);
+    const r = mark.getBoundingClientRect();
+    pop.style.left = r.left + 'px';
+    pop.style.top = (r.bottom + 10) + 'px';
+    pop.addEventListener('click', ev2 => {
+      const b = ev2.target.closest('button');
+      if (!b) return;
+      const pos = b.dataset.pos;
+      SITE.logoPosition = pos;
+      if (pos === 'left') document.documentElement.removeAttribute('data-logo-pos');
+      else document.documentElement.setAttribute('data-logo-pos', pos);
+      setPath(draft, 'site.logoPosition', pos);
+      pop.querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+      markDirty();
+    });
+    setTimeout(() => {
+      const dismiss = e2 => { if (!pop.contains(e2.target) && !e2.target.closest('.mark')) { pop.remove(); document.removeEventListener('click', dismiss, true); } };
+      document.addEventListener('click', dismiss, true);
+    }, 0);
+  }, true);
 
   btnDis.addEventListener('click', () => {
     if (!dirty) return;
