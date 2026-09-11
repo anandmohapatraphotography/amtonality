@@ -598,6 +598,24 @@ html.edit-mode .album-add .add-label{font-size:11px;letter-spacing:.14em;text-tr
 .album-modal-card .row button{flex:1;padding:12px;border:1px solid var(--rule);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
 .album-modal-card .row button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .album-modal-card .err{color:#c0392b;font-size:12px;margin-top:8px}
+
+/* Side navigator (edit mode only) — Adobe-Express-style page tree. */
+.edit-sidenav-toggle{position:fixed;left:20px;top:90px;z-index:79;background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:8px 16px;cursor:pointer;font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);display:none;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.edit-sidenav-toggle:hover{color:var(--ink);border-color:var(--ink)}
+html.edit-mode .edit-sidenav-toggle{display:inline-flex}
+.edit-sidenav{position:fixed;left:0;top:0;bottom:0;width:290px;background:var(--paper);border-right:1px solid var(--rule);z-index:82;transform:translateX(-100%);transition:transform .3s var(--ease);overflow-y:auto;padding:24px 0 24px 0;box-shadow:8px 0 32px rgba(0,0,0,.08);font-family:"Inter",sans-serif}
+.edit-sidenav.open{transform:translateX(0)}
+.edit-sidenav h3{font-family:"Instrument Serif",Georgia,serif;font-size:22px;letter-spacing:-.01em;padding:0 24px 12px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.edit-sidenav .side-close{background:transparent;border:0;color:var(--ink-2);cursor:pointer;font-size:22px;line-height:1;padding:2px 8px;border-radius:8px}
+.edit-sidenav .side-close:hover{background:var(--paper-2);color:var(--ink)}
+.edit-sidenav .side-group{padding:16px 24px 6px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);border-top:1px solid var(--rule);margin-top:8px}
+.edit-sidenav .side-group:first-of-type{border-top:0;margin-top:0}
+.edit-sidenav a.side-link{display:block;padding:8px 24px;font-size:13px;color:var(--ink-2);text-decoration:none;border-left:3px solid transparent;cursor:pointer;transition:color .2s ease,background .2s ease}
+.edit-sidenav a.side-link:hover{color:var(--ink);background:rgba(20,19,15,.03)}
+.edit-sidenav a.side-link.active{color:var(--ink);border-left-color:var(--ink);background:var(--paper-2);font-weight:500}
+.edit-sidenav a.side-link.child{padding-left:38px;font-size:12px}
+.edit-sidenav a.side-link.add{color:var(--ink-3);font-style:italic;padding-left:38px;font-size:12px}
+.edit-sidenav a.side-link.add:hover{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -2565,12 +2583,64 @@ async function bootInlineEditor() {
     $t.addEventListener('keydown', ev => { if (ev.key === 'Enter') create(); if (ev.key === 'Escape') close(); });
   }
 
+  /* Side navigator — always-available page tree while editing. Reads live
+     ARCHITECTURE + EXPLORATIONS so newly-created albums appear immediately. */
+  function buildSideNav() {
+    document.querySelectorAll('#editSideNav, #editSideToggle').forEach(el => el.remove());
+    const isVis = p => !(draft.projects && draft.projects[p.slug] && draft.projects[p.slug].hidden);
+    const cur = location.pathname;
+    const link = (href, label, cls='') =>
+      `<a href="${href}" class="side-link ${cls} ${cur===href?'active':''}">${label}</a>`;
+    const nav = document.createElement('nav');
+    nav.className = 'edit-sidenav';
+    nav.id = 'editSideNav';
+    nav.innerHTML = `
+      <h3><span>Pages</span><button class="side-close" id="sideNavClose">×</button></h3>
+      ${link('/', 'Home')}
+      <div class="side-group">Architecture</div>
+      ${link('/architecture', 'All architecture')}
+      ${ARCHITECTURE.filter(isVis).map(p => link('/p/'+p.slug, esc(p.title), 'child')).join('')}
+      <a class="side-link add" data-add="architecture">+ New album</a>
+      <div class="side-group">Explorations</div>
+      ${link('/explorations', 'All explorations')}
+      ${EXPLORATIONS.filter(isVis).map(p => link('/p/'+p.slug, esc(p.title), 'child')).join('')}
+      <a class="side-link add" data-add="explorations">+ New album</a>
+      <div class="side-group">Other</div>
+      ${link('/press', 'Press')}
+      ${link('/about', 'About')}
+      ${link('/contact', 'Contact')}
+    `;
+    document.body.appendChild(nav);
+
+    const toggle = document.createElement('button');
+    toggle.className = 'edit-sidenav-toggle';
+    toggle.id = 'editSideToggle';
+    toggle.innerHTML = '☰ Pages';
+    document.body.appendChild(toggle);
+
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+    nav.querySelector('#sideNavClose').addEventListener('click', () => nav.classList.remove('open'));
+    nav.addEventListener('click', e => {
+      const add = e.target.closest('[data-add]');
+      if (add) { e.preventDefault(); nav.classList.remove('open'); promptNewAlbum(add.dataset.add); return; }
+      const link = e.target.closest('a.side-link');
+      if (!link) return;
+      e.preventDefault();
+      const href = link.getAttribute('href');
+      if (!href) return;
+      if (location.pathname !== href) history.pushState({}, '', href);
+      render();
+      nav.classList.remove('open');
+    });
+  }
+
   wire();
   wirePhotos();
   wireAlbumAdd();
+  buildSideNav();
   const origRender = window.render;
   if (typeof origRender === 'function') {
-    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); };
+    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); buildSideNav(); };
   }
 
   /* Logo position picker — capture-phase click on .mark intercepts before
