@@ -650,7 +650,7 @@ html.edit-mode .album-add .add-label{font-size:11px;letter-spacing:.14em;text-tr
         <a href="https://www.linkedin.com/in/anand-mohapatra-650b7212b/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://www.facebook.com/AnandMohapatraPhotography" target="_blank" rel="noopener">Facebook</a>
       </nav>
-      <div class="fmeta">© <span id="yr"></span> Anand Mohapatra : Tonality — Vancouver, BC</div>
+      <div class="fmeta" data-edit="site.footerCopy">© <span id="yr"></span> Anand Mohapatra : Tonality — Vancouver, BC</div>
     </div>
   </div>
 </footer>
@@ -839,8 +839,9 @@ const visible = list => list.filter(isVisible);
    append extra photos beyond the 525 hardcoded in IMGDATA. Missing file = use
    the defaults hardcoded here; broken JSON = same fallback with a console
    warning. */
-/* Push editable nav-label overrides from SITE into the static header/drawer/footer
-   nav elements. Called after applyContent and after inline edits. */
+/* Push editable overrides from SITE into the static header/drawer/footer
+   elements (the parts that live outside the view template). Called after
+   applyContent and after inline edits. */
 function applyNavLabels(){
   const map = { '/architecture': 'navArchitecture', '/explorations': 'navExplorations', '/press': 'navPress', '/about': 'navAbout', '/contact': 'navContact' };
   document.querySelectorAll('#nav a, .drawer a, .fnav a').forEach(a => {
@@ -848,6 +849,10 @@ function applyNavLabels(){
     const key = map[href];
     if (key && SITE[key]) a.textContent = SITE[key];
   });
+  if (SITE.footerCopy) {
+    const fm = document.querySelector('.fmeta[data-edit="site.footerCopy"]');
+    if (fm) fm.textContent = SITE.footerCopy;
+  }
 }
 
 async function applyContent(){
@@ -1555,7 +1560,7 @@ function home(){
     <div class="hero-grid">
       <div class="rv hero-img">${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
       <div class="hero-copy rv d1">
-        <div class="eyebrow">Architectural Photography</div>
+        <div class="eyebrow" data-edit="site.heroEyebrow">${SITE.heroEyebrow || 'Architectural Photography'}</div>
         <h1 class="display" data-edit="site.tagline">${SITE.tagline}</h1>
         <p class="lede" data-edit="site.intro">${SITE.intro}</p>
       </div>
@@ -1613,7 +1618,7 @@ function indexPage(title, eyebrow, statement, items, editKey){
   return `
   <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
     <div class="rv">
-      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">${eyebrow}</div>
+      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)" ${editKey?`data-edit="site.${editKey}Eyebrow"`:''}>${editKey && SITE[editKey+'Eyebrow'] || eyebrow}</div>
       <h1 class="display" style="max-width:14ch" ${eTitle}>${title}</h1>
       <p class="lede" style="margin-top:clamp(22px,3vw,38px);max-width:58ch" ${eState}>${statement}</p>
     </div>
@@ -1644,7 +1649,7 @@ function project(p){
   return `
   <section class="phero wrap">
     <div class="rv">
-      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">${ARCHITECTURE.includes(p)?'Architecture':'Explorations'}</div>
+      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)" data-edit="projects.${p.slug}.eyebrow">${p.eyebrow || (ARCHITECTURE.includes(p)?'Architecture':'Explorations')}</div>
       <h1 class="display" style="max-width:13ch" data-edit="projects.${p.slug}.title">${esc(p.title)}</h1>
     </div>
     ${(() => {
@@ -1689,10 +1694,10 @@ function about(){
         ${SITE.aboutHeadingVisible === true ? `<h1 class="h2" style="max-width:100%;margin-bottom:clamp(18px,2.5vw,32px)" data-edit="about.headingText">${esc(SITE.aboutHeadingText || 'Light, patience, and the shape of a room.')}</h1>` : ''}
         ${frame(SITE.portrait,'nat','Anand Mohapatra')}
         <ul class="factlist">
-          <li><span>Based in</span><div data-edit="site.factBasedIn">${SITE.factBasedIn || esc(SITE.city) + ', Canada'}</div></li>
-          <li><span>Focus</span><div data-edit="site.factFocus">${SITE.factFocus || 'Architectural Photography'}</div></li>
-          <li><span>Published</span><div data-edit="site.factPublished">${SITE.factPublished || 'Lonely Planet, Condé Nast Traveller'}</div></li>
-          <li><span>Response</span><div data-edit="site.factResponse">${SITE.factResponse || 'Within 48 hours'}</div></li>
+          <li><span data-edit="site.factBasedInLabel">${SITE.factBasedInLabel || 'Based in'}</span><div data-edit="site.factBasedIn">${SITE.factBasedIn || esc(SITE.city) + ', Canada'}</div></li>
+          <li><span data-edit="site.factFocusLabel">${SITE.factFocusLabel || 'Focus'}</span><div data-edit="site.factFocus">${SITE.factFocus || 'Architectural Photography'}</div></li>
+          <li><span data-edit="site.factPublishedLabel">${SITE.factPublishedLabel || 'Published'}</span><div data-edit="site.factPublished">${SITE.factPublished || 'Lonely Planet, Condé Nast Traveller'}</div></li>
+          <li><span data-edit="site.factResponseLabel">${SITE.factResponseLabel || 'Response'}</span><div data-edit="site.factResponse">${SITE.factResponse || 'Within 48 hours'}</div></li>
         </ul>
       </div>
       <div class="body rv d1">
@@ -1756,12 +1761,12 @@ function contact(){
         </ul>
       </div>
       <form class="rv d1" id="cform" novalidate>
-        <div class="field"><label for="n">Name</label><input id="n" name="name" required autocomplete="name"></div>
-        <div class="field"><label for="e">Email address</label><input id="e" name="email" type="email" required autocomplete="email"></div>
-        <div class="field"><label for="s">Project type</label><input id="s" name="subject" placeholder="Residential, commercial, heritage, editorial…"></div>
-        <div class="field"><label for="m">Message</label><textarea id="m" name="message" required></textarea></div>
+        <div class="field"><label for="n" data-edit="site.formLabelName">${SITE.formLabelName || 'Name'}</label><input id="n" name="name" required autocomplete="name"></div>
+        <div class="field"><label for="e" data-edit="site.formLabelEmail">${SITE.formLabelEmail || 'Email address'}</label><input id="e" name="email" type="email" required autocomplete="email"></div>
+        <div class="field"><label for="s" data-edit="site.formLabelSubject">${SITE.formLabelSubject || 'Project type'}</label><input id="s" name="subject" placeholder="Residential, commercial, heritage, editorial…"></div>
+        <div class="field"><label for="m" data-edit="site.formLabelMessage">${SITE.formLabelMessage || 'Message'}</label><textarea id="m" name="message" required></textarea></div>
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
-        <button class="btn" id="csubmit" type="submit">Send enquiry ${ARROW}</button>
+        <button class="btn" id="csubmit" type="submit"><span data-edit="site.formButton">${SITE.formButton || 'Send enquiry'}</span> ${ARROW}</button>
         <p class="num" id="cnote" style="letter-spacing:.06em;line-height:1.6"></p>
       </form>
     </div>
