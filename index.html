@@ -579,6 +579,25 @@ html.edit-mode .photo-add:hover,html.edit-mode .photo-add.drag-over{border-color
 html.edit-mode .photo-add-plus{font-size:32px;line-height:1;font-weight:200}
 html.edit-mode .photo-add-hint{font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-align:center}
 .photo-uploading{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 20px;border-radius:999px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;z-index:95;font-family:"Inter",sans-serif}
+
+/* New album tile on section index pages */
+html.edit-mode .album-add{aspect-ratio:4/3;background:transparent;border:2px dashed var(--rule);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-3);cursor:pointer;transition:border-color .2s ease,color .2s ease;padding:20px}
+html.edit-mode .album-add:hover{border-color:var(--ink);color:var(--ink);border-style:solid}
+html.edit-mode .album-add .add-plus{font-size:40px;line-height:1;font-weight:200}
+html.edit-mode .album-add .add-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center}
+
+/* Modal for new album creation */
+.album-modal{position:fixed;inset:0;background:rgba(20,19,15,.6);backdrop-filter:blur(6px);z-index:95;display:flex;align-items:center;justify-content:center;padding:20px;font-family:"Inter",sans-serif}
+.album-modal-card{background:var(--paper);border-radius:12px;padding:32px;max-width:440px;width:100%;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.album-modal-card h3{font-family:"Instrument Serif",Georgia,serif;font-size:26px;margin-bottom:8px;letter-spacing:-.01em}
+.album-modal-card p{color:var(--ink-2);font-size:13px;line-height:1.55;margin-bottom:18px}
+.album-modal-card .hint{font-size:11px;color:var(--ink-3);margin-top:6px;letter-spacing:.02em}
+.album-modal-card input{width:100%;padding:12px 14px;border:1px solid var(--rule);border-radius:6px;font-family:inherit;font-size:14px;background:var(--paper);color:var(--ink);outline:none}
+.album-modal-card input:focus{border-color:var(--ink)}
+.album-modal-card .row{display:flex;gap:10px;margin-top:20px}
+.album-modal-card .row button{flex:1;padding:12px;border:1px solid var(--rule);border-radius:6px;background:transparent;color:var(--ink);cursor:pointer;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.album-modal-card .row button.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.album-modal-card .err{color:#c0392b;font-size:12px;margin-top:8px}
 </style>
 </head>
 <body>
@@ -2426,11 +2445,80 @@ async function bootInlineEditor() {
     });
   }
 
+  /* Slugify helper — same rules as /admin so new albums get consistent URLs. */
+  const slugify = t => (t || '').toLowerCase().trim()
+    .replace(/[^\w\s-]/g,'').replace(/[\s_]+/g,'-').replace(/-+/g,'-').replace(/^-+|-+$/g,'');
+
+  /* "+ New album" tile on /architecture and /explorations index pages. */
+  function wireAlbumAdd() {
+    const section = location.pathname === '/architecture' ? 'architecture'
+                  : location.pathname === '/explorations' ? 'explorations' : null;
+    if (!section) return;
+    const grid = document.getElementById('idx')?.querySelector('.jgal.cards');
+    if (!grid || grid._addWired) return;
+    grid._addWired = true;
+
+    const tile = document.createElement('div');
+    tile.className = 'gitem album-add';
+    tile.innerHTML = '<div class="add-plus">+</div><div class="add-label">New album</div>';
+    grid.appendChild(tile);
+    tile.addEventListener('click', () => promptNewAlbum(section));
+  }
+
+  function promptNewAlbum(section) {
+    const wrap = document.createElement('div');
+    wrap.className = 'album-modal';
+    const label = section === 'architecture' ? 'Architecture' : 'Explorations';
+    wrap.innerHTML = `
+      <div class="album-modal-card">
+        <h3>New ${label} album</h3>
+        <p>Give the album a title. You can add photos, a statement, and other details from the album page after it's created.</p>
+        <input type="text" id="albTitle" placeholder="e.g. Bandra–Worli Sea Link" autofocus>
+        <div class="hint" id="albHint">URL: /p/</div>
+        <div class="err" id="albErr"></div>
+        <div class="row">
+          <button id="albCancel">Cancel</button>
+          <button id="albCreate" class="primary">Create album</button>
+        </div>
+      </div>`;
+    document.body.appendChild(wrap);
+    const $t = wrap.querySelector('#albTitle');
+    const $h = wrap.querySelector('#albHint');
+    const $e = wrap.querySelector('#albErr');
+    $t.focus();
+    $t.addEventListener('input', () => { $h.textContent = 'URL: /p/' + (slugify($t.value) || '(pick a title)'); });
+    const close = () => wrap.remove();
+    wrap.querySelector('#albCancel').onclick = close;
+    wrap.addEventListener('click', e => { if (e.target === wrap) close(); });
+    const create = () => {
+      const title = $t.value.trim();
+      if (!title) { $e.textContent = 'Give the album a title first.'; return; }
+      const slug = slugify(title);
+      if (!slug) { $e.textContent = 'Title needs at least one letter/number for the URL.'; return; }
+      if (ALL.find(p => p.slug === slug)) { $e.textContent = 'An album with that URL already exists. Pick a different title.'; return; }
+      const extra = { slug, title, year:'', place:'', statement:'', photos:[] };
+      if (!draft.extraProjects) draft.extraProjects = { architecture:[], explorations:[] };
+      if (!Array.isArray(draft.extraProjects[section])) draft.extraProjects[section] = [];
+      draft.extraProjects[section].push(extra);
+      /* Mirror in memory so navigation immediately renders the new album. */
+      const dest = section === 'architecture' ? ARCHITECTURE : EXPLORATIONS;
+      dest.push({ slug, title, year:'', place:'', statement:'', cover:'', images:[], _extra:true });
+      ALL.length = 0; ALL.push(...ARCHITECTURE, ...EXPLORATIONS);
+      markDirty();
+      close();
+      history.pushState({}, '', '/p/' + slug);
+      render();
+    };
+    wrap.querySelector('#albCreate').onclick = create;
+    $t.addEventListener('keydown', ev => { if (ev.key === 'Enter') create(); if (ev.key === 'Escape') close(); });
+  }
+
   wire();
   wirePhotos();
+  wireAlbumAdd();
   const origRender = window.render;
   if (typeof origRender === 'function') {
-    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); };
+    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); };
   }
 
   /* Logo position picker — capture-phase click on .mark intercepts before
