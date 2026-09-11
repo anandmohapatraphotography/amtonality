@@ -1651,9 +1651,11 @@ function project(p){
       const parts = p.statement.split(/(?<=[.!?])\s+/);
       const lead  = parts[0];
       const rest  = parts.slice(1).join(' ');
-      return `<div class="pintro rv${rest?'':' solo'}">
-        <p class="pintro-lead" data-edit="projects.${p.slug}.statement">${esc(lead)}</p>
-        ${rest ? `<div class="body"><p>${esc(rest)}</p></div>` : ''}
+      const isEdit = document.documentElement.classList.contains('edit-mode');
+      /* Both halves are editable and re-joined on save (see wire() combiner). */
+      return `<div class="pintro rv${rest||isEdit?'':' solo'}">
+        <p class="pintro-lead" data-edit-combine="projects.${p.slug}.statement">${esc(lead)}</p>
+        <div class="body"><p data-edit-combine="projects.${p.slug}.statement" data-edit-placeholder="Continue the story…">${esc(rest)}</p></div>
       </div>`;
     })()}
     ${gal}
@@ -2265,7 +2267,52 @@ async function bootInlineEditor() {
 
   /* Wire every data-edit element on the currently-rendered view. Called on each
      render() so newly-mounted routes get wired. */
+  /* Element re-syncs the in-memory model for a given content path. */
+  const syncModel = (path, val) => {
+    try {
+      const parts = path.split('.');
+      if (parts[0] === 'site') {
+        SITE[parts[1]] = val;
+        if (parts[1].startsWith('nav')) applyNavLabels();
+      } else if (parts[0] === 'about' && parts[1] === 'lead') {
+        SITE.aboutLead = val;
+      } else if (parts[0] === 'about' && parts[1] === 'headingText') {
+        SITE.aboutHeadingText = val;
+      } else if (parts[0] === 'about' && parts[1] === 'paragraphs') {
+        if (!Array.isArray(SITE.aboutParagraphs)) SITE.aboutParagraphs = [];
+        SITE.aboutParagraphs[+parts[2]] = val;
+      } else if (parts[0] === 'contact' && parts[1] === 'lede') {
+        SITE.contactLede = val;
+      } else if (parts[0] === 'projects') {
+        const slug = parts[1], field = parts[2];
+        const proj = ALL.find(p => p.slug === slug);
+        if (proj) proj[field === 'statement' ? 'statement' : field] = val;
+      }
+    } catch (_) {}
+  };
+
   const wire = () => {
+    /* Group-editable paragraphs (e.g. album statement rendered as lead + rest).
+       Each participating element carries the same data-edit-combine path; on
+       input we concat all their text and persist as one field. */
+    document.querySelectorAll('[data-edit-combine]').forEach(el => {
+      if (el._editWired) return;
+      el._editWired = true;
+      el.setAttribute('contenteditable', 'plaintext-only');
+      el.setAttribute('spellcheck', 'true');
+      el.addEventListener('input', () => {
+        const path = el.getAttribute('data-edit-combine');
+        const parts = [...document.querySelectorAll('[data-edit-combine="' + path.replace(/"/g,'\\"') + '"]')];
+        const combined = parts.map(p => p.textContent.trim()).filter(Boolean).join(' ');
+        setPath(draft, path, combined);
+        syncModel(path, combined);
+        el.classList.add('dirty');
+        markDirty();
+      });
+      el.addEventListener('keydown', e => {
+        if (e.key === 'Escape') el.blur();
+      });
+    });
     document.querySelectorAll('[data-edit]').forEach(el => {
       if (el._editWired) return;
       el._editWired = true;
