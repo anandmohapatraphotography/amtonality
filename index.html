@@ -574,6 +574,12 @@ html.edit-mode .jgal.gallery .gitem.drop-target::before{content:"";position:abso
 html.edit-mode .jgal.gallery .gitem .photo-del{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:999px;background:rgba(20,19,15,.85);color:#fff;border:0;cursor:pointer;font-size:16px;line-height:1;z-index:4;display:none;align-items:center;justify-content:center;transition:background .2s ease}
 html.edit-mode .jgal.gallery .gitem:hover .photo-del{display:flex}
 html.edit-mode .jgal.gallery .gitem .photo-del:hover{background:#c0392b}
+/* ★ Set-as-cover button (bottom-right) + COVER badge on active cover */
+html.edit-mode .jgal.gallery .gitem .photo-cover{position:absolute;bottom:8px;right:8px;width:28px;height:28px;border-radius:999px;background:rgba(20,19,15,.85);color:#fff;border:0;cursor:pointer;font-size:15px;line-height:1;z-index:4;display:none;align-items:center;justify-content:center;transition:background .2s ease}
+html.edit-mode .jgal.gallery .gitem:hover .photo-cover{display:flex}
+html.edit-mode .jgal.gallery .gitem .photo-cover:hover{background:#d4a017}
+html.edit-mode .jgal.gallery .gitem .photo-cover.active{background:#d4a017;display:flex}
+html.edit-mode .jgal.gallery .gitem.is-cover::after{content:"★ COVER";position:absolute;top:8px;left:8px;background:#d4a017;color:#fff;padding:4px 10px;border-radius:999px;font-family:"Inter",sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;z-index:4;pointer-events:none}
 html.edit-mode .photo-add{aspect-ratio:1.5;background:transparent;border:2px dashed var(--rule);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-3);cursor:pointer;transition:border-color .2s ease,color .2s ease;padding:16px}
 html.edit-mode .photo-add:hover,html.edit-mode .photo-add.drag-over{border-color:var(--ink);color:var(--ink);border-style:solid}
 html.edit-mode .photo-add-plus{font-size:32px;line-height:1;font-weight:200}
@@ -2447,6 +2453,29 @@ async function bootInlineEditor() {
         render();
       });
       it.appendChild(del);
+      /* ★ Set-as-cover control. If this photo's URL matches the current cover
+         (or it's the first photo when no cover set), show it as active. */
+      const thisUrl = proj.images[idx] && proj.images[idx].u;
+      const currentCover = proj.cover || (proj.images[0] && proj.images[0].u);
+      if (thisUrl && thisUrl === currentCover) it.classList.add('is-cover');
+      const star = document.createElement('button');
+      star.className = 'photo-cover' + (thisUrl && thisUrl === currentCover ? ' active' : '');
+      star.type = 'button';
+      star.title = 'Set as album cover';
+      star.innerHTML = '★';
+      star.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const url = proj.images[idx] && proj.images[idx].u;
+        if (!url) return;
+        proj.cover = url;
+        if (!draft.projects) draft.projects = {};
+        if (!draft.projects[slug]) draft.projects[slug] = {};
+        draft.projects[slug].cover = url;
+        markDirty();
+        render();
+      });
+      it.appendChild(star);
       it.addEventListener('dragstart', e => {
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('text/plain', String(idx));
