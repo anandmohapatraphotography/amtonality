@@ -39,8 +39,20 @@
           "a": 1.5
         },
         {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/028.jpg",
+          "a": 0.667
+        },
+        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/294redm0mu8oti6t.jpg",
           "a": 0.6666666666666666
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/ycjj3hhbmu8pb5wy.jpg",
+          "a": 0.6666666666666666
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/006.jpg",
+          "a": 1.5
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/020.jpg",
@@ -55,10 +67,6 @@
           "a": 1.5
         },
         {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/006.jpg",
-          "a": 1.5
-        },
-        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/003.jpg",
           "a": 0.667
         },
@@ -67,16 +75,16 @@
           "a": 0.667
         },
         {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/6c72ktzjmsxuwl3k.jpg",
-          "a": 0.6665480427046263
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/009.jpg",
+          "a": 1.5
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/008.jpg",
           "a": 0.667
         },
         {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/009.jpg",
-          "a": 1.5
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/6c72ktzjmsxuwl3k.jpg",
+          "a": 0.6665480427046263
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/012.jpg",
@@ -167,10 +175,6 @@
           "a": 1.5
         },
         {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/028.jpg",
-          "a": 0.667
-        },
-        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/029.jpg",
           "a": 1.5
         },
@@ -193,6 +197,10 @@
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/cmt9da9cmu8ovtis.jpg",
           "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/aml9hu2qmu8pb3b7.jpg",
+          "a": 0.6666666666666666
         }
       ],
       "title": "Architecture",
