@@ -2230,27 +2230,36 @@ applyContent().then(() => {
    Save = PUT content.json to GitHub Contents API. Old /admin keeps working.
    ============================================================ */
 async function bootInlineEditor() {
-  let pat = localStorage.getItem('amt_pat') || '';
-  if (!pat) {
-    pat = await promptForToken();
-    if (!pat) return;
-  }
   const owner = 'anandmohapatraphotography', repo = 'amtonality', branch = 'main';
-  /* Draft starts as a deep copy of the loaded content.json + a copy of SITE
-     defaults so first-edit-of-a-blank-field still writes cleanly. */
-  let raw = null, sha = null;
-  try {
-    const r = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/content.json?ref=${branch}`, {
-      headers: { Authorization: 'token ' + pat, Accept: 'application/vnd.github.v3+json' }
-    });
-    if (!r.ok) throw new Error('load ' + r.status);
-    const j = await r.json();
-    sha = j.sha;
-    raw = JSON.parse(new TextDecoder('utf-8').decode(Uint8Array.from(atob(j.content), c => c.charCodeAt(0))));
-  } catch (e) {
-    alert('Could not load content from GitHub. Check your token in /admin.\n' + e.message);
-    return;
+  let raw = null, sha = null, pat = '';
+  /* Try the stored token first; on any auth error, wipe it and re-prompt. Loop
+     until we succeed or the user cancels the prompt. */
+  for (let attempt = 0; attempt < 3; attempt++) {
+    pat = localStorage.getItem('amt_pat') || '';
+    if (!pat) {
+      pat = await promptForToken(attempt > 0 ? 'That token didn\'t work. Paste your new one:' : null);
+      if (!pat) return;
+    }
+    try {
+      const r = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/content.json?ref=${branch}`, {
+        headers: { Authorization: 'token ' + pat, Accept: 'application/vnd.github.v3+json' }
+      });
+      if (r.status === 401 || r.status === 403) {
+        localStorage.removeItem('amt_pat');
+        continue;
+      }
+      if (!r.ok) throw new Error('load ' + r.status);
+      const j = await r.json();
+      sha = j.sha;
+      raw = JSON.parse(new TextDecoder('utf-8').decode(Uint8Array.from(atob(j.content), c => c.charCodeAt(0))));
+      break;
+    } catch (e) {
+      const cont = confirm('Could not load content from GitHub (' + e.message + '). Try again with a new token?');
+      if (!cont) return;
+      localStorage.removeItem('amt_pat');
+    }
   }
+  if (!raw) return;
   const draft = raw || {};
   if (!draft.site) draft.site = {};
 
@@ -2746,14 +2755,14 @@ async function bootInlineEditor() {
   });
 }
 
-async function promptForToken() {
+async function promptForToken(customMessage) {
   return new Promise(resolve => {
     const wrap = document.createElement('div');
     wrap.className = 'edit-auth';
     wrap.innerHTML = `
       <div class="edit-auth-card">
         <h3>Enter editor</h3>
-        <p>Paste your GitHub personal access token (starts with <code>github_pat_</code>). It's saved in this browser only.</p>
+        <p>${customMessage || 'Paste your GitHub personal access token (starts with <code>github_pat_</code>). It\'s saved in this browser only.'}</p>
         <input type="password" id="editPat" placeholder="github_pat_...">
         <div class="err" id="editErr"></div>
         <div class="row">
