@@ -243,8 +243,8 @@
           "a": 0.6666666666666666
         },
         {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/011.jpg",
-          "a": 1.5
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/4ftyo9eamuqj2oh9.jpg",
+          "a": 1.4998696219035201
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/p4542hlhmudri786.jpg",
@@ -271,6 +271,10 @@
           "a": 1.5
         },
         {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/hq5jsxecmuqj2kuy.jpg",
+          "a": 1.5001305823974929
+        },
+        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/004.jpg",
           "a": 1.501
         },
@@ -279,12 +283,8 @@
           "a": 1.5
         },
         {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/012.jpg",
-          "a": 1.501
-        },
-        {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/014.jpg",
-          "a": 1.5
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/nm2m5b7fmuqj2n2r.jpg",
+          "a": 1.4998696219035201
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/015.jpg",
@@ -333,13 +333,17 @@
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/p2fly6axmtsdkqfv.jpg",
           "a": 1.7778901247050893
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/cy7eb0mdmuqj2pip.jpg",
+          "a": 0.6666666666666666
         }
       ],
       "title": "Residential & Interiors",
       "year": "2026",
       "place": "Vancouver, BC",
       "statement": "Within the world of residence and interiors, design becomes intimate — a study in texture, silence, and the personality it holds. And within that space lies a rhythm of living: comfort, belonging, and the character shaped by those who call it home.",
-      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/011.jpg"
+      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/4ftyo9eamuqj2oh9.jpg"
     },
     "heritage": {
       "photos": [
