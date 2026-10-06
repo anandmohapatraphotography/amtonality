@@ -1784,13 +1784,46 @@ function contact(){
           ${SITE.social.map(([n,h])=>`<li><a href="${h}" target="_blank" rel="noopener"><span>${n}</span><em>↗</em></a></li>`).join('')}
         </ul>
       </div>
-      <form class="rv d1" id="cform" novalidate>
-        <div class="field"><label for="n" data-edit="site.formLabelName">${SITE.formLabelName || 'Name'}</label><input id="n" name="name" required autocomplete="name"></div>
-        <div class="field"><label for="e" data-edit="site.formLabelEmail">${SITE.formLabelEmail || 'Email address'}</label><input id="e" name="email" type="email" required autocomplete="email"></div>
-        <div class="field"><label for="s" data-edit="site.formLabelSubject">${SITE.formLabelSubject || 'Project type'}</label><input id="s" name="subject" placeholder="Residential, commercial, heritage, editorial…"></div>
-        <div class="field"><label for="m" data-edit="site.formLabelMessage">${SITE.formLabelMessage || 'Message'}</label><textarea id="m" name="message" required></textarea></div>
+      <form class="rv d1" id="cform" novalidate style="display:grid;gap:clamp(24px,3vw,36px)">
+        <!-- Name & Email row -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px)">
+          <div class="field"><label for="n"><span style="font-weight:500">Name</span><span style="color:var(--ink-3)">(Required)</span></label><input id="n" name="name" required autocomplete="name"></div>
+          <div class="field"><label for="e"><span style="font-weight:500">Email</span><span style="color:var(--ink-3)">(Required)</span></label><input id="e" name="email" type="email" required autocomplete="email"></div>
+        </div>
+
+        <!-- Company row -->
+        <div class="field"><label for="co"><span style="font-weight:500">Company</span><span style="color:var(--ink-3)">(Optional)</span></label><input id="co" name="company" autocomplete="organization"></div>
+
+        <!-- Project Type -->
+        <div class="field">
+          <label for="pt"><span style="font-weight:500">Project Type</span><span style="color:var(--ink-3)">(Required)</span></label>
+          <input id="pt" name="projectType" placeholder="Residential, commercial, heritage, editorial…" required>
+        </div>
+
+        <!-- Timing dropdown -->
+        <div class="field">
+          <label for="timing"><span style="font-weight:500">Timing</span><span style="color:var(--ink-3)">(Required)</span></label>
+          <select id="timing" name="timing" required style="width:100%;border:0;background:none;outline:none;font:inherit;font-size:16px;color:var(--ink);padding:0 0 12px;border-bottom:1px solid var(--rule);appearance:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22currentColor%22 stroke-width=%222%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>');background-repeat:no-repeat;background-position:right;background-size:20px;padding-right:24px">
+            <option value="">Choose timing</option>
+            <option value="ASAP">ASAP (within 2 weeks)</option>
+            <option value="1-3 months">1–3 months</option>
+            <option value="3-6 months">3–6 months</option>
+            <option value="6+ months">6+ months away</option>
+            <option value="Flexible">Flexible / TBD</option>
+          </select>
+        </div>
+
+        <!-- Message -->
+        <div class="field">
+          <label for="m"><span style="font-weight:500">Tell us about the project</span><span style="color:var(--ink-3)">(Required)</span></label>
+          <p style="font-size:13px;color:var(--ink-3);margin-bottom:8px">What are you making, who is it for, and what should the work accomplish?</p>
+          <textarea id="m" name="message" required style="min-height:160px"></textarea>
+        </div>
+
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden">
-        <button class="btn" id="csubmit" type="submit"><span data-edit="site.formButton">${SITE.formButton || 'Send enquiry'}</span> ${ARROW}</button>
+
+        <!-- Submit button -->
+        <button class="btn" id="csubmit" type="submit" style="justify-self:start;margin-top:12px"><span data-edit="site.formButton">${SITE.formButton || 'Send enquiry'}</span> ${ARROW}</button>
         <p class="num" id="cnote" style="letter-spacing:.06em;line-height:1.6"></p>
       </form>
     </div>
