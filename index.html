@@ -1719,7 +1719,6 @@ function about(){
     </div>
     <div class="about" style="padding-top:clamp(20px,3vw,44px)">
       <div class="rv">
-        ${SITE.aboutHeadingVisible === true ? `<h1 class="h2" style="max-width:100%;margin-bottom:clamp(18px,2.5vw,32px)" data-edit="about.headingText">${esc(SITE.aboutHeadingText || 'Light, patience, and the shape of a room.')}</h1>` : ''}
         <div data-edit-image="site.portrait" data-edit-slug="portrait">${frame(SITE.portrait,'nat','Anand Mohapatra')}</div>
         <ul class="factlist">
           <li><span data-edit="site.factBasedInLabel">${SITE.factBasedInLabel || 'Based in'}</span><div data-edit="site.factBasedIn">${SITE.factBasedIn || esc(SITE.city) + ', Canada'}</div></li>
@@ -1729,8 +1728,9 @@ function about(){
         </ul>
       </div>
       <div class="body rv d1">
-        <p data-edit="about.lead">${esc(lead)}</p>
-        ${paras.map((p,i) => `<p data-edit="about.paragraphs.${i}">${esc(p)}</p>`).join('')}
+        ${SITE.aboutHeadingVisible === true ? `<h1 class="h2" style="max-width:100%;margin:0 0 clamp(22px,3vw,40px);line-height:1" data-edit="about.headingText">${esc(SITE.aboutHeadingText || 'Light, patience, and the shape of a room.')}</h1>` : ''}
+        <p data-edit="about.lead" data-edit-rich="1">${lead}</p>
+        ${paras.map((p,i) => `<p data-edit="about.paragraphs.${i}" data-edit-rich="1">${p}</p>`).join('')}
         <div style="margin-top:clamp(30px,4vw,52px)"><a class="arrow" href="/contact">Work with me ${ARROW}</a></div>
       </div>
     </div>
@@ -2390,11 +2390,21 @@ async function bootInlineEditor() {
     document.querySelectorAll('[data-edit]').forEach(el => {
       if (el._editWired) return;
       el._editWired = true;
-      el.setAttribute('contenteditable', 'plaintext-only');
+      const rich = el.hasAttribute('data-edit-rich');
+      /* Rich fields get full contenteditable so Cmd/Ctrl+B etc. work. We
+         paste-as-plaintext to prevent crazy formatting from Word/Docs. */
+      el.setAttribute('contenteditable', rich ? 'true' : 'plaintext-only');
       el.setAttribute('spellcheck', 'true');
+      if (rich) {
+        el.addEventListener('paste', e => {
+          e.preventDefault();
+          const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+          document.execCommand('insertText', false, text);
+        });
+      }
       el.addEventListener('input', () => {
         const path = el.getAttribute('data-edit');
-        const val = el.textContent;
+        const val = rich ? el.innerHTML : el.textContent;
         setPath(draft, path, val);
         /* Sync in-memory model so navigation re-renders reflect the edit
            before publish. Mirrors the mapping in applyContent(). */
