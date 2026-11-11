@@ -580,6 +580,12 @@ html.edit-mode .jgal.gallery .gitem:hover .photo-cover{display:flex}
 html.edit-mode .jgal.gallery .gitem .photo-cover:hover{background:#d4a017}
 html.edit-mode .jgal.gallery .gitem .photo-cover.active{background:#d4a017;display:flex}
 html.edit-mode .jgal.gallery .gitem.is-cover::after{content:"★ COVER";position:absolute;top:8px;left:8px;background:#d4a017;color:#fff;padding:4px 10px;border-radius:999px;font-family:"Inter",sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;z-index:4;pointer-events:none}
+
+/* Generic image-replace overlay for data-edit-image elements (portrait, cover). */
+html.edit-mode [data-edit-image]{position:relative;cursor:pointer}
+html.edit-mode [data-edit-image]::after{content:"↑ REPLACE";position:absolute;bottom:14px;left:14px;background:rgba(20,19,15,.9);color:#fff;padding:7px 16px;border-radius:999px;font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.14em;z-index:4;opacity:0;transition:opacity .2s ease;pointer-events:none}
+html.edit-mode [data-edit-image]:hover::after{opacity:1}
+html.edit-mode [data-edit-image]:hover{outline:2px dashed var(--ink);outline-offset:4px}
 html.edit-mode .photo-add{aspect-ratio:1.5;background:transparent;border:2px dashed var(--rule);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-3);cursor:pointer;transition:border-color .2s ease,color .2s ease;padding:16px}
 html.edit-mode .photo-add:hover,html.edit-mode .photo-add.drag-over{border-color:var(--ink);color:var(--ink);border-style:solid}
 html.edit-mode .photo-add-plus{font-size:32px;line-height:1;font-weight:200}
@@ -1582,7 +1588,7 @@ function home(){
   return `
   <section class="hero wrap">
     <div class="hero-grid">
-      <div class="rv hero-img">${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
+      <div class="rv hero-img" data-edit-image="site.cover" data-edit-slug="cover">${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
       <div class="hero-copy rv d1">
         <div class="eyebrow" data-edit="site.heroEyebrow">${SITE.heroEyebrow || 'Architectural Photography'}</div>
         <h1 class="display" data-edit="site.tagline">${SITE.tagline}</h1>
@@ -1716,7 +1722,7 @@ function about(){
     <div class="about" style="padding-top:clamp(20px,3vw,44px)">
       <div class="rv">
         ${SITE.aboutHeadingVisible === true ? `<h1 class="h2" style="max-width:100%;margin-bottom:clamp(18px,2.5vw,32px)" data-edit="about.headingText">${esc(SITE.aboutHeadingText || 'Light, patience, and the shape of a room.')}</h1>` : ''}
-        ${frame(SITE.portrait,'nat','Anand Mohapatra')}
+        <div data-edit-image="site.portrait" data-edit-slug="portrait">${frame(SITE.portrait,'nat','Anand Mohapatra')}</div>
         <ul class="factlist">
           <li><span data-edit="site.factBasedInLabel">${SITE.factBasedInLabel || 'Based in'}</span><div data-edit="site.factBasedIn">${SITE.factBasedIn || esc(SITE.city) + ', Canada'}</div></li>
           <li><span data-edit="site.factFocusLabel">${SITE.factFocusLabel || 'Focus'}</span><div data-edit="site.factFocus">${SITE.factFocus || 'Architectural Photography'}</div></li>
@@ -2704,13 +2710,60 @@ async function bootInlineEditor() {
     });
   }
 
+  /* Replace any site-level image (portrait, cover, press item) via a hover
+     overlay that opens the file picker. Writes to SITE and draft at the path
+     named by data-edit-image, and swaps the actual <img src> inline so the
+     result is visible immediately without a full re-render. */
+  function wireImageReplace() {
+    document.querySelectorAll('[data-edit-image]').forEach(el => {
+      if (el._imgWired) return;
+      el._imgWired = true;
+      el.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const path = el.getAttribute('data-edit-image');
+        const slug = el.getAttribute('data-edit-slug') || 'site';
+        const input = document.createElement('input');
+        input.type = 'file'; input.accept = 'image/*';
+        input.style.display = 'none';
+        input.onchange = async () => {
+          const file = input.files[0];
+          input.remove();
+          if (!file) return;
+          const status = document.createElement('div');
+          status.className = 'photo-uploading';
+          status.textContent = 'Uploading…';
+          document.body.appendChild(status);
+          try {
+            const im = await _uploadPhoto(file, slug);
+            setPath(draft, path, im.u);
+            /* Also mirror into SITE so next render (or this one's DOM) sees it. */
+            const parts = path.split('.');
+            if (parts[0] === 'site') SITE[parts[1]] = im.u;
+            const img = el.querySelector('img');
+            if (img) img.src = im.u;
+            status.textContent = 'Replaced ✓';
+            setTimeout(() => status.remove(), 1500);
+            markDirty();
+          } catch (err) {
+            status.textContent = 'Upload failed: ' + err.message;
+            setTimeout(() => status.remove(), 3000);
+          }
+        };
+        document.body.appendChild(input);
+        input.click();
+      });
+    });
+  }
+
   wire();
   wirePhotos();
   wireAlbumAdd();
   buildSideNav();
+  wireImageReplace();
   const origRender = window.render;
   if (typeof origRender === 'function') {
-    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); buildSideNav(); };
+    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); buildSideNav(); wireImageReplace(); };
   }
 
   /* Logo position picker — capture-phase click on .mark intercepts before
