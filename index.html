@@ -376,11 +376,9 @@ a.card:hover .frame img{transform:scale(1.045)}
    the same width, rows lining up, and a partial last row keeping that width
    instead of shrinking to fit. Galleries above stay justified, because those
    photographs have mixed shapes. */
-.jgal.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2.2vw,34px);margin-inline:0}
+.jgal.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,3vw,52px);margin-inline:0}
 .jgal.cards .gitem{width:auto;padding:0;align-self:start}
-@media (max-width:1180px){.jgal.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media (max-width:820px){.jgal.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.jgal.cards{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:620px){.jgal.cards{grid-template-columns:minmax(0,1fr)}}
 
 /* ---------- about ---------- */
 .about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,44px);align-items:start}
