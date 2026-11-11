@@ -1,0 +1,31 @@
+# 301 redirects for legacy Adobe Portfolio URLs that Google still remembers.
+# These used to be the top-level URLs for each album; map them to the new
+# /p/<slug> paths. The order matters — specific rules first, SPA fallback last.
+
+# Album legacy URLs → new /p/<slug>
+/arie                                 /p/aerial               301
+/ladakhandspiti                       /p/ladakh-spiti         301
+/likir-dosmoche-festival-ladakh       /p/likir-dosmoche       301
+/time-and-migration-1                 /p/time-and-migration   301
+/bandra-worli-sea-link-bridge         /p/bandra-worli         301
+/burning-man-2022-waking-dreams       /p/burning-man          301
+/asad-khan-press-photos               /p/asad-khan            301
+/the-reflection-that-remains          /p/reflection           301
+/heritage                             /p/heritage             301
+/residential                          /p/residential          301
+/industrial                           /p/industrial           301
+/underwater-odyssey                   /p/underwater-odyssey   301
+/ulterior                             /p/ulterior             301
+/patterns                             /p/patterns             301
+/purity                               /p/purity               301
+/food                                 /p/food                 301
+/music                                /p/music                301
+/table-top                            /p/food                 301
+
+# Section / catch-all legacy
+/architecturephotos                   /architecture           301
+/photography                          /                       301
+
+# Cloudflare Pages catch-all: serve index.html for any other SPA route.
+# Static files, /admin/, /api/ functions all take precedence over this rule.
+/*                                    /index.html             200
