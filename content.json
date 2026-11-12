@@ -56,6 +56,10 @@
           "a": 1.5001365747063644
         },
         {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/ycjj3hhbmu8pb5wy.jpg",
+          "a": 0.6666666666666666
+        },
+        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/mvnwfgtsmsxv2rfg.jpg",
           "a": 0.6666666666666666
         },
@@ -82,10 +86,6 @@
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/015.jpg",
           "a": 1.5
-        },
-        {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/ycjj3hhbmu8pb5wy.jpg",
-          "a": 0.6666666666666666
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/8c5kau8kmuhbr7ek.jpg",
@@ -146,10 +146,6 @@
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/017.jpg",
           "a": 0.667
-        },
-        {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/018.jpg",
-          "a": 1.5
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/021.jpg",
@@ -228,7 +224,7 @@
       "year": "2026",
       "place": "Vancouver, BC",
       "statement": "Through the art of photography, I learned that architecture is more than form — it carries atmosphere, intention, and the character of the people who inhabit it. Each photograph is an exploration of balance, detail, and the quiet dialogue between space, material, and experience.",
-      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/pu40q3xkmsxv2x9f.jpg"
+      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/2cp12o0pmu5vt35y.jpg"
     },
     "residential": {
       "photos": [
