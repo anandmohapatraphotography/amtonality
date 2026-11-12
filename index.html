@@ -369,20 +369,23 @@ a.card:hover .frame img{transform:scale(1.045)}
 .jgal .gimg{display:block;width:100%;overflow:hidden;background:var(--paper-2)}
 .jgal .gimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.4s var(--ease)}
 .jgal a.gitem:hover .gimg img{transform:scale(1.035)}
-/* Album gallery: 3 photos per row, V/H/V proportion (narrow-wide-narrow).
-   Each row stretches to fill container width; photo heights align per row. */
-.jgal.gallery{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr);gap:clamp(6px,0.8vw,14px);margin-inline:0;grid-auto-rows:minmax(0,auto)}
-.jgal.gallery .gitem{display:block;width:100% !important;flex-grow:0 !important;padding:0;overflow:hidden}
-.jgal.gallery .gimg{width:100%;aspect-ratio:auto !important;overflow:hidden}
-.jgal.gallery .gimg img{width:100%;height:100%;object-fit:cover;display:block}
-/* Force each row to a consistent height so V and H align side-by-side */
-.jgal.gallery .gitem{aspect-ratio:3/4}
-.jgal.gallery .gitem:nth-child(3n+2){aspect-ratio:3/2}
+/* Default gallery: justified rows (flex) — same as it always was. */
+.jgal.gallery{--inset:4px}
+.jgal.gallery .gitem{display:flex;flex-direction:column}
+.jgal.gallery .gimg{flex:1 1 auto;min-height:0}
+
+/* Architecture-section albums only (architecture, residential, heritage,
+   bandra-worli): 3-column V/H/V grid with narrow-wide-narrow proportions. */
+.jgal.gallery.arch{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr);gap:clamp(6px,0.8vw,14px);margin-inline:0}
+.jgal.gallery.arch .gitem{display:block;width:100% !important;flex-grow:0 !important;padding:0;overflow:hidden;aspect-ratio:3/4}
+.jgal.gallery.arch .gitem:nth-child(3n+2){aspect-ratio:3/2}
+.jgal.gallery.arch .gimg{width:100%;aspect-ratio:auto !important;overflow:hidden;height:100%}
+.jgal.gallery.arch .gimg img{width:100%;height:100%;object-fit:cover;display:block}
 @media (max-width:820px){
-  .jgal.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .jgal.gallery .gitem,.jgal.gallery .gitem:nth-child(3n+2){aspect-ratio:auto}
+  .jgal.gallery.arch{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .jgal.gallery.arch .gitem,.jgal.gallery.arch .gitem:nth-child(3n+2){aspect-ratio:auto}
 }
-@media (max-width:520px){.jgal.gallery{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:520px){.jgal.gallery.arch{grid-template-columns:minmax(0,1fr)}}
 /* Album covers are all 4:3, so they belong in an even column grid — every card
    the same width, rows lining up, and a partial last row keeping that width
    instead of shrinking to fit. Galleries above stay justified, because those
@@ -1585,7 +1588,7 @@ const card = (p, n, base) => gitem(
 );
 
 /* BASE row heights. 260 is the value amtonality.com uses for its galleries. */
-const GALLERY_BASE = 400;
+const GALLERY_BASE = 260;
 const CARD_BASE = 240;
 const COVER_AR = 4/3;
 const jgal = (html, cls) => `<div class="jgal ${cls}">${html}</div>`;
@@ -1681,7 +1684,7 @@ function project(p){
   const shots = p.images;
   const gal = shots.length
     ? `<div class="rv" style="padding-top:clamp(34px,4.5vw,72px)">
-         ${jgal(shots.map((im,n)=>gitem(im.u, im.a, p.title+' — '+(n+1), null, '', GALLERY_BASE)).join(''), 'gallery')}
+         ${jgal(shots.map((im,n)=>gitem(im.u, im.a, p.title+' — '+(n+1), null, '', GALLERY_BASE)).join(''), 'gallery' + (ARCHITECTURE.includes(p) ? ' arch' : ''))}
        </div>`
     : '';
 
