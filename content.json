@@ -378,8 +378,16 @@
     "bandra-worli": {
       "photos": [
         {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/003.jpg",
+          "a": 0.667
+        },
+        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/000.jpg",
           "a": 1.5
+        },
+        {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/004.jpg",
+          "a": 0.667
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/001.jpg",
@@ -388,14 +396,6 @@
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/002.jpg",
           "a": 1.5
-        },
-        {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/003.jpg",
-          "a": 0.667
-        },
-        {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/004.jpg",
-          "a": 0.667
         },
         {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/bandra-worli/005.jpg",
