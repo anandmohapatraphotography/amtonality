@@ -374,15 +374,12 @@ a.card:hover .frame img{transform:scale(1.045)}
 .jgal.gallery .gitem{display:flex;flex-direction:column}
 .jgal.gallery .gimg{flex:1 1 auto;min-height:0}
 
-/* Architecture-section albums only: 3-column V/H/V grid with narrow-wide-narrow
-   proportions. Photos keep their NATIVE aspect ratios — no cropping. Row
-   heights vary naturally based on what's in each row. */
-.jgal.gallery.arch{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr) minmax(0,1fr);gap:clamp(6px,0.8vw,14px);margin-inline:0;align-items:start}
-.jgal.gallery.arch .gitem{display:block;width:100% !important;flex-grow:0 !important;padding:0;aspect-ratio:auto}
-.jgal.gallery.arch .gimg{width:100%;aspect-ratio:auto !important;height:auto;background:transparent}
-.jgal.gallery.arch .gimg img{width:100%;height:auto;object-fit:contain;display:block}
-@media (max-width:820px){.jgal.gallery.arch{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:520px){.jgal.gallery.arch{grid-template-columns:minmax(0,1fr)}}
+/* Architecture-section albums: justified-row layout, bigger base height so
+   rows feel bolder. Photos keep NATIVE aspect, rows justify to uniform
+   height — no crop, no whitespace, variable photos-per-row. */
+.jgal.gallery.arch{--inset:4px}
+.jgal.gallery.arch .gitem{display:flex;flex-direction:column}
+.jgal.gallery.arch .gimg{flex:1 1 auto;min-height:0}
 /* Album covers are all 4:3, so they belong in an even column grid — every card
    the same width, rows lining up, and a partial last row keeping that width
    instead of shrinking to fit. Galleries above stay justified, because those
@@ -1679,9 +1676,11 @@ function project(p){
   const i = pool.indexOf(p);
   const prev = pool[(i-1+pool.length)%pool.length], next = pool[(i+1)%pool.length];
   const shots = p.images;
+  const isArch = ARCHITECTURE.includes(p);
+  const base = isArch ? 420 : GALLERY_BASE;
   const gal = shots.length
     ? `<div class="rv" style="padding-top:clamp(34px,4.5vw,72px)">
-         ${jgal(shots.map((im,n)=>gitem(im.u, im.a, p.title+' — '+(n+1), null, '', GALLERY_BASE)).join(''), 'gallery' + (ARCHITECTURE.includes(p) ? ' arch' : ''))}
+         ${jgal(shots.map((im,n)=>gitem(im.u, im.a, p.title+' — '+(n+1), null, '', base)).join(''), 'gallery' + (isArch ? ' arch' : ''))}
        </div>`
     : '';
 
