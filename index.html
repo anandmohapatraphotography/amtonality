@@ -696,6 +696,14 @@ html.edit-mode .edit-sidenav-toggle{display:inline-flex}
         <a href="/contact" data-edit="site.navContact">Contact</a>
       </nav>
       <nav class="fnav">
+        <a href="/architectural-photography-vancouver">Architectural Photography, Vancouver</a>
+        <a href="/interior-photography-vancouver">Interior Photography, Vancouver</a>
+        <a href="/residential-photography-vancouver">Residential Photography, Vancouver</a>
+        <a href="/commercial-photography-vancouver">Commercial Photography, Vancouver</a>
+        <a href="/real-estate-photography-vancouver">Real Estate Photography, Vancouver</a>
+        <a href="/architecture-photographer-bc">Architecture Photographer, BC</a>
+      </nav>
+      <nav class="fnav">
         <a href="https://www.behance.net/anandmohapatra" target="_blank" rel="noopener">Behance</a>
         <a href="https://www.instagram.com/_anandmohapatra/" target="_blank" rel="noopener">Instagram</a>
         <a href="https://www.linkedin.com/in/anand-mohapatra-650b7212b/" target="_blank" rel="noopener">LinkedIn</a>
@@ -1870,6 +1878,122 @@ function contact(){
 }
 
 /* ============================================================
+   SEO LANDING PAGES — one per high-value search query.
+   Each has keyword-matched H1/title/meta, unique body copy,
+   a 6-photo preview from the matching album, and clear CTAs.
+   ============================================================ */
+const LANDINGS = {
+  'architectural-photography-vancouver': {
+    eyebrow: 'Architectural photography · Vancouver',
+    h1: 'Architectural photography in Vancouver',
+    lede: 'Editorial-grade architectural photography for architects, design studios, developers, and publications across Metro Vancouver.',
+    paras: [
+      "Working in Vancouver means photographing buildings against the city's particular light — long low winter angles, the soft overcast that flatters glass and steel, the summer Pacific haze that lifts a facade off its site. Each commission begins with a site walk to understand how light moves through the building across a day, then a shot plan built around the moments that reveal the architect's intent.",
+      "Deliverables are editorial-grade files prepared for press kits, awards submissions, publication pitches (Dezeen, ArchDaily, Western Living, Azure, Dwell), and the studio's own portfolio. Every frame is composed and corrected for publication — no stock-library treatment, no HDR crunch, no artificial sky swaps. The image a magazine picks up has to look like the building actually looks.",
+      "Past architectural clients span Metro Vancouver and extend across British Columbia — Burnaby, Richmond, North and West Vancouver, Surrey, Coquitlam, New Westminster. Travel across BC and Alberta on request; most Vancouver shoots are a half or full day on site."
+    ],
+    album: 'architecture',
+    serviceType: 'Architectural Photography',
+    nav: '/architecture'
+  },
+  'interior-photography-vancouver': {
+    eyebrow: 'Interior photography · Vancouver',
+    h1: 'Interior photography in Vancouver',
+    lede: 'Interior photography for designers, design-build firms, and homeowners — the kind of images that carry a room in print, on a studio reel, or on the front page of a feature.',
+    paras: [
+      "Interior work rewards patience with light. Each room is photographed the way it actually lives — ambient light as the base, subtle fill where a camera eye needs more than the human eye, nothing that reads as staged. The result is a frame that still looks like the room six months later, when the designer pitches the next project.",
+      "The brief usually comes from a Vancouver interior designer, custom home builder, or hospitality group ready to present a finished project. Scope covers hero shots for the portfolio, vignette and detail frames for social, and a full editorial set ready for publication. File delivery is RAW + graded JPEG sets, usually within a week.",
+      "Service area covers Vancouver, Burnaby, Richmond, North Vancouver, West Vancouver, Surrey, Coquitlam, New Westminster — anywhere the project sits inside Metro Vancouver. Travel further into BC on request."
+    ],
+    album: 'residential',
+    serviceType: 'Interior Photography',
+    nav: '/architecture'
+  },
+  'residential-photography-vancouver': {
+    eyebrow: 'Residential photography · Vancouver',
+    h1: 'Residential photography in Vancouver',
+    lede: 'Residential architecture and interior photography for custom home builders, landscape architects, and private homeowners across Metro Vancouver.',
+    paras: [
+      "A home is an architectural project and a personal one. The photographs that end up framed on a client's wall, or carried into a builder's portfolio, treat the house as both — the architect's intent made visible, and the way the owner actually inhabits the rooms. That tension is the work.",
+      "Each project is scoped around the rooms that matter most — the architectural hero shots a custom home builder will use for awards submissions and the next client pitch, the softer interior frames an owner wants for their own record. Landscape and exterior detail work rounds out the set so the house is photographed as a whole.",
+      "Residential commissions welcome across Metro Vancouver — Vancouver, Burnaby, Richmond, North and West Vancouver, Surrey, Coquitlam, New Westminster, Maple Ridge. Shoots are discreet and usually scheduled for a single full day."
+    ],
+    album: 'residential',
+    serviceType: 'Residential Photography',
+    nav: '/architecture'
+  },
+  'commercial-photography-vancouver': {
+    eyebrow: 'Commercial photography · Vancouver',
+    h1: 'Commercial architecture photography in Vancouver',
+    lede: 'Commercial and corporate architectural photography for developers, hospitality groups, and office projects across Vancouver and British Columbia.',
+    paras: [
+      "Commercial architecture carries its own photographic brief. A tower photographs differently than a restaurant interior, which photographs differently than a boutique hotel — but every commercial commission is built around the same question: what does this project need to say about itself to its next customer?",
+      "The deliverable is a usable set — hero exteriors for the developer's leasing or sales material, interior sequences a hospitality brand can carry across its own site, press-ready selects a publicist can pitch to Western Living or BC Business. Everything ready for publication, no re-work.",
+      "Comfortable at height (drone work on request where regulations permit), confident with mixed artificial and natural light in restaurant and retail interiors, and used to working around a live site. Commissions welcome in Vancouver, Burnaby, Richmond, Surrey, Coquitlam, and across BC."
+    ],
+    album: 'architecture',
+    serviceType: 'Commercial Photography',
+    nav: '/architecture'
+  },
+  'real-estate-photography-vancouver': {
+    eyebrow: 'Real estate photography · Vancouver',
+    h1: 'Real estate photography in Vancouver',
+    lede: 'Real estate photography for luxury listings, custom home builders, and realtors across Metro Vancouver — architectural standards applied to the listing shot.',
+    paras: [
+      "Most listing photography is a volume business. The work here is the opposite — a smaller number of listings, photographed to architectural standards, for realtors and custom home builders whose clientele expects more than the standard pass.",
+      "A typical shoot covers hero exterior, every main room, kitchen and primary bath detail, and any architectural feature the listing is actually selling. Light is corrected shot by shot rather than batch-processed, so each room carries its own warmth instead of the uniform grey-blue cast that gives away a rushed job.",
+      "Service area: Vancouver, West Vancouver, North Vancouver, Burnaby, Richmond, New Westminster, Coquitlam, Surrey. Turnaround is typically 48 hours for a graded set. Listings over $3M or heritage properties get first priority."
+    ],
+    album: 'residential',
+    serviceType: 'Real Estate Photography',
+    nav: '/architecture'
+  },
+  'architecture-photographer-bc': {
+    eyebrow: 'Architecture photographer · British Columbia',
+    h1: 'Architecture photographer in British Columbia',
+    lede: 'Architecture and interiors photography across British Columbia — Metro Vancouver, Vancouver Island, the Okanagan, and resort and heritage work further afield.',
+    paras: [
+      "The practice is based in Vancouver but the work moves. BC's architecture ranges from downtown Vancouver residential towers to heritage buildings across the province to the lodges and resort architecture of the Interior and coast — each with its own light, its own weather, and its own photographic brief.",
+      "Commissions across BC welcome. Base in Vancouver means Metro Vancouver (Burnaby, Richmond, North and West Vancouver, Surrey, Coquitlam, New Westminster, Maple Ridge) is a single-day turnaround; Vancouver Island, the Okanagan, and the Interior scope out as multi-day shoots and are planned with travel included in the quote.",
+      "Deliverables are consistent regardless of where the project sits — editorial-grade files prepared for the studio's portfolio, awards submissions, and press placement in publications like Western Living, BC Business, Azure, Dwell, and ArchDaily."
+    ],
+    album: 'architecture',
+    serviceType: 'Architectural Photography',
+    nav: '/architecture'
+  }
+};
+
+function landing(key){
+  const L = LANDINGS[key]; if (!L) return home();
+  const p = bySlug(L.album) || ARCHITECTURE[0];
+  const shots = (p && p.images || []).slice(0, 6);
+  const gal = shots.length
+    ? `<div class="rv" style="padding-top:clamp(34px,4.5vw,72px)">
+         ${jgal(shots.map((im,n)=>gitem(im.u, im.a,
+           `${L.h1} — ${n+1} by Anand Mohapatra`, null, '', 420)).join(''),
+           'gallery arch')}
+       </div>`
+    : '';
+  const bodyHtml = L.paras.map(t=>`<p class="lede" style="max-width:52ch">${esc(t)}</p>`).join('');
+  return `
+  <section class="wrap" style="padding-top:clamp(120px,14vh,180px)">
+    <div class="rv">
+      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)">${esc(L.eyebrow)}</div>
+      <h1 class="display" style="max-width:16ch">${esc(L.h1)}</h1>
+      <p class="lede" style="max-width:52ch;padding-top:clamp(20px,2.6vw,34px)">${esc(L.lede)}</p>
+    </div>
+    ${gal}
+    <div class="rv" style="padding-top:clamp(44px,6vw,90px);display:grid;gap:clamp(18px,2.4vw,32px)">
+      ${bodyHtml}
+    </div>
+    <div class="rv" style="padding-top:clamp(44px,6vw,90px);display:flex;gap:clamp(16px,2vw,28px);flex-wrap:wrap">
+      <a class="btn" href="/p/${p.slug}">View ${esc(p.title)} ${ARROW}</a>
+      <a class="btn" href="/contact">Start a project ${ARROW}</a>
+    </div>
+  </section>`;
+}
+
+/* ============================================================
    ROUTER + BEHAVIOUR
    ============================================================ */
 const view = document.getElementById('view');
@@ -1893,7 +2017,13 @@ function routeFor(pathOrHash){
     case '/press':   return { html: press(),   title:'Press',   nav:'/press' };
     case '/about':   return { html: about(),   title:'About',   nav:'/about' };
     case '/contact': return { html: contact(), title:'Contact', nav:'/contact' };
-    default:         return { html: home(),    title:null,      nav:'/' };
+    default:
+      // SEO landing routes: /architectural-photography-vancouver etc.
+      const key = h.replace(/^\//, '').replace(/\/$/, '');
+      if (LANDINGS[key]) {
+        return { html: landing(key), title: LANDINGS[key].h1, nav: LANDINGS[key].nav || '/' };
+      }
+      return { html: home(), title:null, nav:'/' };
   }
 }
 
@@ -2075,14 +2205,21 @@ function seoFor(hash){
       url: 'https://amtonality.com/' + h
     };
   }
-  const preset = {
+  const presets = {
     '/':             { t: base, d: SITE.intro || 'Architecture and interiors photography, Vancouver.' },
     '/architecture': { t: 'Architecture — Anand Mohapatra', d: 'Architectural and interiors photography portfolio, Vancouver.' },
     '/explorations': { t: 'Explorations — Anand Mohapatra', d: 'Travel, music, portraits, and personal photography projects by Anand Mohapatra.' },
     '/press':        { t: 'Press — Anand Mohapatra', d: 'Tear sheets and published work — magazine features, editorial commissions, and books carrying photographs by Anand Mohapatra.' },
     '/about':        { t: 'About — Anand Mohapatra', d: 'A South Asian-origin photographer specialising in architecture, based in Vancouver, Canada.' },
-    '/contact':      { t: 'Contact — Anand Mohapatra', d: 'Available for architectural and interior commissions in Vancouver and beyond.' }
-  }[h] || { t: base, d: SITE.intro || 'Architecture photography, Vancouver.' };
+    '/contact':      { t: 'Contact — Anand Mohapatra', d: 'Available for architectural and interior commissions in Vancouver and beyond.' },
+    '/architectural-photography-vancouver': { t: 'Architectural Photography Vancouver — Anand Mohapatra', d: 'Editorial-grade architectural photography for Vancouver architects, design studios, developers, and publications. Serving Metro Vancouver and BC.' },
+    '/interior-photography-vancouver':      { t: 'Interior Photography Vancouver — Anand Mohapatra', d: 'Interior photography in Vancouver for designers, design-build firms, and homeowners. Editorial-grade imagery for portfolios, publications, and press.' },
+    '/residential-photography-vancouver':   { t: 'Residential Photography Vancouver — Anand Mohapatra', d: 'Residential architecture and interiors photography for custom home builders, landscape architects, and homeowners across Metro Vancouver.' },
+    '/commercial-photography-vancouver':    { t: 'Commercial Architecture Photography Vancouver — Anand Mohapatra', d: 'Commercial and corporate architectural photography for Vancouver developers, hospitality groups, and office projects. Editorial-standard files.' },
+    '/real-estate-photography-vancouver':   { t: 'Real Estate Photography Vancouver — Anand Mohapatra', d: 'Real estate photography for luxury listings, custom home builders, and realtors in Metro Vancouver. Architectural standards on every shoot.' },
+    '/architecture-photographer-bc':        { t: 'Architecture Photographer BC — Anand Mohapatra', d: 'Architecture and interiors photographer serving British Columbia — Metro Vancouver, Vancouver Island, Okanagan, and resort and heritage commissions across BC.' }
+  };
+  const preset = presets[h] || { t: base, d: SITE.intro || 'Architecture photography, Vancouver.' };
   return { title: preset.t, description: preset.d, image: homeImg, url: 'https://amtonality.com' + (h === '/' ? '/' : h) };
 }
 /* Current route = the real pathname; falls back to a legacy `#/xxx` if some old
