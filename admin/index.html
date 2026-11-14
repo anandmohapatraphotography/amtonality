@@ -928,6 +928,67 @@ function renderProject(pane, slug) {
 
   pane.append(coverSection);
 
+  /* ---------- Gallery layout ---------- */
+  const isArchSection = PROJECTS.architecture.some(p => p.slug === slug);
+  const defaultBase = isArchSection ? 420 : 260;
+  const curLayout = o.layout || {};
+  const curMode = curLayout.mode || 'justified';
+  const curBase = typeof curLayout.base === 'number' ? curLayout.base : defaultBase;
+  const curCols = typeof curLayout.columns === 'number' ? curLayout.columns : 3;
+  const ensureLayout = () => { if (!o.layout) o.layout = {}; return o.layout; };
+
+  const layoutSection = el('div', { class:'section-actions' });
+  layoutSection.append(el('h3', {}, 'Gallery layout'));
+  layoutSection.append(el('div', { class:'sub' },
+    'How the photos arrange on this album page. Justified rows fits every photo flush edge-to-edge. Fixed columns gives a clean grid — 2, 3, or 4 across.'));
+
+  const modeRow = el('div', { style:'display:flex;gap:10px;margin:14px 0 4px' });
+  [['justified','Justified rows'],['grid','Fixed columns']].forEach(([m, label]) => {
+    const btn = el('button', {
+      class: 'btn small' + (curMode === m ? ' primary' : ' ghost'),
+      onclick: () => { ensureLayout().mode = m; setDirty(); renderPane(); }
+    }, label);
+    modeRow.append(btn);
+  });
+  layoutSection.append(modeRow);
+
+  if (curMode === 'grid') {
+    const colsRow = el('div', { style:'display:flex;gap:10px;align-items:center;margin-top:14px' });
+    colsRow.append(el('label', { style:'min-width:120px;font-weight:500' }, 'Columns'));
+    [2,3,4].forEach(n => {
+      const b = el('button', {
+        class: 'btn small' + (curCols === n ? ' primary' : ' ghost'),
+        onclick: () => { ensureLayout().columns = n; setDirty(); renderPane(); }
+      }, String(n));
+      colsRow.append(b);
+    });
+    layoutSection.append(colsRow);
+    layoutSection.append(el('div', { class:'sub', style:'margin-top:10px' },
+      'Photos keep their native aspect ratio. Shorter photos leave a bit of whitespace below in their row — that\'s unavoidable with strict columns.'));
+  } else {
+    const sliderRow = el('div', { style:'display:flex;gap:12px;align-items:center;margin-top:14px' });
+    sliderRow.append(el('label', { style:'min-width:120px;font-weight:500' }, 'Thumb size'));
+    const slider = el('input', { type:'range', min:'180', max:'600', step:'10', value: String(curBase), style:'flex:1' });
+    const readout = el('span', { style:'min-width:70px;text-align:right;font-variant-numeric:tabular-nums;color:#555' }, curBase + 'px');
+    slider.addEventListener('input', () => {
+      readout.textContent = slider.value + 'px';
+      ensureLayout().base = +slider.value;
+      setDirty();
+    });
+    sliderRow.append(slider, readout);
+    layoutSection.append(sliderRow);
+    layoutSection.append(el('div', { class:'sub', style:'margin-top:10px' },
+      `Smaller = more photos per row. Default is ${defaultBase}px for this album.`));
+  }
+
+  if (o.layout) {
+    layoutSection.append(el('button', {
+      class:'btn small ghost', style:'margin-top:14px',
+      onclick: () => { delete o.layout; setDirty(); renderPane(); }
+    }, 'Reset to default'));
+  }
+  pane.append(layoutSection);
+
   /* ---------- Photos ----------
      After the Adobe→R2 migration, `o.photos` is the full list. Before it,
      only `o.extraImages` exists and we tell the user the originals are locked. */
