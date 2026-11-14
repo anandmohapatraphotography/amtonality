@@ -400,7 +400,12 @@ a.card:hover .frame img{transform:scale(1.045)}
    at the bottom of their cell (unavoidable with strict columns). */
 .jgal.gallery.cols-2,
 .jgal.gallery.cols-3,
-.jgal.gallery.cols-4{display:grid;gap:clamp(8px,1vw,16px);align-items:start}
+.jgal.gallery.cols-4{display:grid;gap:var(--gap,clamp(8px,1vw,16px));align-items:start}
+/* When gap is user-controlled, apply it to the default justified gallery too. */
+.gal-inner .jgal.gallery{gap:var(--gap,4px)}
+.gal-inner .jgal.gallery.cols-2,
+.gal-inner .jgal.gallery.cols-3,
+.gal-inner .jgal.gallery.cols-4{gap:var(--gap,12px)}
 .jgal.gallery.cols-2{grid-template-columns:repeat(2,1fr)}
 .jgal.gallery.cols-3{grid-template-columns:repeat(3,1fr)}
 .jgal.gallery.cols-4{grid-template-columns:repeat(4,1fr)}
@@ -419,17 +424,23 @@ a.card:hover .frame img{transform:scale(1.045)}
 }
 /* Inline-editor layout widget — appears on each gallery page in edit mode. */
 .layout-widget{display:none}
-html.edit-mode .layout-widget{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 clamp(18px,2vw,28px);padding:8px 12px;background:var(--paper-2);border:1px solid var(--rule);border-radius:999px;font-family:"Inter",sans-serif;font-size:12px;color:var(--ink);width:fit-content}
-.layout-widget .lw-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:0 6px}
+html.edit-mode .layout-widget{display:block;margin:0 0 clamp(18px,2vw,28px);padding:10px 14px;background:var(--paper-2);border:1px solid var(--rule);border-radius:14px;font-family:"Inter",sans-serif;font-size:12px;color:var(--ink);width:fit-content;min-width:280px;max-width:420px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.layout-widget .lw-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.layout-widget .lw-row.lw-more{margin-top:10px;padding-top:10px;border-top:1px solid var(--rule)}
+.layout-widget .lw-row.lw-more + .lw-row.lw-more{margin-top:8px;padding-top:8px}
+.layout-widget .lw-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:0 6px 0 0}
 .layout-widget .lw-btn{background:transparent;border:1px solid transparent;color:var(--ink);cursor:pointer;padding:4px 12px;border-radius:999px;font-size:12px;font-family:inherit;letter-spacing:.04em;transition:background .15s ease,border-color .15s ease}
 .layout-widget .lw-btn:hover{background:var(--paper)}
 .layout-widget .lw-btn.on{background:var(--ink);color:var(--paper)}
-.layout-widget .lw-btn.lw-reset{padding:4px 8px;font-size:14px;line-height:1}
+.layout-widget .lw-btn.lw-reset,
+.layout-widget .lw-btn.lw-toggle{padding:4px 8px;font-size:13px;line-height:1}
 .layout-widget .lw-sep{width:1px;height:16px;background:var(--rule);margin:0 2px}
-.layout-widget .lw-slider{width:160px;appearance:none;background:transparent;cursor:pointer}
+.layout-widget .lw-field{display:flex;align-items:center;gap:10px;width:100%}
+.layout-widget .lw-flabel{font-size:11px;color:var(--ink-2);min-width:72px}
+.layout-widget .lw-slider{flex:1;min-width:120px;appearance:none;background:transparent;cursor:pointer}
 .layout-widget .lw-slider::-webkit-slider-runnable-track{height:3px;background:var(--rule);border-radius:3px}
 .layout-widget .lw-slider::-webkit-slider-thumb{appearance:none;width:14px;height:14px;background:var(--ink);border-radius:50%;margin-top:-5px;cursor:grab}
-.layout-widget .lw-readout{font-variant-numeric:tabular-nums;color:var(--ink-3);min-width:46px;text-align:right;font-size:11px}
+.layout-widget .lw-readout{font-variant-numeric:tabular-nums;color:var(--ink-3);min-width:56px;text-align:right;font-size:11px}
 /* Album covers are all 4:3, so they belong in an even column grid — every card
    the same width, rows lining up, and a partial last row keeping that width
    instead of shrinking to fit. Galleries above stay justified, because those
@@ -729,14 +740,6 @@ html.edit-mode .edit-sidenav-toggle{display:inline-flex}
         <a href="/press" data-edit="site.navPress">Press</a>
         <a href="/about" data-edit="site.navAbout">About</a>
         <a href="/contact" data-edit="site.navContact">Contact</a>
-      </nav>
-      <nav class="fnav">
-        <a href="/architectural-photography-vancouver">Architectural Photography, Vancouver</a>
-        <a href="/interior-photography-vancouver">Interior Photography, Vancouver</a>
-        <a href="/residential-photography-vancouver">Residential Photography, Vancouver</a>
-        <a href="/commercial-photography-vancouver">Commercial Photography, Vancouver</a>
-        <a href="/real-estate-photography-vancouver">Real Estate Photography, Vancouver</a>
-        <a href="/architecture-photographer-bc">Architecture Photographer, BC</a>
       </nav>
       <nav class="fnav">
         <a href="https://www.behance.net/anandmohapatra" target="_blank" rel="noopener">Behance</a>
@@ -1755,30 +1758,92 @@ function project(p){
   } else if (isArch) {
     galCls += ' arch';
   }
-  /* Layout widget — visible only in edit mode. Lets the user switch per-album
-     layout right from the gallery page without jumping to /admin/. */
+  /* Extended layout knobs — all default to sane values when unset. */
+  const gutter    = typeof layout.gutter    === 'number' ? layout.gutter    : (mode==='grid' ? 10 : 4);
+  const widthPct  = typeof layout.widthPct  === 'number' ? layout.widthPct  : 100;
+  const maxWidth  = typeof layout.maxWidth  === 'number' ? layout.maxWidth  : 0;
+  const padTop    = typeof layout.padTop    === 'number' ? layout.padTop    : -1;  // -1 = use default clamp
+  const padBottom = typeof layout.padBottom === 'number' ? layout.padBottom : -1;
+  const expanded  = layout._expanded === true;
+
+  const galWrapStyle = [
+    padTop >= 0 ? `padding-top:${padTop}px` : 'padding-top:clamp(34px,4.5vw,72px)',
+    padBottom >= 0 ? `padding-bottom:${padBottom}px` : ''
+  ].filter(Boolean).join(';');
+
+  const galInnerStyle = [
+    `width:${widthPct}%`,
+    maxWidth > 0 ? `max-width:${maxWidth}px` : '',
+    'margin:0 auto',
+    `--gap:${gutter}px`
+  ].filter(Boolean).join(';');
+
+  /* Layout widget — visible only in edit mode. */
   const layoutWidget = `
-    <div class="layout-widget" data-layout-slug="${p.slug}" data-mode="${mode}" data-base="${base}" data-cols="${cols}">
-      <span class="lw-label">Layout</span>
-      <button class="lw-btn${mode==='justified'?' on':''}" data-lw-mode="justified">Justified</button>
-      <button class="lw-btn${mode==='grid'?' on':''}" data-lw-mode="grid">Grid</button>
-      ${mode==='grid'
-        ? `<span class="lw-sep"></span>
-           ${[2,3,4].map(n=>`<button class="lw-btn lw-col${cols===n?' on':''}" data-lw-cols="${n}">${n}</button>`).join('')}`
-        : `<span class="lw-sep"></span>
-           <input class="lw-slider" type="range" min="180" max="600" step="10" value="${base}" aria-label="Thumb size">
-           <span class="lw-readout">${base}px</span>`}
-      ${p.layout ? `<span class="lw-sep"></span><button class="lw-btn lw-reset" title="Reset to default">↺</button>` : ''}
+    <div class="layout-widget" data-layout-slug="${p.slug}" data-mode="${mode}">
+      <div class="lw-row">
+        <span class="lw-label">Layout</span>
+        <button class="lw-btn${mode==='justified'?' on':''}" data-lw-mode="justified">Justified</button>
+        <button class="lw-btn${mode==='grid'?' on':''}" data-lw-mode="grid">Grid</button>
+        ${mode==='grid'
+          ? `<span class="lw-sep"></span>
+             ${[2,3,4].map(n=>`<button class="lw-btn lw-col${cols===n?' on':''}" data-lw-cols="${n}">${n}</button>`).join('')}`
+          : `<span class="lw-sep"></span>
+             <input class="lw-slider" type="range" min="180" max="600" step="10" value="${base}" data-lw-key="base" aria-label="Thumb size">
+             <span class="lw-readout" data-lw-readout="base">${base}px</span>`}
+        <span class="lw-sep"></span>
+        <button class="lw-btn lw-toggle" data-lw-toggle title="More options">${expanded ? '▲' : '⚙'}</button>
+        ${(p.layout && Object.keys(p.layout).some(k => k !== '_expanded')) ? `<button class="lw-btn lw-reset" title="Reset to default">↺</button>` : ''}
+      </div>
+      ${expanded ? `
+      <div class="lw-row lw-more">
+        <div class="lw-field">
+          <span class="lw-flabel">Gutter</span>
+          <input class="lw-slider" type="range" min="0" max="40" step="1" value="${gutter}" data-lw-key="gutter">
+          <span class="lw-readout" data-lw-readout="gutter">${gutter}px</span>
+        </div>
+      </div>
+      <div class="lw-row lw-more">
+        <div class="lw-field">
+          <span class="lw-flabel">% Width</span>
+          <input class="lw-slider" type="range" min="30" max="100" step="1" value="${widthPct}" data-lw-key="widthPct">
+          <span class="lw-readout" data-lw-readout="widthPct">${widthPct}%</span>
+        </div>
+      </div>
+      <div class="lw-row lw-more">
+        <div class="lw-field">
+          <span class="lw-flabel">Max-Width</span>
+          <input class="lw-slider" type="range" min="0" max="2400" step="20" value="${maxWidth}" data-lw-key="maxWidth">
+          <span class="lw-readout" data-lw-readout="maxWidth">${maxWidth > 0 ? maxWidth + 'px' : 'none'}</span>
+        </div>
+      </div>
+      <div class="lw-row lw-more">
+        <div class="lw-field">
+          <span class="lw-flabel">Above</span>
+          <input class="lw-slider" type="range" min="0" max="200" step="2" value="${padTop >= 0 ? padTop : 50}" data-lw-key="padTop">
+          <span class="lw-readout" data-lw-readout="padTop">${padTop >= 0 ? padTop + 'px' : 'auto'}</span>
+        </div>
+      </div>
+      <div class="lw-row lw-more">
+        <div class="lw-field">
+          <span class="lw-flabel">Below</span>
+          <input class="lw-slider" type="range" min="0" max="200" step="2" value="${padBottom >= 0 ? padBottom : 50}" data-lw-key="padBottom">
+          <span class="lw-readout" data-lw-readout="padBottom">${padBottom >= 0 ? padBottom + 'px' : 'auto'}</span>
+        </div>
+      </div>
+      ` : ''}
     </div>`;
   const gal = shots.length
-    ? `<div class="rv" style="padding-top:clamp(34px,4.5vw,72px)">
+    ? `<div class="rv" style="${galWrapStyle}">
          ${layoutWidget}
+         <div class="gal-inner" style="${galInnerStyle}">
          ${jgal(shots.map((im,n)=>{
            const alt = isArch
              ? `${p.title} — Vancouver architecture photography by Anand Mohapatra — ${n+1}`
              : `${p.title} — photography by Anand Mohapatra — ${n+1}`;
            return gitem(im.u, im.a, alt, null, '', itemBase);
          }).join(''), galCls)}
+         </div>
        </div>`
     : '';
 
@@ -3015,7 +3080,10 @@ async function bootInlineEditor() {
       if (w._wired) return;
       w._wired = true;
       const slug = w.dataset.layoutSlug;
-      const commit = next => {
+      /* commit({...}, {silent:true}) updates state without triggering re-render
+         (useful for live slider dragging — we live-update the DOM ourselves). */
+      const commit = (next, opts) => {
+        opts = opts || {};
         if (!draft.projects) draft.projects = {};
         if (!draft.projects[slug]) draft.projects[slug] = {};
         if (next === null) {
@@ -3024,11 +3092,26 @@ async function bootInlineEditor() {
         } else {
           const cur = draft.projects[slug].layout || {};
           const merged = Object.assign({}, cur, next);
+          /* _expanded is UI state, not content — strip before persisting if
+             that's the only field left. */
           draft.projects[slug].layout = merged;
           syncModel('projectLayout.' + slug, merged);
         }
         markDirty();
-        render();
+        if (!opts.silent) render();
+      };
+      /* Keys that change gallery structure (justified vs grid) need a re-render.
+         Pure visual knobs (gutter/width/pad) can live-update via inline styles. */
+      const STRUCTURAL_KEYS = new Set(['mode','columns','base']);
+      const liveApply = (key, val) => {
+        const galWrap = w.closest('.rv');
+        if (!galWrap) return;
+        const inner = galWrap.querySelector('.gal-inner');
+        if (key === 'gutter' && inner) inner.style.setProperty('--gap', val + 'px');
+        else if (key === 'widthPct' && inner) inner.style.width = val + '%';
+        else if (key === 'maxWidth' && inner) inner.style.maxWidth = val > 0 ? val + 'px' : '';
+        else if (key === 'padTop') galWrap.style.paddingTop = val + 'px';
+        else if (key === 'padBottom') galWrap.style.paddingBottom = val + 'px';
       };
       w.querySelectorAll('[data-lw-mode]').forEach(b => {
         b.addEventListener('click', () => commit({ mode: b.dataset.lwMode }));
@@ -3036,18 +3119,36 @@ async function bootInlineEditor() {
       w.querySelectorAll('[data-lw-cols]').forEach(b => {
         b.addEventListener('click', () => commit({ mode: 'grid', columns: +b.dataset.lwCols }));
       });
-      const slider = w.querySelector('.lw-slider');
-      const readout = w.querySelector('.lw-readout');
-      if (slider) {
+      w.querySelectorAll('.lw-slider').forEach(slider => {
+        const key = slider.dataset.lwKey;
+        const readout = w.querySelector('[data-lw-readout="' + key + '"]');
+        const fmt = v => {
+          if (key === 'widthPct') return v + '%';
+          if (key === 'maxWidth') return +v > 0 ? v + 'px' : 'none';
+          return v + 'px';
+        };
         let t;
         slider.addEventListener('input', () => {
-          if (readout) readout.textContent = slider.value + 'px';
+          if (readout) readout.textContent = fmt(slider.value);
+          liveApply(key, +slider.value);
           clearTimeout(t);
-          t = setTimeout(() => commit({ mode: 'justified', base: +slider.value }), 200);
+          t = setTimeout(() => {
+            if (STRUCTURAL_KEYS.has(key)) {
+              commit(key === 'base' ? { mode:'justified', base:+slider.value } : { [key]: +slider.value });
+            } else {
+              /* silent commit — DOM already updated by liveApply */
+              commit({ [key]: +slider.value }, { silent: true });
+            }
+          }, 180);
         });
-      }
+      });
       const reset = w.querySelector('.lw-reset');
       if (reset) reset.addEventListener('click', () => commit(null));
+      const tog = w.querySelector('[data-lw-toggle]');
+      if (tog) tog.addEventListener('click', () => {
+        const cur = (draft.projects && draft.projects[slug] && draft.projects[slug].layout) || {};
+        commit({ _expanded: !cur._expanded });
+      });
     });
   }
 
