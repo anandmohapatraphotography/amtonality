@@ -207,6 +207,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.185em;
   color:var(--ink-2);
 }
+/* Eyebrow styled as a link — visual parity with plain eyebrow; subtle hover. */
+a.eyebrow-link,a.eyebrow-link:visited{color:var(--ink-2);text-decoration:none;display:inline-block;transition:opacity .2s ease}
+a.eyebrow-link:hover{opacity:.65}
 .lede{font-size:clamp(1.02rem,1.35vw,1.2rem);line-height:1.68;color:var(--ink-2);max-width:46ch}
 .body p{max-width:64ch;color:var(--ink-2);font-size:1.02rem;line-height:1.78}
 .body p+p{margin-top:1.35em}
@@ -1663,7 +1666,7 @@ function home(){
     <div class="hero-grid">
       <div class="rv hero-img" data-edit-image="site.cover" data-edit-slug="cover">${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
       <div class="hero-copy rv d1">
-        <div class="eyebrow" data-edit="site.heroEyebrow">${SITE.heroEyebrow || 'Architectural Photography'}</div>
+        <a class="eyebrow eyebrow-link" href="/architectural-photography-vancouver"><span data-edit="site.heroEyebrow">${SITE.heroEyebrow || 'Architectural Photography'}</span></a>
         <h1 class="display" data-edit="site.tagline">${SITE.tagline}</h1>
         <p class="lede" data-edit="site.intro">${SITE.intro}</p>
       </div>
@@ -1672,7 +1675,7 @@ function home(){
 
   <section class="wrap">
     <div class="shead shead-first rv">
-      <div><div class="eyebrow" data-edit="site.homeArchEyebrow">${SITE.homeArchEyebrow || 'Architectural Photography'}</div><h2 class="h2" data-edit="site.homeArchHeading">${SITE.homeArchHeading || 'Architecture and Interiors'}</h2></div>
+      <div><a class="eyebrow eyebrow-link" href="/architectural-photography-vancouver"><span data-edit="site.homeArchEyebrow">${SITE.homeArchEyebrow || 'Architectural Photography'}</span></a><h2 class="h2" data-edit="site.homeArchHeading">${SITE.homeArchHeading || 'Architecture and Interiors'}</h2></div>
       <a class="arrow" href="/architecture"><span data-edit="site.homeArchArrow">${SITE.homeArchArrow || 'All architecture'}</span> ${ARROW}</a>
     </div>
     ${jgal(a.map((p,i)=>card(p,pad(i))).join(''), 'cards')}
