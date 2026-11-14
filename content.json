@@ -212,7 +212,11 @@
       "year": "2026",
       "place": "Vancouver, BC",
       "statement": "Through the art of photography, I learned that architecture is more than form — it carries atmosphere, intention, and the character of the people who inhabit it. Each photograph is an exploration of balance, detail, and the quiet dialogue between space, material, and experience.",
-      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/2cp12o0pmu5vt35y.jpg"
+      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/2cp12o0pmu5vt35y.jpg",
+      "layout": {
+        "mode": "justified",
+        "base": 420
+      }
     },
     "residential": {
       "photos": [
