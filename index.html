@@ -926,7 +926,12 @@ const EXPLORATIONS = [
 /* `let` because applyContent() may push editor-created albums into
    ARCHITECTURE/EXPLORATIONS and then rebuild ALL in place. */
 let ALL = [...ARCHITECTURE, ...EXPLORATIONS];
-const bySlug = s => ALL.find(p => p.slug === s);
+/* Public page addresses that differ from the internal album id. The id stays
+   the key in content.json and the R2 photo folder; only the URL changes.
+   bySlug() accepts either, so old /p/residential links still resolve. */
+const URL_NAME = { residential: 'interiors' };
+const pageUrl = p => '/p/' + (URL_NAME[p.slug] || p.slug);
+const bySlug = s => ALL.find(p => p.slug === s || URL_NAME[p.slug] === s);
 /* A project is "visible" when it appears in menus and gallery grids. Hidden
    projects still resolve via #/p/<slug> (so bookmarks keep working) but drop
    off the homepage, the index pages, and the sidebar. */
@@ -1645,7 +1650,7 @@ const card = (p, n, base) => {
     p.cover,
     COVER_AR,
     altText,
-    `/p/${p.slug}`,
+    pageUrl(p),
     `<span class="cap"><h3>${esc(p.title)}</h3></span>`,
     base || null
   );
@@ -1731,7 +1736,7 @@ function indexPage(title, eyebrow, statement, items, editKey){
     <div id="idx" style="padding-top:clamp(18px,2.4vw,30px)">${jgal(items.map((p,i)=>card(p,pad(i))).join(''), 'cards')}</div>
     <div id="idxlist" class="list" style="display:none">
       ${items.map((p,i)=>`
-        <a href="/p/${p.slug}" data-cover="${p.cover}">
+        <a href="${pageUrl(p)}" data-cover="${p.cover}">
           <span class="num">${pad(i)}</span>
           <h3>${esc(p.title)}</h3>
           <p>${esc(p.statement.slice(0,110))}…</p>
@@ -1869,8 +1874,8 @@ function project(p){
     })()}
     ${gal}
     <div class="pnav">
-      <a href="/p/${prev.slug}"><div class="eyebrow">Previous</div><div class="h3">${esc(prev.title)}</div></a>
-      <a href="/p/${next.slug}" class="r"><div class="eyebrow">Next</div><div class="h3">${esc(next.title)}</div></a>
+      <a href="${pageUrl(prev)}"><div class="eyebrow">Previous</div><div class="h3">${esc(prev.title)}</div></a>
+      <a href="${pageUrl(next)}" class="r"><div class="eyebrow">Next</div><div class="h3">${esc(next.title)}</div></a>
     </div>
   </section>`;
 }
@@ -2119,7 +2124,7 @@ function landing(key){
       ${bodyHtml}
     </div>
     <div class="rv" style="padding-top:clamp(44px,6vw,90px);display:flex;gap:clamp(16px,2vw,28px);flex-wrap:wrap">
-      <a class="btn" href="/p/${p.slug}">View ${esc(p.title)} ${ARROW}</a>
+      <a class="btn" href="${pageUrl(p)}">View ${esc(p.title)} ${ARROW}</a>
       <a class="btn" href="/contact">Start a project ${ARROW}</a>
     </div>
   </section>`;
@@ -2334,7 +2339,7 @@ function seoFor(hash){
       title: (p.title || 'Album') + ' — Anand Mohapatra',
       description: (p.statement || '').replace(/\s+/g,' ').slice(0,180),
       image: p.cover || homeImg,
-      url: 'https://amtonality.com/' + h
+      url: 'https://amtonality.com' + pageUrl(p)
     };
   }
   const presets = {
@@ -2775,9 +2780,9 @@ async function bootInlineEditor() {
      view.innerHTML is replaced there. */
   function wirePhotos() {
     if (!location.pathname.startsWith('/p/')) return;
-    const slug = location.pathname.slice(3).replace(/\/$/, '');
-    const proj = ALL.find(p => p.slug === slug);
+    const proj = bySlug(location.pathname.slice(3).replace(/\/$/, ''));
     if (!proj) return;
+    const slug = proj.slug;
     const gal = document.querySelector('.jgal.gallery');
     const persist = () => {
       if (!draft.projects) draft.projects = {};
@@ -2961,7 +2966,7 @@ async function bootInlineEditor() {
       if (!title) { $e.textContent = 'Give the album a title first.'; return; }
       const slug = slugify(title);
       if (!slug) { $e.textContent = 'Title needs at least one letter/number for the URL.'; return; }
-      if (ALL.find(p => p.slug === slug)) { $e.textContent = 'An album with that URL already exists. Pick a different title.'; return; }
+      if (bySlug(slug)) { $e.textContent = 'An album with that URL already exists. Pick a different title.'; return; }
       const extra = { slug, title, year:'', place:'', statement:'', photos:[] };
       if (!draft.extraProjects) draft.extraProjects = { architecture:[], explorations:[] };
       if (!Array.isArray(draft.extraProjects[section])) draft.extraProjects[section] = [];
@@ -2995,11 +3000,11 @@ async function bootInlineEditor() {
       ${link('/', 'Home')}
       <div class="side-group">Architecture</div>
       ${link('/architecture', 'All architecture')}
-      ${ARCHITECTURE.filter(isVis).map(p => link('/p/'+p.slug, esc(p.title), 'child')).join('')}
+      ${ARCHITECTURE.filter(isVis).map(p => link(pageUrl(p), esc(p.title), 'child')).join('')}
       <a class="side-link add" data-add="architecture">+ New album</a>
       <div class="side-group">Explorations</div>
       ${link('/explorations', 'All explorations')}
-      ${EXPLORATIONS.filter(isVis).map(p => link('/p/'+p.slug, esc(p.title), 'child')).join('')}
+      ${EXPLORATIONS.filter(isVis).map(p => link(pageUrl(p), esc(p.title), 'child')).join('')}
       <a class="side-link add" data-add="explorations">+ New album</a>
       <div class="side-group">Other</div>
       ${link('/press', 'Press')}
