@@ -297,11 +297,15 @@
           "a": 0.6666666666666666
         },
         {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/015.jpg",
+          "a": 1.5
+        },
+        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/npo1t8a9mwjn4huj.jpg",
           "a": 0.6666666666666666
         },
         {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/015.jpg",
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/u4tcwg4bmuqkwn1o.jpg",
           "a": 1.5
         },
         {
@@ -313,10 +317,6 @@
           "a": 1.5
         },
         {
-          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/u4tcwg4bmuqkwn1o.jpg",
-          "a": 1.5
-        },
-        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/p2fly6axmtsdkqfv.jpg",
           "a": 1.7778901247050893
         }
@@ -324,7 +324,7 @@
       "title": "Interiors",
       "year": "2026",
       "place": "Vancouver, BC",
-      "statement": "Within the world of residence and interiors, design becomes intimate — a study in texture, silence, and the personality it holds. And within that space lies a rhythm of living: comfort, belonging, and the character shaped by those who call it home.",
+      "statement": "Homes, restaurants and shops: interiors where design becomes intimate. A study in texture, silence, and the character shaped by the people who fill them. And within that space lies a rhythm of living: comfort, belonging, and the character shaped by those who call it home.",
       "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/l3csccp3muhcbft8.jpg"
     },
     "heritage": {
