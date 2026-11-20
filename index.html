@@ -540,6 +540,13 @@ html.edit-mode .jgal.gallery .gitem.drop-target::before{content:"";position:abso
 html.edit-mode .jgal.gallery .gitem .photo-del{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:999px;background:rgba(20,19,15,.85);color:#fff;border:0;cursor:pointer;font-size:16px;line-height:1;z-index:4;display:none;align-items:center;justify-content:center;transition:background .2s ease}
 html.edit-mode .jgal.gallery .gitem:hover .photo-del{display:flex}
 html.edit-mode .jgal.gallery .gitem .photo-del:hover{background:#c0392b}
+/* Contact form field editing — same remove-on-hover pattern as gallery photos */
+html.edit-mode .cfield .cfield-del{position:absolute;top:0;right:0;width:24px;height:24px;border-radius:999px;background:rgba(20,19,15,.85);color:#fff;border:0;cursor:pointer;font-size:14px;line-height:1;z-index:2;display:none;align-items:center;justify-content:center;transition:background .2s ease}
+html.edit-mode .cfield:hover .cfield-del{display:flex}
+html.edit-mode .cfield-del:hover{background:#c0392b}
+.cfield-add{display:none}
+html.edit-mode .cfield-add{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--ink-3);font-size:11px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;border:2px dashed var(--rule);border-radius:6px;padding:14px 16px;transition:border-color .2s ease,color .2s ease}
+html.edit-mode .cfield-add:hover{border-color:var(--ink);color:var(--ink)}
 /* ★ Set-as-cover button (bottom-right) + COVER badge on active cover */
 html.edit-mode .jgal.gallery .gitem .photo-cover{position:absolute;bottom:8px;right:8px;width:28px;height:28px;border-radius:999px;background:rgba(20,19,15,.85);color:#fff;border:0;cursor:pointer;font-size:15px;line-height:1;z-index:4;display:none;align-items:center;justify-content:center;transition:background .2s ease}
 html.edit-mode .jgal.gallery .gitem:hover .photo-cover{display:flex}
@@ -691,6 +698,13 @@ const SITE = {
     ["Instagram","https://www.instagram.com/_anandmohapatra/"],
     ["LinkedIn","https://www.linkedin.com/in/anand-mohapatra-650b7212b/"],
     ["Facebook","https://www.facebook.com/AnandMohapatraPhotography"]
+  ],
+  /* Extra contact-form fields, beyond the fixed Name / Email / Message.
+     Each editable/removable from amtonality.com/edit without touching code.
+     content.json.contact.fields fully replaces this array once the editor
+     has saved at least once. type is "text" or "textarea". */
+  contactFields: [
+    { id:"company", label:"Company", type:"text", required:false, placeholder:"" }
   ]
 };
 
@@ -824,6 +838,7 @@ async function applyContent(){
     if (c.about && c.about.headingText) SITE.aboutHeadingText = c.about.headingText;
     if (c.about && typeof c.about.headingVisible === 'boolean') SITE.aboutHeadingVisible = c.about.headingVisible;
     if (c.contact && c.contact.lede) SITE.contactLede = c.contact.lede;
+    if (c.contact && Array.isArray(c.contact.fields)) SITE.contactFields = c.contact.fields;
     if (Array.isArray(c.press)) SITE.press = c.press;
     /* Extras first — editor-created albums live in extraProjects.{architecture,
        explorations} as {slug,title,year,place,statement,cover,photos}. Push
@@ -1825,8 +1840,16 @@ function contact(){
           <div class="field"><label for="e"><span style="font-weight:700">Email</span><span style="color:var(--ink-3)">(Required)</span></label><input id="e" name="email" type="email" required autocomplete="email"></div>
         </div>
 
-        <!-- Company row -->
-        <div class="field"><label for="co"><span style="font-weight:700">Company</span><span style="color:var(--ink-3)">(Optional)</span></label><input id="co" name="company" autocomplete="organization"></div>
+        <!-- Extra fields: self-managed from the editor at amtonality.com/edit.
+             Default is just Company; add or remove fields there, no code needed. -->
+        ${(SITE.contactFields || []).map((f,i) => `
+        <div class="field cfield" data-cfield-id="${esc(f.id)}" data-cfield-idx="${i}">
+          <label for="cf-${esc(f.id)}"><span style="font-weight:700">${esc(f.label || f.id)}</span><span style="color:var(--ink-3)">(${f.required ? 'Required' : 'Optional'})</span></label>
+          ${f.type === 'textarea'
+            ? `<textarea id="cf-${esc(f.id)}" name="${esc(f.id)}" placeholder="${esc(f.placeholder || '')}" ${f.required ? 'required' : ''} style="min-height:120px"></textarea>`
+            : `<input id="cf-${esc(f.id)}" name="${esc(f.id)}" placeholder="${esc(f.placeholder || '')}" ${f.required ? 'required' : ''}>`}
+        </div>`).join('')}
+        <div class="cfield-add" id="cfieldAdd">+ Add a field</div>
 
         <!-- Message -->
         <div class="field">
@@ -2638,6 +2661,96 @@ async function bootInlineEditor() {
   const slugify = t => (t || '').toLowerCase().trim()
     .replace(/[^\w\s-]/g,'').replace(/[\s_]+/g,'-').replace(/-+/g,'-').replace(/^-+|-+$/g,'');
 
+  /* Contact form field editing — remove-on-hover (same pattern as gallery
+     photos) plus a "+ Add a field" tile. Name / Email / Message stay fixed;
+     everything in SITE.contactFields is self-managed from here. */
+  function wireContactFields() {
+    if (location.pathname !== '/contact') return;
+    const persist = () => setPath(draft, 'contact.fields', SITE.contactFields);
+
+    document.querySelectorAll('.cfield').forEach(row => {
+      if (row._delWired) return;
+      row._delWired = true;
+      const del = document.createElement('button');
+      del.className = 'cfield-del';
+      del.type = 'button';
+      del.title = 'Remove this field';
+      del.innerHTML = '×';
+      del.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const idx = +row.dataset.cfieldIdx;
+        const field = SITE.contactFields[idx];
+        if (!confirm('Remove "' + (field.label || field.id) + '" from the contact form?')) return;
+        SITE.contactFields.splice(idx, 1);
+        persist();
+        markDirty();
+        render();
+      });
+      row.appendChild(del);
+    });
+
+    const addTile = document.getElementById('cfieldAdd');
+    if (addTile && !addTile._wired) {
+      addTile._wired = true;
+      addTile.addEventListener('click', () => promptNewContactField());
+    }
+  }
+
+  function promptNewContactField() {
+    const wrap = document.createElement('div');
+    wrap.className = 'album-modal';
+    wrap.innerHTML = `
+      <div class="album-modal-card">
+        <h3>Add a field</h3>
+        <p>Give the field a label. Visitors will see it on the contact form exactly as typed.</p>
+        <input type="text" id="cfLabel" placeholder="e.g. Budget" autofocus>
+        <div class="row" style="margin-top:14px">
+          <button id="cfTypeText" class="primary" data-type="text">Short answer</button>
+          <button id="cfTypeArea" data-type="textarea">Paragraph</button>
+        </div>
+        <label style="display:flex;align-items:center;gap:8px;margin-top:14px;font-size:13px;color:var(--ink-2)">
+          <input type="checkbox" id="cfRequired" style="width:auto"> Required
+        </label>
+        <div class="err" id="cfErr"></div>
+        <div class="row">
+          <button id="cfCancel">Cancel</button>
+          <button id="cfCreate" class="primary">Add field</button>
+        </div>
+      </div>`;
+    document.body.appendChild(wrap);
+    let type = 'text';
+    const $l = wrap.querySelector('#cfLabel');
+    const $e = wrap.querySelector('#cfErr');
+    const $tText = wrap.querySelector('#cfTypeText');
+    const $tArea = wrap.querySelector('#cfTypeArea');
+    const paintType = () => {
+      $tText.classList.toggle('primary', type === 'text');
+      $tArea.classList.toggle('primary', type === 'textarea');
+    };
+    $tText.onclick = () => { type = 'text'; paintType(); };
+    $tArea.onclick = () => { type = 'textarea'; paintType(); };
+    $l.focus();
+    const close = () => wrap.remove();
+    wrap.querySelector('#cfCancel').onclick = close;
+    wrap.addEventListener('click', e => { if (e.target === wrap) close(); });
+    const create = () => {
+      const label = $l.value.trim();
+      if (!label) { $e.textContent = 'Give the field a label first.'; return; }
+      let id = slugify(label) || ('field-' + Date.now());
+      if (!Array.isArray(SITE.contactFields)) SITE.contactFields = [];
+      let uniq = id, n = 2;
+      while (SITE.contactFields.some(f => f.id === uniq)) uniq = id + '-' + (n++);
+      SITE.contactFields.push({ id: uniq, label, type, required: wrap.querySelector('#cfRequired').checked, placeholder: '' });
+      setPath(draft, 'contact.fields', SITE.contactFields);
+      markDirty();
+      close();
+      render();
+    };
+    wrap.querySelector('#cfCreate').onclick = create;
+    $l.addEventListener('keydown', ev => { if (ev.key === 'Enter') create(); if (ev.key === 'Escape') close(); });
+  }
+
   /* "+ New album" tile on /architecture and /explorations index pages. */
   function wireAlbumAdd() {
     const section = location.pathname === '/architecture' ? 'architecture'
@@ -2881,12 +2994,13 @@ async function bootInlineEditor() {
   wire();
   wirePhotos();
   wireAlbumAdd();
+  wireContactFields();
   buildSideNav();
   wireImageReplace();
   wireLayoutWidget();
   const origRender = window.render;
   if (typeof origRender === 'function') {
-    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); buildSideNav(); wireImageReplace(); wireLayoutWidget(); };
+    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); wireContactFields(); buildSideNav(); wireImageReplace(); wireLayoutWidget(); };
   }
 
   /* Logo position picker — capture-phase click on .mark intercepts before
