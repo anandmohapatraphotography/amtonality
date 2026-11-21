@@ -272,8 +272,7 @@ a.card:hover .frame img{transform:scale(1.045)}
 .hero-img{display:flex;align-items:center}
 .hero-img .frame{width:100%}
 .hero-img .frame{display:flex;justify-content:center;background:none}
-.hero-img .frame img{height:auto;max-height:70vh;width:100%;max-width:100%;object-fit:cover}
-.hero-grid[data-hero-size="large"] .hero-img .frame img{max-height:92vh}
+.hero-img .frame img{height:auto;max-height:var(--hero-h,70vh);width:100%;max-width:100%;object-fit:cover}
 .hero-copy{padding-bottom:clamp(0px,1.5vw,26px);max-width:68ch}
 .hero-copy .eyebrow{margin-bottom:clamp(14px,1.8vw,22px)}
 .hero-copy .display{margin-bottom:clamp(20px,2.6vw,34px)}
@@ -410,6 +409,10 @@ html.edit-mode .hero-widget{display:flex;flex-direction:column;gap:8px;position:
 .hero-widget .lw-btn{background:transparent;border:1px solid transparent;color:var(--ink);cursor:pointer;padding:4px 12px;border-radius:999px;font-size:12px;font-family:inherit;letter-spacing:.04em;transition:background .15s ease,border-color .15s ease}
 .hero-widget .lw-btn:hover{background:var(--paper-2)}
 .hero-widget .lw-btn.on{background:var(--ink);color:var(--paper)}
+.hero-widget .lw-slider{flex:1;min-width:120px;appearance:none;background:transparent;cursor:pointer}
+.hero-widget .lw-slider::-webkit-slider-runnable-track{height:3px;background:var(--rule);border-radius:3px}
+.hero-widget .lw-slider::-webkit-slider-thumb{appearance:none;width:14px;height:14px;background:var(--ink);border-radius:50%;margin-top:-5px;cursor:grab}
+.hero-widget .lw-readout{font-variant-numeric:tabular-nums;color:var(--ink-3);min-width:38px;text-align:right;font-size:11px}
 html.edit-mode .hero-img{position:relative}
 .herotext-off-note{color:var(--ink-3);font-style:italic;font-size:14px}
 .album-actions{display:flex;flex-wrap:wrap;gap:10px}
@@ -418,9 +421,6 @@ html.edit-mode .move-section-btn{display:inline-flex;align-items:center;gap:6px;
 html.edit-mode .move-section-btn:hover{border-color:var(--ink);color:var(--ink)}
 html.edit-mode .move-section-btn.danger{color:#c0392b;border-color:#e2bdb6}
 html.edit-mode .move-section-btn.danger:hover{background:#c0392b;color:#fff;border-color:#c0392b}
-/* Hero image size — "large" gives the photo more of the row and lets it run taller. */
-.hero-grid[data-hero-size="large"]{grid-template-columns:minmax(0,7.4fr) minmax(0,4.6fr)}
-.hero-grid[data-hero-size="large"] .hero-img .frame img{max-height:88vh}
 /* Album covers are all 4:3, so they belong in an even column grid — every card
    the same width, rows lining up, and a partial last row keeping that width
    instead of shrinking to fit. Galleries above stay justified, because those
@@ -526,7 +526,7 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
 @media (max-width:1000px){
   .about,.contact,.pintro{grid-template-columns:1fr}
   .hero-img .frame{min-height:42vh}
-  .hero-grid .hero-img .frame img,.hero-grid[data-hero-size="large"] .hero-img .frame img{max-height:52vh}
+  .hero-img .frame img{max-height:min(var(--hero-h,70vh),52vh)}
   .pintro-lead,.pintro:has(.body) .pintro-lead{max-width:30ch}
   .hero-grid{gap:24px}
   .work-row{grid-template-columns:1fr}
@@ -765,7 +765,7 @@ const SITE = {
      editable from amtonality.com/edit via the Hero widget. */
   heroTextVisible: true,
   heroIdentity: "Tonality is an architectural photography project led by Anand Mohapatra, based in Vancouver, British Columbia.",
-  heroImageSize: "large",
+  heroImageHeight: 90,
   /* Site-wide font pairing. "editorial" = Instrument Serif headings + Inter
      body (the original look). "futura" = Jost everywhere — Jost is a free,
      open-source geometric sans built specifically to look like Futura, since
@@ -1638,11 +1638,12 @@ function home(){
      visitor, and a small placeholder + Show button for the editor. */
   const sectionOn = k => !(SITE.homeSections && SITE.homeSections[k] === false);
   const sectionToggle = (key, label) => `<button class="move-section-btn" data-home-section-toggle="${key}">${sectionOn(key) ? 'Hide' : 'Show'} ${label} section</button>`;
-  const heroSize = SITE.heroImageSize === 'large' ? 'large' : 'normal';
+  const heroHeight = (typeof SITE.heroImageHeight === 'number' && SITE.heroImageHeight >= 30 && SITE.heroImageHeight <= 95) ? SITE.heroImageHeight : 70;
   const fontPair = SITE.fontPair === 'editorial' ? 'editorial' : 'futura';
   /* Hero widget — visible only in edit mode. One compact card instead of
-     three scattered controls: hero text show/hide, hero image size, and the
-     site-wide font pairing. Same box style as the album layout-widget. */
+     scattered controls: hero text show/hide, a drag-to-resize slider for the
+     photo's height, and the site-wide font pairing. Same box style, and the
+     same live-drag slider pattern, as the album layout widget. */
   const heroWidget = `
     <div class="hero-widget">
       <div class="lw-row">
@@ -1651,8 +1652,8 @@ function home(){
       </div>
       <div class="lw-row">
         <span class="lw-label">Hero image</span>
-        <button class="lw-btn${heroSize==='normal'?' on':''}" data-hero-size="normal">Normal</button>
-        <button class="lw-btn${heroSize==='large'?' on':''}" data-hero-size="large">Large</button>
+        <input class="lw-slider" type="range" min="30" max="95" step="1" value="${heroHeight}" data-hero-height aria-label="Hero image height">
+        <span class="lw-readout" data-hero-height-readout>${heroHeight}vh</span>
       </div>
       <div class="lw-row">
         <span class="lw-label">Site font</span>
@@ -1662,8 +1663,8 @@ function home(){
     </div>`;
   return `
   <section class="hero wrap">
-    <div class="hero-grid" data-hero-size="${heroSize}">
-      <div class="rv hero-img" data-edit-image="site.cover" data-edit-slug="cover">${heroWidget}${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
+    <div class="hero-grid">
+      <div class="rv hero-img" style="--hero-h:${heroHeight}vh" data-edit-image="site.cover" data-edit-slug="cover">${heroWidget}${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
       <div class="hero-copy rv d1">
         <a class="eyebrow eyebrow-link" href="/architectural-photography-vancouver"><span data-edit="site.heroEyebrow">${SITE.heroEyebrow || 'Architectural Photography'}</span></a>
         ${heroVisible ? `<p class="lede hero-identity" data-edit="site.heroIdentity">${SITE.heroIdentity || 'Tonality is an architectural photography project led by Anand Mohapatra, based in Vancouver, British Columbia.'}</p>` : (isEdit ? `<p class="herotext-off-note">Hero text hidden — use the Hero widget to bring it back.</p>` : '')}
@@ -1704,7 +1705,7 @@ function home(){
   ${sectionOn('commissions') ? `
   <section class="wrap">
     <div class="shead rv">
-      <div><div class="eyebrow" data-edit="site.commissionsEyebrow">${SITE.commissionsEyebrow || 'Commissions'}</div><h2 class="h2" data-edit="site.commissionsHeading">${SITE.commissionsHeading || "Available for commissions."}</h2></div>
+      <div class="eyebrow" data-edit="site.commissionsEyebrow">${SITE.commissionsEyebrow || 'Commissions'}</div>
       <a class="arrow" href="/contact"><span data-edit="site.commissionsArrow">${SITE.commissionsArrow || 'Start a project'}</span> ${ARROW}</a>
     </div>
     <div class="rule" style="margin-top:clamp(28px,4vw,56px)"></div>
@@ -2671,10 +2672,11 @@ async function bootInlineEditor() {
     return { u: j.url, a: dim.aspect };
   };
 
-  /* Homepage Hero widget — text show/hide, image size, site font pairing.
-     All three just set a SITE.* value, mirror it into draft via setPath, and
-     re-render; the hero-grid[data-hero-size] / :root[data-font] CSS and the
-     home() render logic do the rest. */
+  /* Homepage Hero widget — text show/hide, a drag-to-resize height slider,
+     and site font pairing. Each sets a SITE.* value and mirrors it into
+     draft via setPath; the height slider live-updates --hero-h on .hero-img
+     while dragging and only commits (silently, no re-render) once the user
+     pauses, same as the album layout widget's sliders. */
   /* "Hide/Show statement" on the Architecture and Explorations index pages —
      same generic on/off pattern as the Hero widget. SITE[key] is a plain
      site.* field, so it's just a normal setPath + re-render. */
@@ -2729,15 +2731,26 @@ async function bootInlineEditor() {
       render();
     });
 
-    widget.querySelectorAll('[data-hero-size]').forEach(b => {
-      b.addEventListener('click', () => {
-        const val = b.dataset.heroSize;
-        SITE.heroImageSize = val;
-        setPath(draft, 'site.heroImageSize', val);
-        markDirty();
-        render();
+    /* Drag-to-resize — same live-update-then-debounced-commit pattern as the
+       album layout widget's sliders, so dragging feels instant instead of
+       re-rendering the whole page on every pixel of movement. */
+    const heightSlider = widget.querySelector('[data-hero-height]');
+    if (heightSlider) {
+      const readout = widget.querySelector('[data-hero-height-readout]');
+      const heroImgEl = document.querySelector('.hero-img');
+      let t;
+      heightSlider.addEventListener('input', () => {
+        const val = +heightSlider.value;
+        if (readout) readout.textContent = val + 'vh';
+        if (heroImgEl) heroImgEl.style.setProperty('--hero-h', val + 'vh');
+        clearTimeout(t);
+        t = setTimeout(() => {
+          SITE.heroImageHeight = val;
+          setPath(draft, 'site.heroImageHeight', val);
+          markDirty();
+        }, 180);
       });
-    });
+    }
 
     widget.querySelectorAll('[data-font-pair]').forEach(b => {
       b.addEventListener('click', () => {
