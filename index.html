@@ -265,13 +265,17 @@ a.card:hover .frame img{transform:scale(1.045)}
 
 /* ---------- hero ---------- */
 .hero{padding-top:clamp(104px,12vh,160px);padding-bottom:clamp(10px,1.4vw,24px)}
-.hero-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(28px,5vw,72px);align-items:center}
+/* Stacked hero: the photo runs the full width up top, the identity line sits
+   below it. Anand asked for the photo bigger than a 50/50 column could ever
+   give; this is the layout that actually does that. */
+.hero-grid{display:flex;flex-direction:column;gap:clamp(24px,3.2vw,40px)}
 .hero-img{display:flex;align-items:center}
 .hero-img .frame{width:100%}
 .hero-img .frame{display:flex;justify-content:center;background:none}
-.hero-img .frame img{height:auto;max-height:76vh;width:auto;max-width:100%;object-fit:contain}
-.hero-copy{padding-bottom:clamp(0px,1.5vw,26px)}
-.hero-copy .eyebrow{margin-bottom:clamp(18px,2.4vw,32px)}
+.hero-img .frame img{height:auto;max-height:70vh;width:100%;max-width:100%;object-fit:cover}
+.hero-grid[data-hero-size="large"] .hero-img .frame img{max-height:92vh}
+.hero-copy{padding-bottom:clamp(0px,1.5vw,26px);max-width:68ch}
+.hero-copy .eyebrow{margin-bottom:clamp(14px,1.8vw,22px)}
 .hero-copy .display{margin-bottom:clamp(20px,2.6vw,34px)}
 
 /* ---------- link ---------- */
@@ -520,11 +524,11 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
 
 /* ---------- responsive ---------- */
 @media (max-width:1000px){
-  .hero-grid,.hero-grid[data-hero-size="large"],.about,.contact,.pintro{grid-template-columns:1fr}
-  .hero-img .frame{min-height:52vh}
-  .hero-grid[data-hero-size="large"] .hero-img .frame img{max-height:52vh}
+  .about,.contact,.pintro{grid-template-columns:1fr}
+  .hero-img .frame{min-height:42vh}
+  .hero-grid .hero-img .frame img,.hero-grid[data-hero-size="large"] .hero-img .frame img{max-height:52vh}
   .pintro-lead,.pintro:has(.body) .pintro-lead{max-width:30ch}
-  .hero-grid{gap:34px}
+  .hero-grid{gap:24px}
   .work-row{grid-template-columns:1fr}
   .c-1-8,.c-9-12,.c-1-5,.c-6-12,.c-2-9,.c-1-12,.c-4-12,.c-1-7,.c-1-6,.c-7-12{grid-column:1/-1}
   .list a{grid-template-columns:40px 1fr 70px}
@@ -1627,6 +1631,13 @@ function home(){
   const a = visible(ARCHITECTURE);
   const heroVisible = SITE.heroTextVisible !== false;
   const isEdit = document.documentElement.classList.contains('edit-mode');
+  /* Whole-section show/hide for the homepage. Architecture's own portfolio
+     grid is excluded on purpose — that's the core of the site. About,
+     Featured in, Commissions and Explorations can each be switched off
+     completely from here; a hidden section renders nothing at all for a
+     visitor, and a small placeholder + Show button for the editor. */
+  const sectionOn = k => !(SITE.homeSections && SITE.homeSections[k] === false);
+  const sectionToggle = (key, label) => `<button class="move-section-btn" data-home-section-toggle="${key}">${sectionOn(key) ? 'Hide' : 'Show'} ${label} section</button>`;
   const heroSize = SITE.heroImageSize === 'large' ? 'large' : 'normal';
   const fontPair = SITE.fontPair === 'editorial' ? 'editorial' : 'futura';
   /* Hero widget — visible only in edit mode. One compact card instead of
@@ -1668,6 +1679,7 @@ function home(){
     ${jgal(a.map((p,i)=>card(p,pad(i))).join(''), 'cards')}
   </section>
 
+  ${sectionOn('about') ? `
   <section class="wrap">
     <div class="shead rv" style="padding-bottom:0">
       <div style="flex:1 1 520px"><div class="eyebrow" data-edit="site.homeAboutEyebrow">${SITE.homeAboutEyebrow || 'About'}</div>
@@ -1677,23 +1689,29 @@ function home(){
     <div class="body rv d1" style="padding:clamp(24px,3vw,42px) 0 0">
       <p data-edit="site.homeAboutBlurb">${SITE.homeAboutBlurb || 'I love observing the structures around me — the way architecture and light come together to captivate me, how a single beam or shadow can reveal the character, mood, and story hidden within a space.'}</p>
     </div>
-  </section>
+    ${isEdit ? sectionToggle('about','About') : ''}
+  </section>` : (isEdit ? `<section class="wrap"><p class="herotext-off-note">About section hidden.</p>${sectionToggle('about','About')}</section>` : '')}
 
+  ${sectionOn('featured') ? `
   <section class="wrap press-strip rv">
     <div class="rule" style="margin-bottom:clamp(28px,4vw,56px)"></div>
     <div class="eyebrow" style="margin-bottom:clamp(14px,1.6vw,22px)" data-edit="site.featuredInEyebrow">${SITE.featuredInEyebrow || 'Featured in'}</div>
     <div class="press-names" data-edit="site.featuredInList">${SITE.featuredInList || 'Condé Nast Traveler · Lonely Planet · Plant-Based Indian Cookbook'}</div>
     <div class="rule" style="margin-top:clamp(28px,4vw,56px)"></div>
-  </section>
+    ${isEdit ? sectionToggle('featured','Featured in') : ''}
+  </section>` : (isEdit ? `<section class="wrap"><p class="herotext-off-note">Featured in section hidden.</p>${sectionToggle('featured','Featured in')}</section>` : '')}
 
+  ${sectionOn('commissions') ? `
   <section class="wrap">
-    <div class="rule" style="margin-bottom:clamp(48px,7vw,110px)"></div>
-    <div class="shead rv" style="padding-bottom:clamp(48px,7vw,110px)">
+    <div class="shead rv">
       <div><div class="eyebrow" data-edit="site.commissionsEyebrow">${SITE.commissionsEyebrow || 'Commissions'}</div><h2 class="h2" data-edit="site.commissionsHeading">${SITE.commissionsHeading || "Available for commissions."}</h2></div>
       <a class="arrow" href="/contact"><span data-edit="site.commissionsArrow">${SITE.commissionsArrow || 'Start a project'}</span> ${ARROW}</a>
     </div>
-  </section>
+    <div class="rule" style="margin-top:clamp(28px,4vw,56px)"></div>
+    ${isEdit ? sectionToggle('commissions','Commissions') : ''}
+  </section>` : (isEdit ? `<section class="wrap"><p class="herotext-off-note">Commissions section hidden.</p>${sectionToggle('commissions','Commissions')}</section>` : '')}
 
+  ${sectionOn('explorations') ? `
   <section class="wrap">
     <div class="shead rv">
       <div style="flex:1 1 560px"><div class="eyebrow" data-edit="site.homeExplorationsEyebrow">${SITE.homeExplorationsEyebrow || 'Explorations'}</div>
@@ -1701,7 +1719,8 @@ function home(){
       <a class="arrow" href="/explorations"><span data-edit="site.homeExplorationsArrow">${SITE.homeExplorationsArrow || 'All explorations'}</span> ${ARROW}</a>
     </div>
     ${jgal(visible(EXPLORATIONS).slice(0,12).map(p=>card(p)).join(''), 'cards cards-compact')}
-  </section>
+    ${isEdit ? sectionToggle('explorations','Explorations') : ''}
+  </section>` : (isEdit ? `<section class="wrap"><p class="herotext-off-note">Explorations section hidden.</p>${sectionToggle('explorations','Explorations')}</section>` : '')}
 
 `;
 }
@@ -2673,6 +2692,28 @@ async function bootInlineEditor() {
     });
   }
 
+  /* Whole homepage sections — About / Featured in / Commissions / Explorations
+     — switched on or off from a button at the end of each one. Mirrors the
+     hero text / statement toggles: a plain SITE.* flag, persisted, re-render. */
+  function wireHomeSections() {
+    if (location.pathname !== '/' && location.pathname !== '') return;
+    document.querySelectorAll('[data-home-section-toggle]').forEach(btn => {
+      if (btn._wired) return;
+      btn._wired = true;
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.homeSectionToggle;
+        if (!SITE.homeSections) SITE.homeSections = {};
+        const next = !(SITE.homeSections[key] !== false);
+        SITE.homeSections[key] = next;
+        if (!draft.site) draft.site = {};
+        if (!draft.site.homeSections) draft.site.homeSections = {};
+        draft.site.homeSections[key] = next;
+        markDirty();
+        render();
+      });
+    });
+  }
+
   function wireHeroWidget() {
     if (location.pathname !== '/' && location.pathname !== '') return;
     const widget = document.querySelector('.hero-widget');
@@ -3264,6 +3305,7 @@ async function bootInlineEditor() {
   wireAlbumAdd();
   wireContactFields();
   wireHeroWidget();
+  wireHomeSections();
   wireAlbumSection();
   wireStatementToggle();
   buildSideNav();
@@ -3271,7 +3313,7 @@ async function bootInlineEditor() {
   wireLayoutWidget();
   const origRender = window.render;
   if (typeof origRender === 'function') {
-    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); wireContactFields(); wireHeroWidget(); wireAlbumSection(); wireStatementToggle(); buildSideNav(); wireImageReplace(); wireLayoutWidget(); };
+    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); wireContactFields(); wireHeroWidget(); wireHomeSections(); wireAlbumSection(); wireStatementToggle(); buildSideNav(); wireImageReplace(); wireLayoutWidget(); };
   }
 
   /* Logo position picker — capture-phase click on .mark intercepts before
