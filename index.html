@@ -408,9 +408,12 @@ html.edit-mode .hero-widget{display:flex;flex-direction:column;gap:8px;position:
 .hero-widget .lw-btn.on{background:var(--ink);color:var(--paper)}
 html.edit-mode .hero-img{position:relative}
 .herotext-off-note{color:var(--ink-3);font-style:italic;font-size:14px}
+.album-actions{display:flex;flex-wrap:wrap;gap:10px}
 .move-section-btn{display:none}
 html.edit-mode .move-section-btn{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:7px 16px;border:1px solid var(--rule);border-radius:999px;background:var(--paper-2);color:var(--ink-2);font-family:var(--font-body);font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .2s ease,color .2s ease}
 html.edit-mode .move-section-btn:hover{border-color:var(--ink);color:var(--ink)}
+html.edit-mode .move-section-btn.danger{color:#c0392b;border-color:#e2bdb6}
+html.edit-mode .move-section-btn.danger:hover{background:#c0392b;color:#fff;border-color:#c0392b}
 /* Hero image size — "large" gives the photo more of the row and lets it run taller. */
 .hero-grid[data-hero-size="large"]{grid-template-columns:minmax(0,7.4fr) minmax(0,4.6fr)}
 .hero-grid[data-hero-size="large"] .hero-img .frame img{max-height:88vh}
@@ -1724,6 +1727,7 @@ function project(p){
   const prev = pool[(i-1+pool.length)%pool.length], next = pool[(i+1)%pool.length];
   const shots = p.images;
   const isArch = ARCHITECTURE.includes(p);
+  const isEdit = document.documentElement.classList.contains('edit-mode');
   /* Per-album layout: p.layout = { mode: 'justified'|'grid', base: px, columns: 2|3|4 }
      Falls back to the section default (420px base for architecture, 260 elsewhere). */
   const layout = p.layout || {};
@@ -1827,12 +1831,18 @@ function project(p){
        </div>`
     : '';
 
+  const albumIsHidden = p.hidden === true;
   return `
   <section class="phero wrap">
     <div class="rv">
       <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)" data-edit="projects.${p.slug}.eyebrow">${p.eyebrow || (ARCHITECTURE.includes(p)?'Architecture':'Explorations')}</div>
       <h1 class="display" style="max-width:13ch" data-edit="projects.${p.slug}.title">${esc(p.title)}</h1>
-      <button class="move-section-btn" data-move-section="${p.slug}">Move to ${isArch ? 'Explorations' : 'Architecture'}</button>
+      <div class="album-actions">
+        <button class="move-section-btn" data-move-section="${p.slug}">Move to ${isArch ? 'Explorations' : 'Architecture'}</button>
+        <button class="move-section-btn" data-hide-album="${p.slug}">${albumIsHidden ? 'Unhide album' : 'Hide album'}</button>
+        ${p._extra ? `<button class="move-section-btn danger" data-delete-album="${p.slug}">Delete album</button>` : ''}
+      </div>
+      ${albumIsHidden && isEdit ? `<p class="herotext-off-note" style="margin-top:10px">Hidden — off the menus and grids, but still reachable at this URL.</p>` : ''}
     </div>
     ${(() => {
       const parts = p.statement.split(/(?<=[.!?])\s+/);
@@ -2694,6 +2704,54 @@ async function bootInlineEditor() {
       markDirty();
       render();
     });
+
+    /* Hide / unhide — works for any album, hardcoded or extra. Reversible:
+       the album drops off menus and grids but its URL still resolves, so an
+       old link or a bookmark never 404s. */
+    const hideBtn = document.querySelector('[data-hide-album]');
+    if (hideBtn && !hideBtn._wired) {
+      hideBtn._wired = true;
+      hideBtn.addEventListener('click', () => {
+        const slug = hideBtn.dataset.hideAlbum;
+        const proj = bySlug(slug);
+        if (!proj) return;
+        const next = !(proj.hidden === true);
+        proj.hidden = next;
+        if (!draft.projects) draft.projects = {};
+        if (!draft.projects[slug]) draft.projects[slug] = {};
+        if (next) draft.projects[slug].hidden = true; else delete draft.projects[slug].hidden;
+        markDirty();
+        render();
+      });
+    }
+
+    /* Delete — extras only. A hardcoded album lives in this file's own
+       source code, so it can be hidden here but genuinely deleting it needs
+       a code change; this button only ever renders for p._extra albums. */
+    const delBtn = document.querySelector('[data-delete-album]');
+    if (delBtn && !delBtn._wired) {
+      delBtn._wired = true;
+      delBtn.addEventListener('click', () => {
+        const slug = delBtn.dataset.deleteAlbum;
+        const proj = bySlug(slug);
+        if (!proj) return;
+        if (!confirm('Delete "' + proj.title + '" completely? The photos stay in storage, but the album and its page disappear from the site once you publish. This can only be undone by asking Claude to restore it from the extraProjects history.')) return;
+        const fromArch = ARCHITECTURE.includes(proj);
+        const section = fromArch ? 'architecture' : 'explorations';
+        const arr = fromArch ? ARCHITECTURE : EXPLORATIONS;
+        const idx = arr.indexOf(proj);
+        if (idx > -1) arr.splice(idx, 1);
+        ALL.length = 0; ALL.push(...ARCHITECTURE, ...EXPLORATIONS);
+        if (!draft.extraProjects) draft.extraProjects = { architecture: [], explorations: [] };
+        if (!Array.isArray(draft.extraProjects[section])) draft.extraProjects[section] = [];
+        const entry = draft.extraProjects[section].find(e => e && e.slug === slug);
+        if (entry) entry.deleted = true;
+        else draft.extraProjects[section].push({ slug, deleted: true });
+        markDirty();
+        history.pushState({}, '', '/' + section);
+        render();
+      });
+    }
   }
 
   /* Photo add/delete/reorder on album pages. Rebuilt on each render since
