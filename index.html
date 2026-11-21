@@ -424,6 +424,14 @@ html.edit-mode .move-section-btn.danger:hover{background:#c0392b;color:#fff;bord
 .jgal.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(28px,3vw,52px);margin-inline:0}
 .jgal.cards .gitem{width:auto;padding:0;align-self:start}
 @media (max-width:620px){.jgal.cards{grid-template-columns:minmax(0,1fr)}}
+/* Homepage Explorations preview — small on purpose. Architecture is the main
+   portfolio; this is a "there's more if you want it" strip, not a second
+   showcase competing for the same attention. */
+.jgal.cards.cards-compact{grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(8px,1vw,14px)}
+.jgal.cards.cards-compact .cap{margin-top:6px}
+.jgal.cards.cards-compact .cap h3{font-size:11px;letter-spacing:-.005em;line-height:1.25}
+@media (max-width:900px){.jgal.cards.cards-compact{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:620px){.jgal.cards.cards-compact{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
 /* ---------- about ---------- */
 .about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,3vw,44px);align-items:start}
@@ -1692,7 +1700,7 @@ function home(){
         <p class="sectioncap" data-edit="site.homeExplorationsBlurb">${SITE.homeExplorationsBlurb || "Over the years, I've explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal."}</p></div>
       <a class="arrow" href="/explorations"><span data-edit="site.homeExplorationsArrow">${SITE.homeExplorationsArrow || 'All explorations'}</span> ${ARROW}</a>
     </div>
-    ${jgal(visible(EXPLORATIONS).slice(0,8).map(p=>card(p)).join(''), 'cards')}
+    ${jgal(visible(EXPLORATIONS).slice(0,12).map(p=>card(p)).join(''), 'cards cards-compact')}
   </section>
 
 `;
