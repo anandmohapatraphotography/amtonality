@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Tonality — Anand Mohapatra">
 <meta property="og:url" content="https://amtonality.com/">
 <meta property="og:title" content="Tonality — Anand Mohapatra | Architecture Photography, Vancouver">
-<meta property="og:description" content="Tonality is an architectural photography project led by Anand Mohapatra, based in Vancouver, British Columbia.">
+<meta property="og:description" content="Tonality is the architectural photography studio of Anand Mohapatra, based in Vancouver, British Columbia.">
 <meta property="og:image" content="https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg">
 <meta property="og:image:width" content="1920">
 <meta property="og:image:height" content="1280">
@@ -764,7 +764,7 @@ const SITE = {
      the hero photo gets more of the row now the headline is gone. All
      editable from amtonality.com/edit via the Hero widget. */
   heroTextVisible: true,
-  heroIdentity: "Tonality is an architectural photography project led by Anand Mohapatra, based in Vancouver, British Columbia.",
+  heroIdentity: "Tonality is the architectural photography studio of Anand Mohapatra, based in Vancouver, British Columbia.",
   heroImageHeight: 90,
   /* Site-wide font pairing. "editorial" = Instrument Serif headings + Inter
      body (the original look). "futura" = Jost everywhere — Jost is a free,
@@ -1667,7 +1667,7 @@ function home(){
       <div class="rv hero-img" style="--hero-h:${heroHeight}vh" data-edit-image="site.cover" data-edit-slug="cover">${heroWidget}${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
       <div class="hero-copy rv d1">
         <a class="eyebrow eyebrow-link" href="/architectural-photography-vancouver"><span data-edit="site.heroEyebrow">${SITE.heroEyebrow || 'Architectural Photography'}</span></a>
-        ${heroVisible ? `<p class="lede hero-identity" data-edit="site.heroIdentity">${SITE.heroIdentity || 'Tonality is an architectural photography project led by Anand Mohapatra, based in Vancouver, British Columbia.'}</p>` : (isEdit ? `<p class="herotext-off-note">Hero text hidden — use the Hero widget to bring it back.</p>` : '')}
+        ${heroVisible ? `<p class="lede hero-identity" data-edit="site.heroIdentity">${SITE.heroIdentity || 'Tonality is the architectural photography studio of Anand Mohapatra, based in Vancouver, British Columbia.'}</p>` : (isEdit ? `<p class="herotext-off-note">Hero text hidden — use the Hero widget to bring it back.</p>` : '')}
       </div>
     </div>
   </section>
