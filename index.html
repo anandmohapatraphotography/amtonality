@@ -269,8 +269,8 @@ a.card:hover .frame img{transform:scale(1.045)}
    below it. Anand asked for the photo bigger than a 50/50 column could ever
    give; this is the layout that actually does that. */
 .hero-grid{display:flex;flex-direction:column;gap:clamp(24px,3.2vw,40px)}
-.hero-img{display:flex;align-items:center}
-.hero-img .frame{width:100%}
+.hero-img{display:flex;align-items:center;justify-content:center}
+.hero-img .frame{width:var(--hero-w,100%)}
 .hero-img .frame{display:flex;justify-content:center;background:none}
 .hero-img .frame img{height:auto;max-height:var(--hero-h,70vh);width:100%;max-width:100%;object-fit:cover}
 .hero-copy{padding-bottom:clamp(0px,1.5vw,26px);max-width:68ch}
@@ -766,6 +766,7 @@ const SITE = {
   heroTextVisible: true,
   heroIdentity: "Tonality is the architectural photography studio of Anand Mohapatra, based in Vancouver, British Columbia.",
   heroImageHeight: 90,
+  heroImageWidth: 100,
   /* Site-wide font pairing. "editorial" = Instrument Serif headings + Inter
      body (the original look). "futura" = Jost everywhere — Jost is a free,
      open-source geometric sans built specifically to look like Futura, since
@@ -1639,11 +1640,13 @@ function home(){
   const sectionOn = k => !(SITE.homeSections && SITE.homeSections[k] === false);
   const sectionToggle = (key, label) => `<button class="move-section-btn" data-home-section-toggle="${key}">${sectionOn(key) ? 'Hide' : 'Show'} ${label} section</button>`;
   const heroHeight = (typeof SITE.heroImageHeight === 'number' && SITE.heroImageHeight >= 30 && SITE.heroImageHeight <= 95) ? SITE.heroImageHeight : 70;
+  const heroWidth = (typeof SITE.heroImageWidth === 'number' && SITE.heroImageWidth >= 30 && SITE.heroImageWidth <= 100) ? SITE.heroImageWidth : 100;
   const fontPair = SITE.fontPair === 'editorial' ? 'editorial' : 'futura';
   /* Hero widget — visible only in edit mode. One compact card instead of
-     scattered controls: hero text show/hide, a drag-to-resize slider for the
-     photo's height, and the site-wide font pairing. Same box style, and the
-     same live-drag slider pattern, as the album layout widget. */
+     scattered controls: hero text show/hide, drag-to-resize sliders for the
+     photo's height and width, and the site-wide font pairing. Same box
+     style, and the same live-drag slider pattern, as the album layout
+     widget. */
   const heroWidget = `
     <div class="hero-widget">
       <div class="lw-row">
@@ -1651,9 +1654,14 @@ function home(){
         <button class="lw-btn" data-hero-text-toggle>${heroVisible ? 'Hide' : 'Show'}</button>
       </div>
       <div class="lw-row">
-        <span class="lw-label">Hero image</span>
+        <span class="lw-label">Height</span>
         <input class="lw-slider" type="range" min="30" max="95" step="1" value="${heroHeight}" data-hero-height aria-label="Hero image height">
         <span class="lw-readout" data-hero-height-readout>${heroHeight}vh</span>
+      </div>
+      <div class="lw-row">
+        <span class="lw-label">Width</span>
+        <input class="lw-slider" type="range" min="30" max="100" step="1" value="${heroWidth}" data-hero-width aria-label="Hero image width">
+        <span class="lw-readout" data-hero-width-readout>${heroWidth}%</span>
       </div>
       <div class="lw-row">
         <span class="lw-label">Site font</span>
@@ -1664,7 +1672,7 @@ function home(){
   return `
   <section class="hero wrap">
     <div class="hero-grid">
-      <div class="rv hero-img" style="--hero-h:${heroHeight}vh" data-edit-image="site.cover" data-edit-slug="cover">${heroWidget}${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
+      <div class="rv hero-img" style="--hero-h:${heroHeight}vh;--hero-w:${heroWidth}%" data-edit-image="site.cover" data-edit-slug="cover">${heroWidget}${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
       <div class="hero-copy rv d1">
         <a class="eyebrow eyebrow-link" href="/architectural-photography-vancouver"><span data-edit="site.heroEyebrow">${SITE.heroEyebrow || 'Architectural Photography'}</span></a>
         ${heroVisible ? `<p class="lede hero-identity" data-edit="site.heroIdentity">${SITE.heroIdentity || 'Tonality is the architectural photography studio of Anand Mohapatra, based in Vancouver, British Columbia.'}</p>` : (isEdit ? `<p class="herotext-off-note">Hero text hidden — use the Hero widget to bring it back.</p>` : '')}
@@ -2747,6 +2755,24 @@ async function bootInlineEditor() {
         t = setTimeout(() => {
           SITE.heroImageHeight = val;
           setPath(draft, 'site.heroImageHeight', val);
+          markDirty();
+        }, 180);
+      });
+    }
+
+    const widthSlider = widget.querySelector('[data-hero-width]');
+    if (widthSlider) {
+      const readout = widget.querySelector('[data-hero-width-readout]');
+      const heroImgEl = document.querySelector('.hero-img');
+      let t;
+      widthSlider.addEventListener('input', () => {
+        const val = +widthSlider.value;
+        if (readout) readout.textContent = val + '%';
+        if (heroImgEl) heroImgEl.style.setProperty('--hero-w', val + '%');
+        clearTimeout(t);
+        t = setTimeout(() => {
+          SITE.heroImageWidth = val;
+          setPath(draft, 'site.heroImageWidth', val);
           markDirty();
         }, 180);
       });
