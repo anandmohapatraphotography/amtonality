@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-font="futura">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Tonality — Anand Mohapatra">
 <meta property="og:url" content="https://amtonality.com/">
 <meta property="og:title" content="Tonality — Anand Mohapatra | Architecture Photography, Vancouver">
-<meta property="og:description" content="Tonality — architecture and interiors photography studio by Anand Mohapatra, Vancouver. Where creativity finds its tone.">
+<meta property="og:description" content="Tonality is an architectural photography project led by Anand Mohapatra, based in Vancouver, British Columbia.">
 <meta property="og:image" content="https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg">
 <meta property="og:image:width" content="1920">
 <meta property="og:image:height" content="1280">
@@ -26,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -136,12 +136,22 @@
   --ease:cubic-bezier(.19,.82,.24,1);
   --pad:clamp(20px,5vw,88px);
   --maxw:1680px;
+  /* Site font pairing — switchable from the Hero widget in amtonality.com/edit.
+     "editorial" (default values below) = Instrument Serif headings + Inter body.
+     [data-font="futura"] swaps both to Jost, the free Google-Fonts geometric
+     sans built to resemble Futura (true Futura is a paid commercial font). */
+  --font-display:"Instrument Serif",Georgia,serif;
+  --font-body:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+}
+:root[data-font="futura"]{
+  --font-display:"Jost","Futura","Century Gothic",-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-body:"Jost","Futura","Century Gothic",-apple-system,BlinkMacSystemFont,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 html,body{background:var(--paper);color:var(--ink)}
 body{
-  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
+  font-family:var(--font-body);
   font-weight:400;font-size:16px;line-height:1.65;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
   overflow-x:hidden;
@@ -152,9 +162,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 ::selection{background:var(--ink);color:var(--paper)}
 
 /* ---------- type ---------- */
-.serif{font-family:"Instrument Serif",Georgia,"Times New Roman",serif;font-weight:400}
+.serif{font-family:var(--font-display);font-weight:400}
 .display{
-  font-family:"Instrument Serif",Georgia,serif;font-weight:400;
+  font-family:var(--font-display);font-weight:400;
   font-size:clamp(2.9rem,8.4vw,8.2rem);line-height:.92;letter-spacing:-.012em;
   /* Force common ligatures + kerning on. Instrument Serif's "fi" ligature
      merges f and i into a single glyph that clears the collision; without
@@ -163,8 +173,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   font-feature-settings:"kern" 1, "liga" 1, "calt" 1;
 }
 .display em{font-style:italic;letter-spacing:-.01em}
-.h2{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(2rem,4.6vw,4rem);line-height:1.02;letter-spacing:-.018em}
-.h3{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.5rem,2.5vw,2.35rem);line-height:1.1;letter-spacing:-.014em}
+.h2{font-family:var(--font-display);font-size:clamp(2rem,4.6vw,4rem);line-height:1.02;letter-spacing:-.018em}
+.h3{font-family:var(--font-display);font-size:clamp(1.5rem,2.5vw,2.35rem);line-height:1.1;letter-spacing:-.014em}
 .eyebrow{
   font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.185em;
   color:var(--ink-2);
@@ -203,7 +213,7 @@ html[data-logo-pos="right"] .hbar nav.main{margin-left:auto}
 .mark.fallback img{display:none}
 .mark.fallback .markfall{display:flex}
 .mark b{font-weight:500;font-size:12.5px;letter-spacing:.2em;text-transform:uppercase}
-.mark em{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:19px;color:var(--ink-2)}
+.mark em{font-family:var(--font-display);font-style:italic;font-size:19px;color:var(--ink-2)}
 .mark i{display:inline-block;width:16px;height:1px;background:var(--rule);transform:translateY(-5px)}
 nav.main{display:flex;gap:34px;align-items:center}
 nav.main a{
@@ -228,7 +238,7 @@ body.menu .burger s:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
   opacity:0;pointer-events:none;transition:opacity .45s ease;
 }
 body.menu .drawer{opacity:1;pointer-events:auto}
-.drawer a{font-family:"Instrument Serif",Georgia,serif;font-size:13vw;line-height:1.18;border-bottom:1px solid var(--rule);padding:.18em 0}
+.drawer a{font-family:var(--font-display);font-size:13vw;line-height:1.18;border-bottom:1px solid var(--rule);padding:.18em 0}
 
 /* ---------- images ---------- */
 .frame{position:relative;overflow:hidden;background:var(--paper-2)}
@@ -274,10 +284,10 @@ a.card:hover .frame img{transform:scale(1.045)}
 .shead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:clamp(56px,8vw,120px) 0 clamp(24px,3.2vw,44px);flex-wrap:wrap}
 .shead-first{padding-top:clamp(18px,2.2vw,34px);border-top:1px solid var(--rule);margin-top:clamp(10px,1.4vw,22px)}
 .shead .h2{max-width:16ch}
-.sectioncap{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.25rem,2.1vw,1.85rem);line-height:1.32;letter-spacing:-.008em;color:var(--ink);max-width:44ch;margin-top:14px}
+.sectioncap{font-family:var(--font-display);font-size:clamp(1.25rem,2.1vw,1.85rem);line-height:1.32;letter-spacing:-.008em;color:var(--ink);max-width:44ch;margin-top:14px}
 .shead .eyebrow{margin-bottom:14px}
 .press-strip{padding-top:clamp(56px,7vw,110px);text-align:center}
-.press-names{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.2;letter-spacing:-.01em;color:var(--ink);display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:.55em}
+.press-names{font-family:var(--font-display);font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.2;letter-spacing:-.01em;color:var(--ink);display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:.55em}
 .press-sep{color:var(--ink-3);font-style:italic}
 .press-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:clamp(24px,4vw,56px);padding-top:clamp(48px,6vw,88px)}
 .press-card{margin:0;display:flex;flex-direction:column;gap:clamp(14px,1.6vw,22px)}
@@ -285,7 +295,7 @@ a.card:hover .frame img{transform:scale(1.045)}
 .press-card .press-img img{width:100%;height:auto;display:block;transition:transform .8s var(--ease)}
 .press-card a.press-img:hover img{transform:scale(1.02)}
 .press-card figcaption{padding:2px 0}
-.press-title{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.35rem,2.2vw,1.85rem);line-height:1.22;letter-spacing:-.008em}
+.press-title{font-family:var(--font-display);font-size:clamp(1.35rem,2.2vw,1.85rem);line-height:1.22;letter-spacing:-.008em}
 .press-pub{font-size:13px;color:var(--ink-2);margin-top:6px;letter-spacing:.01em}
 
 /* ---------- editorial work rows ---------- */
@@ -299,7 +309,7 @@ a.card:hover .frame img{transform:scale(1.045)}
 .c-2-9{grid-column:2/10}.c-1-12{grid-column:1/13}
 .c-4-12{grid-column:4/13}.c-1-7{grid-column:1/8}
 .cap{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-top:14px;border-top:1px solid var(--rule)}
-.cap h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.25rem,2vw,1.9rem);line-height:1.12;letter-spacing:-.012em}
+.cap h3{font-family:var(--font-display);font-weight:400;font-size:clamp(1.25rem,2vw,1.9rem);line-height:1.12;letter-spacing:-.012em}
 .cap .num{white-space:nowrap}
 .card .cap h3{transition:opacity .4s ease}
 .card:hover .cap h3{opacity:.55}
@@ -313,7 +323,7 @@ a.card:hover .frame img{transform:scale(1.045)}
 .list a{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1.2fr);gap:clamp(12px,2vw,32px);
   align-items:center;padding:clamp(18px,2.2vw,30px) 0;border-bottom:1px solid var(--rule);transition:padding .5s var(--ease)}
 .list a:hover{padding-left:14px}
-.list a h3{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.15rem,2.1vw,1.85rem);letter-spacing:-.012em}
+.list a h3{font-family:var(--font-display);font-weight:400;font-size:clamp(1.15rem,2.1vw,1.85rem);letter-spacing:-.012em}
 .list a p{font-size:13.5px;color:var(--ink-2);line-height:1.5}
 #thumb img{height:auto}
 .list .thumb{position:absolute;pointer-events:none;width:300px;opacity:0;transform:translate(-50%,-50%) scale(.96);
@@ -370,7 +380,7 @@ a.card:hover .frame img{transform:scale(1.045)}
 }
 /* Inline-editor layout widget — appears on each gallery page in edit mode. */
 .layout-widget{display:none}
-html.edit-mode .layout-widget{display:block;margin:0 0 clamp(18px,2vw,28px);padding:10px 14px;background:var(--paper-2);border:1px solid var(--rule);border-radius:14px;font-family:"Inter",sans-serif;font-size:12px;color:var(--ink);width:fit-content;min-width:280px;max-width:420px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+html.edit-mode .layout-widget{display:block;margin:0 0 clamp(18px,2vw,28px);padding:10px 14px;background:var(--paper-2);border:1px solid var(--rule);border-radius:14px;font-family:var(--font-body);font-size:12px;color:var(--ink);width:fit-content;min-width:280px;max-width:420px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
 .layout-widget .lw-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .layout-widget .lw-row.lw-more{margin-top:10px;padding-top:10px;border-top:1px solid var(--rule)}
 .layout-widget .lw-row.lw-more + .lw-row.lw-more{margin-top:8px;padding-top:8px}
@@ -387,6 +397,23 @@ html.edit-mode .layout-widget{display:block;margin:0 0 clamp(18px,2vw,28px);padd
 .layout-widget .lw-slider::-webkit-slider-runnable-track{height:3px;background:var(--rule);border-radius:3px}
 .layout-widget .lw-slider::-webkit-slider-thumb{appearance:none;width:14px;height:14px;background:var(--ink);border-radius:50%;margin-top:-5px;cursor:grab}
 .layout-widget .lw-readout{font-variant-numeric:tabular-nums;color:var(--ink-3);min-width:56px;text-align:right;font-size:11px}
+/* Homepage Hero widget — same control language as the layout widget, but
+   pinned over the hero image's top-left corner (edit mode only). */
+.hero-widget{display:none}
+html.edit-mode .hero-widget{display:flex;flex-direction:column;gap:8px;position:absolute;top:14px;left:14px;z-index:5;padding:10px 14px;background:var(--paper);border:1px solid var(--rule);border-radius:14px;font-family:var(--font-body);font-size:12px;color:var(--ink);width:fit-content;box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.hero-widget .lw-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hero-widget .lw-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);min-width:72px}
+.hero-widget .lw-btn{background:transparent;border:1px solid transparent;color:var(--ink);cursor:pointer;padding:4px 12px;border-radius:999px;font-size:12px;font-family:inherit;letter-spacing:.04em;transition:background .15s ease,border-color .15s ease}
+.hero-widget .lw-btn:hover{background:var(--paper-2)}
+.hero-widget .lw-btn.on{background:var(--ink);color:var(--paper)}
+html.edit-mode .hero-img{position:relative}
+.herotext-off-note{color:var(--ink-3);font-style:italic;font-size:14px}
+.move-section-btn{display:none}
+html.edit-mode .move-section-btn{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:7px 16px;border:1px solid var(--rule);border-radius:999px;background:var(--paper-2);color:var(--ink-2);font-family:var(--font-body);font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .2s ease,color .2s ease}
+html.edit-mode .move-section-btn:hover{border-color:var(--ink);color:var(--ink)}
+/* Hero image size — "large" gives the photo more of the row and lets it run taller. */
+.hero-grid[data-hero-size="large"]{grid-template-columns:minmax(0,7.4fr) minmax(0,4.6fr)}
+.hero-grid[data-hero-size="large"] .hero-img .frame img{max-height:88vh}
 /* Album covers are all 4:3, so they belong in an even column grid — every card
    the same width, rows lining up, and a partial last row keeping that width
    instead of shrinking to fit. Galleries above stay justified, because those
@@ -408,7 +435,7 @@ html.edit-mode .layout-widget{display:block;margin:0 0 clamp(18px,2vw,28px);padd
 .pmeta div p{font-size:14.5px}
 .pintro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,80px);
   padding-top:clamp(38px,5vw,76px);align-items:start}
-.pintro-lead{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.4rem,2.5vw,2.15rem);
+.pintro-lead{font-family:var(--font-display);font-size:clamp(1.4rem,2.5vw,2.15rem);
   line-height:1.3;letter-spacing:-.008em;color:var(--ink);max-width:24ch}
 .pintro:has(.body) .pintro-lead{max-width:22ch}
 .pintro.solo{grid-template-columns:1fr}
@@ -442,7 +469,7 @@ form{display:grid;gap:clamp(18px,2.4vw,30px)}
 .social-icons a{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:999px;border:1px solid var(--rule);color:var(--ink-2);transition:color .25s ease,border-color .25s ease,background .25s ease}
 .social-icons a:hover{color:var(--ink);border-color:var(--ink);background:var(--paper-2)}
 .social-icons svg{width:17px;height:17px}
-.social-icons .bemark{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:14px;line-height:1}
+.social-icons .bemark{font-family:var(--font-display);font-style:italic;font-size:14px;line-height:1}
 
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28px,3.4vw,44px);margin-top:clamp(50px,7vw,110px)}
@@ -450,7 +477,7 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
 .fnav{display:flex;gap:26px;flex-wrap:wrap}
 .fnav a,.fmeta{font-size:12px;letter-spacing:.1em;color:var(--ink-2);text-transform:uppercase}
 .fbig{margin-bottom:clamp(28px,4vw,60px)}
-.ftag{font-family:"Instrument Serif",Georgia,serif;font-size:clamp(1.5rem,3.4vw,3rem);line-height:1.1;letter-spacing:-.018em;margin-top:clamp(16px,2vw,28px);color:var(--ink)}
+.ftag{font-family:var(--font-display);font-size:clamp(1.5rem,3.4vw,3rem);line-height:1.1;letter-spacing:-.018em;margin-top:clamp(16px,2vw,28px);color:var(--ink)}
 
 /* ---------- lightbox ---------- */
 .lb{position:fixed;inset:0;z-index:90;background:var(--paper);display:flex;align-items:center;justify-content:center;
@@ -460,7 +487,7 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
 .lb .x{position:absolute;top:24px;right:var(--pad);font-size:12px;letter-spacing:.14em;text-transform:uppercase;z-index:2}
 .lb .lbnav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;
   display:flex;align-items:center;justify-content:center;
-  font-family:"Instrument Serif",Georgia,serif;font-size:34px;line-height:1;color:var(--ink);
+  font-family:var(--font-display);font-size:34px;line-height:1;color:var(--ink);
   border:1px solid var(--rule);border-radius:999px;background:var(--pill-bg);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
   transition:opacity .35s ease,background .35s ease,border-color .35s ease,color .35s ease;opacity:.7;z-index:2}
@@ -482,8 +509,9 @@ footer{border-top:1px solid var(--rule);padding:clamp(40px,5vw,70px) 0 clamp(28p
 
 /* ---------- responsive ---------- */
 @media (max-width:1000px){
-  .hero-grid,.about,.contact,.pintro{grid-template-columns:1fr}
+  .hero-grid,.hero-grid[data-hero-size="large"],.about,.contact,.pintro{grid-template-columns:1fr}
   .hero-img .frame{min-height:52vh}
+  .hero-grid[data-hero-size="large"] .hero-img .frame img{max-height:52vh}
   .pintro-lead,.pintro:has(.body) .pintro-lead{max-width:30ch}
   .hero-grid{gap:34px}
   .work-row{grid-template-columns:1fr}
@@ -508,7 +536,7 @@ html.edit-mode [data-edit]:hover{outline-color:rgba(20,19,15,.35)}
 html.edit-mode [data-edit]:focus{outline:2px solid var(--ink);outline-offset:8px;background:rgba(255,255,255,.35)}
 html.edit-mode [data-edit].dirty{outline-color:#f39c12}
 
-.editbar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:80;background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:8px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.12);font-family:"Inter",sans-serif;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.editbar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);z-index:80;background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:8px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,.12);font-family:var(--font-body);opacity:0;pointer-events:none;transition:opacity .3s ease}
 html.edit-mode .editbar{opacity:1;pointer-events:auto}
 .editbar-status{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);padding:0 12px}
 .editbar-status.dirty{color:#f39c12}
@@ -520,7 +548,7 @@ html.edit-mode .editbar{opacity:1;pointer-events:auto}
 
 .edit-auth{position:fixed;inset:0;background:rgba(20,19,15,.6);backdrop-filter:blur(6px);z-index:90;display:flex;align-items:center;justify-content:center;padding:20px}
 .edit-auth-card{background:var(--paper);border-radius:12px;padding:32px;max-width:400px;width:100%;box-shadow:0 20px 50px rgba(0,0,0,.25)}
-.edit-auth-card h3{font-family:"Instrument Serif",Georgia,serif;font-size:24px;margin-bottom:8px}
+.edit-auth-card h3{font-family:var(--font-display);font-size:24px;margin-bottom:8px}
 .edit-auth-card p{color:var(--ink-2);font-size:14px;line-height:1.5;margin-bottom:18px}
 .edit-auth-card input{width:100%;padding:12px 14px;border:1px solid var(--rule);border-radius:6px;font-family:inherit;font-size:13px;background:var(--paper);color:var(--ink);outline:none}
 .edit-auth-card input:focus{border-color:var(--ink)}
@@ -530,7 +558,7 @@ html.edit-mode .editbar{opacity:1;pointer-events:auto}
 .edit-auth-card .err{color:#c0392b;font-size:12px;margin-top:8px}
 
 /* Editor widget popup (used for logo position, later: image swap) */
-.edit-widget-popup{position:fixed;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.18);display:flex;gap:4px;z-index:85;font-family:"Inter",sans-serif}
+.edit-widget-popup{position:fixed;background:var(--paper);border:1px solid var(--rule);border-radius:10px;padding:8px;box-shadow:0 12px 40px rgba(0,0,0,.18);display:flex;gap:4px;z-index:85;font-family:var(--font-body)}
 .edit-widget-popup .ep-label{padding:8px 6px 8px 10px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 .edit-widget-popup button{background:transparent;border:1px solid var(--rule);border-radius:6px;padding:8px 14px;color:var(--ink);cursor:pointer;font-size:11px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s ease,color .2s ease,border-color .2s ease}
 .edit-widget-popup button:hover{border-color:var(--ink)}
@@ -560,18 +588,18 @@ html.edit-mode .jgal.gallery .gitem .photo-cover{position:absolute;bottom:8px;ri
 html.edit-mode .jgal.gallery .gitem:hover .photo-cover{display:flex}
 html.edit-mode .jgal.gallery .gitem .photo-cover:hover{background:#d4a017}
 html.edit-mode .jgal.gallery .gitem .photo-cover.active{background:#d4a017;display:flex}
-html.edit-mode .jgal.gallery .gitem.is-cover::after{content:"★ COVER";position:absolute;top:8px;left:8px;background:#d4a017;color:#fff;padding:4px 10px;border-radius:999px;font-family:"Inter",sans-serif;font-size:10px;letter-spacing:.14em;text-transform:uppercase;z-index:4;pointer-events:none}
+html.edit-mode .jgal.gallery .gitem.is-cover::after{content:"★ COVER";position:absolute;top:8px;left:8px;background:#d4a017;color:#fff;padding:4px 10px;border-radius:999px;font-family:var(--font-body);font-size:10px;letter-spacing:.14em;text-transform:uppercase;z-index:4;pointer-events:none}
 
 /* Generic image-replace overlay for data-edit-image elements (portrait, cover). */
 html.edit-mode [data-edit-image]{position:relative;cursor:pointer}
-html.edit-mode [data-edit-image]::after{content:"↑ REPLACE";position:absolute;bottom:14px;left:14px;background:rgba(20,19,15,.9);color:#fff;padding:7px 16px;border-radius:999px;font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.14em;z-index:4;opacity:0;transition:opacity .2s ease;pointer-events:none}
+html.edit-mode [data-edit-image]::after{content:"↑ REPLACE";position:absolute;bottom:14px;left:14px;background:rgba(20,19,15,.9);color:#fff;padding:7px 16px;border-radius:999px;font-family:var(--font-body);font-size:11px;letter-spacing:.14em;z-index:4;opacity:0;transition:opacity .2s ease;pointer-events:none}
 html.edit-mode [data-edit-image]:hover::after{opacity:1}
 html.edit-mode [data-edit-image]:hover{outline:2px dashed var(--ink);outline-offset:4px}
 html.edit-mode .photo-add{aspect-ratio:1.5;background:transparent;border:2px dashed var(--rule);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--ink-3);cursor:pointer;transition:border-color .2s ease,color .2s ease;padding:16px}
 html.edit-mode .photo-add:hover,html.edit-mode .photo-add.drag-over{border-color:var(--ink);color:var(--ink);border-style:solid}
 html.edit-mode .photo-add-plus{font-size:32px;line-height:1;font-weight:200}
 html.edit-mode .photo-add-hint{font-size:10px;letter-spacing:.14em;text-transform:uppercase;text-align:center}
-.photo-uploading{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 20px;border-radius:999px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;z-index:95;font-family:"Inter",sans-serif}
+.photo-uploading{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 20px;border-radius:999px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;z-index:95;font-family:var(--font-body)}
 
 /* New album tile on section index pages */
 html.edit-mode .album-add{aspect-ratio:4/3;background:transparent;border:2px dashed var(--rule);border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-3);cursor:pointer;transition:border-color .2s ease,color .2s ease;padding:20px}
@@ -580,9 +608,9 @@ html.edit-mode .album-add .add-plus{font-size:40px;line-height:1;font-weight:200
 html.edit-mode .album-add .add-label{font-size:11px;letter-spacing:.14em;text-transform:uppercase;text-align:center}
 
 /* Modal for new album creation */
-.album-modal{position:fixed;inset:0;background:rgba(20,19,15,.6);backdrop-filter:blur(6px);z-index:95;display:flex;align-items:center;justify-content:center;padding:20px;font-family:"Inter",sans-serif}
+.album-modal{position:fixed;inset:0;background:rgba(20,19,15,.6);backdrop-filter:blur(6px);z-index:95;display:flex;align-items:center;justify-content:center;padding:20px;font-family:var(--font-body)}
 .album-modal-card{background:var(--paper);border-radius:12px;padding:32px;max-width:440px;width:100%;box-shadow:0 20px 50px rgba(0,0,0,.25)}
-.album-modal-card h3{font-family:"Instrument Serif",Georgia,serif;font-size:26px;margin-bottom:8px;letter-spacing:-.01em}
+.album-modal-card h3{font-family:var(--font-display);font-size:26px;margin-bottom:8px;letter-spacing:-.01em}
 .album-modal-card p{color:var(--ink-2);font-size:13px;line-height:1.55;margin-bottom:18px}
 .album-modal-card .hint{font-size:11px;color:var(--ink-3);margin-top:6px;letter-spacing:.02em}
 .album-modal-card input{width:100%;padding:12px 14px;border:1px solid var(--rule);border-radius:6px;font-family:inherit;font-size:14px;background:var(--paper);color:var(--ink);outline:none}
@@ -593,12 +621,12 @@ html.edit-mode .album-add .add-label{font-size:11px;letter-spacing:.14em;text-tr
 .album-modal-card .err{color:#c0392b;font-size:12px;margin-top:8px}
 
 /* Side navigator (edit mode only) — Adobe-Express-style page tree. */
-.edit-sidenav-toggle{position:fixed;left:20px;top:90px;z-index:79;background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:8px 16px;cursor:pointer;font-family:"Inter",sans-serif;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);display:none;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
+.edit-sidenav-toggle{position:fixed;left:20px;top:90px;z-index:79;background:var(--paper);border:1px solid var(--rule);border-radius:999px;padding:8px 16px;cursor:pointer;font-family:var(--font-body);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);display:none;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(0,0,0,.08)}
 .edit-sidenav-toggle:hover{color:var(--ink);border-color:var(--ink)}
 html.edit-mode .edit-sidenav-toggle{display:inline-flex}
-.edit-sidenav{position:fixed;left:0;top:0;bottom:0;width:290px;background:var(--paper);border-right:1px solid var(--rule);z-index:82;transform:translateX(-100%);transition:transform .3s var(--ease);overflow-y:auto;padding:24px 0 24px 0;box-shadow:8px 0 32px rgba(0,0,0,.08);font-family:"Inter",sans-serif}
+.edit-sidenav{position:fixed;left:0;top:0;bottom:0;width:290px;background:var(--paper);border-right:1px solid var(--rule);z-index:82;transform:translateX(-100%);transition:transform .3s var(--ease);overflow-y:auto;padding:24px 0 24px 0;box-shadow:8px 0 32px rgba(0,0,0,.08);font-family:var(--font-body)}
 .edit-sidenav.open{transform:translateX(0)}
-.edit-sidenav h3{font-family:"Instrument Serif",Georgia,serif;font-size:22px;letter-spacing:-.01em;padding:0 24px 12px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.edit-sidenav h3{font-family:var(--font-display);font-size:22px;letter-spacing:-.01em;padding:0 24px 12px;display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .edit-sidenav .side-close{background:transparent;border:0;color:var(--ink-2);cursor:pointer;font-size:22px;line-height:1;padding:2px 8px;border-radius:8px}
 .edit-sidenav .side-close:hover{background:var(--paper-2);color:var(--ink)}
 .edit-sidenav .side-group{padding:16px 24px 6px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3);border-top:1px solid var(--rule);margin-top:8px}
@@ -713,7 +741,22 @@ const SITE = {
      has saved at least once. type is "text" or "textarea". */
   contactFields: [
     { id:"company", label:"Company", type:"text", required:false, placeholder:"" }
-  ]
+  ],
+  /* Homepage hero: a short identity line (who + where), not a slogan — Jordan
+     Power's feedback (Nov 2026) was that visitors couldn't tell who the site
+     belonged to, and that the big serif tagline took up visual weight a
+     photography site should give to photos instead. Defaults to "large" so
+     the hero photo gets more of the row now the headline is gone. All
+     editable from amtonality.com/edit via the Hero widget. */
+  heroTextVisible: true,
+  heroIdentity: "Tonality is an architectural photography project led by Anand Mohapatra, based in Vancouver, British Columbia.",
+  heroImageSize: "large",
+  /* Site-wide font pairing. "editorial" = Instrument Serif headings + Inter
+     body (the original look). "futura" = Jost everywhere — Jost is a free,
+     open-source geometric sans built specifically to look like Futura, since
+     real Futura is a paid commercial typeface. Set to "futura" by default
+     per Anand's brand. Editable from the Hero widget in amtonality.com/edit. */
+  fontPair: "futura"
 };
 
 const ARCHITECTURE = [
@@ -839,6 +882,7 @@ async function applyContent(){
     if (c.site) for (const k of Object.keys(c.site)) if (c.site[k] != null) SITE[k] = c.site[k];
     if (SITE.logoPosition && SITE.logoPosition !== 'left') document.documentElement.setAttribute('data-logo-pos', SITE.logoPosition);
     else document.documentElement.removeAttribute('data-logo-pos');
+    document.documentElement.setAttribute('data-font', SITE.fontPair === 'editorial' ? 'editorial' : 'futura');
     /* Sync editable nav labels (nav is in the static shell, not the template). */
     applyNavLabels();
     if (c.about && Array.isArray(c.about.paragraphs)) SITE.aboutParagraphs = c.about.paragraphs;
@@ -876,6 +920,24 @@ async function applyContent(){
     if (c.extraProjects) {
       pushExtras(ARCHITECTURE, c.extraProjects.architecture);
       pushExtras(EXPLORATIONS, c.extraProjects.explorations);
+      ALL.length = 0; ALL.push(...ARCHITECTURE, ...EXPLORATIONS);
+    }
+    /* Move an album between Architecture and Explorations (set from the
+       "Move to..." button on the album page in amtonality.com/edit). The
+       album's slug/URL never changes — this only moves it between the two
+       arrays everything else already reads live (home, index pages, side
+       nav, prev/next). Works for hardcoded albums and extras alike. */
+    if (c.albumSection) {
+      for (const slug of Object.keys(c.albumSection)) {
+        const section = c.albumSection[slug];
+        const dest = section === 'architecture' ? ARCHITECTURE : section === 'explorations' ? EXPLORATIONS : null;
+        if (!dest) continue;
+        const src = dest === ARCHITECTURE ? EXPLORATIONS : ARCHITECTURE;
+        const idx = src.findIndex(pr => pr.slug === slug);
+        if (idx === -1) continue;
+        const [proj] = src.splice(idx, 1);
+        if (!dest.find(pr => pr.slug === slug)) dest.push(proj);
+      }
       ALL.length = 0; ALL.push(...ARCHITECTURE, ...EXPLORATIONS);
     }
     /* Apply user-configured album order (set from the admin editor). Any
@@ -1552,14 +1614,37 @@ const pad = i => String(i+1).padStart(2,'0');
 
 function home(){
   const a = visible(ARCHITECTURE);
+  const heroVisible = SITE.heroTextVisible !== false;
+  const isEdit = document.documentElement.classList.contains('edit-mode');
+  const heroSize = SITE.heroImageSize === 'large' ? 'large' : 'normal';
+  const fontPair = SITE.fontPair === 'editorial' ? 'editorial' : 'futura';
+  /* Hero widget — visible only in edit mode. One compact card instead of
+     three scattered controls: hero text show/hide, hero image size, and the
+     site-wide font pairing. Same box style as the album layout-widget. */
+  const heroWidget = `
+    <div class="hero-widget">
+      <div class="lw-row">
+        <span class="lw-label">Hero text</span>
+        <button class="lw-btn" data-hero-text-toggle>${heroVisible ? 'Hide' : 'Show'}</button>
+      </div>
+      <div class="lw-row">
+        <span class="lw-label">Hero image</span>
+        <button class="lw-btn${heroSize==='normal'?' on':''}" data-hero-size="normal">Normal</button>
+        <button class="lw-btn${heroSize==='large'?' on':''}" data-hero-size="large">Large</button>
+      </div>
+      <div class="lw-row">
+        <span class="lw-label">Site font</span>
+        <button class="lw-btn${fontPair==='editorial'?' on':''}" data-font-pair="editorial">Editorial</button>
+        <button class="lw-btn${fontPair==='futura'?' on':''}" data-font-pair="futura">Futura</button>
+      </div>
+    </div>`;
   return `
   <section class="hero wrap">
-    <div class="hero-grid">
-      <div class="rv hero-img" data-edit-image="site.cover" data-edit-slug="cover">${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
+    <div class="hero-grid" data-hero-size="${heroSize}">
+      <div class="rv hero-img" data-edit-image="site.cover" data-edit-slug="cover">${heroWidget}${frame(SITE.cover,'nat','Anand Mohapatra — Tonality')}</div>
       <div class="hero-copy rv d1">
         <a class="eyebrow eyebrow-link" href="/architectural-photography-vancouver"><span data-edit="site.heroEyebrow">${SITE.heroEyebrow || 'Architectural Photography'}</span></a>
-        <h1 class="display" data-edit="site.tagline">${SITE.tagline}</h1>
-        <p class="lede" data-edit="site.intro">${SITE.intro}</p>
+        ${heroVisible ? `<p class="lede hero-identity" data-edit="site.heroIdentity">${SITE.heroIdentity || 'Tonality is an architectural photography project led by Anand Mohapatra, based in Vancouver, British Columbia.'}</p>` : (isEdit ? `<p class="herotext-off-note">Hero text hidden — use the Hero widget to bring it back.</p>` : '')}
       </div>
     </div>
   </section>
@@ -1591,6 +1676,14 @@ function home(){
   </section>
 
   <section class="wrap">
+    <div class="rule" style="margin-bottom:clamp(48px,7vw,110px)"></div>
+    <div class="shead rv" style="padding-bottom:clamp(48px,7vw,110px)">
+      <div><div class="eyebrow" data-edit="site.commissionsEyebrow">${SITE.commissionsEyebrow || 'Commissions'}</div><h2 class="h2" data-edit="site.commissionsHeading">${SITE.commissionsHeading || "Available for commissions."}</h2></div>
+      <a class="arrow" href="/contact"><span data-edit="site.commissionsArrow">${SITE.commissionsArrow || 'Start a project'}</span> ${ARROW}</a>
+    </div>
+  </section>
+
+  <section class="wrap">
     <div class="shead rv">
       <div style="flex:1 1 560px"><div class="eyebrow" data-edit="site.homeExplorationsEyebrow">${SITE.homeExplorationsEyebrow || 'Explorations'}</div>
         <p class="sectioncap" data-edit="site.homeExplorationsBlurb">${SITE.homeExplorationsBlurb || "Over the years, I've explored different genres of photography, and this section showcases some of the work that fueled my creativity along the way — from travel, music, portraits, and food, some commissioned and some entirely personal."}</p></div>
@@ -1599,13 +1692,6 @@ function home(){
     ${jgal(visible(EXPLORATIONS).slice(0,8).map(p=>card(p)).join(''), 'cards')}
   </section>
 
-  <section class="wrap">
-    <div class="rule" style="margin-top:clamp(48px,7vw,110px)"></div>
-    <div class="shead rv" style="padding-bottom:clamp(48px,7vw,110px)">
-      <div><div class="eyebrow" data-edit="site.commissionsEyebrow">${SITE.commissionsEyebrow || 'Commissions'}</div><h2 class="h2" data-edit="site.commissionsHeading">${SITE.commissionsHeading || "Available for commissions."}</h2></div>
-      <a class="arrow" href="/contact"><span data-edit="site.commissionsArrow">${SITE.commissionsArrow || 'Start a project'}</span> ${ARROW}</a>
-    </div>
-  </section>
 `;
 }
 
@@ -1746,6 +1832,7 @@ function project(p){
     <div class="rv">
       <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)" data-edit="projects.${p.slug}.eyebrow">${p.eyebrow || (ARCHITECTURE.includes(p)?'Architecture':'Explorations')}</div>
       <h1 class="display" style="max-width:13ch" data-edit="projects.${p.slug}.title">${esc(p.title)}</h1>
+      <button class="move-section-btn" data-move-section="${p.slug}">Move to ${isArch ? 'Explorations' : 'Architecture'}</button>
     </div>
     ${(() => {
       const parts = p.statement.split(/(?<=[.!?])\s+/);
@@ -2541,6 +2628,74 @@ async function bootInlineEditor() {
     return { u: j.url, a: dim.aspect };
   };
 
+  /* Homepage Hero widget — text show/hide, image size, site font pairing.
+     All three just set a SITE.* value, mirror it into draft via setPath, and
+     re-render; the hero-grid[data-hero-size] / :root[data-font] CSS and the
+     home() render logic do the rest. */
+  function wireHeroWidget() {
+    if (location.pathname !== '/' && location.pathname !== '') return;
+    const widget = document.querySelector('.hero-widget');
+    if (!widget || widget._wired) return;
+    widget._wired = true;
+
+    const textBtn = widget.querySelector('[data-hero-text-toggle]');
+    textBtn && textBtn.addEventListener('click', () => {
+      const next = !(SITE.heroTextVisible !== false);
+      SITE.heroTextVisible = next;
+      setPath(draft, 'site.heroTextVisible', next);
+      markDirty();
+      render();
+    });
+
+    widget.querySelectorAll('[data-hero-size]').forEach(b => {
+      b.addEventListener('click', () => {
+        const val = b.dataset.heroSize;
+        SITE.heroImageSize = val;
+        setPath(draft, 'site.heroImageSize', val);
+        markDirty();
+        render();
+      });
+    });
+
+    widget.querySelectorAll('[data-font-pair]').forEach(b => {
+      b.addEventListener('click', () => {
+        const val = b.dataset.fontPair;
+        SITE.fontPair = val;
+        document.documentElement.setAttribute('data-font', val === 'editorial' ? 'editorial' : 'futura');
+        setPath(draft, 'site.fontPair', val);
+        markDirty();
+        render();
+      });
+    });
+  }
+
+  /* Move an album between Architecture and Explorations — a button on the
+     album page itself. The album's slug/URL never changes, only which list
+     it lives in; everywhere else (home, index pages, side nav, prev/next)
+     reads ARCHITECTURE/EXPLORATIONS live, so moving it here is enough. */
+  function wireAlbumSection() {
+    if (!location.pathname.startsWith('/p/')) return;
+    const btn = document.querySelector('[data-move-section]');
+    if (!btn || btn._wired) return;
+    btn._wired = true;
+    btn.addEventListener('click', () => {
+      const slug = btn.dataset.moveSection;
+      const proj = bySlug(slug);
+      if (!proj) return;
+      const fromArch = ARCHITECTURE.includes(proj);
+      const src = fromArch ? ARCHITECTURE : EXPLORATIONS;
+      const dest = fromArch ? EXPLORATIONS : ARCHITECTURE;
+      const idx = src.indexOf(proj);
+      if (idx > -1) src.splice(idx, 1);
+      if (!dest.includes(proj)) dest.push(proj);
+      ALL.length = 0; ALL.push(...ARCHITECTURE, ...EXPLORATIONS);
+      if (!draft.albumSection) draft.albumSection = {};
+      draft.albumSection[slug] = fromArch ? 'explorations' : 'architecture';
+      markDirty();
+      render();
+    });
+  }
+
   /* Photo add/delete/reorder on album pages. Rebuilt on each render since
      view.innerHTML is replaced there. */
   function wirePhotos() {
@@ -3019,12 +3174,14 @@ async function bootInlineEditor() {
   wirePhotos();
   wireAlbumAdd();
   wireContactFields();
+  wireHeroWidget();
+  wireAlbumSection();
   buildSideNav();
   wireImageReplace();
   wireLayoutWidget();
   const origRender = window.render;
   if (typeof origRender === 'function') {
-    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); wireContactFields(); buildSideNav(); wireImageReplace(); wireLayoutWidget(); };
+    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); wireContactFields(); wireHeroWidget(); wireAlbumSection(); buildSideNav(); wireImageReplace(); wireLayoutWidget(); };
   }
 
   /* Logo position picker — capture-phase click on .mark intercepts before
