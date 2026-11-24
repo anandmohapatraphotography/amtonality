@@ -182,7 +182,7 @@
       "layout": {
         "mode": "justified",
         "base": 400,
-        "_expanded": true,
+        "_expanded": false,
         "padTop": 0,
         "padBottom": 54,
         "maxWidth": 0
