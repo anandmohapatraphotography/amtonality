@@ -461,7 +461,12 @@ html.edit-mode .move-section-btn.danger:hover{background:#c0392b;color:#fff;bord
 .pmeta div span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
 .pmeta div p{font-size:14.5px}
 .pintro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,80px);
-  padding-top:clamp(38px,5vw,76px);align-items:start}
+  padding-top:clamp(38px,5vw,76px);align-items:start;position:relative}
+/* Delete / restore button on the project statement in edit mode. */
+.pintro-del{display:none}
+html.edit-mode .pintro-del{display:flex;position:absolute;top:clamp(42px,5vw,80px);right:0;width:28px;height:28px;border-radius:999px;background:rgba(20,19,15,.85);color:#fff;border:0;cursor:pointer;font-size:16px;line-height:1;align-items:center;justify-content:center;opacity:0;transition:opacity .15s ease,background .15s ease;z-index:5}
+html.edit-mode .pintro:hover .pintro-del{opacity:1}
+html.edit-mode .pintro-del:hover{background:#c0392b}
 /* An emptied album title shouldn't leave a tall blank gap — a big .display
    h1 reserves its full line-height even with no characters in it. Collapse
    it for visitors; in edit mode, shrink it to a small clickable placeholder
@@ -1905,13 +1910,18 @@ function project(p){
       ${albumIsHidden && isEdit ? `<p class="herotext-off-note" style="margin-top:10px">Hidden — off the menus and grids, but still reachable at this URL.</p>` : ''}
     </div>
     ${(() => {
-      const parts = p.statement.split(/(?<=[.!?])\s+/);
+      const stmt = (p.statement || '').trim();
+      const isEdit = document.documentElement.classList.contains('edit-mode');
+      /* Deleted statement: skip the section entirely so the gallery flows up.
+         In edit mode we still render an empty placeholder with the × / restore
+         button so the user can bring it back. */
+      if (!stmt && !isEdit) return '';
+      const parts = stmt ? stmt.split(/(?<=[.!?])\s+/) : [''];
       const lead  = parts[0];
       const rest  = parts.slice(1).join(' ');
-      const isEdit = document.documentElement.classList.contains('edit-mode');
-      /* Both halves are editable and re-joined on save (see wire() combiner). */
-      return `<div class="pintro rv${rest||isEdit?'':' solo'}">
-        <p class="pintro-lead" data-edit-combine="projects.${p.slug}.statement">${esc(lead)}</p>
+      return `<div class="pintro rv${rest||isEdit?'':' solo'}" data-pintro-slug="${p.slug}">
+        ${isEdit ? `<button class="pintro-del" data-pintro-del="${p.slug}" title="${stmt ? 'Delete statement' : 'Restore default statement'}">${stmt ? '×' : '＋'}</button>` : ''}
+        <p class="pintro-lead" data-edit-combine="projects.${p.slug}.statement"${isEdit && !lead ? ' data-edit-placeholder="Add a statement…"' : ''}>${esc(lead)}</p>
         <div class="body"><p data-edit-combine="projects.${p.slug}.statement" data-edit-placeholder="Continue the story…">${esc(rest)}</p></div>
       </div>`;
     })()}
@@ -3362,6 +3372,32 @@ async function bootInlineEditor() {
     });
   }
 
+  /* Delete / restore the project statement block in edit mode. */
+  function wirePintroDelete() {
+    document.querySelectorAll('[data-pintro-del]').forEach(btn => {
+      if (btn._wired) return;
+      btn._wired = true;
+      btn.addEventListener('click', ev => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const slug = btn.dataset.pintroDel;
+        const proj = ALL.find(x => x.slug === slug);
+        const liveText = (proj && proj.statement || '').trim();
+        if (liveText) {
+          setPath(draft, 'projects.' + slug + '.statement', '');
+          syncModel('projects.' + slug + '.statement', '');
+        } else {
+          /* Clicking "+" on an empty statement: insert a single space so the
+             editable paragraph re-appears for the user to type into. */
+          setPath(draft, 'projects.' + slug + '.statement', ' ');
+          syncModel('projects.' + slug + '.statement', ' ');
+        }
+        markDirty();
+        render();
+      });
+    });
+  }
+
   wire();
   wirePhotos();
   wireAlbumAdd();
@@ -3373,9 +3409,10 @@ async function bootInlineEditor() {
   buildSideNav();
   wireImageReplace();
   wireLayoutWidget();
+  wirePintroDelete();
   const origRender = window.render;
   if (typeof origRender === 'function') {
-    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); wireContactFields(); wireHeroWidget(); wireHomeSections(); wireAlbumSection(); wireStatementToggle(); buildSideNav(); wireImageReplace(); wireLayoutWidget(); };
+    window.render = function() { origRender.apply(this, arguments); wire(); wirePhotos(); wireAlbumAdd(); wireContactFields(); wireHeroWidget(); wireHomeSections(); wireAlbumSection(); wireStatementToggle(); buildSideNav(); wireImageReplace(); wireLayoutWidget(); wirePintroDelete(); };
   }
 
   /* Logo position picker — capture-phase click on .mark intercepts before
