@@ -1013,7 +1013,7 @@ async function applyContent(){
       for (const p of ALL) {
         const o = c.projects[p.slug];
         if (!o) continue;
-        for (const k of ['title','statement','year','place','cover']) if (o[k] != null) p[k] = o[k];
+        for (const k of ['title','statement','statementLead','statementBody','year','place','cover','leadStyle','restStyle','layout']) if (o[k] != null) p[k] = o[k];
         /* `hidden` removes an album from all menus and grids but keeps it
            reachable at #/p/<slug> — reversible in one click from the editor. */
         if (o.hidden === true) p.hidden = true;
