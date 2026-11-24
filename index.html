@@ -285,6 +285,12 @@ a.card:hover .frame img{transform:scale(1.045)}
 
 /* ---------- section head ---------- */
 .shead{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;padding:clamp(56px,8vw,120px) 0 clamp(24px,3.2vw,44px);flex-wrap:wrap}
+/* Commissions — a plain statement, not a header-plus-faraway-link. "Start a
+   project" sits right beside the heading instead of pinned to the far edge
+   of the row. */
+.commissions-cta{padding:clamp(56px,8vw,120px) 0 clamp(24px,3.2vw,44px)}
+.commissions-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:clamp(20px,3vw,40px)}
+.commissions-row .h2{margin:0}
 .shead-first{padding-top:clamp(18px,2.2vw,34px);border-top:1px solid var(--rule);margin-top:clamp(10px,1.4vw,22px)}
 .shead .h2{max-width:16ch}
 .sectioncap{font-family:var(--font-display);font-size:clamp(1.25rem,2.1vw,1.85rem);line-height:1.32;letter-spacing:-.008em;color:var(--ink);max-width:44ch;margin-top:14px}
@@ -1711,9 +1717,9 @@ function home(){
   </section>` : (isEdit ? `<section class="wrap"><p class="herotext-off-note">Featured in section hidden.</p>${sectionToggle('featured','Featured in')}</section>` : '')}
 
   ${sectionOn('commissions') ? `
-  <section class="wrap">
-    <div class="shead rv">
-      <div class="eyebrow" data-edit="site.commissionsEyebrow">${SITE.commissionsEyebrow || 'Commissions'}</div>
+  <section class="wrap commissions-cta rv">
+    <div class="commissions-row">
+      <h2 class="h2" data-edit="site.commissionsEyebrow">${SITE.commissionsEyebrow || 'Commissions'}</h2>
       <a class="arrow" href="/contact"><span data-edit="site.commissionsArrow">${SITE.commissionsArrow || 'Start a project'}</span> ${ARROW}</a>
     </div>
     <div class="rule" style="margin-top:clamp(28px,4vw,56px)"></div>
