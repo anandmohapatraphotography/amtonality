@@ -1919,14 +1919,22 @@ function project(p){
       ${albumIsHidden && isEdit ? `<p class="herotext-off-note" style="margin-top:10px">Hidden — off the menus and grids, but still reachable at this URL.</p>` : ''}
     </div>
     ${(() => {
-      const stmt = (p.statement || '').trim();
       const isEdit = document.documentElement.classList.contains('edit-mode');
-      if (!stmt && !isEdit) return '';
-      const parts = stmt ? stmt.split(/(?<=[.!?])\s+/) : [''];
-      const lead  = parts[0];
-      const rest  = parts.slice(1).join(' ');
-      /* Per-cell style overrides — user can promote the right body to lead
-         style, or demote the left lead to body style. Stored on the project. */
+      /* Two independent text fields. If neither has been set yet, migrate
+         from the legacy `statement` field by splitting on sentence boundary
+         (preserves existing content). After migration each cell edits only
+         its own field, so deleting one no longer re-shuffles the other. */
+      let lead = p.statementLead;
+      let rest = p.statementBody;
+      if (lead === undefined && rest === undefined) {
+        const stmt = (p.statement || '').trim();
+        const parts = stmt ? stmt.split(/(?<=[.!?])\s+/) : [''];
+        lead = parts[0] || '';
+        rest = parts.slice(1).join(' ');
+      }
+      lead = (lead || '').toString();
+      rest = (rest || '').toString();
+      if (!lead && !rest && !isEdit) return '';
       const leadStyle = (p.leadStyle === 'body') ? 'body' : 'lead';
       const restStyle = (p.restStyle === 'lead') ? 'lead' : 'body';
       const classFor = s => s === 'lead' ? 'pintro-lead' : 'pintro-body-p';
@@ -1935,7 +1943,7 @@ function project(p){
              ${isEdit ? `
                ${lead ? `<button class="pintro-del" data-pintro-del-part="lead" data-pintro-del="${p.slug}" title="Delete this paragraph">×</button>` : ''}
                <button class="pintro-style" data-pintro-style="lead" data-pintro-slug="${p.slug}" title="Toggle text size">Aa</button>` : ''}
-             <p class="${classFor(leadStyle)}" data-edit-combine="projects.${p.slug}.statement"${isEdit && !lead ? ' data-edit-placeholder="Add a statement…"' : ''}>${esc(lead)}</p>
+             <p class="${classFor(leadStyle)}" data-edit="projects.${p.slug}.statementLead"${isEdit && !lead ? ' data-edit-placeholder="Add a statement…"' : ''}>${esc(lead)}</p>
            </div>`
         : '';
       const rightBox = (rest || isEdit)
@@ -1943,7 +1951,7 @@ function project(p){
              ${isEdit ? `
                ${rest ? `<button class="pintro-del" data-pintro-del-part="rest" data-pintro-del="${p.slug}" title="Delete this paragraph">×</button>` : ''}
                <button class="pintro-style" data-pintro-style="rest" data-pintro-slug="${p.slug}" title="Toggle text size">Aa</button>` : ''}
-             <p class="${classFor(restStyle)}" data-edit-combine="projects.${p.slug}.statement" data-edit-placeholder="Continue the story…">${esc(rest)}</p>
+             <p class="${classFor(restStyle)}" data-edit="projects.${p.slug}.statementBody" data-edit-placeholder="Continue the story…">${esc(rest)}</p>
            </div>`
         : '';
       return `<div class="pintro rv${rest||isEdit?'':' solo'}" data-pintro-slug="${p.slug}">
@@ -2630,6 +2638,7 @@ async function bootInlineEditor() {
         const proj = ALL.find(p => p.slug === slug);
         if (proj) {
           if (field === 'leadStyle' || field === 'restStyle') proj[field] = val;
+          else if (field === 'statementLead' || field === 'statementBody') proj[field] = val;
           else proj[field === 'statement' ? 'statement' : field] = val;
         }
       } else if (parts[0] === 'projectLayout') {
@@ -3401,8 +3410,8 @@ async function bootInlineEditor() {
     });
   }
 
-  /* Per-paragraph delete on the pintro. Each × removes just its chunk from
-     the single `statement` field; the remaining text re-splits on next render. */
+  /* Per-paragraph delete on the pintro. Each × only empties its own field;
+     the other paragraph stays untouched (statementLead vs statementBody). */
   function wirePintroDelete() {
     document.querySelectorAll('[data-pintro-del]').forEach(btn => {
       if (btn._wired) return;
@@ -3411,16 +3420,22 @@ async function bootInlineEditor() {
         ev.preventDefault();
         ev.stopPropagation();
         const slug = btn.dataset.pintroDel;
-        const part = btn.dataset.pintroDelPart || 'all';
+        const part = btn.dataset.pintroDelPart || 'lead';
+        const field = part === 'lead' ? 'statementLead' : 'statementBody';
+        /* First-time migration: if legacy statement exists and new fields
+           don't, seed both new fields from the split so we don't lose data. */
         const proj = ALL.find(x => x.slug === slug);
-        const stmt = (proj && proj.statement || '').trim();
-        const parts = stmt ? stmt.split(/(?<=[.!?])\s+/) : [''];
-        let next;
-        if (part === 'lead')       next = parts.slice(1).join(' ').trim();
-        else if (part === 'rest')  next = (parts[0] || '').trim();
-        else                        next = '';
-        setPath(draft, 'projects.' + slug + '.statement', next);
-        syncModel('projects.' + slug + '.statement', next);
+        if (proj && proj.statementLead === undefined && proj.statementBody === undefined && proj.statement) {
+          const parts = proj.statement.split(/(?<=[.!?])\s+/);
+          const seedLead = parts[0] || '';
+          const seedRest = parts.slice(1).join(' ');
+          setPath(draft, 'projects.' + slug + '.statementLead', seedLead);
+          setPath(draft, 'projects.' + slug + '.statementBody', seedRest);
+          syncModel('projects.' + slug + '.statementLead', seedLead);
+          syncModel('projects.' + slug + '.statementBody', seedRest);
+        }
+        setPath(draft, 'projects.' + slug + '.' + field, '');
+        syncModel('projects.' + slug + '.' + field, '');
         markDirty();
         render();
       });
