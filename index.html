@@ -288,8 +288,10 @@ a.card:hover .frame img{transform:scale(1.045)}
 /* Commissions — a plain statement, not a header-plus-faraway-link. "Start a
    project" sits right beside the heading instead of pinned to the far edge
    of the row. */
-.commissions-cta{padding-top:clamp(56px,8vw,120px);padding-bottom:clamp(24px,3.2vw,44px)}
-.commissions-row{display:flex;align-items:baseline;flex-wrap:wrap;gap:clamp(20px,3vw,40px)}
+/* Commissions — centered, same rule-bounded treatment as "Featured in"
+   just above it, rather than a left-aligned header row. */
+.commissions-cta{padding-top:clamp(28px,4vw,56px);text-align:center}
+.commissions-cta .h2{margin:0}
 .commissions-row .h2{margin:0}
 .shead-first{padding-top:clamp(18px,2.2vw,34px);border-top:1px solid var(--rule);margin-top:clamp(10px,1.4vw,22px)}
 .shead .h2{max-width:16ch}
@@ -1718,10 +1720,9 @@ function home(){
 
   ${sectionOn('commissions') ? `
   <section class="wrap commissions-cta rv">
-    <div class="commissions-row">
-      <h2 class="h2" data-edit="site.commissionsEyebrow">${SITE.commissionsEyebrow || 'Commissions'}</h2>
-      <a class="arrow" href="/contact"><span data-edit="site.commissionsArrow">${SITE.commissionsArrow || 'Start a project'}</span> ${ARROW}</a>
-    </div>
+    <div class="rule" style="margin-bottom:clamp(28px,4vw,56px)"></div>
+    <h2 class="h2" data-edit="site.commissionsEyebrow">${SITE.commissionsEyebrow || 'Commissions'}</h2>
+    <a class="arrow" href="/contact" style="margin-top:clamp(16px,2.2vw,28px)"><span data-edit="site.commissionsArrow">${SITE.commissionsArrow || 'Start a project'}</span> ${ARROW}</a>
     <div class="rule" style="margin-top:clamp(28px,4vw,56px)"></div>
     ${isEdit ? sectionToggle('commissions','Commissions') : ''}
   </section>` : (isEdit ? `<section class="wrap"><p class="herotext-off-note">Commissions section hidden.</p>${sectionToggle('commissions','Commissions')}</section>` : '')}
