@@ -1013,7 +1013,7 @@ async function applyContent(){
       for (const p of ALL) {
         const o = c.projects[p.slug];
         if (!o) continue;
-        for (const k of ['title','statement','statementLead','statementBody','year','place','cover','leadStyle','restStyle','layout']) if (o[k] != null) p[k] = o[k];
+        for (const k of ['title','statement','statementLead','statementBody','year','place','cover','leadStyle','restStyle','layout','hideEyebrow','hidePnav']) if (o[k] != null) p[k] = o[k];
         /* `hidden` removes an album from all menus and grids but keeps it
            reachable at #/p/<slug> — reversible in one click from the editor. */
         if (o.hidden === true) p.hidden = true;
@@ -1906,10 +1906,16 @@ function project(p){
     : '';
 
   const albumIsHidden = p.hidden === true;
+  const isEdit = document.documentElement.classList.contains('edit-mode');
+  const hideEyebrow = p.hideEyebrow === true;
+  const hidePnav    = p.hidePnav    === true;
   return `
   <section class="phero wrap">
     <div class="rv">
-      <div class="eyebrow" style="margin-bottom:clamp(16px,2vw,26px)" data-edit="projects.${p.slug}.eyebrow">${p.eyebrow || (ARCHITECTURE.includes(p)?'Architecture':'Explorations')}</div>
+      ${(!hideEyebrow || isEdit) ? `<div class="eyebrow pintro-cell" style="margin-bottom:clamp(16px,2vw,26px);${hideEyebrow?'opacity:.35;':''}">
+        ${isEdit ? `<button class="pintro-del" data-album-toggle="hideEyebrow" data-album-slug="${p.slug}" title="${hideEyebrow?'Show eyebrow on live site':'Hide eyebrow on live site'}">${hideEyebrow?'＋':'×'}</button>` : ''}
+        <span data-edit="projects.${p.slug}.eyebrow">${p.eyebrow || (ARCHITECTURE.includes(p)?'Architecture':'Explorations')}</span>
+      </div>` : ''}
       <h1 class="display" style="max-width:13ch" data-edit="projects.${p.slug}.title">${esc(p.title)}</h1>
       <div class="album-actions">
         <button class="move-section-btn" data-move-section="${p.slug}">Move to ${isArch ? 'Explorations' : 'Architecture'}</button>
@@ -1960,10 +1966,11 @@ function project(p){
       </div>`;
     })()}
     ${gal}
-    <div class="pnav">
+    ${(!hidePnav || isEdit) ? `<div class="pnav pintro-cell" style="${hidePnav?'opacity:.35;':''}">
+      ${isEdit ? `<button class="pintro-del" data-album-toggle="hidePnav" data-album-slug="${p.slug}" title="${hidePnav?'Show on live site':'Hide on live site'}">${hidePnav?'＋':'×'}</button>` : ''}
       <a href="${pageUrl(prev)}"><div class="eyebrow">Previous</div><div class="h3">${esc(prev.title)}</div></a>
       <a href="${pageUrl(next)}" class="r"><div class="eyebrow">Next</div><div class="h3">${esc(next.title)}</div></a>
-    </div>
+    </div>` : ''}
   </section>`;
 }
 
@@ -2639,6 +2646,7 @@ async function bootInlineEditor() {
         if (proj) {
           if (field === 'leadStyle' || field === 'restStyle') proj[field] = val;
           else if (field === 'statementLead' || field === 'statementBody') proj[field] = val;
+          else if (field === 'hideEyebrow' || field === 'hidePnav') proj[field] = val;
           else proj[field === 'statement' ? 'statement' : field] = val;
         }
       } else if (parts[0] === 'projectLayout') {
@@ -3436,6 +3444,25 @@ async function bootInlineEditor() {
         }
         setPath(draft, 'projects.' + slug + '.' + field, '');
         syncModel('projects.' + slug + '.' + field, '');
+        markDirty();
+        render();
+      });
+    });
+    /* Per-album section-hide toggles (eyebrow, prev/next). Click × to hide
+       on the public site; faded preview + ＋ to restore. */
+    document.querySelectorAll('[data-album-toggle]').forEach(btn => {
+      if (btn._wired) return;
+      btn._wired = true;
+      btn.addEventListener('click', ev => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const slug = btn.dataset.albumSlug;
+        const field = btn.dataset.albumToggle;
+        const proj = ALL.find(x => x.slug === slug);
+        const cur = proj && proj[field] === true;
+        const next = !cur;
+        setPath(draft, 'projects.' + slug + '.' + field, next);
+        syncModel('projects.' + slug + '.' + field, next);
         markDirty();
         render();
       });
