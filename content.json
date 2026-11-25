@@ -275,7 +275,9 @@
       "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/residential/u4tcwg4bmuqkwn1o.jpg",
       "layout": {
         "_expanded": false
-      }
+      },
+      "hideEyebrow": true,
+      "hidePnav": true
     },
     "heritage": {
       "photos": [
