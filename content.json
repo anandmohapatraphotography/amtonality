@@ -189,7 +189,9 @@
         "padBottom": 54,
         "maxWidth": 0
       },
-      "leadStyle": "body"
+      "leadStyle": "body",
+      "hideEyebrow": true,
+      "hidePnav": true
     },
     "residential": {
       "photos": [
