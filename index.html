@@ -717,7 +717,16 @@ html.edit-mode .edit-sidenav-toggle{display:inline-flex}
 
 <footer>
   <div class="wrap">
-    <div class="fbig"><img src="https://cdn.myportfolio.com/9c0b9cff-4f88-4e53-a5c5-7ba8f446de1b/8c1ce994-695e-4cce-a523-a12cf994b4e5_rwc_0x0x6878x1425x4096.png?h=b28ae4cb18de0c41226a2907023f94f2" alt="Tonality" style="height:clamp(46px,7vw,96px);width:auto"><div class="ftag" id="ftag"></div></div>
+    <div class="fbig">
+      <div class="pintro-cell" id="flogo-wrap" style="display:inline-block">
+        <button class="pintro-del" id="flogo-del" data-site-toggle="hideFooterLogo" title="Hide footer logo on live site" style="display:none">×</button>
+        <img id="flogo" src="https://cdn.myportfolio.com/9c0b9cff-4f88-4e53-a5c5-7ba8f446de1b/8c1ce994-695e-4cce-a523-a12cf994b4e5_rwc_0x0x6878x1425x4096.png?h=b28ae4cb18de0c41226a2907023f94f2" alt="Tonality" style="height:clamp(46px,7vw,96px);width:auto">
+      </div>
+      <div class="pintro-cell" id="ftag-wrap" style="display:block">
+        <button class="pintro-del" id="ftag-del" data-site-toggle="hideFooterTagline" title="Hide footer tagline on live site" style="display:none">×</button>
+        <div class="ftag" id="ftag" data-edit="site.tagline"></div>
+      </div>
+    </div>
     <div class="rule" style="margin-bottom:clamp(24px,3vw,40px)"></div>
     <div class="fgrid">
       <nav class="fnav">
@@ -2529,6 +2538,27 @@ window.addEventListener('scroll', ()=>{
 applyContent().then(() => {
   const ft = document.getElementById('ftag');
   if (ft) ft.innerHTML = SITE.tagline;
+  /* Public site: honor the hide flags from content.json. In edit mode the
+     render override shows faded placeholders + × / ＋ buttons instead. */
+  const applyFooterFlags = () => {
+    const edit = document.documentElement.classList.contains('edit-mode');
+    const logoWrap = document.getElementById('flogo-wrap');
+    const tagWrap  = document.getElementById('ftag-wrap');
+    const logoDel  = document.getElementById('flogo-del');
+    const tagDel   = document.getElementById('ftag-del');
+    if (logoWrap) {
+      if (SITE.hideFooterLogo && !edit) logoWrap.style.display = 'none';
+      else { logoWrap.style.display = 'inline-block'; if (SITE.hideFooterLogo && edit) logoWrap.style.opacity = '.35'; else logoWrap.style.opacity = ''; }
+    }
+    if (tagWrap) {
+      if (SITE.hideFooterTagline && !edit) tagWrap.style.display = 'none';
+      else { tagWrap.style.display = 'block'; if (SITE.hideFooterTagline && edit) tagWrap.style.opacity = '.35'; else tagWrap.style.opacity = ''; }
+    }
+    if (logoDel) { logoDel.style.display = edit ? 'flex' : 'none'; logoDel.textContent = SITE.hideFooterLogo ? '＋' : '×'; }
+    if (tagDel)  { tagDel.style.display  = edit ? 'flex' : 'none'; tagDel.textContent  = SITE.hideFooterTagline ? '＋' : '×'; }
+  };
+  applyFooterFlags();
+  window._applyFooterFlags = applyFooterFlags;
   render();
   /* Boot the in-place editor if URL has ?edit=1, sessionStorage says we're
      already editing, or the pathname is the shorthand `/edit`. Sticky across
@@ -2592,6 +2622,7 @@ async function bootInlineEditor() {
 
   document.documentElement.classList.add('edit-mode');
   try { sessionStorage.setItem('amt_edit', '1'); } catch(_) {}
+  if (window._applyFooterFlags) window._applyFooterFlags();
 
   const bar = document.createElement('div');
   bar.className = 'editbar';
@@ -3445,6 +3476,23 @@ async function bootInlineEditor() {
         syncModel('projects.' + slug + '.' + field, '');
         markDirty();
         render();
+      });
+    });
+    /* Site-level hide toggles (footer logo, footer tagline). Click × to hide
+       on the public site; faded preview + ＋ to restore. */
+    document.querySelectorAll('[data-site-toggle]').forEach(btn => {
+      if (btn._wired) return;
+      btn._wired = true;
+      btn.addEventListener('click', ev => {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const field = btn.dataset.siteToggle;
+        const cur = SITE[field] === true;
+        const next = !cur;
+        setPath(draft, 'site.' + field, next);
+        SITE[field] = next;
+        markDirty();
+        if (window._applyFooterFlags) window._applyFooterFlags();
       });
     });
     /* Per-album section-hide toggles (eyebrow, prev/next). Click × to hide
