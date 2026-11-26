@@ -20,6 +20,10 @@
     "architecture": {
       "photos": [
         {
+          "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/0edo7niqmw33fpun.jpg",
+          "a": 1.5
+        },
+        {
           "u": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/000.jpg",
           "a": 0.667
         },
@@ -124,7 +128,7 @@
       "year": "2026",
       "place": "Vancouver, BC",
       "statement": "Each photograph is an exploration of balance, detail, and the quiet dialogue between space, material, and experience.",
-      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/2cp12o0pmu5vt35y.jpg",
+      "cover": "https://pub-c5c6ce447a9d43b9b89788a2510fbbac.r2.dev/photos/architecture/0edo7niqmw33fpun.jpg",
       "layout": {
         "mode": "justified",
         "base": 400,
